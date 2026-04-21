@@ -1,26 +1,201 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+/* ── Fuentes de marca OAV ── */
+@font-face {
+  font-family: "CCS Belvare";
+  src: url("/oda/Fonts/ccsbelvareregular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+@font-face {
+  font-family: "Luxurious Script";
+  src: url("/oda/Fonts/LuxuriousScript-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+@font-face {
+  font-family: "Lato";
+  src: url("/oda/Fonts/Lato-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Lato";
+  src: url("/oda/Fonts/Lato-Bold.ttf") format("truetype");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Lato";
+  src: url("/oda/Fonts/Lato-BoldItalic.ttf") format("truetype");
+  font-weight: 700;
+  font-style: italic;
+  font-display: swap;
+}
+
+@theme {
+  /* ── Paleta oficial OAV 2026 (Manual de estilos) ── */
+  --color-paper:   #fff5e1; /* Papel        — C 0  M 4   Y 13  K 0  */
+  --color-wine:    #47072c; /* Vino         — C 59 M 100 Y 40  K 60 */
+  --color-plum:    #700143; /* Ciruela      — C 46 M 100 Y 34  K 33 */
+  --color-olive:   #4c5409; /* Oliva        — C 65 M 44  Y 100 K 38 */
+  --color-harvest: #7c8419; /* Verde Cosecha — C 54 M 31  Y 99  K 11 */
+
+  --font-sans:   "Lato", "Segoe UI", "Helvetica Neue", sans-serif;
+  --font-serif:  "CCS Belvare", Georgia, serif;
+  --font-script: "Luxurious Script", cursive;
+
+  --animate-float: float 6s ease-in-out infinite;
+  --animate-drift: drift 18s linear infinite;
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+  }
+
+  @keyframes drift {
+    0% { transform: translate3d(0, 0, 0); }
+    50% { transform: translate3d(18px, -16px, 0); }
+    100% { transform: translate3d(0, 0, 0); }
+  }
+
+  @keyframes marquee {
+    from { transform: translateX(0); }
+    to   { transform: translateX(-50%); }
   }
 }
 
+:root {
+  --background: var(--color-paper);
+  --foreground: var(--color-wine);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
 body {
-  background: var(--background);
+  background:
+    radial-gradient(circle at top, rgba(112, 1, 67, 0.07), transparent 28%),
+    linear-gradient(180deg, #fff7e9 0%, #fff5e1 40%, #fbefda 100%);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans);
+  overflow-x: hidden;
+}
+
+body::selection {
+  background: rgba(112, 1, 67, 0.18);
+}
+
+/* ── Tipografía oficial OAV ──
+   Roles según el Manual de estilos OAV-2026:
+   a. Lato Regular Expanded → subtítulos y datos breves
+   b. CCS Belvare           → titulares en MAYÚSCULA
+   c. Luxurious Script      → palabra clave del titular (inicial mayúscula)
+   d. Lato Bold Italic      → fechas y año como flanqueo tipográfico
+*/
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-serif);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.script {
+  font-family: var(--font-script);
+  text-transform: none;
+  letter-spacing: normal;
+  font-weight: 400;
+}
+
+/* Variantes decorativas de Luxurious Script */
+.script-alt {
+  font-family: var(--font-script);
+  font-feature-settings: "swsh" 1, "calt" 1;
+}
+
+.script-alt-2 {
+  font-family: var(--font-script);
+  font-feature-settings: "swsh" 2, "calt" 1;
+}
+
+.script-alt-3 {
+  font-family: var(--font-script);
+  font-feature-settings: "swsh" 3, "calt" 1;
+}
+
+.script-ss01 {
+  font-family: var(--font-script);
+  font-feature-settings: "ss01" 1, "calt" 1;
+}
+
+/* Rol (a) — Subtítulos / datos informativos breves
+   Lato Regular Expanded — el "Expanded" del manual se simula
+   con tracking abierto, ya que el archivo Lato-Regular.ttf no
+   incluye la variante Expanded. */
+.lato-expanded {
+  font-family: var(--font-sans);
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: 0.42em;
+  font-feature-settings: "tnum";
+}
+
+/* Rol (d) — Fechas / año como flanqueo tipográfico
+   Lato Bold Italic, con tracking marcado para reforzar el flanqueo. */
+.fecha-flanqueo {
+  font-family: var(--font-sans);
+  font-weight: 700;
+  font-style: italic;
+  text-transform: uppercase;
+  letter-spacing: 0.32em;
+}
+
+/* Efecto Dreamy de fotografía del manual:
+   "Fotografía suave, con movimiento, luces difusas
+    con filtros tipo soft focus o diffusion." */
+.photo-dreamy {
+  filter: brightness(1.04) contrast(0.94) saturate(0.92);
+}
+.photo-dreamy::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse at center, transparent 55%, rgba(71, 7, 44, 0.18) 100%),
+    linear-gradient(180deg, rgba(255, 245, 225, 0.08), transparent 35%);
+  pointer-events: none;
+  mix-blend-mode: soft-light;
+}
+
+.texture-paper {
+  background-image:
+    linear-gradient(rgba(71, 7, 44, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(71, 7, 44, 0.03) 1px, transparent 1px);
+  background-size: 28px 28px;
+  mask-image: linear-gradient(180deg, transparent, black 10%, black 90%, transparent);
+}
+
+.section-glow::before {
+  content: "";
+  position: absolute;
+  inset: auto auto -120px -80px;
+  width: 260px;
+  height: 260px;
+  border-radius: 9999px;
+  background: radial-gradient(circle, rgba(112, 1, 67, 0.18), transparent 68%);
+  filter: blur(10px);
+  pointer-events: none;
 }

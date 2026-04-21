@@ -1,0 +1,326 @@
+export type Language = "es" | "pt";
+
+export const translations = {
+  es: {
+    // ========== HERO V3 ==========
+    heroEyebrow: "10° Edición · 4 y 5 de Septiembre",
+    heroTitleA: "El vino nos",
+    heroTitleScript: "Reúne",
+    heroSubtitle: "Dos días para descubrir, brindar y recorrer Argentina a través de sus mejores etiquetas.",
+    heroDate: "4 Y 5 DE SEPTIEMBRE",
+    heroYear: "2026",
+    heroPlace: "IGUAZÚ · ARGENTINA",
+
+    // ========== MANIFIESTO V3 ==========
+    manifestoLabel: "Manifiesto",
+    manifestoTitleA: "Una",
+    manifestoTitleB: "Celebración",
+    manifestoTitleC: "del vino argentino",
+    manifestoDescription: "ODA al Vino es el punto de encuentro donde el vino argentino se vive, se aprende y se comparte. Una celebración de la cultura, los sentidos y la comunidad que ya lleva diez años reuniendo a quienes aman lo que hay detrás de cada copa.",
+    manifestoHighlights: "DEGUSTACIÓN · EXPERIENCIAS · GASTRONOMÍA · COMUNIDAD",
+
+    // ========== EXPERIENCE V3 ==========
+    experienceSectionTitle: "Viví el",
+    experienceSectionTitleScript: "Vino",
+    experienceSectionSubtitle: "de otra manera",
+    experienceItem1Title: "Descubrí",
+    experienceItem1Text: "Recorré bodegas, probá nuevas etiquetas y dejate sorprender por proyectos boutique, orgánicos y clásicos.",
+    experienceItem2Title: "Conectá",
+    experienceItem2Text: "Conocé a enólogos, sommeliers y a quienes hacen el vino. Una comunidad que comparte historia, origen y paisaje.",
+    experienceItem3Title: "Disfrutá",
+    experienceItem3Text: "Gastronomía pensada como maridaje, pensada para acompañar cada momento y cada copa del recorrido.",
+    experienceItem4Title: "Aprendé",
+    experienceItem4Text: "Masterclasses, charlas y cataciones guiadas que transforman la forma de vivir el vino.",
+
+    // ========== BODEGAS V3 ==========
+    bodegasSelectionLabel: "Selección de Bodegas",
+    bodegasTitle: "+200",
+    bodegasTitleScript: "Bodegas",
+    bodegasTitleC: "Argentinas",
+    bodegasDescription: "Representantes de las principales regiones vitivinícolas del país, cada una trayendo lo mejor de su terroir.",
+    bodegasVarietals: "Varietales destacados:",
+    bodegasRegionDesc: "Esta región aporta una selección curada de bodegas que representan lo mejor de sus tradiciones vitivinícolas y proyectos innovadores.",
+    bodegasParticipants: "Algunas de las bodegas participantes",
+
+    // ========== TICKETS ==========
+    ticketsMarqueeText: "ENTRADAS · LANZAMIENTO OFICIAL · CUPOS INICIALES · MEJOR PRECIO AHORA",
+    ticketsLabel: "Lanzamiento oficial — cupos iniciales",
+    ticketsTitle: "Asegurá tu",
+    ticketsTitleScript: "Lugar",
+    ticketsTitleC: "en ODA al Vino",
+    ticketsSubtitle: "Una única entrada. El precio cambia según el momento.",
+    ticketsDescription: "Accedé al mejor precio disponible en esta primera etapa.",
+    ticketsPriceLabel: "Precio actual",
+    ticketsCurrencyLabel: "BRL",
+    ticketsBtnBuy: "Comprar Ahora",
+    ticketsBtnSoon: "Proximamente",
+    ticketsIncludesLabel: "Incluye",
+    ticketsInclude1: "Acceso al evento (4 y 5 de septiembre)",
+    ticketsInclude2: "Copa de cristal personalizada",
+    ticketsInclude3: "Vale de consumo para ODA y ODF",
+    ticketsInclude4: "Degustaciones durante todo el recorrido",
+    ticketsInclude5: "Acceso a charlas y masterclass del mundo del vino",
+    ticketsVoucherLabel: "✨ Vale de Consumo",
+    ticketsVoucherLocation: "En ODA Vinoteca",
+    ticketsResidenteMisiones: "Residente de Misiones",
+    ticketsUrgency: "↑ El precio aumenta en las próximas etapas",
+    ticketsLot1Label: "Lanzamiento",
+    ticketsLot2Label: "Próximo lote",
+    ticketsLot3Label: "Siguiente etapa",
+    ticketsLot4Label: "Último lote",
+    ticketsNoIntermediary: "Sin intermediarios · Acceso garantizado",
+
+    // ========== IGUAZU ==========
+    iguazuSectionLabel: "Más allá del evento",
+    iguazuTitle: "Tres países,",
+    iguazuTitleScript: "una Copa",
+    iguazuDescription: "Desayunar en Argentina, almorzar en Brasil, cenar en Paraguay. Iguazú es el único lugar donde la Triple Frontera se vive en un mismo día. Un destino icónico que combina naturaleza, aventura y cultura a pasos de nuestro evento.",
+    iguazuCard1Title: "Cataratas",
+    iguazuCard1Desc: "Una de las 7 maravillas naturales del mundo, a 20 minutos del local.",
+    iguazuCard2Title: "Triple Frontera",
+    iguazuCard2Desc: "El marco del encuentro entre Argentina, Brasil y Paraguay.",
+    iguazuCard3Title: "Urban",
+    iguazuCard3Desc: "Experiencias gastronómicas y cultura en la Triple Frontera.",
+
+    // ========== COMMUNITY - TESTIMONIOS ==========
+    testimonial1: "Vine por el vino.\nVolví por la experiencia.",
+    testimonial1Author: "Sommelier, Bodega Iguazú",
+    testimonial2: "La Triple Frontera\nmerecía esta celebración.",
+    testimonial2Author: "Enólogo, ODA al Vino",
+    testimonial3: "Un encuentro único\nentre bodegas, cultura y comunidad.",
+    testimonial3Author: "Catador Profesional",
+    testimonial4: "Diez años transformando\nla forma de vivir el vino.",
+    testimonial4Author: "Participante OAV 2025",
+    testimonial5: "Fue maravilloso. Felicitaciones\na todos. ¡Hasta el año que viene!",
+    testimonial5Author: "Daniela Veloso, Amante del Vino",
+    testimonial6: "Una propuesta única que celebra\nel vino argentino en su máxima expresión.",
+    testimonial6Author: "Productor, Misiones",
+    testimonial7: "El evento que todos esperábamos.\nCalidad, pasión y comunidad reunidas.",
+    testimonial7Author: "Visitante, Buenos Aires",
+
+    // ========== FOOTER ==========
+    footerVinotienda: "ODA Vinoteca",
+    footerVinotiecaDesc: "Nuestra tienda insignia con la mejor selección de vinos argentinos",
+    footerDutyFree: "ODA Duty Free",
+    footerDutyFreeDesc: "Acceso privilegiado a ofertas exclusivas sin impuestos",
+    footerWineshop: "ODA Wineshop",
+    footerWineshopDesc: "E-commerce especializado en envíos internacionales",
+    footerLearnMore: "Conocer más",
+    footerOrganizedBy: "Organizado por",
+
+    // ========== AGE GATE (no activo) ==========
+    ageGateLabel: "✦ Verificación de Edad ✦",
+    ageGateTitle: "ODA al Vino",
+    ageGateMessage: "Para acceder a este sitio, debes confirmar que eres mayor de 21 años.",
+    ageGateButton: "Tengo 21+ años",
+    ageGateExit: "Salir",
+    ageGateDisclaimer: "Confirmando que eres mayor de 21 años según la ley local",
+
+    // ========== AUTHORITY ==========
+    authorityBodegas: "Bodegas",
+    authorityBodegasSub: "de todo el país",
+    authorityEtiquetas: "Etiquetas",
+    authorityEtiquetasSub: "presentadas",
+    authorityYears: "Años",
+    authorityYearsSub: "de trayectoria OAV",
+    authorityAsistentes: "Asistentes",
+    authorityAsistentesSub: "por edición",
+
+    // ========== COMMUNITY ==========
+    communityTitle: "Comunidad",
+    communityTitleScript: "de Vino",
+    communityDescription: "Un espacio para quienes comparten pasión por el vino argentino. Networking, aprendizaje continuo y experiencias compartidas.",
+
+    // ========== VENUE ==========
+    venueTitle: "Iguazú",
+    venueSubtitle: "El corazón de la Triple Frontera",
+    venueMainText: "A minutos de las Cataratas del Iguazú, ODA al Vino se vive en un entorno pensado para disfrutar cada momento.\n\nEl Iguazú Urban Mall no es solo el venue del evento. Es parte de la experiencia.",
+    venueLocation: "Iguazú Urban Mall · Triple Frontera",
+    venueSupportText: "Un espacio moderno, amplio y preparado para recorrer el vino de una forma distinta.",
+    venueDescription: "Bodegas distribuidas en todo el recorrido, zonas de degustación diseñadas para explorar sin apuro y espacios que invitan a quedarse.\n\nCada sector está pensado para que la experiencia fluya, se descubra y se comparta.",
+
+    // ========== FINAL ==========
+    finalTitle: "El vino nos",
+    finalScript: "Reúne",
+    finalSubtitle: "Cada año, cada edición, cada copa",
+
+    // ========== NAVIGATION & GENERAL ==========
+    navLanguage: "Idioma",
+    navBuy: "Comprar",
+    navManifiesto: "Manifiesto",
+    navExperiencia: "Experiencia",
+    navAutoridad: "Autoridad",
+    navEntradas: "Entradas",
+    navBodegas: "Bodegas",
+    navDestino: "Destino",
+    navComunidad: "Comunidad",
+    navInicio: "Inicio",
+    footerCopyright: "Oda Vinoteca © 2026 — Todos los derechos reservados",
+    footerEdition: "10° Edición OAV · 25 Años ODA",
+    footerDate: "4 y 5 de Septiembre",
+    footerLocation: "Iguazú · Argentina",
+  },
+  pt: {
+    // ========== HERO V3 ==========
+    heroEyebrow: "10ª Edição · 4 e 5 de Setembro",
+    heroTitleA: "O vinho nos",
+    heroTitleScript: "Reúne",
+    heroSubtitle: "Dois dias para descobrir, brindar e percorrer Argentina através de seus melhores rótulos.",
+    heroDate: "4 E 5 DE SETEMBRO",
+    heroYear: "2026",
+    heroPlace: "IGUAZU · ARGENTINA",
+
+    // ========== MANIFIESTO V3 ==========
+    manifestoLabel: "Manifesto",
+    manifestoTitleA: "Uma",
+    manifestoTitleB: "Celebração",
+    manifestoTitleC: "do vinho argentino",
+    manifestoDescription: "ODA ao Vinho é o ponto de encontro onde o vinho argentino é vivido, aprendido e compartilhado. Uma celebração da cultura, dos sentidos e da comunidade que há dez anos reúne quem ama o que há por trás de cada taça.",
+    manifestoHighlights: "DEGUSTAÇÃO · EXPERIÊNCIAS · GASTRONOMIA · COMUNIDADE",
+
+    // ========== EXPERIENCE V3 ==========
+    experienceSectionTitle: "Viva o",
+    experienceSectionTitleScript: "Vinho",
+    experienceSectionSubtitle: "de outra forma",
+    experienceItem1Title: "Descubra",
+    experienceItem1Text: "Percorra adegas, prove novos rótulos e surpreenda-se com projetos boutique, orgânicos e clássicos.",
+    experienceItem2Title: "Conecte",
+    experienceItem2Text: "Conheça enólogos, sommeliers e quem faz o vinho. Uma comunidade que compartilha história, origem e paisagem.",
+    experienceItem3Title: "Desfrute",
+    experienceItem3Text: "Gastronomia pensada como harmonização, pensada para acompanhar cada momento e cada taça do percurso.",
+    experienceItem4Title: "Aprenda",
+    experienceItem4Text: "Masterclasses, palestras e degustações guiadas que transformam a forma de viver o vinho.",
+
+    // ========== BODEGAS V3 ==========
+    bodegasSelectionLabel: "Seleção de Adegas",
+    bodegasTitle: "+200",
+    bodegasTitleScript: "Adegas",
+    bodegasTitleC: "Argentinas",
+    bodegasDescription: "Representantes das principais regiões vitivinícolas do país, cada uma trazendo o melhor de seu terroir.",
+    bodegasVarietals: "Variedades em destaque:",
+    bodegasRegionDesc: "Esta região contribui com uma seleção curada de adegas que representam o melhor de suas tradições vitivinícolas e projetos inovadores.",
+    bodegasParticipants: "Algumas das adegas participantes",
+
+    // ========== TICKETS ==========
+    ticketsMarqueeText: "INGRESSOS · LANÇAMENTO OFICIAL · COTAS INICIAIS · MELHOR PREÇO AGORA",
+    ticketsLabel: "Lançamento oficial — cotas iniciais",
+    ticketsTitle: "Garanta seu",
+    ticketsTitleScript: "Lugar",
+    ticketsTitleC: "em ODA ao Vinho",
+    ticketsSubtitle: "Um único ingresso. O preço muda de acordo com o momento.",
+    ticketsDescription: "Acesse o melhor preço disponível nesta primeira etapa.",
+    ticketsPriceLabel: "Preço atual",
+    ticketsCurrencyLabel: "BRL",
+    ticketsBtnBuy: "Comprar Agora",
+    ticketsBtnSoon: "Em Breve",
+    ticketsIncludesLabel: "Inclui",
+    ticketsInclude1: "Acesso ao evento (4 e 5 de setembro)",
+    ticketsInclude2: "Taça de cristal personalizada",
+    ticketsInclude3: "Vale de consumo para ODA e ODF",
+    ticketsInclude4: "Degustações durante todo o percurso",
+    ticketsInclude5: "Acesso a palestras e masterclass do mundo do vinho",
+    ticketsVoucherLabel: "✨ Vale de Consumo",
+    ticketsVoucherLocation: "Em ODA Vinoteca",
+    ticketsResidenteMisiones: "Residente de Missões",
+    ticketsUrgency: "↑ O preço aumenta nas próximas etapas",
+    ticketsLot1Label: "Lançamento",
+    ticketsLot2Label: "Próximo lote",
+    ticketsLot3Label: "Próxima etapa",
+    ticketsLot4Label: "Último lote",
+    ticketsNoIntermediary: "Sem intermediários · Acesso garantido",
+
+    // ========== IGUAZU ==========
+    iguazuSectionLabel: "Além do evento",
+    iguazuTitle: "Três países,",
+    iguazuTitleScript: "uma Taça",
+    iguazuDescription: "Desayunar na Argentina, almoçar no Brasil, jantar no Paraguai. Iguazu é o único lugar onde a Tríplice Fronteira é vivida em um mesmo dia. Um destino icônico que combina natureza, aventura e cultura a passos do nosso evento.",
+    iguazuCard1Title: "Cataratas",
+    iguazuCard1Desc: "Uma das 7 maravilhas naturais do mundo, a 20 minutos do local.",
+    iguazuCard2Title: "Tríplice Fronteira",
+    iguazuCard2Desc: "O marco do encontro entre Argentina, Brasil e Paraguai.",
+    iguazuCard3Title: "Urban",
+    iguazuCard3Desc: "Experiências gastronômicas e cultura na Tríplice Fronteira.",
+
+    // ========== COMMUNITY - TESTIMONIOS ==========
+    testimonial1: "Vim pelo vinho.\nVoltei pela experiência.",
+    testimonial1Author: "Sommelier, Adega Iguazu",
+    testimonial2: "A Tríplice Fronteira\nmerecia esta celebração.",
+    testimonial2Author: "Enólogo, ODA ao Vinho",
+    testimonial3: "Um encontro único\nentre adegas, cultura e comunidade.",
+    testimonial3Author: "Avaliador Profissional",
+    testimonial4: "Dez anos transformando\na forma de viver o vinho.",
+    testimonial4Author: "Participante OAV 2025",
+    testimonial5: "Foi maravilhoso. Parabéns\na todos. Até o ano que vem!",
+    testimonial5Author: "Daniela Veloso, Amante do Vinho",
+    testimonial6: "Uma proposta única que celebra\no vinho argentino em sua máxima expressão.",
+    testimonial6Author: "Produtor, Misiones",
+    testimonial7: "O evento que todos esperávamos.\nQualidade, paixão e comunidade reunidas.",
+    testimonial7Author: "Visitante, Buenos Aires",
+
+    // ========== FOOTER ==========
+    footerVinotienda: "ODA Vinhos",
+    footerVinotiecaDesc: "Nossa loja principal com a melhor seleção de vinhos argentinos",
+    footerDutyFree: "ODA Duty Free",
+    footerDutyFreeDesc: "Acesso privilegiado a ofertas exclusivas sem impostos",
+    footerWineshop: "ODA Wineshop",
+    footerWineshopDesc: "E-commerce especializado em envios internacionais",
+    footerLearnMore: "Saiba mais",
+    footerOrganizedBy: "Organizado por",
+
+    // ========== AGE GATE (não ativo) ==========
+    ageGateLabel: "✦ Verificação de Idade ✦",
+    ageGateTitle: "ODA ao Vinho",
+    ageGateMessage: "Para acessar este site, você deve confirmar que tem mais de 21 anos.",
+    ageGateButton: "Tenho 21+ anos",
+    ageGateExit: "Sair",
+    ageGateDisclaimer: "Confirmando que você tem mais de 21 anos pela lei local",
+
+    // ========== AUTHORITY ==========
+    authorityBodegas: "Adegas",
+    authorityBodegasSub: "de todo o país",
+    authorityEtiquetas: "Rótulos",
+    authorityEtiquetasSub: "apresentados",
+    authorityYears: "Anos",
+    authorityYearsSub: "de trajetória OAV",
+    authorityAsistentes: "Participantes",
+    authorityAsistentesSub: "por edição",
+
+    // ========== COMMUNITY ==========
+    communityTitle: "Comunidade",
+    communityTitleScript: "do Vinho",
+    communityDescription: "Um espaço para quem compartilha paixão pelo vinho argentino. Networking, aprendizado contínuo e experiências compartilhadas.",
+
+    // ========== VENUE ==========
+    venueTitle: "Iguazu",
+    venueSubtitle: "O coração da Tríplice Fronteira",
+    venueMainText: "A minutos das Cataratas do Iguazu, ODA ao Vinho se vive em um ambiente pensado para aproveitar cada momento.\n\nO Iguazu Urban Mall não é apenas o venue do evento. É parte da experiência.",
+    venueLocation: "Iguazu Urban Mall · Tríplice Fronteira",
+    venueSupportText: "Um espaço moderno, amplo e preparado para explorar o vinho de uma forma diferente.",
+    venueDescription: "Adegas distribuídas em todo o percurso, zonas de degustação projetadas para explorar sem pressa e espaços que convidam a ficar.\n\nCada setor foi pensado para que a experiência flua, se descubra e seja compartilhada.",
+
+    // ========== FINAL ==========
+    finalTitle: "O vinho nos",
+    finalScript: "Reúne",
+    finalSubtitle: "Cada ano, cada edição, cada taça",
+
+    // ========== NAVIGATION & GENERAL ==========
+    navLanguage: "Idioma",
+    navBuy: "Comprar",
+    navManifiesto: "Manifesto",
+    navExperiencia: "Experiência",
+    navAutoridad: "Autoridade",
+    navEntradas: "Ingressos",
+    navBodegas: "Adegas",
+    navDestino: "Destino",
+    navComunidad: "Comunidade",
+    navInicio: "Início",
+    footerCopyright: "Oda Vinoteca © 2026 — Todos os direitos reservados",
+    footerEdition: "10ª Edição OAV · 25 Anos ODA",
+    footerDate: "4 e 5 de Setembro",
+    footerLocation: "Iguazu · Argentina",
+  },
+};
+
+export function t(key: keyof typeof translations.es, lang: Language): string {
+  return translations[lang][key] || translations.es[key];
+}

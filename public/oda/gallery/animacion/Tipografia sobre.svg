@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 842.16 546.98">
+  <defs>
+    <style>
+      .cls-1 {
+        letter-spacing: 0em;
+      }
+
+      .cls-1, .cls-2 {
+        font-family: LuxuriousScript-Regular, 'Luxurious Script';
+        font-size: 210.15px;
+      }
+
+      .cls-3, .cls-4, .cls-5 {
+        font-family: CCSBelvareRegular, 'CCS Belvare';
+        font-size: 150.88px;
+      }
+
+      .cls-3, .cls-6 {
+        fill: #890043;
+      }
+
+      .cls-7 {
+        isolation: isolate;
+      }
+
+      .cls-8 {
+        letter-spacing: .17em;
+      }
+
+      .cls-9 {
+        letter-spacing: .15em;
+      }
+
+      .cls-10 {
+        letter-spacing: .14em;
+      }
+
+      .cls-4, .cls-11 {
+        letter-spacing: 0em;
+      }
+
+      .cls-5, .cls-12 {
+        letter-spacing: 0em;
+      }
+
+      .cls-13 {
+        mix-blend-mode: darken;
+      }
+
+      .cls-14 {
+        font-family: BentonModDisp-Semibold, 'Benton Modern D';
+        font-size: 152.63px;
+        font-weight: 600;
+        letter-spacing: 0em;
+      }
+
+      .cls-15 {
+        fill: #700143;
+        font-family: Lato-Regular, Lato;
+        font-size: 27.03px;
+      }
+
+      .cls-16 {
+        letter-spacing: .01em;
+      }
+    </style>
+  </defs>
+  <g class="cls-7">
+    <g id="Capa_2" data-name="Capa 2">
+      <g id="Capa_1-2" data-name="Capa 1">
+        <g>
+          <g class="cls-13">
+            <text class="cls-15" transform="translate(235.15 529.17)"><tspan class="cls-8" x="0" y="0">IG</tspan><tspan class="cls-10" x="37.38" y="0">U</tspan><tspan class="cls-8" x="60.97" y="0">AZÚ- A</tspan><tspan class="cls-9" x="176.65" y="0">R</tspan><tspan class="cls-8" x="198.05" y="0">GENTINA</tspan></text>
+          </g>
+          <text class="cls-6" transform="translate(0 164.44)"><tspan class="cls-5" x="0" y="0">LA</tspan><tspan class="cls-14" x="94.75" y="0"> </tspan><tspan class="cls-1" x="126.19" y="0">Celebración </tspan></text>
+          <text class="cls-3" transform="translate(48.14 301.1)"><tspan class="cls-12" x="0" y="0">EMPIE</tspan><tspan class="cls-16" x="297.53" y="0">Z</tspan><tspan class="cls-11" x="354.86" y="0">A CON</tspan></text>
+          <text class="cls-6" transform="translate(111.2 438.76)"><tspan class="cls-4" x="0" y="0">UNA</tspan><tspan class="cls-14" x="209.41" y="0"> </tspan><tspan class="cls-2" x="240.86" y="0">Copa</tspan></text>
+        </g>
+      </g>
+    </g>
+  </g>
+</svg>
