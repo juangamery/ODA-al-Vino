@@ -15,6 +15,30 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="es" className="h-full antialiased">
+      <head>
+        {/* Preload critical fonts */}
+        <link
+          rel="preload"
+          href="/oda/Fonts/CCSBelvareRegular.ttf"
+          as="font"
+          type="font/ttf"
+          crossOrigin="anonymous"
+        />
+        <link
+          rel="preload"
+          href="/oda/Fonts/LuxuriousScript-Regular.ttf"
+          as="font"
+          type="font/ttf"
+          crossOrigin="anonymous"
+        />
+        <link
+          rel="preload"
+          href="/oda/Fonts/Lato-Bold.ttf"
+          as="font"
+          type="font/ttf"
+          crossOrigin="anonymous"
+        />
+      </head>
       <body className="font-sans min-h-full flex flex-col">
         <LayoutClient>{children}</LayoutClient>
       </body>

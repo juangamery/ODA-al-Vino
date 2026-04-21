@@ -6,7 +6,7 @@
   src: url("/oda/Fonts/ccsbelvareregular.ttf") format("truetype");
   font-weight: 400;
   font-style: normal;
-  font-display: swap;
+  font-display: auto;
 }
 
 @font-face {
@@ -14,7 +14,7 @@
   src: url("/oda/Fonts/LuxuriousScript-Regular.ttf") format("truetype");
   font-weight: 400;
   font-style: normal;
-  font-display: swap;
+  font-display: auto;
 }
 
 @font-face {
@@ -22,7 +22,7 @@
   src: url("/oda/Fonts/Lato-Regular.ttf") format("truetype");
   font-weight: 400;
   font-style: normal;
-  font-display: swap;
+  font-display: auto;
 }
 
 @font-face {
@@ -30,7 +30,7 @@
   src: url("/oda/Fonts/Lato-Bold.ttf") format("truetype");
   font-weight: 700;
   font-style: normal;
-  font-display: swap;
+  font-display: auto;
 }
 
 @font-face {
@@ -38,7 +38,7 @@
   src: url("/oda/Fonts/Lato-BoldItalic.ttf") format("truetype");
   font-weight: 700;
   font-style: italic;
-  font-display: swap;
+  font-display: auto;
 }
 
 @theme {

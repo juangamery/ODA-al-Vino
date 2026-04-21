@@ -42,7 +42,7 @@ export function HeroV3() {
     }
 
     /* Timeline de entrada */
-    const tl = gsap.timeline({ delay: 0.3 });
+    const tl = gsap.timeline({ delay: 0.1 }); // Reducido de 0.3 a 0.1
 
     /* Contenedor completo: oscilación pendular continua (SVG + texto) */
     if (containerRef.current) {
@@ -53,7 +53,7 @@ export function HeroV3() {
         ease: "sine.inOut",
         repeat: -1,
         yoyo: true,
-        delay: 0.5,
+        delay: 0.2, // Reducido de 0.5 a 0.2
       });
     }
 
