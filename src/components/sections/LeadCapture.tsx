@@ -32,7 +32,7 @@ export function LeadCapture() {
             {/* Gráfico decorativo */}
             <div className="mt-12 pointer-events-none select-none">
               <img
-                src="/oda/Graphics/Recurso 4@2x.png"
+                src="/oda/Graphics/Recurso 4@2x.webp"
                 alt=""
                 aria-hidden="true"
                 className="w-48 opacity-20 animate-float"

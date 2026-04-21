@@ -24,7 +24,7 @@ export function FooterV3() {
       {/* Strip de personajes como separador superior */}
       <div className="border-b border-wine/5 overflow-hidden">
         <img
-          src="/oda/Graphics/copas y personajes.png"
+          src="/oda/Graphics/copas y personajes.webp"
           alt=""
           aria-hidden="true"
           className="w-full max-w-5xl mx-auto object-contain py-4 px-8 md:px-16"

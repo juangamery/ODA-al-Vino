@@ -15,19 +15,19 @@ interface Card {
 function getCards(language: string): Card[] {
   return [
     {
-      src: "/oda/gallery/iguazu/Cataratas.jpg",
+      src: "/oda/gallery/iguazu/Cataratas.webp",
       alt: t("iguazuCard1Title", language as any),
       title: t("iguazuCard1Title", language as any),
       desc: t("iguazuCard1Desc", language as any),
     },
     {
-      src: "/oda/gallery/iguazu/Rueda.jpg",
+      src: "/oda/gallery/iguazu/Rueda.webp",
       alt: t("iguazuCard2Title", language as any),
       title: t("iguazuCard2Title", language as any),
       desc: t("iguazuCard2Desc", language as any),
     },
     {
-      src: "/oda/gallery/iguazu/Urban.jpg",
+      src: "/oda/gallery/iguazu/Urban.webp",
       alt: t("iguazuCard3Title", language as any),
       title: t("iguazuCard3Title", language as any),
       desc: t("iguazuCard3Desc", language as any),

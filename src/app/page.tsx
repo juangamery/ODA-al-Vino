@@ -1,17 +1,28 @@
+import dynamic from "next/dynamic";
 import { Authority } from "@/components/sections/Authority";
-import { BodegasV3 } from "@/components/sections/BodegasV3";
-import { Community } from "@/components/sections/Community";
 import { ExperienceV3 } from "@/components/sections/ExperienceV3";
 import { FinalV3 } from "@/components/sections/FinalV3";
 import { FooterV3 } from "@/components/sections/FooterV3";
 import { FloatingHeader } from "@/components/layout/FloatingHeader";
 import { HeroV3 } from "@/components/sections/HeroV3";
-import { Iguazu } from "@/components/sections/Iguazu";
 import { ManifestoV3 } from "@/components/sections/ManifestoV3";
 import { SealDivider } from "@/components/sections/SealDivider";
 import { Tickets } from "@/components/sections/Tickets";
 import { VenueV3 } from "@/components/sections/VenueV3";
 import { Marquee } from "@/components/ui/Marquee";
+
+// Lazy load secciones no críticas
+const BodegasV3 = dynamic(() => import("@/components/sections/BodegasV3").then(mod => ({ default: mod.BodegasV3 })), {
+  loading: () => <div className="h-64" />,
+});
+
+const Community = dynamic(() => import("@/components/sections/Community").then(mod => ({ default: mod.Community })), {
+  loading: () => <div className="h-64" />,
+});
+
+const Iguazu = dynamic(() => import("@/components/sections/Iguazu").then(mod => ({ default: mod.Iguazu })), {
+  loading: () => <div className="h-96" />,
+});
 
 export default function Home() {
   return (

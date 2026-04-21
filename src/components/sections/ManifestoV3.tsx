@@ -97,7 +97,7 @@ export function ManifestoV3() {
               </svg>
 
               <img
-                src="/oda/Graphics/Recurso 4@2x.png"
+                src="/oda/Graphics/Recurso 4@2x.webp"
                 alt="Celebración ODA al Vino"
                 className="w-full object-contain drop-shadow-2xl"
               />

@@ -25,7 +25,7 @@ function getExperienceItems(language: Language): ExperienceItem[] {
         "/oda/gallery/oav25/009A7140.webp",
         "/oda/gallery/oav25/009A7373.webp",
         "/oda/gallery/oav25/0D0A7446.webp",
-        "/oda/Graphics/700 etiquetas@2x.png",
+        "/oda/Graphics/700 etiquetas@2x.webp",
       ],
     },
     {

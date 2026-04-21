@@ -48,7 +48,7 @@ export function About() {
               <path d="M7 0L8.5 5.5L14 7L8.5 8.5L7 14L5.5 8.5L0 7L5.5 5.5Z" fill="currentColor"/>
             </svg>
             <img
-              src="/oda/Graphics/Recurso 4@2x.png"
+              src="/oda/Graphics/Recurso 4@2x.webp"
               alt="ODA al Vino — celebración"
               className="w-full object-contain drop-shadow-2xl"
             />

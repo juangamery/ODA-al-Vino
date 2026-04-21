@@ -5,7 +5,7 @@ import Image from "next/image";
 import { gsap } from "@/lib/gsap";
 import { useGSAP } from "@gsap/react";
 
-const HERO_IMG = "/oda/gallery/Hero imagen fondo.png";
+const HERO_IMG = "/oda/gallery/Hero imagen fondo.webp";
 
 export function HeroVideo() {
   const sectionRef = useRef<HTMLElement>(null);
@@ -26,7 +26,7 @@ export function HeroVideo() {
           trigger: sectionRef.current,
           start: "top top",
           end: "bottom top",
-          scrub: true,
+          scrub: 0.5,
         },
       });
     }

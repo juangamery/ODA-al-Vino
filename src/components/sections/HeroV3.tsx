@@ -7,7 +7,7 @@ import { useGSAP } from "@gsap/react";
 import { useLanguage } from "@/context/LanguageContext";
 import { t } from "@/lib/translations";
 
-const HERO_IMG = "/oda/gallery/Hero imagen fondo.png";
+const HERO_IMG = "/oda/gallery/Hero imagen fondo.webp";
 
 export function HeroV3() {
   const { language } = useLanguage();
@@ -26,6 +26,9 @@ export function HeroV3() {
 
     /* Parallax suave en la foto de fondo */
     if (imgRef.current) {
+      // Optimización: usar will-change para hardware acceleration
+      imgRef.current.style.willChange = "transform";
+
       gsap.to(imgRef.current, {
         yPercent: 35,
         ease: "none",
@@ -33,7 +36,7 @@ export function HeroV3() {
           trigger: sectionRef.current,
           start: "top top",
           end: "bottom top",
-          scrub: true,
+          scrub: 0.5, // Cambio de true a 0.5 para mejor performance
         },
       });
     }
