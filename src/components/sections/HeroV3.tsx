@@ -120,8 +120,8 @@ export function HeroV3() {
           className="relative w-full max-w-4xl flex flex-col items-center justify-center"
           style={{
             minHeight: "auto",
-            aspectRatio: "1 / 1.2",
-            maxHeight: "clamp(300px, 70vh, 500px)",
+            aspectRatio: "1 / 1.1",
+            maxHeight: "clamp(280px, 60vh, 480px)",
           }}
         >
           {/* SVG del contenedor AL FRENTE */}
@@ -138,24 +138,24 @@ export function HeroV3() {
           {/* Eyebrow */}
           <p
             ref={eyebrowRef}
-            className="text-wine/50 text-[10px] md:text-sm tracking-widest uppercase font-bold mb-2 md:mb-4 opacity-0"
+            className="text-wine/50 text-[8px] md:text-sm tracking-widest uppercase font-bold mb-1 md:mb-4 opacity-0"
           >
             {t("heroEyebrow", language)}
           </p>
 
           {/* Título dinámico - más armónico */}
-          <div ref={titleRef} className="mb-0 opacity-0" style={{ marginTop: 'clamp(12px, 3vw, 35px)' }}>
+          <div ref={titleRef} className="mb-0 opacity-0" style={{ marginTop: 'clamp(8px, 2vw, 35px)' }}>
             <h1
               ref={titleARef}
               className="font-serif uppercase text-wine mb-0 leading-[0.75]"
-              style={{ fontSize: 'clamp(28px, 6vw, 96px)' }}
+              style={{ fontSize: 'clamp(20px, 5vw, 96px)' }}
             >
               {t("heroTitleA", language)}
             </h1>
             <p
               ref={titleScriptRef}
               className="script normal-case italic text-wine leading-[0.85]"
-              style={{ fontSize: 'clamp(45px, 11vw, 150px)' }}
+              style={{ fontSize: 'clamp(32px, 9vw, 150px)' }}
             >
               {language === "es" ? (
                 <>
@@ -167,7 +167,7 @@ export function HeroV3() {
                 </>
               )}
             </p>
-            <p className="lato-expanded text-wine font-bold tracking-widest mt-2 md:mt-4" style={{ fontSize: 'clamp(11px, 2.5vw, 14px)' }}>
+            <p className="lato-expanded text-wine font-bold tracking-widest mt-1 md:mt-4" style={{ fontSize: 'clamp(9px, 2vw, 14px)' }}>
               {t("heroYear", language)}
             </p>
           </div>
@@ -175,11 +175,11 @@ export function HeroV3() {
       </div>
 
       {/* Subtítulo dinámico AFUERA del contenedor */}
-      <div className="relative z-10 px-4 md:px-6 pt-4 md:pt-6 pb-0">
+      <div className="relative z-10 px-4 md:px-6 pt-3 md:pt-6 pb-0">
         <p
           ref={subtitleRef}
-          className="text-center text-paper leading-relaxed max-w-2xl mx-auto opacity-0"
-          style={{ fontSize: 'clamp(14px, 3.5vw, 24px)' }}
+          className="text-center text-paper leading-snug md:leading-relaxed max-w-2xl mx-auto opacity-0"
+          style={{ fontSize: 'clamp(12px, 3vw, 24px)' }}
         >
           {t("heroSubtitle", language)}
         </p>
