@@ -40,6 +40,11 @@ export const translations = {
     bodegasDescription: "Representantes de las principales regiones vitivinícolas del país, cada una trayendo lo mejor de su terroir.",
     bodegasVarietals: "Varietales destacados:",
     bodegasRegionDesc: "Esta región aporta una selección curada de bodegas que representan lo mejor de sus tradiciones vitivinícolas y proyectos innovadores.",
+    mendozaDesc: "A 800-1200m de altitud en el pie de los Andes. La Cordillera actúa como barrera natural, generando un clima ideal: seco y cálido, moderado por la altura. La tierra del Malbec argentino, con tradición inquebrantable desde Luján de Cuyo hasta el Valle de Uco.",
+    sanjuanDesc: "La región del norte de Cuyo, concentrada en los valles irrigados. Clima continental seco, con la altitud como modulador clave. Especializada en vinos robustos y estructurados: Syrah, Bonarda y Petit Verdot dan vida a proyectos únicos.",
+    saltaDesc: "A altitudes extremas en los Valles Calchaquíes, hasta 3.300m sobre el nivel del mar. El Torrontés es la joya autóctona: un blanco aromático y fresco que solo existe en estas alturas. Malbec, Cabernet Franc y Tannat completan la expresión de esta región singular.",
+    lariojDesc: "En el límite norte de Cuyo, compartiendo características con el NOA. Productora histórica de Torrontés y Malbec. El clima seco y la elevación generan vinos de carácter mineral y elegancia natural.",
+    patagoniaDesc: "La región más austral, a menor altitud pero con amplitud térmica extrema. Clima frío, vientos intensos y ciclos largos crean Pinot Noir de elegancia incomparable. Sauvignon Blanc y Chardonnay destacan entre los blancos, frescos y aromáticos.",
     bodegasParticipants: "Algunas de las bodegas participantes",
 
     // ========== TICKETS ==========
@@ -210,6 +215,11 @@ export const translations = {
     bodegasDescription: "Representantes das principais regiões vitivinícolas do país, cada uma trazendo o melhor de seu terroir.",
     bodegasVarietals: "Variedades em destaque:",
     bodegasRegionDesc: "Esta região contribui com uma seleção curada de adegas que representam o melhor de suas tradições vitivinícolas e projetos inovadores.",
+    mendozaDesc: "A 800-1200m de altitude no pé dos Andes. A Cordilheira atua como barreira natural, gerando um clima ideal: seco e quente, moderado pela altitude. A terra do Malbec argentino, com tradição inabalável desde Luján de Cuyo até o Valle de Uco.",
+    sanjuanDesc: "A região do norte de Cuyo, concentrada nos vales irrigados. Clima continental seco, com a altitude como modulador chave. Especializada em vinhos robustos e estruturados: Syrah, Bonarda e Petit Verdot ganham vida em projetos únicos.",
+    saltaDesc: "A altitudes extremas nos Vales Calchaquíes, até 3.300m acima do nível do mar. O Torrontés é a joia autóctone: um branco aromático e fresco que existe apenas nestas altitudes. Malbec, Cabernet Franc e Tannat completam a expressão desta região singular.",
+    lariojDesc: "No limite norte de Cuyo, compartilhando características com o NOA. Produtora histórica de Torrontés e Malbec. O clima seco e a elevação geram vinhos de caráter mineral e elegância natural.",
+    patagoniaDesc: "A região mais austral, em menor altitude mas com amplitude térmica extrema. Clima frio, ventos intensos e ciclos longos criam Pinot Noir de elegância incomparável. Sauvignon Blanc e Chardonnay destacam-se entre os brancos, frescos e aromáticos.",
     bodegasParticipants: "Algumas das adegas participantes",
 
     // ========== TICKETS ==========

@@ -5,31 +5,45 @@ import { Reveal } from "@/components/motion/Reveal";
 import { useLanguage } from "@/context/LanguageContext";
 import { t } from "@/lib/translations";
 
-const regions = [
+type RegionDescKey = "mendozaDesc" | "sanjuanDesc" | "saltaDesc" | "lariojDesc" | "patagoniaDesc";
+
+interface Region {
+  name: string;
+  pct: string;
+  varietals: string;
+  descriptionKey: RegionDescKey;
+}
+
+const regions: Region[] = [
   {
     name: "Mendoza",
     pct: "45%",
     varietals: "Malbec, Cabernet Sauvignon, Syrah",
+    descriptionKey: "mendozaDesc",
   },
   {
     name: "San Juan",
     pct: "22%",
     varietals: "Syrah, Bonarda, Petit Verdot",
+    descriptionKey: "sanjuanDesc",
   },
   {
     name: "Salta",
     pct: "15%",
     varietals: "Malbec, Cabernet Franc, Tannat",
+    descriptionKey: "saltaDesc",
   },
   {
     name: "La Rioja",
     pct: "12%",
     varietals: "Torrontés, Malbec, Syrah",
+    descriptionKey: "lariojDesc",
   },
   {
-    name: "Otras regiones",
+    name: "Patagonia",
     pct: "6%",
-    varietals: "Riesling, Tempranillo, Viognier",
+    varietals: "Pinot Noir, Sauvignon Blanc, Chardonnay",
+    descriptionKey: "patagoniaDesc",
   },
 ];
 
@@ -175,7 +189,7 @@ export function BodegasV3() {
                 </p>
 
                 <p className="text-sm text-paper/60 leading-relaxed">
-                  {t("bodegasRegionDesc", language)}
+                  {t(regions[selectedRegion].descriptionKey, language)}
                 </p>
               </div>
             </Reveal>
