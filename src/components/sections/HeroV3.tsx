@@ -148,14 +148,14 @@ export function HeroV3() {
             <h1
               ref={titleARef}
               className="font-serif uppercase text-wine mb-0 leading-[0.75]"
-              style={{ fontSize: 'clamp(32px, 7vw, 96px)' }}
+              style={{ fontSize: 'clamp(35px, 7.5vw, 96px)' }}
             >
               {t("heroTitleA", language)}
             </h1>
             <p
               ref={titleScriptRef}
               className="script normal-case italic text-wine leading-[0.85]"
-              style={{ fontSize: 'clamp(55px, 12vw, 150px)' }}
+              style={{ fontSize: 'clamp(60px, 13vw, 150px)' }}
             >
               {language === "es" ? (
                 <>
