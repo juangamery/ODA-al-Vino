@@ -144,6 +144,17 @@ export const translations = {
     finalScript: "Reúne",
     finalSubtitle: "Cada año, cada edición, cada copa",
 
+    // ========== NEWSLETTER ==========
+    newsletterEyebrow: "Comunidad ODA",
+    newsletterTitle: "Recibí noticias",
+    newsletterSubtitle: "Sé el primero en conocer novedades sobre ODA al Vino, experiencias exclusivas y promociones especiales.",
+    newsletterPlaceholder: "tu@email.com",
+    newsletterButton: "Suscribirse",
+    newsletterButtonLoading: "Enviando...",
+    newsletterSuccess: "¡Gracias! Revisa tu email para confirmar.",
+    newsletterError: "Hubo un error. Intenta de nuevo.",
+    newsletterDisclaimer: "No compartimos tu email. Cancelar suscripción en cualquier momento.",
+
     // ========== NAVIGATION & GENERAL ==========
     navLanguage: "Idioma",
     navBuy: "Comprar",
@@ -302,6 +313,17 @@ export const translations = {
     finalTitle: "O vinho nos",
     finalScript: "Reúne",
     finalSubtitle: "Cada ano, cada edição, cada taça",
+
+    // ========== NEWSLETTER ==========
+    newsletterEyebrow: "Comunidade ODA",
+    newsletterTitle: "Receba notícias",
+    newsletterSubtitle: "Seja o primeiro a saber sobre novidades sobre ODA ao Vinho, experiências exclusivas e promoções especiais.",
+    newsletterPlaceholder: "seu@email.com",
+    newsletterButton: "Inscrever-se",
+    newsletterButtonLoading: "Enviando...",
+    newsletterSuccess: "Obrigado! Verifique seu email para confirmar.",
+    newsletterError: "Houve um erro. Tente novamente.",
+    newsletterDisclaimer: "Não compartilhamos seu email. Cancelar inscrição a qualquer momento.",
 
     // ========== NAVIGATION & GENERAL ==========
     navLanguage: "Idioma",
