@@ -43,7 +43,7 @@ export function FloatingHeader() {
           <img
             src="/oda/brand/logo_blanco_vertical.svg"
             alt="ODA al Vino"
-            className="h-20 w-auto"
+            className="h-40 md:h-20 w-auto"
           />
         </a>
       </header>
