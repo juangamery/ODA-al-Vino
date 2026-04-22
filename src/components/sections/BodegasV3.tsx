@@ -99,6 +99,20 @@ export function BodegasV3() {
     setIsDragging(false);
   };
 
+  const handlePrevClick = () => {
+    if (marqueeRef.current) {
+      marqueeRef.current.style.animation = "none";
+      setTranslateX((prev) => prev + 200);
+    }
+  };
+
+  const handleNextClick = () => {
+    if (marqueeRef.current) {
+      marqueeRef.current.style.animation = "none";
+      setTranslateX((prev) => prev - 200);
+    }
+  };
+
   return (
     <section id="bodegas" className="bg-olive overflow-hidden relative py-28 md:py-40">
       {/* Patrón de fondo */}
@@ -223,34 +237,59 @@ export function BodegasV3() {
             <p className="lato-expanded text-[10px] text-paper/50 uppercase tracking-widest mb-6">
               {t("bodegasParticipants", language)}
             </p>
-            <div className="overflow-hidden group cursor-grab active:cursor-grabbing"
-              onMouseDown={handleMouseDown}
-              onMouseMove={handleMouseMove}
-              onMouseUp={handleMouseUp}
-              onMouseLeave={handleMouseUp}
-            >
-              <div
-                ref={marqueeRef}
-                className="flex whitespace-nowrap gap-8"
-                style={{
-                  animation: isDragging ? "none" : "marquee-slow 25s linear infinite",
-                  animationPlayState: isDragging ? "paused" : "running",
-                  transform: isDragging ? `translateX(${translateX}px)` : "translateX(0)",
-                  transition: isDragging ? "none" : "transform 0.3s ease-out",
-                  cursor: isDragging ? "grabbing" : "grab"
-                }}
+            <div className="flex items-center gap-6 lg:gap-8">
+              {/* Flecha Anterior */}
+              <button
+                onClick={handlePrevClick}
+                className="flex-shrink-0 p-3 rounded-full border border-paper/30 text-paper/70 hover:text-paper hover:bg-paper/10 transition-all duration-300 hover:scale-110"
+                aria-label="Previous bodegas"
               >
-                {[...Array(2)].map((_, k) => (
-                  <div key={k} className="flex gap-8">
-                    {bodegas.map((bodega, i) => (
-                      <div key={i} className="flex items-center gap-3 font-serif text-2xl md:text-3xl lg:text-4xl uppercase text-paper/80">
-                        <span>{bodega}</span>
-                        <span className="text-harvest text-lg md:text-xl">★</span>
-                      </div>
-                    ))}
-                  </div>
-                ))}
+                <svg className="w-5 h-5 md:w-6 md:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+                </svg>
+              </button>
+
+              {/* Marquee */}
+              <div className="overflow-hidden group cursor-grab active:cursor-grabbing flex-1"
+                onMouseDown={handleMouseDown}
+                onMouseMove={handleMouseMove}
+                onMouseUp={handleMouseUp}
+                onMouseLeave={handleMouseUp}
+              >
+                <div
+                  ref={marqueeRef}
+                  className="flex whitespace-nowrap gap-8"
+                  style={{
+                    animation: isDragging ? "none" : "marquee-slow 25s linear infinite",
+                    animationPlayState: isDragging ? "paused" : "running",
+                    transform: isDragging ? `translateX(${translateX}px)` : "translateX(0)",
+                    transition: isDragging ? "none" : "transform 0.3s ease-out",
+                    cursor: isDragging ? "grabbing" : "grab"
+                  }}
+                >
+                  {[...Array(2)].map((_, k) => (
+                    <div key={k} className="flex gap-8">
+                      {bodegas.map((bodega, i) => (
+                        <div key={i} className="flex items-center gap-3 font-serif text-2xl md:text-3xl lg:text-4xl uppercase text-paper/80">
+                          <span>{bodega}</span>
+                          <span className="text-harvest text-lg md:text-xl">★</span>
+                        </div>
+                      ))}
+                    </div>
+                  ))}
+                </div>
               </div>
+
+              {/* Flecha Siguiente */}
+              <button
+                onClick={handleNextClick}
+                className="flex-shrink-0 p-3 rounded-full border border-paper/30 text-paper/70 hover:text-paper hover:bg-paper/10 transition-all duration-300 hover:scale-110"
+                aria-label="Next bodegas"
+              >
+                <svg className="w-5 h-5 md:w-6 md:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                </svg>
+              </button>
             </div>
           </div>
         </Reveal>
