@@ -175,11 +175,11 @@ export function HeroV3() {
       </div>
 
       {/* Subtítulo dinámico AFUERA del contenedor */}
-      <div className="relative z-10 px-4 md:px-6 pt-3 md:pt-6 pb-0">
+      <div className="relative z-10 px-4 md:px-6 pt-2 md:pt-6 pb-0">
         <p
           ref={subtitleRef}
           className="text-center text-paper leading-snug md:leading-relaxed max-w-2xl mx-auto opacity-0"
-          style={{ fontSize: 'clamp(14px, 3.5vw, 24px)' }}
+          style={{ fontSize: 'clamp(15px, 4vw, 24px)' }}
         >
           {t("heroSubtitle", language)}
         </p>
