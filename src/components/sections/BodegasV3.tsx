@@ -12,6 +12,7 @@ interface Region {
   pct: string;
   varietals: string;
   descriptionKey: RegionDescKey;
+  characteristics: string[];
 }
 
 const regions: Region[] = [
@@ -20,30 +21,35 @@ const regions: Region[] = [
     pct: "45%",
     varietals: "Malbec, Cabernet Sauvignon, Syrah",
     descriptionKey: "mendozaDesc",
+    characteristics: ["800-1200m altitud", "Clima seco cálido", "Cordillera moderadora"],
   },
   {
     name: "San Juan",
     pct: "22%",
     varietals: "Syrah, Bonarda, Petit Verdot",
     descriptionKey: "sanjuanDesc",
+    characteristics: ["Norte de Cuyo", "Continental seco", "Vinos robustos"],
   },
   {
     name: "Salta",
     pct: "15%",
     varietals: "Malbec, Cabernet Franc, Tannat",
     descriptionKey: "saltaDesc",
+    characteristics: ["Hasta 3.300m altitud", "Valles Calchaquíes", "Torrontés autóctono"],
   },
   {
     name: "La Rioja",
     pct: "12%",
     varietals: "Torrontés, Malbec, Syrah",
     descriptionKey: "lariojDesc",
+    characteristics: ["Límite norte Cuyo", "Clima mineral", "Tradición histórica"],
   },
   {
     name: "Patagonia",
     pct: "6%",
     varietals: "Pinot Noir, Sauvignon Blanc, Chardonnay",
     descriptionKey: "patagoniaDesc",
+    characteristics: ["Región más austral", "Clima frío intenso", "Amplitud térmica extrema"],
   },
 ];
 
@@ -173,7 +179,7 @@ export function BodegasV3() {
           {/* Right: Details Sticky */}
           <div className="hidden lg:block sticky top-24">
             <Reveal key={selectedRegion}>
-              <div className="space-y-6">
+              <div className="space-y-8">
                 <div>
                   <h4 className="font-serif text-[clamp(2.5rem,6vw,4rem)] uppercase text-paper leading-tight">
                     {regions[selectedRegion].name}
@@ -183,12 +189,27 @@ export function BodegasV3() {
                   </p>
                 </div>
 
+                {/* Características visuales */}
+                <div className="space-y-3">
+                  <p className="text-xs text-paper/50 uppercase tracking-widest font-semibold">Características</p>
+                  <div className="flex flex-wrap gap-2">
+                    {regions[selectedRegion].characteristics.map((char, idx) => (
+                      <div
+                        key={idx}
+                        className="px-3 py-1.5 text-xs font-medium rounded-full border border-paper/30 text-paper/80 bg-paper/5 hover:bg-paper/10 transition-colors"
+                      >
+                        {char}
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
                 <p className="text-base md:text-lg text-paper/75 leading-relaxed max-w-md">
                   <span className="italic font-semibold">{t("bodegasVarietals", language)}</span>{" "}
                   {regions[selectedRegion].varietals}
                 </p>
 
-                <p className="text-sm text-paper/60 leading-relaxed">
+                <p className="text-sm text-paper/60 leading-relaxed max-w-md">
                   {t(regions[selectedRegion].descriptionKey, language)}
                 </p>
               </div>
