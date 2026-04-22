@@ -211,9 +211,9 @@ export function Tickets() {
         </Reveal>
 
         {/* Grid: Tickets + Card */}
-        <div className="grid lg:grid-cols-[1fr_1.2fr] gap-12 lg:gap-24 items-start">
+        <div className="grid md:lg:grid-cols-[1fr_1.2fr] gap-6 md:gap-12 lg:gap-24 items-start">
           {/* LEFT: Tickets */}
-          <div className="space-y-6" ref={cardsContainerRef}>
+          <div className="space-y-4 md:space-y-6" ref={cardsContainerRef}>
             {lots.map((lot, i) => (
               <TicketCard
                 key={lot.number}
@@ -227,14 +227,14 @@ export function Tickets() {
 
           {/* RIGHT: Entrada Card - Label Style with Perforation */}
           <div>
-            <div className="sticky top-32 bg-gradient-to-br from-wine via-plum to-wine p-10 md:p-14 shadow-2xl relative" style={{
+            <div className="lg:sticky lg:top-32 bg-gradient-to-br from-wine via-plum to-wine p-6 md:p-10 lg:p-14 shadow-2xl relative" style={{
               borderRadius: "12px",
               boxShadow: "0 20px 60px rgba(71, 7, 44, 0.4)",
               borderLeft: "2px dashed rgba(255, 245, 225, 0.5)",
-              paddingLeft: "calc(40px + 2.5rem)",
+              paddingLeft: "calc(24px + 1.5rem)",
             }}>
-              {/* Perforación decorativa */}
-              <div className="absolute left-0 top-0 bottom-0 w-10 flex flex-col items-center justify-between py-4">
+              {/* Perforación decorativa - solo en tablet/desktop */}
+              <div className="hidden md:flex absolute left-0 top-0 bottom-0 w-10 flex flex-col items-center justify-between py-4">
                 <div className="space-y-2">
                   {[...Array(12)].map((_, i) => (
                     <div key={i} className="w-1 h-1 rounded-full bg-paper/40" />
@@ -242,38 +242,38 @@ export function Tickets() {
                 </div>
               </div>
               {/* Header: Título + Logo */}
-              <div className="mb-10">
-                <p className="lato-expanded text-[10px] text-paper/60 uppercase tracking-[0.35em] font-bold mb-4">
+              <div className="mb-6 md:mb-10">
+                <p className="lato-expanded text-[9px] md:text-[10px] text-paper/60 uppercase tracking-[0.35em] font-bold mb-2 md:mb-4">
                   ✦ Acceso Completo ✦
                 </p>
-                <div className="flex items-start justify-between gap-4">
-                  <h3 className="font-serif text-4xl md:text-5xl lg:text-6xl uppercase text-paper leading-tight">
+                <div className="flex items-start justify-between gap-3 md:gap-4">
+                  <h3 className="font-serif text-2xl md:text-4xl lg:text-5xl xl:text-6xl uppercase text-paper leading-tight">
                     Entrada
                   </h3>
-                  {/* Logo SVG */}
+                  {/* Logo SVG - Más pequeño en mobile */}
                   <img
                     src="/oda/brand/logo_blanco_vertical.svg"
                     alt="ODA al Vino"
-                    className="h-24 md:h-32 w-auto flex-shrink-0 -mt-6 md:-mt-8"
+                    className="h-14 md:h-24 lg:h-32 w-auto flex-shrink-0 -mt-2 md:-mt-6 lg:-mt-8"
                   />
                 </div>
               </div>
 
               {/* Precio Dinámico - Prominente */}
-              <div className="bg-harvest/20 border-l-4 border-harvest rounded-lg p-6 mb-8">
-                <p className="text-paper/70 text-sm mb-2 uppercase tracking-widest">{t("ticketsPriceLabel", language)}</p>
-                <p className="font-serif text-5xl md:text-6xl text-paper font-bold">
+              <div className="bg-harvest/20 border-l-4 border-harvest rounded-lg p-4 md:p-6 mb-6 md:mb-8">
+                <p className="text-paper/70 text-xs md:text-sm mb-2 uppercase tracking-widest">{t("ticketsPriceLabel", language)}</p>
+                <p className="font-serif text-3xl md:text-5xl lg:text-6xl text-paper font-bold">
                   {getPrice(lots[selectedLot])}
                 </p>
-                <p className="text-harvest text-xs font-bold uppercase tracking-widest mt-3">
+                <p className="text-harvest text-xs font-bold uppercase tracking-widest mt-2 md:mt-3">
                   {lots[selectedLot].label}
                 </p>
               </div>
 
               {/* Vale de Consumo - Destacado */}
-              <div className="bg-plum/10 border-l-4 border-plum rounded-lg p-6 mb-8">
-                <p className="text-paper/70 text-sm mb-3 uppercase tracking-widest font-bold">{t("ticketsVoucherLabel", language)}</p>
-                <p className="font-serif text-4xl md:text-5xl text-paper font-bold mb-2">
+              <div className="bg-plum/10 border-l-4 border-plum rounded-lg p-4 md:p-6 mb-6 md:mb-8">
+                <p className="text-paper/70 text-xs md:text-sm mb-2 md:mb-3 uppercase tracking-widest font-bold">{t("ticketsVoucherLabel", language)}</p>
+                <p className="font-serif text-2xl md:text-4xl lg:text-5xl text-paper font-bold mb-2">
                   {getVoucherPrice(lots[selectedLot])}
                 </p>
                 <p className="text-plum text-xs font-bold uppercase tracking-widest">
@@ -282,7 +282,7 @@ export function Tickets() {
               </div>
 
               {/* Selector de Monedas — v2 style */}
-              <div className="flex gap-2 mb-6">
+              <div className="flex gap-2 mb-4 md:mb-6">
                 {currencies.map((c) => (
                   <button
                     key={c.code}
@@ -290,7 +290,7 @@ export function Tickets() {
                       setCurrency(c.code as "brl" | "ars" | "pyg");
                       if (c.code !== "ars") setIsMisioneros(false);
                     }}
-                    className={`px-4 py-2 text-xs font-bold uppercase tracking-widest rounded-full transition-all duration-300 ${
+                    className={`px-3 md:px-4 py-1.5 md:py-2 text-[11px] md:text-xs font-bold uppercase tracking-widest rounded-full transition-all duration-300 ${
                       currency === c.code
                         ? "bg-paper text-wine border border-paper"
                         : "bg-transparent text-paper/70 border border-paper/30 hover:border-paper/60"
@@ -303,7 +303,7 @@ export function Tickets() {
 
               {/* Toggle Misioneros - Solo visible para ARS */}
               {currency === "ars" && (
-                <div className="mb-10 flex items-center gap-3 bg-harvest/20 p-3 rounded-lg">
+                <div className="mb-6 md:mb-10 flex items-center gap-3 bg-harvest/20 p-3 rounded-lg">
                   <input
                     type="checkbox"
                     id="misioneros-toggle"
@@ -318,20 +318,20 @@ export function Tickets() {
               )}
 
               {/* Incluye - Cards Grid */}
-              <div className="mb-10">
-                <p className="lato-expanded text-[10px] text-paper/60 uppercase tracking-[0.35em] font-bold mb-5">
+              <div className="mb-6 md:mb-10">
+                <p className="lato-expanded text-[9px] md:text-[10px] text-paper/60 uppercase tracking-[0.35em] font-bold mb-3 md:mb-5">
                   ✔️ {t("ticketsIncludesLabel", language)}
                 </p>
-                <div className="grid grid-cols-1 gap-4">
+                <div className="grid grid-cols-1 gap-2 md:gap-4">
                   {includes.map((item, i) => (
                     <div
                       key={item}
-                      className="flex items-start gap-3 bg-paper/10 rounded-lg p-4 backdrop-blur-sm border border-paper/10"
+                      className="flex items-start gap-2 md:gap-3 bg-paper/10 rounded-lg p-3 md:p-4 backdrop-blur-sm border border-paper/10"
                     >
-                      <span className="text-harvest text-xl leading-none mt-0.5 flex-shrink-0 font-bold">
+                      <span className="text-harvest text-lg md:text-xl leading-none mt-0.5 flex-shrink-0 font-bold">
                         {i + 1}.
                       </span>
-                      <span className="text-sm md:text-base text-paper/90 leading-snug font-medium">
+                      <span className="text-xs md:text-sm lg:text-base text-paper/90 leading-snug font-medium">
                         {item}
                       </span>
                     </div>
@@ -342,7 +342,7 @@ export function Tickets() {
               {/* CTA Principal - Grande y Llamativo */}
               <button
                 disabled={selectedLot !== 0}
-                className={`w-full font-serif text-lg md:text-2xl font-bold uppercase tracking-wider py-6 rounded-full transition-all duration-300 shadow-2xl mb-4 ${
+                className={`w-full font-serif text-base md:text-lg lg:text-2xl font-bold uppercase tracking-wider py-4 md:py-6 rounded-full transition-all duration-300 shadow-2xl mb-3 md:mb-4 ${
                   selectedLot === 0
                     ? "bg-paper hover:bg-paper/95 text-wine transform hover:scale-105 cursor-pointer"
                     : "bg-paper/60 text-wine/60 cursor-not-allowed"
