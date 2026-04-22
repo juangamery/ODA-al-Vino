@@ -114,14 +114,14 @@ export function HeroV3() {
       />
 
       {/* Contenedor con SVG al frente */}
-      <div className="relative z-10 flex flex-col items-center justify-center flex-1 px-4 md:px-6 pt-16 md:pt-32 pb-8 md:pb-16">
+      <div className="relative z-10 flex flex-col items-center justify-center flex-1 px-3 md:px-6 pt-12 md:pt-32 pb-6 md:pb-16">
         <div
           ref={containerRef}
           className="relative w-full max-w-4xl flex flex-col items-center justify-center"
           style={{
             minHeight: "auto",
             aspectRatio: "1 / 1.1",
-            maxHeight: "clamp(280px, 60vh, 480px)",
+            maxHeight: "clamp(320px, 65vh, 480px)",
           }}
         >
           {/* SVG del contenedor AL FRENTE */}
