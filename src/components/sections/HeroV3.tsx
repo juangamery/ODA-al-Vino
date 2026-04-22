@@ -179,7 +179,7 @@ export function HeroV3() {
         <p
           ref={subtitleRef}
           className="text-center text-paper leading-snug md:leading-relaxed max-w-2xl mx-auto opacity-0"
-          style={{ fontSize: 'clamp(15px, 4vw, 24px)' }}
+          style={{ fontSize: 'clamp(17px, 4.5vw, 24px)' }}
         >
           {t("heroSubtitle", language)}
         </p>

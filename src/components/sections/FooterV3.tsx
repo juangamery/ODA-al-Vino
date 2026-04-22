@@ -99,7 +99,7 @@ export function FooterV3() {
         <img
           src="/oda/brand/logo-oda.svg"
           alt="ODA"
-          className="h-20 md:h-28 w-auto opacity-[0.35] mx-auto select-none"
+          className="h-20 md:h-28 w-auto opacity-100 mx-auto select-none"
         />
       </div>
     </footer>
