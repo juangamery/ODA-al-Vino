@@ -138,13 +138,13 @@ export function HeroV3() {
           {/* Eyebrow */}
           <p
             ref={eyebrowRef}
-            className="text-wine/50 text-[8px] md:text-sm tracking-widest uppercase font-bold mb-1 md:mb-4 opacity-0"
+            className="text-wine/50 text-[8px] md:text-sm tracking-widest uppercase font-bold mb-3 md:mb-4 opacity-0"
           >
             {t("heroEyebrow", language)}
           </p>
 
           {/* Título dinámico - más armónico */}
-          <div ref={titleRef} className="mb-0 opacity-0" style={{ marginTop: 'clamp(8px, 2vw, 35px)' }}>
+          <div ref={titleRef} className="mb-0 opacity-0" style={{ marginTop: 'clamp(0px, 1vw, 35px)' }}>
             <h1
               ref={titleARef}
               className="font-serif uppercase text-wine mb-0 leading-[0.75]"
@@ -167,7 +167,7 @@ export function HeroV3() {
                 </>
               )}
             </p>
-            <p className="lato-expanded text-wine font-bold tracking-widest mt-1 md:mt-4" style={{ fontSize: 'clamp(9px, 2vw, 14px)' }}>
+            <p className="lato-expanded text-wine font-bold tracking-widest mt-0 md:mt-4" style={{ fontSize: 'clamp(9px, 2vw, 14px)' }}>
               {t("heroYear", language)}
             </p>
           </div>
@@ -179,7 +179,7 @@ export function HeroV3() {
         <p
           ref={subtitleRef}
           className="text-center text-paper leading-snug md:leading-relaxed max-w-2xl mx-auto opacity-0"
-          style={{ fontSize: 'clamp(12px, 3vw, 24px)' }}
+          style={{ fontSize: 'clamp(13px, 3.2vw, 24px)' }}
         >
           {t("heroSubtitle", language)}
         </p>
