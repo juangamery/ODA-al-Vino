@@ -1,7 +1,13 @@
 import { Resend } from "resend";
+import { createClient } from "@supabase/supabase-js";
 import { NextRequest, NextResponse } from "next/server";
 
 const resend = new Resend(process.env.RESEND_API_KEY);
+
+const supabase = createClient(
+  process.env.NEXT_PUBLIC_SUPABASE_URL!,
+  process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
+);
 
 export async function POST(request: NextRequest) {
   try {
@@ -13,6 +19,30 @@ export async function POST(request: NextRequest) {
         { success: false, message: "Email inválido" },
         { status: 400 }
       );
+    }
+
+    // Guardar en Supabase
+    const { data, error: dbError } = await supabase
+      .from("newsletter_subscribers")
+      .insert([
+        {
+          email: email.toLowerCase(),
+          language: language || "es",
+          verified: false,
+        },
+      ])
+      .select();
+
+    // Si el email ya existe, retornar error
+    if (dbError) {
+      if (dbError.code === "23505") {
+        // Error de unique constraint
+        return NextResponse.json(
+          { success: false, message: "Email ya está suscrito" },
+          { status: 400 }
+        );
+      }
+      throw dbError;
     }
 
     // Email de bienvenida en ES/PT
@@ -71,14 +101,15 @@ export async function POST(request: NextRequest) {
   `;
 
     // Enviar email con Resend
-    const data = await resend.emails.send({
-      from: "ODA al Vino <noreply@odaalvino.com>",
+    const emailData = await resend.emails.send({
+      from: "ODA al Vino 🍷 <noreply@odaalvino.com>",
       to: email,
       subject: subject,
       html: htmlContent,
+      replyTo: "info@odaalvino.com",
     });
 
-    if (data.error) {
+    if (emailData.error) {
       return NextResponse.json(
         { success: false, message: "Error al enviar email" },
         { status: 500 }
