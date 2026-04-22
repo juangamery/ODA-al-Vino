@@ -19,6 +19,7 @@ interface Lot {
   voucherArs: string;
   voucherMisioneros: string;
   voucherPyg: string;
+  dates: string;
 }
 
 function getLots(lang: string): Lot[] {
@@ -30,10 +31,11 @@ function getLots(lang: string): Lot[] {
       status: "available",
       ars: "166.950",
       pyg: "793.800",
-      voucherBrl: "189",
-      voucherArs: "50.085",
-      voucherMisioneros: "42.525",
-      voucherPyg: "238.140",
+      voucherBrl: "200",
+      voucherArs: "53.000",
+      voucherMisioneros: "45.000",
+      voucherPyg: "252.000",
+      dates: "30/04-05/06",
     },
     {
       number: 2,
@@ -46,6 +48,7 @@ function getLots(lang: string): Lot[] {
       voucherArs: "55.650",
       voucherMisioneros: "47.250",
       voucherPyg: "264.600",
+      dates: "06/06-05/07",
     },
     {
       number: 3,
@@ -58,6 +61,7 @@ function getLots(lang: string): Lot[] {
       voucherArs: "60.950",
       voucherMisioneros: "51.750",
       voucherPyg: "289.800",
+      dates: "06/07-05/08",
     },
     {
       number: 4,
@@ -70,6 +74,7 @@ function getLots(lang: string): Lot[] {
       voucherArs: "66.780",
       voucherMisioneros: "56.700",
       voucherPyg: "317.520",
+      dates: "06/08-03/09",
     },
   ];
 }
