@@ -96,11 +96,18 @@ export function FooterV3() {
         <p className="text-[10px] font-bold uppercase tracking-[0.35em] text-wine/40 text-center mb-6">
           {t("footerOrganizedBy", language)}
         </p>
-        <img
-          src="/oda/brand/logo-oda.svg"
-          alt="ODA"
-          className="h-20 md:h-28 w-auto opacity-100 mx-auto select-none"
-        />
+        <a
+          href="https://www.odavinoteca.com.ar/"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="inline-flex justify-center w-full hover:opacity-80 transition-opacity"
+        >
+          <img
+            src="/oda/brand/logo-oda.svg"
+            alt="ODA"
+            className="h-20 md:h-28 w-auto opacity-100 select-none"
+          />
+        </a>
       </div>
     </footer>
   );
