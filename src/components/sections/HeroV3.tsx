@@ -138,7 +138,7 @@ export function HeroV3() {
           {/* Eyebrow */}
           <p
             ref={eyebrowRef}
-            className="text-wine/50 text-[9px] md:text-sm tracking-widest uppercase font-bold mb-3 md:mb-4 opacity-0"
+            className="text-wine/50 text-[10px] md:text-sm tracking-widest uppercase font-bold mb-3 md:mb-4 opacity-0"
           >
             {t("heroEyebrow", language)}
           </p>
@@ -148,14 +148,14 @@ export function HeroV3() {
             <h1
               ref={titleARef}
               className="font-serif uppercase text-wine mb-0 leading-[0.75]"
-              style={{ fontSize: 'clamp(24px, 5.5vw, 96px)' }}
+              style={{ fontSize: 'clamp(32px, 7vw, 96px)' }}
             >
               {t("heroTitleA", language)}
             </h1>
             <p
               ref={titleScriptRef}
               className="script normal-case italic text-wine leading-[0.85]"
-              style={{ fontSize: 'clamp(40px, 10vw, 150px)' }}
+              style={{ fontSize: 'clamp(55px, 12vw, 150px)' }}
             >
               {language === "es" ? (
                 <>
@@ -167,7 +167,7 @@ export function HeroV3() {
                 </>
               )}
             </p>
-            <p className="lato-expanded text-wine font-bold tracking-widest mt-0 md:mt-4" style={{ fontSize: 'clamp(10px, 2.2vw, 14px)' }}>
+            <p className="lato-expanded text-wine font-bold tracking-widest mt-0 md:mt-4" style={{ fontSize: 'clamp(11px, 2.5vw, 14px)' }}>
               {t("heroYear", language)}
             </p>
           </div>
@@ -179,7 +179,7 @@ export function HeroV3() {
         <p
           ref={subtitleRef}
           className="text-center text-paper leading-snug md:leading-relaxed max-w-2xl mx-auto opacity-0"
-          style={{ fontSize: 'clamp(13px, 3.2vw, 24px)' }}
+          style={{ fontSize: 'clamp(14px, 3.5vw, 24px)' }}
         >
           {t("heroSubtitle", language)}
         </p>
