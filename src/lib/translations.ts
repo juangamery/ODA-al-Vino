@@ -76,11 +76,11 @@ export const translations = {
     iguazuTitleScript: "una Copa",
     iguazuDescription: "Desayunar en Argentina, almorzar en Brasil, cenar en Paraguay. Iguazú es el único lugar donde la Triple Frontera se vive en un mismo día. Un destino icónico que combina naturaleza, aventura y cultura a pasos de nuestro evento.",
     iguazuCard1Title: "Cataratas",
-    iguazuCard1Desc: "Una de las 7 maravillas naturales del mundo, a 20 minutos del local.",
+    iguazuCard1Desc: "Una de las siete maravillas naturales del mundo, a pocos minutos del evento. Un entorno que transforma cualquier experiencia.",
     iguazuCard2Title: "Triple Frontera",
-    iguazuCard2Desc: "El marco del encuentro entre Argentina, Brasil y Paraguay.",
+    iguazuCard2Desc: "El punto donde Argentina, Brasil y Paraguay se encuentran. Una mezcla única de culturas, sabores y energía.",
     iguazuCard3Title: "Urban",
-    iguazuCard3Desc: "Experiencias gastronómicas y cultura en la Triple Frontera.",
+    iguazuCard3Desc: "Iguazú Urban Mall es el corazón de la experiencia. Gastronomía, movimiento y cultura en un mismo lugar.",
 
     // ========== COMMUNITY - TESTIMONIOS ==========
     testimonial1: "Vine por el vino.\nVolví por la experiencia.",
@@ -246,11 +246,11 @@ export const translations = {
     iguazuTitleScript: "uma Taça",
     iguazuDescription: "Desayunar na Argentina, almoçar no Brasil, jantar no Paraguai. Iguazu é o único lugar onde a Tríplice Fronteira é vivida em um mesmo dia. Um destino icônico que combina natureza, aventura e cultura a passos do nosso evento.",
     iguazuCard1Title: "Cataratas",
-    iguazuCard1Desc: "Uma das 7 maravilhas naturais do mundo, a 20 minutos do local.",
+    iguazuCard1Desc: "Uma das sete maravilhas naturais do mundo, a poucos minutos do evento. Um ambiente que transforma qualquer experiência.",
     iguazuCard2Title: "Tríplice Fronteira",
-    iguazuCard2Desc: "O marco do encontro entre Argentina, Brasil e Paraguai.",
+    iguazuCard2Desc: "O ponto onde Argentina, Brasil e Paraguai se encontram. Uma mistura única de culturas, sabores e energia.",
     iguazuCard3Title: "Urban",
-    iguazuCard3Desc: "Experiências gastronômicas e cultura na Tríplice Fronteira.",
+    iguazuCard3Desc: "Iguazu Urban Mall é o coração da experiência. Gastronomia, movimento e cultura em um mesmo lugar.",
 
     // ========== COMMUNITY - TESTIMONIOS ==========
     testimonial1: "Vim pelo vinho.\nVoltei pela experiência.",
