@@ -16,11 +16,15 @@ export function NewsletterV3() {
     setMessage("");
 
     try {
-      // Aquí irá la integración con tu servicio de email (Mailchimp, Brevo, etc.)
-      // Por ahora simulamos la respuesta
-      await new Promise((resolve) => setTimeout(resolve, 1000));
+      const response = await fetch("/api/subscribe", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, language }),
+      });
 
-      if (email) {
+      const data = await response.json();
+
+      if (response.ok && data.success) {
         setMessage(
           language === "es"
             ? "¡Gracias! Revisa tu email para confirmar."
@@ -30,8 +34,15 @@ export function NewsletterV3() {
 
         // Limpiar mensaje después de 5 segundos
         setTimeout(() => setMessage(""), 5000);
+      } else {
+        setMessage(
+          language === "es"
+            ? "Hubo un error. Intenta de nuevo."
+            : "Houve um erro. Tente novamente."
+        );
       }
     } catch (error) {
+      console.error("Error:", error);
       setMessage(
         language === "es"
           ? "Hubo un error. Intenta de nuevo."
