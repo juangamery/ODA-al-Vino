@@ -9,7 +9,6 @@ import { ManifestoV3 } from "@/components/sections/ManifestoV3";
 import { SealDivider } from "@/components/sections/SealDivider";
 import { Tickets } from "@/components/sections/Tickets";
 import { VenueV3 } from "@/components/sections/VenueV3";
-import { NewsletterV3 } from "@/components/sections/NewsletterV3";
 import { WhatsAppButton } from "@/components/WhatsAppButton";
 import { Marquee } from "@/components/ui/Marquee";
 
@@ -71,8 +70,6 @@ export default function Home() {
       <Iguazu />
 
       <FinalV3 />
-
-      <NewsletterV3 />
 
       <FooterV3 />
     </main>
