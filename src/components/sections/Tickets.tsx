@@ -14,6 +14,7 @@ interface Lot {
   label: string;
   status: "available" | "next" | "upcoming" | "final";
   ars: string;
+  arsMisioneros: string;
   pyg: string;
   voucherBrl: string;
   voucherArs: string;
@@ -30,6 +31,7 @@ function getLots(lang: string): Lot[] {
       label: t("ticketsLot1Label", lang as any),
       status: "available",
       ars: "166.950",
+      arsMisioneros: "141.750",
       pyg: "793.800",
       voucherBrl: "200",
       voucherArs: "53.000",
@@ -43,6 +45,7 @@ function getLots(lang: string): Lot[] {
       label: t("ticketsLot2Label", lang as any),
       status: "next",
       ars: "184.175",
+      arsMisioneros: "156.375",
       pyg: "875.700",
       voucherBrl: "210",
       voucherArs: "55.650",
@@ -56,6 +59,7 @@ function getLots(lang: string): Lot[] {
       label: t("ticketsLot3Label", lang as any),
       status: "upcoming",
       ars: "202.725",
+      arsMisioneros: "172.125",
       pyg: "963.900",
       voucherBrl: "230",
       voucherArs: "60.950",
@@ -69,6 +73,7 @@ function getLots(lang: string): Lot[] {
       label: t("ticketsLot4Label", lang as any),
       status: "final",
       ars: "222.600",
+      arsMisioneros: "189.000",
       pyg: "1.058.400",
       voucherBrl: "252",
       voucherArs: "66.780",
@@ -138,7 +143,13 @@ export function Tickets() {
     const selected = currencies.find((c) => c.code === currency);
     if (!selected) return lot.price;
 
-    const value = lot[selected.key as keyof typeof lot];
+    let value;
+    if (currency === "ars" && isMisioneros) {
+      value = lot.arsMisioneros;
+    } else {
+      value = lot[selected.key as keyof typeof lot];
+    }
+
     if (currency === "brl") return `R$${value}`;
     if (currency === "ars") return `AR$${value}`;
     if (currency === "pyg") return `₲${value}`;
