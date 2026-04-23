@@ -162,11 +162,13 @@ export function BodegasV3() {
   const [selectedRegion, setSelectedRegion] = useState(0);
   const marqueeRef = useRef<HTMLDivElement>(null);
   const [isDragging, setIsDragging] = useState(false);
+  const [isManualMode, setIsManualMode] = useState(false);
   const [dragStart, setDragStart] = useState(0);
   const [translateX, setTranslateX] = useState(0);
 
   const handleMouseDown = (e: React.MouseEvent) => {
     setIsDragging(true);
+    setIsManualMode(true);
     setDragStart(e.clientX);
   };
 
@@ -181,17 +183,13 @@ export function BodegasV3() {
   };
 
   const handlePrevClick = () => {
-    if (marqueeRef.current) {
-      marqueeRef.current.style.animation = "none";
-      setTranslateX((prev) => prev + 200);
-    }
+    setIsManualMode(true);
+    setTranslateX((prev) => prev + 200);
   };
 
   const handleNextClick = () => {
-    if (marqueeRef.current) {
-      marqueeRef.current.style.animation = "none";
-      setTranslateX((prev) => prev - 200);
-    }
+    setIsManualMode(true);
+    setTranslateX((prev) => prev - 200);
   };
 
   return (
@@ -341,9 +339,9 @@ export function BodegasV3() {
                   ref={marqueeRef}
                   className="flex whitespace-nowrap gap-8"
                   style={{
-                    animation: isDragging ? "none" : "marquee-slow 25s linear infinite",
-                    animationPlayState: isDragging ? "paused" : "running",
-                    transform: isDragging ? `translateX(${translateX}px)` : "translateX(0)",
+                    animation: isManualMode || isDragging ? "none" : "marquee-slow 25s linear infinite",
+                    animationPlayState: isManualMode || isDragging ? "paused" : "running",
+                    transform: `translateX(${translateX}px)`,
                     transition: isDragging ? "none" : "transform 0.3s ease-out",
                     cursor: isDragging ? "grabbing" : "grab"
                   }}
