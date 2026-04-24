@@ -352,10 +352,12 @@ export function BodegasV3() {
                     ref={marqueeRef1}
                     className="flex whitespace-nowrap gap-12"
                     style={{
-                      animation: isDragging1 ? "none" : "marquee-right 2.5s linear infinite",
+                      animation: "marquee-right 2.5s linear infinite",
+                      animationPlayState: isDragging1 ? "paused" : "running",
                       transform: `translateX(${translateX1}px)`,
                       transition: isDragging1 ? "none" : "transform 0.3s ease-out",
-                      cursor: isDragging1 ? "grabbing" : "grab"
+                      cursor: isDragging1 ? "grabbing" : "grab",
+                      willChange: "transform"
                     }}
                   >
                     {[...Array(10)].map((_, k) => (
@@ -406,10 +408,12 @@ export function BodegasV3() {
                     ref={marqueeRef2}
                     className="flex whitespace-nowrap gap-12"
                     style={{
-                      animation: isDragging2 ? "none" : "marquee-left 2.5s linear infinite",
+                      animation: "marquee-left 2.5s linear infinite",
+                      animationPlayState: isDragging2 ? "paused" : "running",
                       transform: `translateX(${translateX2}px)`,
                       transition: isDragging2 ? "none" : "transform 0.3s ease-out",
-                      cursor: isDragging2 ? "grabbing" : "grab"
+                      cursor: isDragging2 ? "grabbing" : "grab",
+                      willChange: "transform"
                     }}
                   >
                     {[...Array(10)].map((_, k) => (
