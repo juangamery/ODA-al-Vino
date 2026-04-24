@@ -60,7 +60,7 @@ export function VenueV3() {
   return (
     <section id="venue" className="bg-paper overflow-hidden relative py-20 md:py-32">
       <div className="mx-auto max-w-6xl px-6 md:px-12 lg:px-20">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+        <div className="space-y-16">
           {/* Left Content */}
           <div className="space-y-6">
             <Reveal>
@@ -122,29 +122,19 @@ export function VenueV3() {
             </Reveal>
           </div>
 
-          {/* Right: Floor Plan */}
+          {/* Right: Gallery */}
           <Reveal delay={0.3}>
-            <div className="bg-wine rounded p-8 md:p-10 shadow-lg aspect-square flex flex-col justify-between">
-              {/* Header */}
-              <div className="flex items-start justify-between mb-4">
-                <div>
-                  <p className="lato-expanded text-[9px] text-paper/60 uppercase tracking-[0.3em] mb-1">
-                    Planta · {selectedFloor === 0 ? "Baja" : "Alta"}
-                  </p>
-                  <p className="font-serif text-xl md:text-2xl text-paper font-bold">
-                    {floors[selectedFloor].capacity}
-                    <span className="text-sm ml-2 font-normal">personas</span>
-                  </p>
-                </div>
-                <img
-                  src="/oda/brand/logo_blanco_vertical.svg"
-                  alt="ODA"
-                  className="h-12 opacity-60"
-                />
+            <div className="col-span-1 lg:col-span-2 space-y-6">
+              {/* Title */}
+              <div>
+                <h3 className="font-serif text-[clamp(1.5rem,3vw,2.5rem)] uppercase text-wine leading-tight">
+                  Iguazú Urban Mall<br/>
+                  <span className="script normal-case italic text-wine text-[1.15em]"><span className="script-ss01">n</span>uestro espacio</span>
+                </h3>
               </div>
 
               {/* Gallery Carousel */}
-              <div className="relative w-full h-full flex items-center justify-center overflow-hidden rounded bg-wine/5">
+              <div className="relative w-full h-[500px] md:h-[600px] flex items-center justify-center overflow-hidden rounded-xl bg-wine shadow-xl">
                 {/* Image */}
                 <Image
                   src={`/oda/venue/${venueImages[imageIndex]}`}
