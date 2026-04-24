@@ -65,7 +65,7 @@ interface RevealImageItemProps {
 }
 
 function RevealImageItem({ title, text, images }: RevealImageItemProps) {
-  // Posiciones dinámicas para cada imagen - bien dispersas sin solapamiento
+  // Dynamic positions for images - well dispersed without overlap
   const imagePositions = [
     { x: 80, y: -90, delay: 0 },
     { x: 200, y: -40, delay: 100 },
@@ -103,24 +103,25 @@ function RevealImageItem({ title, text, images }: RevealImageItemProps) {
           </p>
         </div>
 
-        {/* Columna derecha: imágenes flotantes */}
+        {/* Right column: floating images - ALWAYS VISIBLE FOR TESTING */}
         <div className="hidden sm:block relative flex-shrink-0 w-[280px] sm:w-[350px] md:w-[450px] lg:w-[560px] h-[240px] sm:h-[300px] md:h-[380px] lg:h-[460px]">
           {images.map((img, i) => (
             <div
               key={i}
-              className="absolute overflow-hidden rounded-lg shadow-lg transition-all duration-700 scale-75 opacity-0 group-hover:scale-100 group-hover:opacity-100 group-hover:shadow-2xl"
+              className="absolute overflow-hidden rounded-lg shadow-lg"
               style={{
                 width: "180px",
                 height: "200px",
                 left: `${imagePositions[i].x}px`,
                 top: `${imagePositions[i].y}px`,
-                transitionDelay: `${imagePositions[i].delay}ms`,
               }}
             >
               <img
                 src={img}
                 alt={`${title} - Foto ${i + 1}`}
                 className="object-cover w-full h-full"
+                loading="lazy"
+                style={{ display: 'block', width: '100%', height: '100%' }}
               />
             </div>
           ))}
