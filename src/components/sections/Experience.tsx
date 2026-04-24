@@ -15,7 +15,7 @@ const items: ExperienceItem[] = [
   {
     id: 0,
     title: "Descubrí",
-    text: "Recorré bodegas, probá nuevas etiquetas y dejate sorprender.",
+    text: "Recorré bodegas, probá nuevas etiquetas y dejate sorprender por proyectos boutique, orgánicos y clásicos.",
     images: [
       "/oda/gallery/oav25/descubri.webp",
       "/oda/gallery/oav25/009A7064.webp",
