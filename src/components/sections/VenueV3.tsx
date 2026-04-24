@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Image from "next/image";
 import { Reveal } from "@/components/motion/Reveal";
 import { useLanguage } from "@/context/LanguageContext";
 import { t, Language } from "@/lib/translations";
@@ -32,10 +33,29 @@ function getFloors(lang: Language): Floor[] {
   ];
 }
 
+const venueImages = [
+  "_HID8883.webp",
+  "_HID8893.webp",
+  "_HID8908.webp",
+  "_HID8910.webp",
+  "_HID8934.webp",
+  "_HID8935.webp",
+  "_HID8937.webp",
+  "_HID8943.webp",
+  "_HID8946.webp",
+  "_HID8949.webp",
+  "_HID8967.webp",
+  "_HID9460.webp",
+  "_HID9705.webp",
+  "_HID9800.webp",
+  "_HID9875.webp",
+];
+
 export function VenueV3() {
   const { language } = useLanguage();
   const floors = getFloors(language);
   const [selectedFloor, setSelectedFloor] = useState(0);
+  const [imageIndex, setImageIndex] = useState(0);
 
   return (
     <section id="venue" className="bg-paper overflow-hidden relative py-20 md:py-32">
@@ -123,8 +143,62 @@ export function VenueV3() {
                 />
               </div>
 
-              {/* Floor Plan SVG */}
-              <svg viewBox="0 0 400 400" className="w-full h-auto flex-grow">
+              {/* Gallery Carousel */}
+              <div className="relative w-full h-full flex items-center justify-center overflow-hidden rounded bg-wine/5">
+                {/* Image */}
+                <Image
+                  src={`/oda/venue/${venueImages[imageIndex]}`}
+                  alt={`Venue space ${imageIndex + 1}`}
+                  fill
+                  className="object-cover"
+                  priority={imageIndex === 0}
+                />
+
+                {/* Navigation Arrows */}
+                <button
+                  onClick={() => setImageIndex((i) => (i - 1 + venueImages.length) % venueImages.length)}
+                  className="absolute left-4 top-1/2 transform -translate-y-1/2 p-2 rounded-full bg-wine/80 hover:bg-wine text-paper transition-all z-10"
+                  aria-label="Previous image"
+                >
+                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+                  </svg>
+                </button>
+
+                <button
+                  onClick={() => setImageIndex((i) => (i + 1) % venueImages.length)}
+                  className="absolute right-4 top-1/2 transform -translate-y-1/2 p-2 rounded-full bg-wine/80 hover:bg-wine text-paper transition-all z-10"
+                  aria-label="Next image"
+                >
+                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                  </svg>
+                </button>
+
+                {/* Image Counter */}
+                <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 bg-wine/90 px-4 py-2 rounded-full">
+                  <p className="text-paper text-sm font-medium">
+                    {imageIndex + 1} / {venueImages.length}
+                  </p>
+                </div>
+
+                {/* Dots Navigation */}
+                <div className="absolute bottom-16 left-1/2 transform -translate-x-1/2 flex gap-2">
+                  {venueImages.map((_, i) => (
+                    <button
+                      key={i}
+                      onClick={() => setImageIndex(i)}
+                      className={`h-2 rounded-full transition-all ${
+                        i === imageIndex ? "w-6 bg-paper" : "w-2 bg-paper/40 hover:bg-paper/60"
+                      }`}
+                      aria-label={`Go to image ${i + 1}`}
+                    />
+                  ))}
+                </div>
+              </div>
+
+              {/* Old SVG Floor Plan - kept for reference, hidden */}
+              <svg viewBox="0 0 400 400" className="w-full h-auto flex-grow hidden">
                 <defs>
                   <pattern id="dots" x="0" y="0" width="12" height="12" patternUnits="userSpaceOnUse">
                     <circle cx="2" cy="2" r="0.5" fill="rgba(255, 245, 225, 0.15)" />
