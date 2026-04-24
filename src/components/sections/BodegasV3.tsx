@@ -169,11 +169,11 @@ export function BodegasV3() {
   const [dragStart1, setDragStart1] = useState(0);
   const [translateX1, setTranslateX1] = useState(0);
 
-  // Slider 2 (bottom - scroll right)
+  // Slider 2 (bottom - scroll right) - starts from end
   const [isDragging2, setIsDragging2] = useState(false);
   const [isManualMode2, setIsManualMode2] = useState(false);
   const [dragStart2, setDragStart2] = useState(0);
-  const [translateX2, setTranslateX2] = useState(0);
+  const [translateX2, setTranslateX2] = useState(-33.333);
 
   // Slider 1 handlers
   const handleMouseDown1 = (e: React.MouseEvent) => {
