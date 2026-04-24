@@ -350,8 +350,9 @@ export function BodegasV3() {
                 >
                   <div
                     ref={marqueeRef1}
-                    className={`flex whitespace-nowrap gap-12 ${isDragging1 ? "" : "animate-marquee-right"}`}
+                    className="flex whitespace-nowrap gap-12"
                     style={{
+                      animation: isDragging1 ? "none" : "marquee-right 1.5s linear infinite",
                       transform: `translateX(${translateX1}px)`,
                       transition: isDragging1 ? "none" : "transform 0.3s ease-out",
                       cursor: isDragging1 ? "grabbing" : "grab"
@@ -403,8 +404,9 @@ export function BodegasV3() {
                 >
                   <div
                     ref={marqueeRef2}
-                    className={`flex whitespace-nowrap gap-12 ${isDragging2 ? "" : "animate-marquee-left"}`}
+                    className="flex whitespace-nowrap gap-12"
                     style={{
+                      animation: isDragging2 ? "none" : "marquee-left 1.5s linear infinite",
                       transform: `translateX(${translateX2}px)`,
                       transition: isDragging2 ? "none" : "transform 0.3s ease-out",
                       cursor: isDragging2 ? "grabbing" : "grab"
@@ -435,12 +437,6 @@ export function BodegasV3() {
         @keyframes marquee-right {
           0% { transform: translateX(0); }
           100% { transform: translateX(20%); }
-        }
-        .animate-marquee-left {
-          animation: marquee-left 1.5s linear infinite;
-        }
-        .animate-marquee-right {
-          animation: marquee-right 1.5s linear infinite;
         }
       `}</style>
     </section>
