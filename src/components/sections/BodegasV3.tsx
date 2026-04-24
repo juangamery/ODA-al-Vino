@@ -160,58 +160,6 @@ const bodegas = [
 export function BodegasV3() {
   const { language } = useLanguage();
   const [selectedRegion, setSelectedRegion] = useState(0);
-  const marqueeRef1 = useRef<HTMLDivElement>(null);
-  const marqueeRef2 = useRef<HTMLDivElement>(null);
-
-  // Slider 1 (top - scroll left)
-  const [isDragging1, setIsDragging1] = useState(false);
-  const [dragStart1, setDragStart1] = useState(0);
-  const [translateX1, setTranslateX1] = useState(0);
-
-  // Slider 2 (bottom - scroll right)
-  const [isDragging2, setIsDragging2] = useState(false);
-  const [dragStart2, setDragStart2] = useState(0);
-  const [translateX2, setTranslateX2] = useState(0);
-
-  // Slider 1 handlers
-  const handleMouseDown1 = (e: React.MouseEvent) => {
-    setIsDragging1(true);
-    setDragStart1(e.clientX);
-  };
-
-  const handleMouseMove1 = (e: React.MouseEvent) => {
-    if (!isDragging1) return;
-    const delta = e.clientX - dragStart1;
-    setTranslateX1(delta);
-  };
-
-  const handleMouseUp1 = () => {
-    setIsDragging1(false);
-  };
-
-  const handleNextClick1 = () => {
-    setTranslateX1((prev) => prev - 250);
-  };
-
-  // Slider 2 handlers
-  const handleMouseDown2 = (e: React.MouseEvent) => {
-    setIsDragging2(true);
-    setDragStart2(e.clientX);
-  };
-
-  const handleMouseMove2 = (e: React.MouseEvent) => {
-    if (!isDragging2) return;
-    const delta = e.clientX - dragStart2;
-    setTranslateX2(delta);
-  };
-
-  const handleMouseUp2 = () => {
-    setIsDragging2(false);
-  };
-
-  const handlePrevClick2 = () => {
-    setTranslateX2((prev) => prev + 250);
-  };
 
   return (
     <section id="bodegas" className="bg-olive overflow-hidden relative py-28 md:py-40">
@@ -333,112 +281,41 @@ export function BodegasV3() {
         </div>
       </div>
 
-      {/* Bodegas Marquees - Full Width Dual Sliders */}
-      <div className="mt-24 space-y-0">
-            {/* Slider 1 - Scroll Left */}
-            <div className="border-t border-paper/20 py-6 overflow-hidden">
-              <p className="lato-expanded text-[10px] text-paper/50 uppercase tracking-widest mb-4 px-8 md:px-12 lg:px-20">
-                {t("bodegasParticipants", language)}
-              </p>
-              <div className="flex items-center gap-8">
-                <div className="overflow-hidden group cursor-grab active:cursor-grabbing flex-1"
-                  onMouseDown={handleMouseDown1}
-                  onMouseMove={handleMouseMove1}
-                  onMouseUp={handleMouseUp1}
-                  onMouseLeave={handleMouseUp1}
-                >
-                  <div
-                    ref={marqueeRef1}
-                    className="flex whitespace-nowrap gap-12"
-                    style={{
-                      animation: "marquee-right 20s linear infinite",
-                      animationPlayState: isDragging1 ? "paused" : "running",
-                      transform: `translateX(${translateX1}px)`,
-                      transition: isDragging1 ? "none" : "transform 0.3s ease-out",
-                      cursor: isDragging1 ? "grabbing" : "grab",
-                      willChange: "transform"
-                    }}
-                  >
-                    {[...Array(10)].map((_, k) => (
-                      <div key={k} className="flex gap-12">
-                        {bodegas.slice(0, Math.ceil(bodegas.length / 2)).map((bodega, i) => (
-                          <div key={i} className="flex items-center gap-4 font-serif text-5xl md:text-6xl lg:text-7xl uppercase text-paper/80 flex-shrink-0">
-                            <span>{bodega}</span>
-                            <span className="text-harvest text-3xl md:text-4xl">★</span>
-                          </div>
-                        ))}
-                      </div>
-                    ))}
-                  </div>
-                </div>
-                {/* Right Arrow for Slider 1 */}
-                <button
-                  onClick={handleNextClick1}
-                  className="flex-shrink-0 p-3 rounded-full border border-paper/30 text-paper/70 hover:text-paper hover:bg-paper/10 transition-all duration-300 hover:scale-110 mr-4"
-                  aria-label="Next bodegas"
-                >
-                  <svg className="w-6 h-6 md:w-7 md:h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                  </svg>
-                </button>
+      {/* Bodegas Marquee - Single Infinite Slider */}
+      <div className="mt-24 border-t border-paper/20">
+        <p className="lato-expanded text-[10px] text-paper/50 uppercase tracking-widest mb-6 px-8 md:px-12 lg:px-20 pt-6">
+          {t("bodegasParticipants", language)}
+        </p>
+        <div className="overflow-hidden py-8">
+          <div
+            className="flex whitespace-nowrap gap-12"
+            style={{
+              animation: "marquee-infinite 60s linear infinite",
+              willChange: "transform"
+            }}
+          >
+            {/* First set of all bodegas */}
+            {bodegas.map((bodega, i) => (
+              <div key={`set1-${i}`} className="flex items-center gap-4 font-serif text-4xl md:text-5xl lg:text-6xl uppercase text-paper/80 flex-shrink-0">
+                <span>{bodega}</span>
+                <span className="text-harvest text-2xl md:text-3xl">★</span>
               </div>
-            </div>
-
-            {/* Slider 2 - Scroll Right */}
-            <div className="border-t border-b border-paper/20 py-6 overflow-hidden bg-olive/5">
-              <div className="flex items-center gap-8">
-                {/* Left Arrow for Slider 2 */}
-                <button
-                  onClick={handlePrevClick2}
-                  className="flex-shrink-0 p-3 rounded-full border border-paper/30 text-paper/70 hover:text-paper hover:bg-paper/10 transition-all duration-300 hover:scale-110 ml-4"
-                  aria-label="Previous bodegas"
-                >
-                  <svg className="w-6 h-6 md:w-7 md:h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-                  </svg>
-                </button>
-                <div className="overflow-hidden group cursor-grab active:cursor-grabbing flex-1"
-                  onMouseDown={handleMouseDown2}
-                  onMouseMove={handleMouseMove2}
-                  onMouseUp={handleMouseUp2}
-                  onMouseLeave={handleMouseUp2}
-                >
-                  <div
-                    ref={marqueeRef2}
-                    className="flex whitespace-nowrap gap-12"
-                    style={{
-                      animation: "marquee-left 20s linear infinite",
-                      animationPlayState: isDragging2 ? "paused" : "running",
-                      transform: `translateX(${translateX2}px)`,
-                      transition: isDragging2 ? "none" : "transform 0.3s ease-out",
-                      cursor: isDragging2 ? "grabbing" : "grab",
-                      willChange: "transform"
-                    }}
-                  >
-                    {[...Array(10)].map((_, k) => (
-                      <div key={k} className="flex gap-12">
-                        {bodegas.slice(Math.ceil(bodegas.length / 2)).map((bodega, i) => (
-                          <div key={i} className="flex items-center gap-4 font-serif text-5xl md:text-6xl lg:text-7xl uppercase text-paper/80 flex-shrink-0">
-                            <span>{bodega}</span>
-                            <span className="text-harvest text-3xl md:text-4xl">★</span>
-                          </div>
-                        ))}
-                      </div>
-                    ))}
-                  </div>
-                </div>
+            ))}
+            {/* Seamless loop - second set identical to first */}
+            {bodegas.map((bodega, i) => (
+              <div key={`set2-${i}`} className="flex items-center gap-4 font-serif text-4xl md:text-5xl lg:text-6xl uppercase text-paper/80 flex-shrink-0">
+                <span>{bodega}</span>
+                <span className="text-harvest text-2xl md:text-3xl">★</span>
               </div>
-            </div>
+            ))}
           </div>
+        </div>
+      </div>
 
       <style>{`
-        @keyframes marquee-left {
+        @keyframes marquee-infinite {
           0% { transform: translateX(0); }
-          100% { transform: translateX(-10%); }
-        }
-        @keyframes marquee-right {
-          0% { transform: translateX(0); }
-          100% { transform: translateX(10%); }
+          100% { transform: translateX(-50%); }
         }
       `}</style>
     </section>
