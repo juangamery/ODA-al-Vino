@@ -334,8 +334,7 @@ export function BodegasV3() {
       </div>
 
       {/* Bodegas Marquees - Full Width Dual Sliders */}
-      <Reveal delay={0.4}>
-          <div className="mt-24 space-y-0">
+      <div className="mt-24 space-y-0">
             {/* Slider 1 - Scroll Left */}
             <div className="border-t border-paper/20 py-6 overflow-hidden">
               <p className="lato-expanded text-[10px] text-paper/50 uppercase tracking-widest mb-4 px-8 md:px-12 lg:px-20">
@@ -431,7 +430,6 @@ export function BodegasV3() {
               </div>
             </div>
           </div>
-        </Reveal>
 
       <style>{`
         @keyframes marquee-left {
