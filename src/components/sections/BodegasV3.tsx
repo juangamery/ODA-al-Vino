@@ -165,20 +165,17 @@ export function BodegasV3() {
 
   // Slider 1 (top - scroll left)
   const [isDragging1, setIsDragging1] = useState(false);
-  const [isManualMode1, setIsManualMode1] = useState(false);
   const [dragStart1, setDragStart1] = useState(0);
   const [translateX1, setTranslateX1] = useState(0);
 
-  // Slider 2 (bottom - scroll right) - starts from end
+  // Slider 2 (bottom - scroll right)
   const [isDragging2, setIsDragging2] = useState(false);
-  const [isManualMode2, setIsManualMode2] = useState(false);
   const [dragStart2, setDragStart2] = useState(0);
-  const [translateX2, setTranslateX2] = useState(-33.333);
+  const [translateX2, setTranslateX2] = useState(0);
 
   // Slider 1 handlers
   const handleMouseDown1 = (e: React.MouseEvent) => {
     setIsDragging1(true);
-    setIsManualMode1(true);
     setDragStart1(e.clientX);
   };
 
@@ -193,14 +190,12 @@ export function BodegasV3() {
   };
 
   const handleNextClick1 = () => {
-    setIsManualMode1(true);
     setTranslateX1((prev) => prev - 250);
   };
 
   // Slider 2 handlers
   const handleMouseDown2 = (e: React.MouseEvent) => {
     setIsDragging2(true);
-    setIsManualMode2(true);
     setDragStart2(e.clientX);
   };
 
@@ -215,15 +210,8 @@ export function BodegasV3() {
   };
 
   const handlePrevClick2 = () => {
-    setIsManualMode2(true);
     setTranslateX2((prev) => prev + 250);
   };
-
-  // Initialize slider 2 to start from the end
-  useEffect(() => {
-    // Set initial offset so slider 2 appears to start from the end
-    // This creates the illusion that both sliders are running continuously
-  }, []);
 
   return (
     <section id="bodegas" className="bg-olive overflow-hidden relative py-28 md:py-40">
@@ -364,8 +352,8 @@ export function BodegasV3() {
                     ref={marqueeRef1}
                     className="flex whitespace-nowrap gap-12"
                     style={{
-                      animation: isManualMode1 || isDragging1 ? "none" : "marquee-left 100s linear infinite",
-                      animationPlayState: isManualMode1 || isDragging1 ? "paused" : "running",
+                      animation: isDragging1 ? "none" : "marquee-left 20s linear infinite",
+                      animationPlayState: isDragging1 ? "paused" : "running",
                       transform: `translateX(${translateX1}px)`,
                       transition: isDragging1 ? "none" : "transform 0.3s ease-out",
                       cursor: isDragging1 ? "grabbing" : "grab"
@@ -419,8 +407,8 @@ export function BodegasV3() {
                     ref={marqueeRef2}
                     className="flex whitespace-nowrap gap-12"
                     style={{
-                      animation: isManualMode2 || isDragging2 ? "none" : "marquee-right-reverse 100s linear infinite",
-                      animationPlayState: isManualMode2 || isDragging2 ? "paused" : "running",
+                      animation: isDragging2 ? "none" : "marquee-right 20s linear infinite",
+                      animationPlayState: isDragging2 ? "paused" : "running",
                       transform: `translateX(${translateX2}px)`,
                       transition: isDragging2 ? "none" : "transform 0.3s ease-out",
                       cursor: isDragging2 ? "grabbing" : "grab"
@@ -428,7 +416,7 @@ export function BodegasV3() {
                   >
                     {[...Array(3)].map((_, k) => (
                       <div key={k} className="flex gap-12">
-                        {[...bodegas.slice(Math.ceil(bodegas.length / 2))].reverse().map((bodega, i) => (
+                        {bodegas.slice(Math.ceil(bodegas.length / 2)).map((bodega, i) => (
                           <div key={i} className="flex items-center gap-4 font-serif text-5xl md:text-6xl lg:text-7xl uppercase text-paper/80 flex-shrink-0">
                             <span>{bodega}</span>
                             <span className="text-harvest text-3xl md:text-4xl">★</span>
@@ -451,10 +439,6 @@ export function BodegasV3() {
         @keyframes marquee-right {
           0% { transform: translateX(0); }
           100% { transform: translateX(33.333%); }
-        }
-        @keyframes marquee-right-reverse {
-          0% { transform: translateX(33.333%); }
-          100% { transform: translateX(0); }
         }
       `}</style>
     </section>
