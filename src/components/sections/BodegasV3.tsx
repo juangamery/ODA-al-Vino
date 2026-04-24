@@ -171,7 +171,7 @@ export function BodegasV3() {
   const { language } = useLanguage();
   const [selectedRegion, setSelectedRegion] = useState(0);
   const [shuffledBodegas] = useState(() => shuffleArray(bodegas));
-  const [sliderKey, setSliderKey] = useState(0);
+  const [sliderOffset, setSliderOffset] = useState(0);
 
   return (
     <section id="bodegas" className="bg-olive overflow-hidden relative py-28 md:py-40">
@@ -301,8 +301,8 @@ export function BodegasV3() {
           </p>
           <div className="flex gap-3">
             <button
-              onClick={() => setSliderKey(k => k - 1)}
-              className="p-2 rounded-full border border-paper/30 text-paper/70 hover:text-paper hover:bg-paper/10 transition-all duration-300 flex-shrink-0"
+              onClick={() => setSliderOffset(o => o - 300)}
+              className="p-2 rounded-full border border-paper/30 text-paper/70 hover:text-paper hover:bg-paper/10 transition-all duration-300 flex-shrink-0 hover:scale-110"
               aria-label="Previous"
             >
               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -310,8 +310,8 @@ export function BodegasV3() {
               </svg>
             </button>
             <button
-              onClick={() => setSliderKey(k => k + 1)}
-              className="p-2 rounded-full border border-paper/30 text-paper/70 hover:text-paper hover:bg-paper/10 transition-all duration-300 flex-shrink-0"
+              onClick={() => setSliderOffset(o => o + 300)}
+              className="p-2 rounded-full border border-paper/30 text-paper/70 hover:text-paper hover:bg-paper/10 transition-all duration-300 flex-shrink-0 hover:scale-110"
               aria-label="Next"
             >
               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -322,10 +322,10 @@ export function BodegasV3() {
         </div>
         <div className="overflow-hidden py-8">
           <div
-            key={sliderKey}
-            className="flex whitespace-nowrap gap-12"
+            className="flex whitespace-nowrap gap-12 transition-transform duration-500"
             style={{
-              animation: "marquee-infinite 30s linear infinite",
+              animation: sliderOffset === 0 ? "marquee-infinite 30s linear infinite" : "none",
+              transform: `translateX(${sliderOffset}px)`,
               willChange: "transform"
             }}
           >
