@@ -350,7 +350,7 @@ export function BodegasV3() {
                 >
                   <div
                     ref={marqueeRef1}
-                    className={`flex whitespace-nowrap gap-12 ${isDragging1 ? "" : "animate-marquee-left"}`}
+                    className={`flex whitespace-nowrap gap-12 ${isDragging1 ? "" : "animate-marquee-right"}`}
                     style={{
                       transform: `translateX(${translateX1}px)`,
                       transition: isDragging1 ? "none" : "transform 0.3s ease-out",
@@ -403,14 +403,14 @@ export function BodegasV3() {
                 >
                   <div
                     ref={marqueeRef2}
-                    className={`flex whitespace-nowrap gap-12 ${isDragging2 ? "" : "animate-marquee-right"}`}
+                    className={`flex whitespace-nowrap gap-12 ${isDragging2 ? "" : "animate-marquee-left"}`}
                     style={{
                       transform: `translateX(${translateX2}px)`,
                       transition: isDragging2 ? "none" : "transform 0.3s ease-out",
                       cursor: isDragging2 ? "grabbing" : "grab"
                     }}
                   >
-                    {[...Array(3)].map((_, k) => (
+                    {[...Array(5)].map((_, k) => (
                       <div key={k} className="flex gap-12">
                         {bodegas.slice(Math.ceil(bodegas.length / 2)).map((bodega, i) => (
                           <div key={i} className="flex items-center gap-4 font-serif text-5xl md:text-6xl lg:text-7xl uppercase text-paper/80 flex-shrink-0">
@@ -437,10 +437,10 @@ export function BodegasV3() {
           100% { transform: translateX(20%); }
         }
         .animate-marquee-left {
-          animation: marquee-left 4s linear infinite;
+          animation: marquee-left 1.5s linear infinite;
         }
         .animate-marquee-right {
-          animation: marquee-right 4s linear infinite;
+          animation: marquee-right 1.5s linear infinite;
         }
       `}</style>
     </section>
