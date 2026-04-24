@@ -17,11 +17,11 @@ const items: ExperienceItem[] = [
     title: "Descubrí",
     text: "Recorré bodegas, probá nuevas etiquetas y dejate sorprender.",
     images: [
+      "/oda/gallery/oav25/descubri.webp",
       "/oda/gallery/oav25/009A7064.webp",
       "/oda/gallery/oav25/009A7140.webp",
       "/oda/gallery/oav25/009A7373.webp",
       "/oda/gallery/oav25/0D0A7446.webp",
-      "/oda/Graphics/700 etiquetas@2x.webp",
     ],
   },
   {
@@ -29,10 +29,10 @@ const items: ExperienceItem[] = [
     title: "Conectá",
     text: "Conocé a quienes hacen el vino y compartí la experiencia con otros.",
     images: [
+      "/oda/gallery/oav25/Conecta.webp",
       "/oda/gallery/oav24/_HID9206.webp",
       "/oda/gallery/oav24/_HID9267.webp",
       "/oda/gallery/oav24/_HID9322.webp",
-      "/oda/gallery/oav24/_HID0705.webp",
     ],
   },
   {
@@ -40,10 +40,10 @@ const items: ExperienceItem[] = [
     title: "Disfrutá",
     text: "Gastronomía pensada para acompañar cada momento.",
     images: [
+      "/oda/gallery/oav25/disfruta.webp",
       "/oda/gallery/oav25/009A7272.webp",
       "/oda/gallery/oav25/0D0A7461.webp",
       "/oda/gallery/oav25/009A7134.webp",
-      "/oda/gallery/oav24/_HID8934.webp",
     ],
   },
   {
@@ -51,10 +51,10 @@ const items: ExperienceItem[] = [
     title: "Aprendé",
     text: "Experiencias que transforman la forma de vivir el vino.",
     images: [
+      "/oda/gallery/oav25/aprende.webp",
       "/oda/gallery/oav24/_HID8934.webp",
       "/oda/gallery/oav25/009A7064.webp",
       "/oda/gallery/oav24/_HID9206.webp",
-      "/oda/gallery/oav25/009A7272.webp",
     ],
   },
 ];
