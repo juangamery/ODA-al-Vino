@@ -103,28 +103,15 @@ function RevealImageItem({ title, text, images }: RevealImageItemProps) {
           </p>
         </div>
 
-        {/* Right column: floating images - ALWAYS VISIBLE FOR TESTING */}
-        <div className="hidden sm:block relative flex-shrink-0 w-[280px] sm:w-[350px] md:w-[450px] lg:w-[560px] h-[240px] sm:h-[300px] md:h-[380px] lg:h-[460px]">
-          {images.map((img, i) => (
-            <div
-              key={i}
-              className="absolute overflow-hidden rounded-lg shadow-lg"
-              style={{
-                width: "180px",
-                height: "200px",
-                left: `${imagePositions[i].x}px`,
-                top: `${imagePositions[i].y}px`,
-              }}
-            >
-              <img
-                src={img}
-                alt={`${title} - Foto ${i + 1}`}
-                className="object-cover w-full h-full"
-                loading="lazy"
-                style={{ display: 'block', width: '100%', height: '100%' }}
-              />
-            </div>
-          ))}
+        {/* Right column: first image - SIMPLE TEST */}
+        <div className="hidden sm:flex flex-shrink-0 w-[280px] sm:w-[350px] md:w-[450px] lg:w-[560px] h-[240px] sm:h-[300px] md:h-[380px] lg:h-[460px] rounded-lg overflow-hidden shadow-xl">
+          {images[0] && (
+            <img
+              src={images[0]}
+              alt={`${title} - Main image`}
+              className="w-full h-full object-cover"
+            />
+          )}
         </div>
 
       </div>
