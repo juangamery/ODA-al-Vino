@@ -1,6 +1,5 @@
 "use client";
 
-import Image from "next/image";
 import { Reveal } from "@/components/motion/Reveal";
 import { cn } from "@/lib/utils";
 
@@ -118,13 +117,10 @@ function RevealImageItem({ title, text, images }: RevealImageItemProps) {
                 transitionDelay: `${imagePositions[i].delay}ms`,
               }}
             >
-              <Image
+              <img
                 src={img}
                 alt={`${title} - Foto ${i + 1}`}
-                fill
-                sizes="(max-width: 640px) 280px, (max-width: 768px) 350px, (max-width: 1024px) 450px, 560px"
-                className="object-cover"
-                priority={i === 0}
+                className="object-cover w-full h-full"
               />
             </div>
           ))}
