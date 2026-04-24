@@ -350,16 +350,14 @@ export function BodegasV3() {
                 >
                   <div
                     ref={marqueeRef1}
-                    className="flex whitespace-nowrap gap-12"
+                    className={`flex whitespace-nowrap gap-12 ${isDragging1 ? "" : "animate-marquee-left"}`}
                     style={{
-                      animation: isDragging1 ? "none" : "marquee-left 20s linear infinite",
-                      animationPlayState: isDragging1 ? "paused" : "running",
                       transform: `translateX(${translateX1}px)`,
                       transition: isDragging1 ? "none" : "transform 0.3s ease-out",
                       cursor: isDragging1 ? "grabbing" : "grab"
                     }}
                   >
-                    {[...Array(3)].map((_, k) => (
+                    {[...Array(5)].map((_, k) => (
                       <div key={k} className="flex gap-12">
                         {bodegas.slice(0, Math.ceil(bodegas.length / 2)).map((bodega, i) => (
                           <div key={i} className="flex items-center gap-4 font-serif text-5xl md:text-6xl lg:text-7xl uppercase text-paper/80 flex-shrink-0">
@@ -405,10 +403,8 @@ export function BodegasV3() {
                 >
                   <div
                     ref={marqueeRef2}
-                    className="flex whitespace-nowrap gap-12"
+                    className={`flex whitespace-nowrap gap-12 ${isDragging2 ? "" : "animate-marquee-right"}`}
                     style={{
-                      animation: isDragging2 ? "none" : "marquee-right 20s linear infinite",
-                      animationPlayState: isDragging2 ? "paused" : "running",
                       transform: `translateX(${translateX2}px)`,
                       transition: isDragging2 ? "none" : "transform 0.3s ease-out",
                       cursor: isDragging2 ? "grabbing" : "grab"
@@ -434,11 +430,17 @@ export function BodegasV3() {
       <style>{`
         @keyframes marquee-left {
           0% { transform: translateX(0); }
-          100% { transform: translateX(-33.333%); }
+          100% { transform: translateX(-20%); }
         }
         @keyframes marquee-right {
           0% { transform: translateX(0); }
-          100% { transform: translateX(33.333%); }
+          100% { transform: translateX(20%); }
+        }
+        .animate-marquee-left {
+          animation: marquee-left 4s linear infinite;
+        }
+        .animate-marquee-right {
+          animation: marquee-right 4s linear infinite;
         }
       `}</style>
     </section>
