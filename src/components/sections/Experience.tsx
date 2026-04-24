@@ -122,7 +122,9 @@ function RevealImageItem({ title, text, images }: RevealImageItemProps) {
                 src={img}
                 alt={`${title} - Foto ${i + 1}`}
                 fill
+                sizes="(max-width: 640px) 280px, (max-width: 768px) 350px, (max-width: 1024px) 450px, 560px"
                 className="object-cover"
+                priority={i === 0}
               />
             </div>
           ))}

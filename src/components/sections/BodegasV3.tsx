@@ -407,7 +407,7 @@ export function BodegasV3() {
                     ref={marqueeRef2}
                     className="flex whitespace-nowrap gap-12"
                     style={{
-                      animation: "marquee-left 2.5s linear infinite",
+                      animation: "marquee-left 20s linear infinite",
                       animationPlayState: isDragging2 ? "paused" : "running",
                       transform: `translateX(${translateX2}px)`,
                       transition: isDragging2 ? "none" : "transform 0.3s ease-out",
