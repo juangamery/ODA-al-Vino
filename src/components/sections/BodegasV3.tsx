@@ -364,7 +364,7 @@ export function BodegasV3() {
                     ref={marqueeRef1}
                     className="flex whitespace-nowrap gap-12"
                     style={{
-                      animation: isManualMode1 || isDragging1 ? "none" : "marquee-left 20s linear infinite",
+                      animation: isManualMode1 || isDragging1 ? "none" : "marquee-left 100s linear infinite",
                       animationPlayState: isManualMode1 || isDragging1 ? "paused" : "running",
                       transform: `translateX(${translateX1}px)`,
                       transition: isDragging1 ? "none" : "transform 0.3s ease-out",
@@ -419,7 +419,7 @@ export function BodegasV3() {
                     ref={marqueeRef2}
                     className="flex whitespace-nowrap gap-12"
                     style={{
-                      animation: isManualMode2 || isDragging2 ? "none" : "marquee-right 20s linear infinite",
+                      animation: isManualMode2 || isDragging2 ? "none" : "marquee-right-reverse 100s linear infinite",
                       animationPlayState: isManualMode2 || isDragging2 ? "paused" : "running",
                       transform: `translateX(${translateX2}px)`,
                       transition: isDragging2 ? "none" : "transform 0.3s ease-out",
@@ -428,7 +428,7 @@ export function BodegasV3() {
                   >
                     {[...Array(3)].map((_, k) => (
                       <div key={k} className="flex gap-12">
-                        {bodegas.slice(Math.ceil(bodegas.length / 2)).map((bodega, i) => (
+                        {[...bodegas.slice(Math.ceil(bodegas.length / 2))].reverse().map((bodega, i) => (
                           <div key={i} className="flex items-center gap-4 font-serif text-5xl md:text-6xl lg:text-7xl uppercase text-paper/80 flex-shrink-0">
                             <span>{bodega}</span>
                             <span className="text-harvest text-3xl md:text-4xl">★</span>
@@ -451,6 +451,10 @@ export function BodegasV3() {
         @keyframes marquee-right {
           0% { transform: translateX(0); }
           100% { transform: translateX(33.333%); }
+        }
+        @keyframes marquee-right-reverse {
+          0% { transform: translateX(33.333%); }
+          100% { transform: translateX(0); }
         }
       `}</style>
     </section>
