@@ -352,13 +352,13 @@ export function BodegasV3() {
                     ref={marqueeRef1}
                     className="flex whitespace-nowrap gap-12"
                     style={{
-                      animation: isDragging1 ? "none" : "marquee-right 1.5s linear infinite",
+                      animation: isDragging1 ? "none" : "marquee-right 2.5s linear infinite",
                       transform: `translateX(${translateX1}px)`,
                       transition: isDragging1 ? "none" : "transform 0.3s ease-out",
                       cursor: isDragging1 ? "grabbing" : "grab"
                     }}
                   >
-                    {[...Array(5)].map((_, k) => (
+                    {[...Array(10)].map((_, k) => (
                       <div key={k} className="flex gap-12">
                         {bodegas.slice(0, Math.ceil(bodegas.length / 2)).map((bodega, i) => (
                           <div key={i} className="flex items-center gap-4 font-serif text-5xl md:text-6xl lg:text-7xl uppercase text-paper/80 flex-shrink-0">
@@ -406,13 +406,13 @@ export function BodegasV3() {
                     ref={marqueeRef2}
                     className="flex whitespace-nowrap gap-12"
                     style={{
-                      animation: isDragging2 ? "none" : "marquee-left 1.5s linear infinite",
+                      animation: isDragging2 ? "none" : "marquee-left 2.5s linear infinite",
                       transform: `translateX(${translateX2}px)`,
                       transition: isDragging2 ? "none" : "transform 0.3s ease-out",
                       cursor: isDragging2 ? "grabbing" : "grab"
                     }}
                   >
-                    {[...Array(5)].map((_, k) => (
+                    {[...Array(10)].map((_, k) => (
                       <div key={k} className="flex gap-12">
                         {bodegas.slice(Math.ceil(bodegas.length / 2)).map((bodega, i) => (
                           <div key={i} className="flex items-center gap-4 font-serif text-5xl md:text-6xl lg:text-7xl uppercase text-paper/80 flex-shrink-0">
@@ -432,11 +432,11 @@ export function BodegasV3() {
       <style>{`
         @keyframes marquee-left {
           0% { transform: translateX(0); }
-          100% { transform: translateX(-20%); }
+          100% { transform: translateX(-10%); }
         }
         @keyframes marquee-right {
           0% { transform: translateX(0); }
-          100% { transform: translateX(20%); }
+          100% { transform: translateX(10%); }
         }
       `}</style>
     </section>
