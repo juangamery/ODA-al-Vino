@@ -202,6 +202,7 @@ export function BodegasV3() {
         className="absolute inset-0 w-full h-full object-cover opacity-[0.08] pointer-events-none select-none mix-blend-screen"
       />
 
+      {/* Header con padding normal */}
       <div className="mx-auto max-w-[1440px] px-8 md:px-16 lg:px-24 relative">
         {/* Header */}
         <div className="mb-16 md:mb-20">
@@ -309,27 +310,17 @@ export function BodegasV3() {
             </Reveal>
           </div>
         </div>
+      </div>
 
-        {/* Bodegas Marquee */}
-        <Reveal delay={0.4}>
-          <div className="mt-24 pt-8 border-t border-b border-paper/20 py-8">
-            <p className="lato-expanded text-[10px] text-paper/50 uppercase tracking-widest mb-6">
-              {t("bodegasParticipants", language)}
-            </p>
-            <div className="flex items-center gap-6 lg:gap-8">
-              {/* Flecha Anterior */}
-              <button
-                onClick={handlePrevClick}
-                className="flex-shrink-0 p-3 rounded-full border border-paper/30 text-paper/70 hover:text-paper hover:bg-paper/10 transition-all duration-300 hover:scale-110"
-                aria-label="Previous bodegas"
-              >
-                <svg className="w-5 h-5 md:w-6 md:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-                </svg>
-              </button>
-
-              {/* Marquee */}
-              <div className="overflow-hidden group cursor-grab active:cursor-grabbing flex-1"
+      {/* Bodegas Marquees - Full Width Dual Sliders */}
+      <Reveal delay={0.4}>
+          <div className="mt-24 space-y-0">
+            {/* Slider 1 - Scroll Left */}
+            <div className="border-t border-paper/20 py-6 overflow-hidden">
+              <p className="lato-expanded text-[10px] text-paper/50 uppercase tracking-widest mb-4 px-8 md:px-12 lg:px-20">
+                {t("bodegasParticipants", language)}
+              </p>
+              <div className="overflow-hidden group cursor-grab active:cursor-grabbing"
                 onMouseDown={handleMouseDown}
                 onMouseMove={handleMouseMove}
                 onMouseUp={handleMouseUp}
@@ -337,48 +328,69 @@ export function BodegasV3() {
               >
                 <div
                   ref={marqueeRef}
-                  className="flex whitespace-nowrap gap-8"
+                  className="flex whitespace-nowrap gap-12"
                   style={{
-                    animation: isManualMode || isDragging ? "none" : "marquee-slow 25s linear infinite",
+                    animation: isManualMode || isDragging ? "none" : "marquee-left 35s linear infinite",
                     animationPlayState: isManualMode || isDragging ? "paused" : "running",
                     transform: `translateX(${translateX}px)`,
                     transition: isDragging ? "none" : "transform 0.3s ease-out",
                     cursor: isDragging ? "grabbing" : "grab"
                   }}
                 >
-                  {[...Array(2)].map((_, k) => (
-                    <div key={k} className="flex gap-8">
-                      {bodegas.map((bodega, i) => (
-                        <div key={i} className="flex items-center gap-3 font-serif text-2xl md:text-3xl lg:text-4xl uppercase text-paper/80">
+                  {[...Array(3)].map((_, k) => (
+                    <div key={k} className="flex gap-12">
+                      {bodegas.slice(0, Math.ceil(bodegas.length / 2)).map((bodega, i) => (
+                        <div key={i} className="flex items-center gap-4 font-serif text-5xl md:text-6xl lg:text-7xl uppercase text-paper/80 flex-shrink-0">
                           <span>{bodega}</span>
-                          <span className="text-harvest text-lg md:text-xl">★</span>
+                          <span className="text-harvest text-3xl md:text-4xl">★</span>
                         </div>
                       ))}
                     </div>
                   ))}
                 </div>
               </div>
+            </div>
 
-              {/* Flecha Siguiente */}
-              <button
-                onClick={handleNextClick}
-                className="flex-shrink-0 p-3 rounded-full border border-paper/30 text-paper/70 hover:text-paper hover:bg-paper/10 transition-all duration-300 hover:scale-110"
-                aria-label="Next bodegas"
+            {/* Slider 2 - Scroll Right */}
+            <div className="border-t border-b border-paper/20 py-6 overflow-hidden bg-olive/5">
+              <div className="overflow-hidden group cursor-grab active:cursor-grabbing"
+                onMouseDown={handleMouseDown}
+                onMouseMove={handleMouseMove}
+                onMouseUp={handleMouseUp}
+                onMouseLeave={handleMouseUp}
               >
-                <svg className="w-5 h-5 md:w-6 md:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                </svg>
-              </button>
+                <div
+                  className="flex whitespace-nowrap gap-12"
+                  style={{
+                    animation: isManualMode || isDragging ? "none" : "marquee-right 35s linear infinite",
+                    animationPlayState: isManualMode || isDragging ? "paused" : "running",
+                    cursor: isDragging ? "grabbing" : "grab"
+                  }}
+                >
+                  {[...Array(3)].map((_, k) => (
+                    <div key={k} className="flex gap-12">
+                      {bodegas.slice(Math.ceil(bodegas.length / 2)).map((bodega, i) => (
+                        <div key={i} className="flex items-center gap-4 font-serif text-5xl md:text-6xl lg:text-7xl uppercase text-paper/80 flex-shrink-0">
+                          <span>{bodega}</span>
+                          <span className="text-harvest text-3xl md:text-4xl">★</span>
+                        </div>
+                      ))}
+                    </div>
+                  ))}
+                </div>
+              </div>
             </div>
           </div>
         </Reveal>
 
-      </div>
-
       <style>{`
-        @keyframes marquee-slow {
+        @keyframes marquee-left {
           0% { transform: translateX(0); }
-          100% { transform: translateX(-50%); }
+          100% { transform: translateX(-33.333%); }
+        }
+        @keyframes marquee-right {
+          0% { transform: translateX(0); }
+          100% { transform: translateX(33.333%); }
         }
       `}</style>
     </section>
