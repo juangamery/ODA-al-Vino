@@ -1,10 +1,39 @@
 "use client";
 
+import { useState } from "react";
 import { useLanguage } from "@/context/LanguageContext";
 import { t } from "@/lib/translations";
 
 export function FooterV3() {
   const { language } = useLanguage();
+  const [email, setEmail] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [message, setMessage] = useState("");
+
+  const handleNewsletterSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setLoading(true);
+
+    try {
+      const res = await fetch("/api/subscribe", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email }),
+      });
+
+      if (res.ok) {
+        setMessage("✓ Suscrito exitosamente");
+        setEmail("");
+      } else {
+        setMessage("✗ Error al suscribirse");
+      }
+    } catch (error) {
+      setMessage("✗ Error de conexión");
+    }
+
+    setLoading(false);
+    setTimeout(() => setMessage(""), 3000);
+  };
 
   const navLinks = [
     { label: t("navInicio", language), href: "#inicio" },
@@ -104,6 +133,34 @@ export function FooterV3() {
               </svg>
             </a>
           </nav>
+        </div>
+
+        {/* Newsletter */}
+        <div className="border-t border-wine/8 py-12 mt-8">
+          <p className="text-[10px] font-bold uppercase tracking-[0.35em] text-wine/60 text-center mb-6">
+            Mantente informado
+          </p>
+          <form onSubmit={handleNewsletterSubmit} className="max-w-md mx-auto flex gap-2">
+            <input
+              type="email"
+              placeholder="Tu email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              required
+              disabled={loading}
+              className="px-4 py-2 bg-wine/10 text-wine placeholder:text-wine/40 border border-wine/20 rounded flex-1 text-sm disabled:opacity-50"
+            />
+            <button
+              type="submit"
+              disabled={loading}
+              className="px-4 py-2 bg-wine text-paper rounded font-bold text-sm hover:bg-wine/90 transition disabled:opacity-50"
+            >
+              {loading ? "..." : "Suscribir"}
+            </button>
+          </form>
+          {message && (
+            <p className="text-center text-xs text-wine/70 mt-2">{message}</p>
+          )}
         </div>
 
         {/* Base */}
