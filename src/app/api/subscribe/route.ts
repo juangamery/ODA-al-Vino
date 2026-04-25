@@ -20,7 +20,11 @@ export async function POST(request: NextRequest) {
     // Save to Supabase
     const { error: dbError } = await supabase
       .from("newsletter_subscribers")
-      .insert([{ email, created_at: new Date() }]);
+      .insert([{
+        email,
+        language: "es",
+        subscribed_at: new Date().toISOString()
+      }]);
 
     if (dbError) {
       console.error("DB Error:", dbError);
