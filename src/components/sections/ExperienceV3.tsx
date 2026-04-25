@@ -21,11 +21,10 @@ function getExperienceItems(language: Language): ExperienceItem[] {
       title: t("experienceItem1Title", language),
       text: t("experienceItem1Text", language),
       images: [
+        "/oda/gallery/oav25/descubri.webp",
         "/oda/gallery/oav25/009A7064.webp",
         "/oda/gallery/oav25/009A7140.webp",
         "/oda/gallery/oav25/009A7373.webp",
-        "/oda/gallery/oav25/0D0A7446.webp",
-        "/oda/Graphics/700 etiquetas@2x.webp",
       ],
     },
     {
@@ -33,10 +32,10 @@ function getExperienceItems(language: Language): ExperienceItem[] {
       title: t("experienceItem2Title", language),
       text: t("experienceItem2Text", language),
       images: [
+        "/oda/gallery/oav25/Conecta.webp",
         "/oda/gallery/oav24/_HID9206.webp",
         "/oda/gallery/oav24/_HID9267.webp",
         "/oda/gallery/oav24/_HID9322.webp",
-        "/oda/gallery/oav24/_HID0705.webp",
       ],
     },
     {
@@ -44,10 +43,10 @@ function getExperienceItems(language: Language): ExperienceItem[] {
       title: t("experienceItem3Title", language),
       text: t("experienceItem3Text", language),
       images: [
+        "/oda/gallery/oav25/disfruta.webp",
         "/oda/gallery/oav25/009A7272.webp",
         "/oda/gallery/oav25/0D0A7461.webp",
         "/oda/gallery/oav25/009A7134.webp",
-        "/oda/gallery/oav24/_HID8934.webp",
       ],
     },
     {
@@ -55,10 +54,10 @@ function getExperienceItems(language: Language): ExperienceItem[] {
       title: t("experienceItem4Title", language),
       text: t("experienceItem4Text", language),
       images: [
+        "/oda/gallery/oav25/aprende.webp",
         "/oda/gallery/oav24/_HID8934.webp",
         "/oda/gallery/oav25/009A7064.webp",
         "/oda/gallery/oav24/_HID9206.webp",
-        "/oda/gallery/oav25/009A7272.webp",
       ],
     },
   ];
