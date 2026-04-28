@@ -8,15 +8,16 @@ export function FinalV3() {
   const { language } = useLanguage();
   return (
     <section className="bg-wine overflow-hidden relative py-32 md:py-48">
-      {/* Patrón de fondo */}
-      <div className="absolute inset-0 overflow-hidden">
-        <img
-          src="/oda/Graphics/fondo-denso.svg"
-          alt=""
-          aria-hidden
-          className="w-full h-full object-cover opacity-100 pointer-events-none select-none"
-        />
-      </div>
+      {/* Patrón de fondo con repetición */}
+      <div
+        className="absolute inset-0 pointer-events-none"
+        style={{
+          backgroundImage: 'url(/oda/Graphics/fondo-denso.svg)',
+          backgroundRepeat: 'repeat',
+          backgroundSize: 'auto 100%',
+          opacity: 1
+        }}
+      />
 
       <div className="mx-auto max-w-[1200px] px-8 md:px-12 lg:px-24 relative">
         <div className="text-center space-y-12">
