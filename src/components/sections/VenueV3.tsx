@@ -60,7 +60,7 @@ export function VenueV3() {
   return (
     <section id="venue" className="bg-paper overflow-hidden relative py-20 md:py-32">
       <div className="mx-auto max-w-6xl px-6 md:px-12 lg:px-20">
-        <div className="space-y-16">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-start">
           {/* Left Content */}
           <div className="space-y-6">
             <Reveal>
@@ -185,6 +185,17 @@ export function VenueV3() {
                     />
                   ))}
                 </div>
+              </div>
+
+              {/* Cartel del Evento - Solo en Web */}
+              <div className="hidden lg:flex justify-center items-center pt-6">
+                <Image
+                  src="/oda/gallery/los mejores vinos.png"
+                  alt="Los Mejores Vinos en un Solo Evento"
+                  width={280}
+                  height={380}
+                  className="object-contain drop-shadow-lg"
+                />
               </div>
 
               {/* Old SVG Floor Plan - kept for reference, hidden */}
