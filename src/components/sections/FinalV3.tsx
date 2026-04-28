@@ -14,6 +14,7 @@ export function FinalV3() {
         alt=""
         aria-hidden
         className="absolute inset-0 w-full h-full object-cover opacity-100 pointer-events-none select-none"
+        style={{ transform: "scale(2.5)" }}
       />
 
       <div className="mx-auto max-w-[1200px] px-8 md:px-12 lg:px-24 relative">
