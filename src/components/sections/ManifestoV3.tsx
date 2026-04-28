@@ -104,6 +104,17 @@ export function ManifestoV3() {
             </div>
           </Reveal>
         </div>
+
+        {/* Sello giratorio — Abajo centrado */}
+        <Reveal delay={0.6}>
+          <div className="flex justify-center mt-16 md:mt-24">
+            <img
+              src="/oda/Graphics/Sellocalidad_ODA.svg"
+              alt="Sello ODA al Vino"
+              className="w-32 md:w-40 h-auto"
+            />
+          </div>
+        </Reveal>
       </div>
 
     </section>
