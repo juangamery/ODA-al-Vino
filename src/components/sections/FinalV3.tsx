@@ -11,7 +11,7 @@ export function FinalV3() {
       {/* Patrón de fondo */}
       <div className="absolute inset-0 overflow-hidden">
         <img
-          src="/oda/Graphics/fondovioletachico.svg"
+          src="/oda/Graphics/fondo-denso.svg"
           alt=""
           aria-hidden
           className="w-full h-full object-cover opacity-100 pointer-events-none select-none"
