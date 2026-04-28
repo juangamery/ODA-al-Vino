@@ -24,7 +24,7 @@
       }
 
       .rotating-elements {
-        animation: rotate 8s linear infinite;
+        animation: rotate 20s linear infinite;
         transform-origin: 112.855px 112.855px;
       }
     </style>
