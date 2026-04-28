@@ -13,7 +13,7 @@ export function FinalV3() {
         src="/oda/Graphics/fondovioletachico.svg"
         alt=""
         aria-hidden
-        className="absolute inset-0 w-full h-full object-cover opacity-100 pointer-events-none select-none mix-blend-screen"
+        className="absolute inset-0 w-full h-full object-cover opacity-100 pointer-events-none select-none mix-blend-overlay"
       />
 
       <div className="mx-auto max-w-[1200px] px-8 md:px-12 lg:px-24 relative">
