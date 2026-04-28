@@ -9,13 +9,14 @@ export function FinalV3() {
   return (
     <section className="bg-wine overflow-hidden relative py-32 md:py-48">
       {/* Patrón de fondo */}
-      <img
-        src="/oda/Graphics/fondovioletachico.svg"
-        alt=""
-        aria-hidden
-        className="absolute inset-0 w-full h-full object-cover opacity-100 pointer-events-none select-none"
-        style={{ transform: "scale(0.4)" }}
-      />
+      <div className="absolute inset-0 overflow-hidden">
+        <img
+          src="/oda/Graphics/fondovioletachico.svg"
+          alt=""
+          aria-hidden
+          className="w-full h-full object-cover opacity-100 pointer-events-none select-none"
+        />
+      </div>
 
       <div className="mx-auto max-w-[1200px] px-8 md:px-12 lg:px-24 relative">
         <div className="text-center space-y-12">
