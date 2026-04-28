@@ -13,7 +13,7 @@ export function FinalV3() {
         src="/oda/Graphics/fondovioletachico.svg"
         alt=""
         aria-hidden
-        className="absolute inset-0 w-full h-full object-cover opacity-[0.12] pointer-events-none select-none mix-blend-screen"
+        className="absolute inset-0 w-full h-full object-cover opacity-100 pointer-events-none select-none mix-blend-screen"
       />
 
       <div className="mx-auto max-w-[1200px] px-8 md:px-12 lg:px-24 relative">
@@ -32,6 +32,21 @@ export function FinalV3() {
             <p className="lato-expanded text-[10px] text-paper/60 uppercase tracking-[0.4em] font-bold">
               10° Edición · 2026
             </p>
+          </Reveal>
+
+          {/* SVG Estrellas ornamentales */}
+          <Reveal delay={0.2}>
+            <svg
+              className="w-[clamp(80px,15vw,180px)] h-auto mx-auto mb-6"
+              viewBox="0 0 119.39 88.36"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <g>
+                <path fill="#fff5e1" d="M118.95,52.19h-13.1c-7.93,0-14.35-6.43-14.35-14.35v-12.66c0-.24-.19-.44-.44-.44s-.44.19-.44.44v12.66c0,7.93-6.43,14.35-14.35,14.35h-18.39c.03.29.05.58.07.87h18.32c7.93,0,14.35,6.43,14.35,14.35v20.51c0,.24.2.44.44.44h0c.24,0,.44-.2.44-.44v-20.51c0-7.93,6.43-14.35,14.35-14.35h13.1c.24,0,.44-.2.44-.44s-.19-.44-.44-.44Z"/>
+                <path fill="#fff5e1" d="M62.24,52.19h-18.69c-7.93,0-14.35-6.43-14.35-14.35v-12.66c0-.24-.19-.44-.44-.44s-.44.19-.44.44v12.66c0,7.93-6.43,14.35-14.35,14.35H.44c-.24,0-.44.19-.44.44s.2.44.44.44h13.53c7.93,0,14.35,6.43,14.35,14.35v20.51c0,.24.2.44.44.44h0c.24,0,.44-.2.44-.44v-20.5c0-7.93,6.43-14.35,14.35-14.35h18.78c-.02-.29-.06-.58-.09-.87Z"/>
+                <path fill="#fff5e1" d="M60.52,61.09v-19.29c0-7.93,6.43-14.35,14.35-14.35h12.23c.24,0,.44-.2.44-.44s-.19-.44-.44-.44h-12.23c-7.93,0-14.35-6.43-14.35-14.35V.44c0-.24-.19-.44-.44-.44s-.44.19-.44.44v11.79c0,7.93-6.43,14.35-14.35,14.35h-12.66c-.24,0-.44.19-.44.44s.2.44.44.44h12.66c7.93,0,14.35,6.43,14.35,14.35v19.28"/>
+              </g>
+            </svg>
           </Reveal>
 
           {/* Título principal */}
