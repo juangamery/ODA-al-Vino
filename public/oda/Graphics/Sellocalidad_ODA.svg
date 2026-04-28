@@ -121,9 +121,11 @@
           <circle class="cls-2" cx="182.61" cy="99.74" r="2.21"/>
         </g>
       </g>
-      <g class="rotating-text">
-        <text class="cls-1" transform="translate(60.15 41.7)"><tspan class="cls-4" x="0" y="0">R</tspan><tspan class="cls-8" x="7" y="0">e</tspan><tspan class="cls-10" x="11.79" y="0">a</tspan><tspan class="cls-6" x="17.27" y="0">l</tspan><tspan class="cls-10" x="20.27" y="0">i</tspan><tspan class="cls-5" x="23.41" y="0">z</tspan><tspan class="cls-9" x="28.44" y="0">a</tspan><tspan class="cls-7" x="33.92" y="0">do p</tspan><tspan class="cls-11" x="52.91" y="0">o</tspan><tspan class="cls-7" x="58.07" y="0">r</tspan></text>
-      </g>
     </g>
+  </g>
+
+  {/* Texto circular giratorio */}
+  <g class="rotating-text">
+    <text class="cls-1" transform="translate(60.15 41.7)"><tspan class="cls-4" x="0" y="0">R</tspan><tspan class="cls-8" x="7" y="0">e</tspan><tspan class="cls-10" x="11.79" y="0">a</tspan><tspan class="cls-6" x="17.27" y="0">l</tspan><tspan class="cls-10" x="20.27" y="0">i</tspan><tspan class="cls-5" x="23.41" y="0">z</tspan><tspan class="cls-9" x="28.44" y="0">a</tspan><tspan class="cls-7" x="33.92" y="0">do p</tspan><tspan class="cls-11" x="52.91" y="0">o</tspan><tspan class="cls-7" x="58.07" y="0">r</tspan></text>
   </g>
 </svg>
