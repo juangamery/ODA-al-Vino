@@ -187,17 +187,6 @@ export function VenueV3() {
                 </div>
               </div>
 
-              {/* Cartel del Evento - Solo en Web */}
-              <div className="hidden lg:flex justify-center items-center pt-6">
-                <Image
-                  src="/oda/gallery/los mejores vinos.png"
-                  alt="Los Mejores Vinos en un Solo Evento"
-                  width={280}
-                  height={380}
-                  className="object-contain drop-shadow-lg"
-                />
-              </div>
-
               {/* Old SVG Floor Plan - kept for reference, hidden */}
               <svg viewBox="0 0 400 400" className="w-full h-auto flex-grow hidden">
                 <defs>
