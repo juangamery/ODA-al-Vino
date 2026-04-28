@@ -9,7 +9,7 @@ export function ManifestoV3() {
   return (
     <section
       id="manifiesto"
-      className="relative bg-wine overflow-visible py-12 md:py-16 lg:py-20"
+      className="relative bg-wine overflow-visible py-6 md:py-8 lg:py-10"
     >
       {/* Patrón de fondo v2 */}
       <img
@@ -108,11 +108,11 @@ export function ManifestoV3() {
 
       {/* Sello giratorio — Abajo centrado (fuera del contenedor de padding) */}
       <Reveal delay={0.6}>
-        <div className="flex justify-center py-8 md:py-12 overflow-visible">
+        <div className="flex justify-center py-4 md:py-6 overflow-visible">
           <img
             src="/oda/Graphics/Sellocalidad_ODA.svg"
             alt="Sello ODA al Vino"
-            className="w-40 md:w-48 h-auto"
+            className="w-56 md:w-64 lg:w-72 h-auto"
           />
         </div>
       </Reveal>
