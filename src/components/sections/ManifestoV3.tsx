@@ -20,7 +20,7 @@ export function ManifestoV3() {
       />
 
       {/* Contenido principal */}
-      <div className="relative z-10 mx-auto max-w-[1320px] px-8 md:px-12 lg:px-24">
+      <div className="relative z-10 mx-auto max-w-[1320px] px-4 md:px-6 lg:px-12">
         <div className="grid grid-cols-1 lg:grid-cols-[1fr_320px] gap-16 lg:gap-24 items-center">
           {/* Texto lado izquierdo */}
           <div className="text-center lg:text-left">
