@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useRef, useEffect } from "react";
+import Image from "next/image";
 import { Reveal } from "@/components/motion/Reveal";
 import { useLanguage } from "@/context/LanguageContext";
 import { t } from "@/lib/translations";
@@ -251,8 +252,23 @@ export function BodegasV3() {
             ))}
           </div>
 
-          {/* Right: Details Sticky */}
-          <div className="hidden lg:block sticky top-24">
+          {/* Right: Cartel Flotante + Details */}
+          <div className="hidden lg:flex flex-col gap-8">
+            {/* Cartel Flotante */}
+            <Reveal delay={0.2}>
+              <div className="relative w-full flex justify-center" style={{ animation: "float 5s ease-in-out infinite" }}>
+                <Image
+                  src="/oda/gallery/los mejores vinos.png"
+                  alt="Los Mejores Vinos en un Solo Evento"
+                  width={240}
+                  height={320}
+                  className="object-contain drop-shadow-xl"
+                />
+              </div>
+            </Reveal>
+
+            {/* Details Sticky */}
+            <div className="sticky top-24">
             <Reveal key={selectedRegion}>
               <div className="space-y-8">
                 <div>
@@ -289,6 +305,7 @@ export function BodegasV3() {
                 </p>
               </div>
             </Reveal>
+            </div>
           </div>
         </div>
       </div>
