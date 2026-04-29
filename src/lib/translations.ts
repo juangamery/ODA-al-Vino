@@ -28,7 +28,7 @@ export const translations = {
     experienceItem2Title: "Conectá",
     experienceItem2Text: "Conocé a enólogos, sommeliers y a quienes hacen el vino. Una comunidad que comparte historia, origen y paisaje.",
     experienceItem3Title: "Disfrutá",
-    experienceItem3Text: "Gastronomía pensada como maridaje, pensada para acompañar cada momento y cada copa del recorrido.",
+    experienceItem3Text: "Gastronomía argentina para acompañar cada momento y cada copa del recorrido.",
     experienceItem4Title: "Aprendé",
     experienceItem4Text: "Masterclasses, charlas y cataciones guiadas que transforman la forma de vivir el vino.",
 
@@ -203,7 +203,7 @@ export const translations = {
     experienceItem2Title: "Conecte",
     experienceItem2Text: "Conheça enólogos, sommeliers e quem faz o vinho. Uma comunidade que compartilha história, origem e paisagem.",
     experienceItem3Title: "Desfrute",
-    experienceItem3Text: "Gastronomia pensada como harmonização, pensada para acompanhar cada momento e cada taça do percurso.",
+    experienceItem3Text: "Gastronomia argentina para acompanhar cada momento e cada taça do percurso.",
     experienceItem4Title: "Aprenda",
     experienceItem4Text: "Masterclasses, palestras e degustações guiadas que transformam a forma de viver o vinho.",
 
