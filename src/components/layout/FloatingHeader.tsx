@@ -13,7 +13,6 @@ export function FloatingHeader() {
   const links = [
     { label: t("navManifiesto", language), href: "#manifiesto" },
     { label: t("navExperiencia", language), href: "#experiencia" },
-    { label: t("navAutoridad", language), href: "#autoridad" },
     { label: t("navEntradas", language), href: "#entradas" },
     { label: t("navBodegas", language), href: "#bodegas" },
     { label: t("navDestino", language), href: "#iguazu" },
