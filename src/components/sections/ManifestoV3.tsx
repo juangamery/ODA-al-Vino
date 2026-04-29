@@ -21,7 +21,7 @@ export function ManifestoV3() {
 
       {/* Contenido principal */}
       <div className="relative z-10 mx-auto w-full px-2 md:px-3 lg:px-6 overflow-visible pb-60 md:pb-0">
-        <div className="grid grid-cols-1 lg:grid-cols-[1fr_320px] gap-16 lg:gap-24 items-center overflow-visible">
+        <div className="grid grid-cols-1 lg:grid-cols-[1fr_320px] gap-16 lg:gap-24 items-center overflow-visible pt-20 md:pt-0">
           {/* Texto lado izquierdo */}
           <div className="text-center lg:text-left mb-28 md:mb-0">
             <Reveal>
