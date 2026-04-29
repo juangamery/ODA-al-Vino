@@ -252,20 +252,22 @@ export function BodegasV3() {
             ))}
           </div>
 
-          {/* Right: Cartel Flotante + Details */}
-          <div className="hidden lg:flex flex-col gap-8">
-            {/* Cartel Flotante */}
-            <Reveal delay={0.2}>
-              <div className="relative w-full flex justify-center" style={{ animation: "float 5s ease-in-out infinite" }}>
-                <Image
-                  src="/oda/gallery/los mejores vinos.png"
-                  alt="Los Mejores Vinos en un Solo Evento"
-                  width={240}
-                  height={320}
-                  className="object-contain drop-shadow-xl"
-                />
-              </div>
-            </Reveal>
+          {/* Right: Details + Cartel Decorativo */}
+          <div className="hidden lg:block relative">
+            {/* Cartel Flotante - Decorativo en la esquina superior */}
+            <div className="absolute -top-8 -right-12 w-64 h-80">
+              <Reveal delay={0.2}>
+                <div className="relative w-full h-full flex items-center justify-center" style={{ animation: "float 5s ease-in-out infinite" }}>
+                  <Image
+                    src="/oda/gallery/los mejores vinos.png"
+                    alt="Los Mejores Vinos en un Solo Evento"
+                    width={240}
+                    height={320}
+                    className="object-contain drop-shadow-xl"
+                  />
+                </div>
+              </Reveal>
+            </div>
 
             {/* Details Sticky */}
             <div className="sticky top-24">
