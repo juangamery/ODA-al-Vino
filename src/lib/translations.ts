@@ -139,7 +139,7 @@ export const translations = {
     // ========== VENUE ==========
     venueTitle: "Iguazú",
     venueSubtitle: "El corazón de la Triple Frontera",
-    venueMainText: "A minutos de las Cataratas del Iguazú, ODA al Vino se vive en un entorno pensado para disfrutar cada momento.\n\nEl Iguazú Urban Mall no es solo el venue del evento. Es parte de la experiencia.",
+    venueMainText: "A minutos de las Cataratas del Iguazú, ODA al Vino se vive en un entorno pensado para disfrutar cada momento.\n\nEl Iguazú Urban Mall no es solo el lugar del evento. Es parte de la experiencia.",
     venueLocation: "Iguazú Urban Mall · Triple Frontera",
     venueSupportText: "Un espacio moderno, amplio y preparado para recorrer el vino de una forma distinta.",
     venueDescription: "Bodegas distribuidas en todo el recorrido, zonas de degustación diseñadas para explorar sin apuro y espacios que invitan a quedarse.\n\nCada sector está pensado para que la experiencia fluya, se descubra y se comparta.",
@@ -314,7 +314,7 @@ export const translations = {
     // ========== VENUE ==========
     venueTitle: "Iguazu",
     venueSubtitle: "O coração da Tríplice Fronteira",
-    venueMainText: "A minutos das Cataratas do Iguazu, ODA ao Vinho se vive em um ambiente pensado para aproveitar cada momento.\n\nO Iguazu Urban Mall não é apenas o venue do evento. É parte da experiência.",
+    venueMainText: "A minutos das Cataratas do Iguazu, ODA ao Vinho se vive em um ambiente pensado para aproveitar cada momento.\n\nO Iguazu Urban Mall não é apenas o lugar do evento. É parte da experiência.",
     venueLocation: "Iguazu Urban Mall · Tríplice Fronteira",
     venueSupportText: "Um espaço moderno, amplo e preparado para explorar o vinho de uma forma diferente.",
     venueDescription: "Adegas distribuídas em todo o percurso, zonas de degustação projetadas para explorar sem pressa e espaços que convidam a ficar.\n\nCada setor foi pensado para que a experiência flua, se descubra e seja compartilhada.",
