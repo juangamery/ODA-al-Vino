@@ -108,11 +108,11 @@ export function ManifestoV3() {
 
       {/* Sello giratorio — Abajo centrado (fuera del contenedor de padding) */}
       <Reveal delay={0.6}>
-        <div className="flex justify-center py-2 md:py-3 overflow-visible">
+        <div className="flex justify-center py-0 md:py-1 -mt-16 md:-mt-20 overflow-visible">
           <img
             src="/oda/Graphics/Sellocalidad_ODA.svg"
             alt="Sello ODA al Vino"
-            className="w-32 sm:w-40 md:w-64 lg:w-72 h-auto"
+            className="w-32 sm:w-40 md:w-64 lg:w-72 h-auto opacity-70"
           />
         </div>
       </Reveal>
