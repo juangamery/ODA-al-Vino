@@ -342,7 +342,7 @@ export const translations = {
     navExperiencia: "Experiência",
     navAutoridad: "Maestria",
     navEntradas: "Ingressos",
-    navBodegas: "Adegas",
+    navBodegas: "Vinícolas",
     navDestino: "Destino",
     navComunidad: "Comunidade",
     navInicio: "Início",
