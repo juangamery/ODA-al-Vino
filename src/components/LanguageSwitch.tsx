@@ -1,26 +1,15 @@
 "use client";
 
 import { useLanguage } from "@/context/LanguageContext";
-import { useState } from "react";
-import { gsap } from "@/lib/gsap";
-import { useRef } from "react";
+import { useState, useRef } from "react";
 
 export function LanguageSwitch() {
   const { language, setLanguage } = useLanguage();
   const [isOpen, setIsOpen] = useState(false);
-  const buttonRef = useRef<HTMLButtonElement>(null);
   const menuRef = useRef<HTMLDivElement>(null);
 
   const toggleLanguage = (lang: "es" | "pt") => {
     if (language !== lang) {
-      // Animar el icono
-      if (buttonRef.current) {
-        gsap.to(buttonRef.current, {
-          rotation: 180,
-          duration: 0.4,
-          ease: "back.out(1.2)",
-        });
-      }
       setLanguage(lang);
     }
     setIsOpen(false);
@@ -29,7 +18,6 @@ export function LanguageSwitch() {
   return (
     <div className="relative">
       <button
-        ref={buttonRef}
         onClick={() => setIsOpen(!isOpen)}
         className="flex items-center gap-2 px-3 py-2 rounded-lg hover:bg-paper/10 transition-all duration-300 text-paper text-sm font-bold uppercase tracking-wider"
         title="Cambiar idioma"
