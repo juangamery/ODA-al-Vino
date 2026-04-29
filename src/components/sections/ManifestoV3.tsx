@@ -20,10 +20,10 @@ export function ManifestoV3() {
       />
 
       {/* Contenido principal */}
-      <div className="relative z-10 mx-auto w-full px-2 md:px-3 lg:px-6 overflow-visible pb-20 md:pb-0">
+      <div className="relative z-10 mx-auto w-full px-2 md:px-3 lg:px-6 overflow-visible pb-40 md:pb-0">
         <div className="grid grid-cols-1 lg:grid-cols-[1fr_320px] gap-16 lg:gap-24 items-center overflow-visible">
           {/* Texto lado izquierdo */}
-          <div className="text-center lg:text-left mb-12 md:mb-0">
+          <div className="text-center lg:text-left mb-20 md:mb-0">
             <Reveal>
               {/* Línea ornamental */}
               <div className="flex items-center justify-center lg:justify-start gap-4 mb-4">
@@ -112,7 +112,7 @@ export function ManifestoV3() {
           <img
             src="/oda/Graphics/Sellocalidad_ODA.svg"
             alt="Sello ODA al Vino"
-            className="w-56 md:w-64 lg:w-72 h-auto"
+            className="w-40 sm:w-48 md:w-64 lg:w-72 h-auto"
           />
         </div>
       </Reveal>
