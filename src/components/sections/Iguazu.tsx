@@ -82,7 +82,7 @@ export function Iguazu() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {cards.map((card, idx) => (
             <Reveal key={idx} delay={0.25 + idx * 0.1}>
-              <div className="flex flex-col overflow-hidden rounded-lg">
+              <div className="flex flex-col overflow-hidden rounded-lg h-full">
                 {/* Área de imagen */}
                 <div className="relative w-full aspect-square border-4 border-paper bg-paper overflow-hidden">
                   <Image
