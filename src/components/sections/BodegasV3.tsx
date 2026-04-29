@@ -255,7 +255,7 @@ export function BodegasV3() {
           {/* Right: Details + Cartel Decorativo */}
           <div className="hidden lg:block relative">
             {/* Cartel Flotante - Decorativo en la esquina superior */}
-            <div className="absolute -top-40 right-0 w-64 h-80 z-20">
+            <div className="absolute right-0 w-64 h-80 z-20" style={{ top: "-210px" }}>
               <Reveal delay={0.2}>
                 <div className="relative w-full h-full flex items-center justify-center" style={{ animation: "float 5s ease-in-out infinite" }}>
                   <Image
