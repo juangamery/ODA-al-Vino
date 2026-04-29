@@ -9,6 +9,21 @@ export const metadata: Metadata = {
   icons: {
     icon: "/favicon.png",
   },
+  openGraph: {
+    title: "ODA AL VINO 2026 | El vino nos reúne",
+    description:
+      "Viví la experiencia del vino más importante de la Triple Frontera. 10° edición OAV - 25 años ODA.",
+    images: [
+      {
+        url: "/oda/gallery/elvinonosreune.png",
+        width: 1200,
+        height: 630,
+        alt: "ODA AL VINO 2026",
+      },
+    ],
+    url: "https://odaalvino.com.br",
+    type: "website",
+  },
 };
 
 export default function RootLayout({
