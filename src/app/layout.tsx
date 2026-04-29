@@ -6,6 +6,9 @@ export const metadata: Metadata = {
   title: "ODA AL VINO 2026 | El vino nos reúne",
   description:
     "Viví la experiencia del vino más importante de la Triple Frontera. 10° edición OAV - 25 años ODA.",
+  icons: {
+    icon: "/favicon.png",
+  },
 };
 
 export default function RootLayout({
