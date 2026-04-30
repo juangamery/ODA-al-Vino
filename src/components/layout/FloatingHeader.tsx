@@ -17,6 +17,7 @@ export function FloatingHeader() {
     { label: t("navBodegas", language), href: "#bodegas" },
     { label: t("navDestino", language), href: "#iguazu" },
     { label: t("navComunidad", language), href: "#comunidad" },
+    { label: t("navFaq", language), href: "/faq" },
   ];
 
   useEffect(() => {
