@@ -10,6 +10,7 @@ interface TicketCardProps {
     label: string;
     ars?: string;
     pyg?: string;
+    dates?: string;
   };
   isSelected: boolean;
   onClick: () => void;
@@ -132,6 +133,17 @@ export function TicketCard({ lot, isSelected, onClick, index }: TicketCardProps)
               >
                 {lot.number}° LOTE
               </p>
+
+              {/* Fechas del lote */}
+              {lot.dates && (
+                <p
+                  className={`text-[8px] md:text-[9px] font-bold transition-colors duration-300 mb-2 tracking-wider ${
+                    isSelected ? "text-wine/80" : "text-wine/40"
+                  }`}
+                >
+                  {lot.dates}
+                </p>
+              )}
 
               {/* Precio con R$ adelante - con pulse cuando está seleccionado */}
               <div className="flex items-baseline justify-center gap-1 md:gap-2 leading-none" style={{ animation: isSelected ? "price-pulse 2s ease-in-out infinite" : "none" }}>
