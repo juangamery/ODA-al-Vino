@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Script from "next/script";
 import "./globals.css";
 import { LayoutClient } from "@/components/LayoutClient";
 
@@ -34,6 +35,25 @@ export default function RootLayout({
   return (
     <html lang="es" className="h-full antialiased">
       <head>
+        {/* Google Analytics */}
+        <Script
+          async
+          src="https://www.googletagmanager.com/gtag/js?id=G-V5ZNWM0MVC"
+          strategy="afterInteractive"
+        />
+        <Script
+          id="google-analytics"
+          strategy="afterInteractive"
+          dangerouslySetInnerHTML={{
+            __html: `
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              gtag('js', new Date());
+              gtag('config', 'G-V5ZNWM0MVC');
+            `,
+          }}
+        />
+
         {/* Preload critical fonts */}
         <link
           rel="preload"
