@@ -8,7 +8,11 @@ export const metadata: Metadata = {
   description:
     "Viví la experiencia del vino más importante de la Triple Frontera. 10° edición OAV - 25 años ODA.",
   icons: {
-    icon: "/favicon.png",
+    icon: [
+      { url: "/favicon.png", type: "image/png" },
+      { url: "/favicon.ico" },
+    ],
+    apple: "/favicon.png",
   },
   alternates: {
     canonical: "https://odaalvino.com.br",
