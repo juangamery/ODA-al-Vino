@@ -219,6 +219,29 @@ export function TicketCard({ lot, isSelected, onClick, index }: TicketCardProps)
         ≈ ARS ${lot.ars || "−"} · ≈ PYG ₲{lot.pyg || "−"}
       </div>
 
+      {/* Buy Button */}
+      {isSelected && (
+        <a
+          href="https://painel.odaalvino.com.br/login"
+          target="_blank"
+          rel="noopener noreferrer"
+          onClick={(e) => {
+            e.stopPropagation();
+            const gtag = (window as any).gtag;
+            if (gtag) {
+              gtag('event', 'purchase_click', {
+                'event_category': 'engagement',
+                'event_label': 'ticket_card',
+                'lot_number': `lot_${lot.number}`,
+              });
+            }
+          }}
+          className="mt-4 inline-block w-full rounded-lg bg-harvest px-4 py-2 text-center text-xs md:text-sm font-bold uppercase tracking-wider text-paper transition hover:bg-harvest/90 hover:shadow-lg"
+        >
+          Comprar Ahora
+        </a>
+      )}
+
       <style>{`
         @keyframes flag-wave {
           0%, 100% { transform: scale(1); }
