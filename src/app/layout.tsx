@@ -28,7 +28,7 @@ export const metadata: Metadata = {
       "Viví la experiencia del vino más importante de la Triple Frontera. 10° edición OAV - 25 años ODA.",
     images: [
       {
-        url: "https://oda-al-vino.vercel.app/oda/gallery/og-image-2026.jpg",
+        url: "https://odaalvino.com.br/og-image.jpg",
         width: 1200,
         height: 630,
         alt: "ODA AL VINO 2026",
