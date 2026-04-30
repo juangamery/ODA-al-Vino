@@ -5,6 +5,7 @@ import Link from "next/link";
 import { useLanguage } from "@/context/LanguageContext";
 import { t } from "@/lib/translations";
 import { Reveal } from "@/components/motion/Reveal";
+import { FloatingHeader } from "@/components/layout/FloatingHeader";
 
 interface FAQItem {
   id: number;
@@ -49,10 +50,22 @@ export default function FaqPage() {
   };
 
   return (
-    <main className="min-h-screen bg-paper">
+    <>
+      <FloatingHeader />
+      <main className="min-h-screen bg-paper">
       {/* Header */}
-      <div className="bg-wine py-16 md:py-24">
-        <div className="mx-auto max-w-6xl px-8 md:px-16 lg:px-24">
+      <div className="bg-wine py-16 md:py-24 relative overflow-hidden">
+        {/* Decorative illustration */}
+        <Reveal direction="left" delay={0.2}>
+          <img
+            src="/oda/Graphics/Recurso 13.svg"
+            alt=""
+            aria-hidden
+            className="absolute -right-32 -top-16 md:-right-24 md:-top-8 w-96 h-auto opacity-20 pointer-events-none"
+          />
+        </Reveal>
+
+        <div className="mx-auto max-w-6xl px-8 md:px-16 lg:px-24 relative z-10">
           <Reveal>
             <div className="flex items-center justify-center gap-4 mb-6">
               <div className="w-12 h-px bg-paper/40" />
@@ -87,7 +100,7 @@ export default function FaqPage() {
                   onClick={() => toggleAccordion(item.id)}
                   className="w-full px-6 py-4 md:px-8 md:py-5 flex items-center justify-between hover:bg-wine/5 transition-colors text-left"
                 >
-                  <span className="font-serif font-bold text-wine text-base md:text-lg">
+                  <span className="font-serif font-bold text-wine text-lg md:text-xl lg:text-2xl">
                     {t(item.questionKey, language)}
                   </span>
                   <span
@@ -165,5 +178,6 @@ export default function FaqPage() {
         }}
       />
     </main>
+    </>
   );
 }
