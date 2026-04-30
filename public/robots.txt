@@ -1,0 +1,14 @@
+# Crawl directives for all bots
+User-agent: *
+Allow: /
+Disallow: /api/
+Disallow: /_next/
+Disallow: /static/
+Disallow: /*.json$
+Disallow: /node_modules/
+
+# Crawl delay (optional, conservative 1 second)
+Crawl-delay: 1
+
+# Reference to sitemap for discovery
+Sitemap: https://odaalvino.com.br/sitemap.xml

@@ -10,6 +10,14 @@ export const metadata: Metadata = {
   icons: {
     icon: "/favicon.png",
   },
+  alternates: {
+    canonical: "https://odaalvino.com.br",
+    languages: {
+      "pt-BR": "https://odaalvino.com.br",
+      "es-AR": "https://odaalvino.com.ar",
+      "x-default": "https://odaalvino.com.br",
+    },
+  },
   openGraph: {
     title: "ODA AL VINO 2026 | El vino nos reúne",
     description:
