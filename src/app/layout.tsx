@@ -37,6 +37,9 @@ export const metadata: Metadata = {
     url: "https://odaalvino.com.br",
     type: "website",
   },
+  verification: {
+    google: "YKDSdOzTZLJEmCmKxKqLaG_M6wLywkGmmbWkfNqB-Zk",
+  },
 };
 
 export default function RootLayout({
