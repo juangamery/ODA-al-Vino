@@ -275,27 +275,24 @@ export function Tickets() {
                 </div>
               </div>
 
-              {/* Número de Lote y Fecha */}
-              <div className="bg-olive/10 border-l-4 border-olive rounded-lg p-4 md:p-6 mb-6 md:mb-8">
-                <p className="text-olive/70 text-xs font-bold uppercase tracking-widest mb-2">Vigencia</p>
-                <div className="space-y-2">
-                  <p className="font-serif text-2xl md:text-3xl text-paper font-bold">
-                    {lots[selectedLot].label}
-                  </p>
-                  {lots[selectedLot].dates && (
-                    <p className="text-olive/80 text-sm md:text-base font-bold">
-                      {lots[selectedLot].dates}
-                    </p>
-                  )}
-                </div>
-              </div>
-
               {/* Precio Dinámico - Prominente */}
               <div className="bg-harvest/20 border-l-4 border-harvest rounded-lg p-4 md:p-6 mb-6 md:mb-8">
                 <p className="text-paper/70 text-xs md:text-sm mb-2 uppercase tracking-widest">{t("ticketsPriceLabel", language)}</p>
-                <p className="font-serif text-3xl md:text-5xl lg:text-6xl text-paper font-bold">
-                  {getPrice(lots[selectedLot])}
-                </p>
+                <div className="flex items-start justify-between gap-4">
+                  <p className="font-serif text-3xl md:text-5xl lg:text-6xl text-paper font-bold">
+                    {getPrice(lots[selectedLot])}
+                  </p>
+                  <div className="text-right text-xs md:text-sm">
+                    <p className="text-paper/70 font-bold uppercase tracking-widest mb-1">
+                      {lots[selectedLot].label}
+                    </p>
+                    {lots[selectedLot].dates && (
+                      <p className="text-harvest font-bold">
+                        {lots[selectedLot].dates}
+                      </p>
+                    )}
+                  </div>
+                </div>
               </div>
 
               {/* Vale de Consumo - Destacado */}
