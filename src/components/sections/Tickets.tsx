@@ -360,6 +360,9 @@ export function Tickets() {
                 href={selectedLot === 0 ? "https://painel.odaalvino.com.br/login" : "#"}
                 target={selectedLot === 0 ? "_blank" : undefined}
                 rel={selectedLot === 0 ? "noopener noreferrer" : undefined}
+                data-event="purchase_click"
+                data-event-location="tickets_section"
+                data-lot-number={getLots(language)[selectedLot]?.number.toString()}
                 className={`block text-center font-serif text-base md:text-lg lg:text-2xl font-bold uppercase tracking-wider py-4 md:py-6 rounded-full transition-all duration-300 shadow-2xl mb-3 md:mb-4 ${
                   selectedLot === 0
                     ? "bg-paper hover:bg-paper/95 text-wine transform hover:scale-105 cursor-pointer"

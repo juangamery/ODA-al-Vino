@@ -91,6 +91,8 @@ export function FinalV3() {
                 href="https://painel.odaalvino.com.br/login"
                 target="_blank"
                 rel="noopener noreferrer"
+                data-event="purchase_click"
+                data-event-location="final_section"
                 className="inline-block px-10 md:px-14 py-5 md:py-6 bg-paper text-wine font-serif text-lg md:text-xl font-bold uppercase tracking-widest hover:bg-harvest hover:text-paper transition-all duration-300 rounded-full shadow-2xl"
               >
                 {t("ticketsBtnBuy", language)}
