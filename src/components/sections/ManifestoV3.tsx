@@ -62,7 +62,7 @@ export function ManifestoV3() {
 
             <Reveal delay={0.45}>
               <div className="flex justify-center lg:justify-start">
-                <p className="lato-expanded text-[10px] md:text-[11px] text-paper/50 tracking-widest">
+                <p className="lato-expanded text-[10px] md:text-[11px] text-paper/50">
                   {t("manifestoHighlights", language)}
                 </p>
               </div>
