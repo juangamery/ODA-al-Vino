@@ -165,9 +165,19 @@ export function FooterV3() {
 
         {/* Base */}
         <div className="border-t border-wine/8 pt-8 flex flex-col md:flex-row items-center justify-between gap-4">
-          <p className="text-[10px] font-bold uppercase tracking-[0.3em] text-wine/25">
-            {t("footerCopyright", language)}
-          </p>
+          <div className="flex flex-col items-center md:items-start gap-2">
+            <p className="text-[10px] font-bold uppercase tracking-[0.3em] text-wine/25">
+              {t("footerCopyright", language)}
+            </p>
+            <a
+              href="/politicas-privacidad.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-[8px] font-bold uppercase tracking-[0.2em] text-wine/20 hover:text-wine/40 transition-colors"
+            >
+              Políticas de Privacidad
+            </a>
+          </div>
           <p className="text-[10px] font-bold uppercase tracking-[0.3em] text-wine/20">
             {t("footerEdition", language)}
           </p>
