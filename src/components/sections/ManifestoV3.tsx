@@ -112,7 +112,7 @@ export function ManifestoV3() {
           <img
             src="/oda/Graphics/Sellocalidad_ODA.svg"
             alt="Sello ODA al Vino"
-            className="w-32 sm:w-40 md:w-64 lg:w-72 h-auto opacity-70"
+            className="w-48 sm:w-56 md:w-72 lg:w-80 h-auto opacity-70"
           />
         </div>
       </Reveal>
