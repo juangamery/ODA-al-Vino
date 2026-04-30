@@ -75,6 +75,33 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
           }}
         />
 
+        {/* Event Tracking for Purchase Buttons */}
+        <Script
+          id="purchase-event-tracking"
+          strategy="afterInteractive"
+          dangerouslySetInnerHTML={{
+            __html: `
+              document.addEventListener('click', function(e) {
+                const target = e.target.closest('[data-event="purchase_click"]');
+                if (target) {
+                  const location = target.getAttribute('data-event-location') || 'unknown';
+                  const lotNumber = target.getAttribute('data-lot-number') || 'general';
+
+                  window.gtag = window.gtag || function(){window.dataLayer.push(arguments);};
+                  window.gtag('event', 'purchase_click', {
+                    'event_category': 'engagement',
+                    'event_label': location,
+                    'lot_number': lotNumber,
+                    'timestamp': new Date().toISOString()
+                  });
+
+                  console.log('[GA4 Event]', 'purchase_click', { location, lotNumber });
+                }
+              });
+            `,
+          }}
+        />
+
         {/* Preload critical fonts */}
         <link
           rel="preload"
