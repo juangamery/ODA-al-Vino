@@ -356,16 +356,18 @@ export function Tickets() {
               </div>
 
               {/* CTA Principal - Grande y Llamativo */}
-              <button
-                disabled={selectedLot !== 0}
-                className={`w-full font-serif text-base md:text-lg lg:text-2xl font-bold uppercase tracking-wider py-4 md:py-6 rounded-full transition-all duration-300 shadow-2xl mb-3 md:mb-4 ${
+              <a
+                href={selectedLot === 0 ? "https://painel.odaalvino.com.br/login" : "#"}
+                target={selectedLot === 0 ? "_blank" : undefined}
+                rel={selectedLot === 0 ? "noopener noreferrer" : undefined}
+                className={`block text-center font-serif text-base md:text-lg lg:text-2xl font-bold uppercase tracking-wider py-4 md:py-6 rounded-full transition-all duration-300 shadow-2xl mb-3 md:mb-4 ${
                   selectedLot === 0
                     ? "bg-paper hover:bg-paper/95 text-wine transform hover:scale-105 cursor-pointer"
-                    : "bg-paper/60 text-wine/60 cursor-not-allowed"
+                    : "bg-paper/60 text-wine/60 cursor-not-allowed pointer-events-none"
                 }`}
               >
                 {selectedLot === 0 ? t("ticketsBtnBuy", language) : t("ticketsBtnSoon", language)}
-              </button>
+              </a>
 
               {/* Microcopy Footer */}
               <p className="text-center text-xs text-paper/70 font-semibold">
