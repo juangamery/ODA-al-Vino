@@ -177,8 +177,21 @@ export function TicketCard({ lot, isSelected, onClick, index }: TicketCardProps)
               </div>
             </div>
 
-            {/* Right: Empty space for balance */}
-            <div className="w-8 md:w-10" />
+            {/* Right: Lot number and dates */}
+            <div className="flex flex-col items-center justify-center gap-1 text-center text-[8px] md:text-[9px]">
+              <p className={`font-bold transition-colors duration-300 ${
+                isSelected ? "text-wine" : "text-wine/40"
+              }`}>
+                LOT<br />{lot.number}
+              </p>
+              {lot.dates && (
+                <p className={`font-bold transition-colors duration-300 ${
+                  isSelected ? "text-wine/70" : "text-wine/30"
+                }`}>
+                  {lot.dates}
+                </p>
+              )}
+            </div>
           </div>
         </div>
 
