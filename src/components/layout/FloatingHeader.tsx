@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { usePathname, useRouter } from "next/navigation";
 import { cn } from "@/lib/utils";
 import { LanguageSwitch } from "@/components/LanguageSwitch";
 import { useLanguage } from "@/context/LanguageContext";
@@ -9,6 +10,16 @@ import { t } from "@/lib/translations";
 export function FloatingHeader() {
   const { language } = useLanguage();
   const [isScrolled, setIsScrolled] = useState(false);
+  const pathname = usePathname();
+  const router = useRouter();
+
+  const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+    // Si estamos en /faq y es un link a una sección, ir a home con el anchor
+    if (pathname === "/faq" && href.startsWith("#")) {
+      e.preventDefault();
+      router.push(`/${href}`);
+    }
+  };
 
   const links = [
     { label: t("navManifiesto", language), href: "#manifiesto" },
@@ -57,7 +68,11 @@ export function FloatingHeader() {
       >
         <div className="mx-auto flex max-w-7xl items-center justify-between rounded-full border border-paper/20 bg-wine/80 px-6 py-3 shadow-[0_20px_80px_rgba(71,7,44,0.3)] backdrop-blur-xl gap-4">
           {/* Logo horizontal a la izquierda */}
-          <a href="#inicio" className="flex items-center flex-shrink-0">
+          <a
+            href={pathname === "/faq" ? "/" : "#inicio"}
+            onClick={(e) => handleNavClick(e, "#inicio")}
+            className="flex items-center flex-shrink-0"
+          >
             <img
               src="/oda/brand/logo_crema_horizontal.svg"
               alt="ODA al Vino"
@@ -71,6 +86,7 @@ export function FloatingHeader() {
               <a
                 key={link.href}
                 href={link.href}
+                onClick={(e) => handleNavClick(e, link.href)}
                 className="rounded-full px-3 py-2 text-[11px] font-bold uppercase tracking-widest text-paper/70 transition hover:bg-paper/15 hover:text-paper whitespace-nowrap"
               >
                 {link.label}
@@ -83,6 +99,7 @@ export function FloatingHeader() {
             <LanguageSwitch />
             <a
               href="#entradas"
+              onClick={(e) => handleNavClick(e, "#entradas")}
               className="rounded-full bg-paper px-5 py-2 text-[11px] font-bold uppercase tracking-widest text-wine transition hover:bg-harvest hover:text-paper"
             >
               {t("navBuy", language)}
