@@ -8,8 +8,8 @@ import { Reveal } from "@/components/motion/Reveal";
 
 interface FAQItem {
   id: number;
-  questionKey: string;
-  answerKey: string;
+  questionKey: "faqQuestion1" | "faqQuestion2" | "faqQuestion3" | "faqQuestion4" | "faqQuestion5" | "faqQuestion6" | "faqQuestion7" | "faqQuestion8" | "faqQuestion9" | "faqQuestion10" | "faqQuestion11" | "faqQuestion12" | "faqQuestion13" | "faqQuestion14" | "faqQuestion15" | "faqQuestion16" | "faqQuestion17" | "faqQuestion18" | "faqQuestion19" | "faqQuestion20";
+  answerKey: "faqAnswer1" | "faqAnswer2" | "faqAnswer3" | "faqAnswer4" | "faqAnswer5" | "faqAnswer6" | "faqAnswer7" | "faqAnswer8" | "faqAnswer9" | "faqAnswer10" | "faqAnswer11" | "faqAnswer12" | "faqAnswer13" | "faqAnswer14" | "faqAnswer15" | "faqAnswer16" | "faqAnswer17" | "faqAnswer18" | "faqAnswer19" | "faqAnswer20";
 }
 
 const faqItems: FAQItem[] = [
