@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { useState, useEffect } from "react";
 import { useLanguage } from "@/context/LanguageContext";
 import { t } from "@/lib/translations";
 import { Reveal } from "@/components/motion/Reveal";
@@ -8,6 +9,34 @@ import { FloatingHeader } from "@/components/layout/FloatingHeader";
 
 export default function CompliancePage() {
   const { language } = useLanguage();
+  const [activeSection, setActiveSection] = useState<"terms" | "privacy" | "cookies">("terms");
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const sections = ["terms", "privacy", "cookies"];
+
+      for (const sectionId of sections) {
+        const element = document.getElementById(sectionId);
+        if (element) {
+          const rect = element.getBoundingClientRect();
+          if (rect.top <= 200) {
+            setActiveSection(sectionId as "terms" | "privacy" | "cookies");
+          }
+        }
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  const scrollToSection = (sectionId: string) => {
+    const element = document.getElementById(sectionId);
+    if (element) {
+      element.scrollIntoView({ behavior: "smooth" });
+      setActiveSection(sectionId as "terms" | "privacy" | "cookies");
+    }
+  };
 
   return (
     <>
@@ -46,6 +75,53 @@ export default function CompliancePage() {
               </p>
             </Reveal>
           </div>
+        </div>
+
+        {/* Navigation Menu */}
+        <div className="sticky top-24 lg:fixed lg:left-8 lg:top-32 z-30">
+          <nav className="bg-wine/95 backdrop-blur-md rounded-xl p-6 shadow-lg max-w-xs">
+            <p className="text-paper font-bold text-sm mb-4 uppercase tracking-wider">
+              {language === "es" ? "Navegación" : "Navegação"}
+            </p>
+            <ul className="space-y-2">
+              <li>
+                <button
+                  onClick={() => scrollToSection("terms")}
+                  className={`w-full text-left px-4 py-2 rounded-lg transition-all text-sm font-medium ${
+                    activeSection === "terms"
+                      ? "bg-paper text-wine"
+                      : "text-paper hover:bg-paper/20"
+                  }`}
+                >
+                  {t("complianceTermsTitle", language) || "Términos"}
+                </button>
+              </li>
+              <li>
+                <button
+                  onClick={() => scrollToSection("privacy")}
+                  className={`w-full text-left px-4 py-2 rounded-lg transition-all text-sm font-medium ${
+                    activeSection === "privacy"
+                      ? "bg-paper text-wine"
+                      : "text-paper hover:bg-paper/20"
+                  }`}
+                >
+                  {t("compliancePrivacyTitle", language) || "Privacidad"}
+                </button>
+              </li>
+              <li>
+                <button
+                  onClick={() => scrollToSection("cookies")}
+                  className={`w-full text-left px-4 py-2 rounded-lg transition-all text-sm font-medium ${
+                    activeSection === "cookies"
+                      ? "bg-paper text-wine"
+                      : "text-paper hover:bg-paper/20"
+                  }`}
+                >
+                  {t("complianceCookiesTitle", language) || "Cookies"}
+                </button>
+              </li>
+            </ul>
+          </nav>
         </div>
 
         {/* Compliance Content */}
