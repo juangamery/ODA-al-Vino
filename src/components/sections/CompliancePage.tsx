@@ -41,6 +41,57 @@ export default function CompliancePage() {
   return (
     <>
       <FloatingHeader />
+
+      {/* Navigation Menu - Fixed Position Outside Main */}
+      <div className="hidden lg:block fixed left-8 top-32 z-40 w-80">
+        <nav className="bg-wine/95 backdrop-blur-md rounded-xl p-6 shadow-lg">
+          <p className="text-paper font-bold text-sm mb-4 uppercase tracking-wider">
+            {language === "es" ? "Navegación" : "Navegação"}
+          </p>
+          <ul className="space-y-2">
+            <li>
+              <button
+                type="button"
+                onClick={() => scrollToSection("terms")}
+                className={`w-full text-left px-4 py-2 rounded-lg transition-all text-sm font-medium cursor-pointer ${
+                  activeSection === "terms"
+                    ? "bg-paper text-wine"
+                    : "text-paper hover:bg-paper/20"
+                }`}
+              >
+                {t("complianceTermsTitle", language) || "Términos"}
+              </button>
+            </li>
+            <li>
+              <button
+                type="button"
+                onClick={() => scrollToSection("privacy")}
+                className={`w-full text-left px-4 py-2 rounded-lg transition-all text-sm font-medium cursor-pointer ${
+                  activeSection === "privacy"
+                    ? "bg-paper text-wine"
+                    : "text-paper hover:bg-paper/20"
+                }`}
+              >
+                {t("compliancePrivacyTitle", language) || "Privacidad"}
+              </button>
+            </li>
+            <li>
+              <button
+                type="button"
+                onClick={() => scrollToSection("cookies")}
+                className={`w-full text-left px-4 py-2 rounded-lg transition-all text-sm font-medium cursor-pointer ${
+                  activeSection === "cookies"
+                    ? "bg-paper text-wine"
+                    : "text-paper hover:bg-paper/20"
+                }`}
+              >
+                {t("complianceCookiesTitle", language) || "Cookies"}
+              </button>
+            </li>
+          </ul>
+        </nav>
+      </div>
+
       <main className="min-h-screen bg-paper">
         {/* Header */}
         <div className="bg-wine py-16 md:py-24 relative overflow-hidden">
@@ -75,53 +126,6 @@ export default function CompliancePage() {
               </p>
             </Reveal>
           </div>
-        </div>
-
-        {/* Navigation Menu */}
-        <div className="sticky top-24 lg:fixed lg:left-8 lg:top-32 z-30">
-          <nav className="bg-wine/95 backdrop-blur-md rounded-xl p-6 shadow-lg max-w-xs">
-            <p className="text-paper font-bold text-sm mb-4 uppercase tracking-wider">
-              {language === "es" ? "Navegación" : "Navegação"}
-            </p>
-            <ul className="space-y-2">
-              <li>
-                <button
-                  onClick={() => scrollToSection("terms")}
-                  className={`w-full text-left px-4 py-2 rounded-lg transition-all text-sm font-medium ${
-                    activeSection === "terms"
-                      ? "bg-paper text-wine"
-                      : "text-paper hover:bg-paper/20"
-                  }`}
-                >
-                  {t("complianceTermsTitle", language) || "Términos"}
-                </button>
-              </li>
-              <li>
-                <button
-                  onClick={() => scrollToSection("privacy")}
-                  className={`w-full text-left px-4 py-2 rounded-lg transition-all text-sm font-medium ${
-                    activeSection === "privacy"
-                      ? "bg-paper text-wine"
-                      : "text-paper hover:bg-paper/20"
-                  }`}
-                >
-                  {t("compliancePrivacyTitle", language) || "Privacidad"}
-                </button>
-              </li>
-              <li>
-                <button
-                  onClick={() => scrollToSection("cookies")}
-                  className={`w-full text-left px-4 py-2 rounded-lg transition-all text-sm font-medium ${
-                    activeSection === "cookies"
-                      ? "bg-paper text-wine"
-                      : "text-paper hover:bg-paper/20"
-                  }`}
-                >
-                  {t("complianceCookiesTitle", language) || "Cookies"}
-                </button>
-              </li>
-            </ul>
-          </nav>
         </div>
 
         {/* Compliance Content */}
