@@ -233,6 +233,24 @@ export const translations = {
     faqAnswer19: "¡Sí! El evento ofrece gastronomía argentina que acompaña cada momento. Además, tendrás acceso a vale de consumo en ODA Vinoteca para comidas y bebidas premium.",
     faqQuestion20: "¿Puedo llevar un acompañante?",
     faqAnswer20: "¡Sí! Cada entrada es personal, pero puedes traer acompañante(s) comprando entradas adicionales. Todos necesitan entrada para acceder al evento.",
+
+    // ========== COOKIE CONSENT ==========
+    cookieConsentTitle: "Gestión de Cookies",
+    cookieConsentDescription: "Utilizamos cookies para mejorar tu experiencia, personalizar contenidos y analizar nuestro tráfico. Puedes aceptar todas o personalizar tus preferencias.",
+    cookieConsentAcceptAll: "Aceptar Todo",
+    cookieConsentRejectAll: "Rechazar Opcionales",
+    cookieConsentCustomize: "Personalizar",
+    cookieConsentCustomizeTitle: "Personaliza tus Preferencias de Cookies",
+    cookieCategoryFunctional: "Cookies Funcionales",
+    cookieCategoryFunctionalDesc: "Esenciales para el funcionamiento del sitio web. No pueden ser desactivadas.",
+    cookieCategoryAnalytics: "Cookies de Analítica",
+    cookieCategoryAnalyticsDesc: "Nos ayudan a entender cómo usas el sitio para mejorarlo continuamente.",
+    cookieCategoryMarketing: "Cookies de Marketing",
+    cookieCategoryMarketingDesc: "Utilizadas para mostrarte contenido personalizado y relevante.",
+    cookieConsentSave: "Guardar Preferencias",
+    cookieConsentCancel: "Cancelar",
+    cookieConsentReadMore: "Lee más en nuestra",
+    cookieConsentPolicyLink: "Política de Cookies",
   },
   pt: {
     // ========== HERO V3 ==========
@@ -464,6 +482,24 @@ export const translations = {
     faqAnswer19: "Sim! O evento oferece gastronomia argentina que acompanha cada momento. Além disso, você terá acesso a vale de consumo em ODA Vinoteca para refeições e bebidas premium.",
     faqQuestion20: "Posso levar um acompanhante?",
     faqAnswer20: "Sim! Cada ingresso é pessoal, mas você pode trazer acompanhante(s) comprando entradas adicionais. Todos precisam de ingresso para acessar o evento.",
+
+    // ========== COOKIE CONSENT ==========
+    cookieConsentTitle: "Gerenciamento de Cookies",
+    cookieConsentDescription: "Usamos cookies para melhorar sua experiência, personalizar conteúdo e analisar nosso tráfego. Você pode aceitar todos ou personalizar suas preferências.",
+    cookieConsentAcceptAll: "Aceitar Tudo",
+    cookieConsentRejectAll: "Rejeitar Opcionais",
+    cookieConsentCustomize: "Personalizar",
+    cookieConsentCustomizeTitle: "Personalize suas Preferências de Cookies",
+    cookieCategoryFunctional: "Cookies Funcionais",
+    cookieCategoryFunctionalDesc: "Essenciais para o funcionamento do site. Não podem ser desativados.",
+    cookieCategoryAnalytics: "Cookies de Análise",
+    cookieCategoryAnalyticsDesc: "Nos ajudam a entender como você usa o site para melhorá-lo continuamente.",
+    cookieCategoryMarketing: "Cookies de Marketing",
+    cookieCategoryMarketingDesc: "Usados para mostrar conteúdo personalizado e relevante para você.",
+    cookieConsentSave: "Salvar Preferências",
+    cookieConsentCancel: "Cancelar",
+    cookieConsentReadMore: "Leia mais em nossa",
+    cookieConsentPolicyLink: "Política de Cookies",
   },
 };
 
