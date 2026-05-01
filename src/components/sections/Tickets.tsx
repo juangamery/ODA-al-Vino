@@ -311,11 +311,12 @@ export function Tickets() {
                 {currencies.map((c) => (
                   <button
                     key={c.code}
-                    onClick={() => {
+                    onClick={(e) => {
+                      e.stopPropagation();
                       setCurrency(c.code as "brl" | "ars" | "pyg");
                       if (c.code !== "ars") setIsMisioneros(false);
                     }}
-                    className={`px-3 md:px-4 py-1.5 md:py-2 text-[11px] md:text-xs font-bold uppercase tracking-widest rounded-full transition-all duration-300 ${
+                    className={`px-3 md:px-4 py-1.5 md:py-2 text-[11px] md:text-xs font-bold uppercase tracking-widest rounded-full transition-all duration-300 cursor-pointer ${
                       currency === c.code
                         ? "bg-paper text-wine border border-paper"
                         : "bg-transparent text-paper/70 border border-paper/30 hover:border-paper/60"
@@ -328,12 +329,15 @@ export function Tickets() {
 
               {/* Toggle Misioneros - Solo visible para ARS */}
               {currency === "ars" && (
-                <div className="mb-6 md:mb-10 flex items-center gap-3 bg-harvest/20 p-3 rounded-lg">
+                <div className="mb-6 md:mb-10 flex items-center gap-3 bg-harvest/20 p-3 rounded-lg" onClick={(e) => e.stopPropagation()}>
                   <input
                     type="checkbox"
                     id="misioneros-toggle"
                     checked={isMisioneros}
-                    onChange={(e) => setIsMisioneros(e.target.checked)}
+                    onChange={(e) => {
+                      e.stopPropagation();
+                      setIsMisioneros(e.target.checked);
+                    }}
                     className="w-4 h-4 cursor-pointer"
                   />
                   <label htmlFor="misioneros-toggle" className="text-xs font-bold uppercase tracking-widest text-harvest cursor-pointer">
