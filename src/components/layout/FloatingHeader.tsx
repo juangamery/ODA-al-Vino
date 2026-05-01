@@ -22,6 +22,7 @@ export function FloatingHeader() {
   };
 
   const links = [
+    { label: t("navInicio", language), href: "/" },
     { label: t("navManifiesto", language), href: "#manifiesto" },
     { label: t("navExperiencia", language), href: "#experiencia" },
     { label: t("navEntradas", language), href: "#entradas" },
@@ -29,6 +30,7 @@ export function FloatingHeader() {
     { label: t("navDestino", language), href: "#iguazu" },
     { label: t("navComunidad", language), href: "#comunidad" },
     { label: t("navFaq", language), href: "/faq" },
+    { label: t("compliancePageTitle", language), href: "/compliance" },
   ];
 
   useEffect(() => {
@@ -81,13 +83,13 @@ export function FloatingHeader() {
           </a>
 
           {/* Navegación en el centro */}
-          <nav className="hidden items-center gap-1 lg:flex flex-wrap justify-center flex-1">
+          <nav className="flex items-center gap-1 flex-wrap justify-center flex-1">
             {links.map((link) => (
               <a
                 key={link.href}
                 href={link.href}
                 onClick={(e) => handleNavClick(e, link.href)}
-                className="rounded-full px-3 py-2 text-[11px] font-bold uppercase tracking-widest text-paper/70 transition hover:bg-paper/15 hover:text-paper whitespace-nowrap"
+                className="rounded-full px-2 md:px-3 py-2 text-[9px] md:text-[11px] font-bold uppercase tracking-widest text-paper/70 transition hover:bg-paper/15 hover:text-paper whitespace-nowrap"
               >
                 {link.label}
               </a>
