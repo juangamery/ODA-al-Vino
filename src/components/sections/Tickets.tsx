@@ -373,16 +373,9 @@ export function Tickets() {
                 href="https://painel.odaalvino.com.br/login"
                 target="_blank"
                 rel="noopener noreferrer"
-                data-event="purchase_click"
-                data-event-location="tickets_section"
-                data-lot-number={lots[selectedLot]?.number.toString()}
-                className={`block text-center font-serif text-base md:text-lg lg:text-2xl font-bold uppercase tracking-wider py-4 md:py-6 rounded-full shadow-2xl mb-3 md:mb-4 ${
-                  selectedLot === 0
-                    ? "bg-paper hover:bg-paper/95 text-wine cursor-pointer transition-all duration-300 hover:shadow-lg"
-                    : "bg-paper/60 text-wine/60 cursor-not-allowed pointer-events-none opacity-60"
-                }`}
+                className="block w-full text-center font-serif text-base md:text-lg lg:text-2xl font-bold uppercase tracking-wider py-4 md:py-6 rounded-full shadow-2xl mb-3 md:mb-4 bg-paper hover:bg-paper/95 text-wine cursor-pointer transition-colors duration-300"
               >
-                {selectedLot === 0 ? t("ticketsBtnBuy", language) : t("ticketsBtnSoon", language)}
+                {t("ticketsBtnBuy", language)}
               </a>
 
               {/* Microcopy Footer */}
