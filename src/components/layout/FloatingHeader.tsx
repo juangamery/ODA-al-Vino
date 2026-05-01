@@ -30,7 +30,6 @@ export function FloatingHeader() {
     { label: t("navDestino", language), href: "#iguazu" },
     { label: t("navComunidad", language), href: "#comunidad" },
     { label: t("navFaq", language), href: "/faq" },
-    { label: t("compliancePageTitle", language), href: "/compliance" },
   ];
 
   useEffect(() => {

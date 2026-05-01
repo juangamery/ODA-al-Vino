@@ -170,12 +170,10 @@ export function FooterV3() {
               {t("footerCopyright", language)}
             </p>
             <a
-              href="/politicas-privacidad.pdf"
-              target="_blank"
-              rel="noopener noreferrer"
+              href="/compliance"
               className="text-[8px] font-bold uppercase tracking-[0.2em] text-wine/20 hover:text-wine/40 transition-colors"
             >
-              Políticas de Privacidad
+              Términos Legales
             </a>
           </div>
           <p className="text-[10px] font-bold uppercase tracking-[0.3em] text-wine/20">

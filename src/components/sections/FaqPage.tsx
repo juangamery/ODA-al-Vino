@@ -143,12 +143,10 @@ export default function FaqPage() {
 
             <div className="flex gap-6">
               <a
-                href="/politicas-privacidad.pdf"
-                target="_blank"
-                rel="noopener noreferrer"
+                href="/compliance"
                 className="text-wine/60 text-sm hover:text-wine transition-colors"
               >
-                Políticas de Privacidad
+                Términos Legales
               </a>
               <span className="text-wine/20">•</span>
               <span className="text-wine/60 text-sm">
