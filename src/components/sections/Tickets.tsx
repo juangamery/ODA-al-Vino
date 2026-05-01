@@ -368,7 +368,7 @@ export function Tickets() {
                 </div>
               </div>
 
-              {/* CTA Principal - Grande y Llamativo */}
+              {/* CTA Principal - Grande y Llamativo - Always Clickeable */}
               <a
                 href="https://painel.odaalvino.com.br/login"
                 target="_blank"
