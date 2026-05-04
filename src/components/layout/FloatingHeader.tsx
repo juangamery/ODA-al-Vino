@@ -67,7 +67,7 @@ export function FloatingHeader() {
           isScrolled ? "opacity-100" : "opacity-0 pointer-events-none"
         )}
       >
-        <div className="mx-auto flex max-w-7xl items-center justify-between rounded-full border border-paper/20 bg-wine/80 px-6 py-3 shadow-[0_20px_80px_rgba(71,7,44,0.3)] backdrop-blur-xl gap-4">
+        <div className="mx-auto flex max-w-7xl items-center justify-between rounded-full border border-paper/20 bg-wine/80 px-3 md:px-6 py-2 md:py-3 shadow-[0_20px_80px_rgba(71,7,44,0.3)] backdrop-blur-xl gap-2 md:gap-4">
           {/* Logo horizontal a la izquierda */}
           <a
             href={pathname === "/faq" ? "/" : "#inicio"}
@@ -77,7 +77,7 @@ export function FloatingHeader() {
             <img
               src="/oda/brand/logo_crema_horizontal.svg"
               alt="ODA al Vino"
-              className="h-12 w-auto"
+              className="h-8 md:h-12 w-auto"
             />
           </a>
 
@@ -96,7 +96,7 @@ export function FloatingHeader() {
           </nav>
 
           {/* Language Switch + Botón Comprar a la derecha */}
-          <div className="flex items-center gap-2 flex-shrink-0">
+          <div className="flex items-center gap-1 md:gap-2 flex-shrink-0">
             <LanguageSwitch />
             <a
               href="#entradas"
