@@ -81,8 +81,8 @@ export function FloatingHeader() {
             />
           </a>
 
-          {/* Navegación en el centro */}
-          <nav className="flex items-center gap-1 flex-wrap justify-center flex-1">
+          {/* Navegación en el centro - hidden en mobile */}
+          <nav className="hidden md:flex items-center gap-1 justify-center flex-1">
             {links.map((link) => (
               <a
                 key={link.href}
@@ -101,7 +101,7 @@ export function FloatingHeader() {
             <a
               href="#entradas"
               onClick={(e) => handleNavClick(e, "#entradas")}
-              className="rounded-full bg-paper px-5 py-2 text-[11px] font-bold uppercase tracking-widest text-wine transition hover:bg-harvest hover:text-paper"
+              className="rounded-full bg-paper px-3 md:px-5 py-2 text-[10px] md:text-[11px] font-bold uppercase tracking-widest text-wine transition hover:bg-harvest hover:text-paper whitespace-nowrap"
             >
               {t("navBuy", language)}
             </a>
