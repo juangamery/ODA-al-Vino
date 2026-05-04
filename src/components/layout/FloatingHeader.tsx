@@ -71,7 +71,7 @@ export function FloatingHeader() {
         <div className="mx-auto flex max-w-7xl items-center justify-between rounded-full border border-paper/20 bg-wine/80 px-3 md:px-6 py-2 md:py-3 shadow-[0_20px_80px_rgba(71,7,44,0.3)] backdrop-blur-xl gap-2 md:gap-4">
           {/* Logo horizontal a la izquierda */}
           <a
-            href={pathname === "/faq" ? "/" : "#inicio"}
+            href={pathname === "/" ? "#inicio" : "/"}
             onClick={(e) => handleNavClick(e, "#inicio")}
             className="flex items-center flex-shrink-0"
           >
@@ -120,10 +120,10 @@ export function FloatingHeader() {
           </div>
         </div>
 
-        {/* Mobile menu dropdown */}
+        {/* Mobile menu dropdown - compact */}
         {isMenuOpen && (
-          <nav className="md:hidden mx-auto max-w-7xl mt-2 rounded-2xl border border-paper/20 bg-wine/90 backdrop-blur-xl shadow-[0_20px_80px_rgba(71,7,44,0.3)]">
-            <div className="flex flex-col p-4 gap-2">
+          <nav className="md:hidden mx-auto max-w-7xl mt-1 rounded-xl border border-paper/20 bg-wine/95 backdrop-blur-xl shadow-lg max-h-64 overflow-y-auto">
+            <div className="flex flex-col p-2 gap-1">
               {links.map((link) => (
                 <a
                   key={link.href}
@@ -132,7 +132,7 @@ export function FloatingHeader() {
                     handleNavClick(e, link.href);
                     setIsMenuOpen(false);
                   }}
-                  className="px-4 py-2 text-sm font-bold uppercase tracking-widest text-paper/80 hover:text-paper hover:bg-paper/10 rounded-lg transition"
+                  className="px-3 py-1.5 text-xs font-bold uppercase tracking-widest text-paper/80 hover:text-paper hover:bg-paper/10 rounded transition"
                 >
                   {link.label}
                 </a>
