@@ -43,7 +43,7 @@ export default function CompliancePage() {
       <FloatingHeader />
       <main className="min-h-screen bg-paper">
         {/* Header */}
-        <div className="bg-wine py-16 md:py-24 relative overflow-hidden">
+        <div className="bg-wine py-16 md:py-32 relative overflow-hidden">
           {/* Decorative illustration */}
           <Reveal direction="left" delay={0.2}>
             <img
@@ -56,7 +56,7 @@ export default function CompliancePage() {
 
           <div className="mx-auto max-w-6xl px-8 md:px-16 lg:px-24 relative z-10">
             <Reveal>
-              <div className="flex items-center justify-center gap-4 mb-6">
+              <div className="hidden md:flex items-center justify-center gap-4 mb-6">
                 <div className="w-12 h-px bg-paper/40" />
                 <span className="text-[11px] font-serif italic text-paper/60">·</span>
                 <div className="w-12 h-px bg-paper/40" />
