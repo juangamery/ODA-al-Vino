@@ -10,6 +10,7 @@ import { t } from "@/lib/translations";
 export function FloatingHeader() {
   const { language } = useLanguage();
   const [isScrolled, setIsScrolled] = useState(false);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
   const pathname = usePathname();
   const router = useRouter();
 
@@ -97,6 +98,17 @@ export function FloatingHeader() {
 
           {/* Language Switch + Botón Comprar a la derecha */}
           <div className="flex items-center gap-1 md:gap-2 flex-shrink-0">
+            {/* Hamburger menu - mobile only */}
+            <button
+              onClick={() => setIsMenuOpen(!isMenuOpen)}
+              className="md:hidden flex flex-col gap-1.5 w-6 h-6 justify-center items-center"
+              aria-label="Menu"
+            >
+              <span className={cn("w-6 h-0.5 bg-paper transition", isMenuOpen && "rotate-45 translate-y-2")}></span>
+              <span className={cn("w-6 h-0.5 bg-paper transition", isMenuOpen && "opacity-0")}></span>
+              <span className={cn("w-6 h-0.5 bg-paper transition", isMenuOpen && "-rotate-45 -translate-y-2")}></span>
+            </button>
+
             <LanguageSwitch />
             <a
               href="#entradas"
@@ -107,6 +119,27 @@ export function FloatingHeader() {
             </a>
           </div>
         </div>
+
+        {/* Mobile menu dropdown */}
+        {isMenuOpen && (
+          <nav className="md:hidden mx-auto max-w-7xl mt-2 rounded-2xl border border-paper/20 bg-wine/90 backdrop-blur-xl shadow-[0_20px_80px_rgba(71,7,44,0.3)]">
+            <div className="flex flex-col p-4 gap-2">
+              {links.map((link) => (
+                <a
+                  key={link.href}
+                  href={link.href}
+                  onClick={(e) => {
+                    handleNavClick(e, link.href);
+                    setIsMenuOpen(false);
+                  }}
+                  className="px-4 py-2 text-sm font-bold uppercase tracking-widest text-paper/80 hover:text-paper hover:bg-paper/10 rounded-lg transition"
+                >
+                  {link.label}
+                </a>
+              ))}
+            </div>
+          </nav>
+        )}
       </header>
     </>
   );
