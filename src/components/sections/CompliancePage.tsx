@@ -78,8 +78,8 @@ export default function CompliancePage() {
         </div>
 
         {/* Navigation Menu */}
-        <div className="hidden lg:block lg:fixed lg:left-8 lg:top-32 z-30">
-          <nav className="bg-wine/95 backdrop-blur-md rounded-xl p-6 shadow-lg max-w-xs">
+        <div className="sticky lg:fixed top-32 lg:left-8 lg:top-32 z-30 mx-4 md:mx-0">
+          <nav className="bg-wine/95 backdrop-blur-md rounded-xl p-4 md:p-6 shadow-lg max-w-xs">
             <p className="text-paper font-bold text-sm mb-4 uppercase tracking-wider">
               {language === "es" ? "Navegación" : "Navegação"}
             </p>
