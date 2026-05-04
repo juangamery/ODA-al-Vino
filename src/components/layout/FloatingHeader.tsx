@@ -48,7 +48,7 @@ export function FloatingHeader() {
       {/* Header inicial - Logo SVG vertical */}
       <header
         className={cn(
-          "fixed inset-x-0 top-0 z-50 px-4 pt-6 md:px-6 transition-all duration-300",
+          "fixed inset-x-0 top-0 z-50 px-2 pt-2 md:px-6 md:pt-6 transition-all duration-300",
           isScrolled && "opacity-0 pointer-events-none"
         )}
       >
@@ -56,7 +56,7 @@ export function FloatingHeader() {
           <img
             src="/oda/brand/logo_blanco_vertical.svg"
             alt="ODA al Vino"
-            className="h-40 md:h-20 w-auto"
+            className="h-20 md:h-40 w-auto"
           />
         </a>
       </header>
