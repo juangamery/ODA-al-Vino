@@ -43,7 +43,7 @@ export default function CompliancePage() {
       <FloatingHeader />
       <main className="min-h-screen bg-paper">
         {/* Header */}
-        <div className="bg-wine py-24 md:py-48 min-h-screen md:min-h-auto flex items-center relative overflow-hidden">
+        <div className="bg-wine py-24 md:py-48 min-h-96 md:min-h-auto flex items-center relative overflow-hidden">
           {/* Decorative illustration */}
           <Reveal direction="left" delay={0.2}>
             <img
