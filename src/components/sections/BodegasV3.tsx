@@ -322,7 +322,7 @@ export function BodegasV3() {
           <div
             className="flex whitespace-nowrap gap-12"
             style={{
-              animation: "marquee-infinite 90s linear infinite",
+              animation: "marquee-infinite 22.5s linear infinite",
               willChange: "transform"
             }}
           >
@@ -340,6 +340,20 @@ export function BodegasV3() {
                 <span className="text-harvest text-2xl md:text-3xl">★</span>
               </div>
             ))}
+            {/* Third set - copy for extended marquee */}
+            {shuffledBodegas.map((bodega, i) => (
+              <div key={`set3-${i}`} className="flex items-center gap-4 font-serif text-4xl md:text-5xl lg:text-6xl uppercase text-paper/80 flex-shrink-0">
+                <span>{bodega}</span>
+                <span className="text-harvest text-2xl md:text-3xl">★</span>
+              </div>
+            ))}
+            {/* Fourth set - copy for smooth loop return */}
+            {shuffledBodegas.map((bodega, i) => (
+              <div key={`set4-${i}`} className="flex items-center gap-4 font-serif text-4xl md:text-5xl lg:text-6xl uppercase text-paper/80 flex-shrink-0">
+                <span>{bodega}</span>
+                <span className="text-harvest text-2xl md:text-3xl">★</span>
+              </div>
+            ))}
           </div>
         </div>
       </div>
@@ -347,7 +361,7 @@ export function BodegasV3() {
       <style>{`
         @keyframes marquee-infinite {
           0% { transform: translateX(0); }
-          100% { transform: translateX(-50%); }
+          100% { transform: translateX(-100%); }
         }
       `}</style>
     </section>
