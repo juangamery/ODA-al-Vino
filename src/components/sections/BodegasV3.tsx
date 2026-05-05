@@ -343,7 +343,7 @@ export function BodegasV3() {
           <div
             className="flex whitespace-nowrap gap-12 transition-transform duration-500"
             style={{
-              animation: "marquee-infinite 2.4s linear infinite",
+              animation: "marquee-infinite 150s linear infinite",
               transform: `translateX(${sliderOffset}px)`,
               willChange: "transform"
             }}
