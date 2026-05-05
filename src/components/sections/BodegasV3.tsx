@@ -172,7 +172,6 @@ export function BodegasV3() {
   const { language } = useLanguage();
   const [selectedRegion, setSelectedRegion] = useState(0);
   const [shuffledBodegas] = useState(() => shuffleArray(bodegas));
-  const [sliderOffset, setSliderOffset] = useState(0);
 
   return (
     <section id="bodegas" className="bg-olive overflow-hidden relative py-28 md:py-40">
@@ -318,33 +317,12 @@ export function BodegasV3() {
           <p className="lato-expanded text-[10px] text-paper/50 uppercase tracking-widest">
             {t("bodegasParticipants", language)}
           </p>
-          <div className="flex gap-3">
-            <button
-              onClick={() => setSliderOffset(o => o - 300)}
-              className="p-2 rounded-full border border-paper/30 text-paper/70 hover:text-paper hover:bg-paper/10 transition-all duration-300 flex-shrink-0 hover:scale-110"
-              aria-label="Previous"
-            >
-              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-              </svg>
-            </button>
-            <button
-              onClick={() => setSliderOffset(o => o + 300)}
-              className="p-2 rounded-full border border-paper/30 text-paper/70 hover:text-paper hover:bg-paper/10 transition-all duration-300 flex-shrink-0 hover:scale-110"
-              aria-label="Next"
-            >
-              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-              </svg>
-            </button>
-          </div>
         </div>
         <div className="overflow-hidden py-8">
           <div
-            className="flex whitespace-nowrap gap-12 transition-transform duration-500"
+            className="flex whitespace-nowrap gap-12"
             style={{
               animation: "marquee-infinite 90s linear infinite",
-              transform: `translateX(${sliderOffset}px)`,
               willChange: "transform"
             }}
           >
