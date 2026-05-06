@@ -251,6 +251,14 @@ export const translations = {
     cookieConsentCancel: "Cancelar",
     cookieConsentReadMore: "Lee más en nuestra",
     cookieConsentPolicyLink: "Política de Cookies",
+
+    // ========== AGE GATE MODAL ==========
+    ageGateTitle: "Verificación de Edad",
+    ageGateQuestion: "¿Eres mayor de 18 años?",
+    ageGateDisclaimer: "El consumo de bebidas alcohólicas es exclusivo para mayores de 18 años. Este evento contiene alcohol. Por favor, consume con responsabilidad.",
+    ageGateYes: "Tengo 18+",
+    ageGateNo: "No tengo 18",
+    ageGateRetry: "Reintentar",
   },
   pt: {
     // ========== HERO V3 ==========
@@ -500,6 +508,14 @@ export const translations = {
     cookieConsentCancel: "Cancelar",
     cookieConsentReadMore: "Leia mais em nossa",
     cookieConsentPolicyLink: "Política de Cookies",
+
+    // ========== AGE GATE MODAL ==========
+    ageGateTitle: "Verificação de Idade",
+    ageGateQuestion: "Você tem 18 anos ou mais?",
+    ageGateDisclaimer: "O consumo de bebidas alcoólicas é exclusivo para maiores de 18 anos. Este evento contém álcool. Por favor, consuma com responsabilidade.",
+    ageGateYes: "Tenho 18+",
+    ageGateNo: "Não tenho 18",
+    ageGateRetry: "Tentar novamente",
   },
 };
 
