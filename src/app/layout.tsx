@@ -4,22 +4,24 @@ import "./globals.css";
 import { LayoutClient } from "@/components/LayoutClient";
 
 export const metadata: Metadata = {
-  title: "ODA AL VINO 2026 | El vino nos reúne",
+  metadataBase: new URL("https://odaalvino.com.br"),
+  title: {
+    default: "ODA AL VINO 2026 | El vino nos reúne",
+    template: "%s | ODA AL VINO 2026",
+  },
   description:
     "Viví la experiencia del vino más importante de la Triple Frontera. 10° edición OAV - 25 años ODA.",
   icons: {
     icon: "/favicon.png",
     apple: "/favicon.png",
   },
-  alternates: {
-    canonical: "https://odaalvino.com.br",
-    languages: {
-      "pt-BR": "https://odaalvino.com.br",
-      "es-AR": "https://odaalvino.com.ar",
-      "x-default": "https://odaalvino.com.br",
-    },
+  verification: {
+    google: "YKDSdOzTZLJEmCmKxKqLaG_M6wLywkGmmbWkfNqB-Zk",
   },
   openGraph: {
+    siteName: "ODA AL VINO",
+    locale: "es_AR",
+    type: "website",
     title: "ODA AL VINO 2026 | El vino nos reúne",
     description:
       "Viví la experiencia del vino más importante de la Triple Frontera. 10° edición OAV - 25 años ODA.",
@@ -32,11 +34,54 @@ export const metadata: Metadata = {
       },
     ],
     url: "https://odaalvino.com.br",
-    type: "website",
   },
-  verification: {
-    google: "YKDSdOzTZLJEmCmKxKqLaG_M6wLywkGmmbWkfNqB-Zk",
+  twitter: {
+    site: "@odaalvino",
+    card: "summary_large_image",
   },
+  other: {
+    "theme-color": "#47072c",
+  },
+  alternates: {
+    canonical: "https://odaalvino.com.br",
+    languages: {
+      "pt-BR": "https://odaalvino.com.br",
+      "es-AR": "https://odaalvino.com.ar",
+      "x-default": "https://odaalvino.com.br",
+    },
+  },
+};
+
+const websiteSchema = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebSite",
+      "@id": "https://odaalvino.com.br/#website",
+      name: "ODA AL VINO",
+      url: "https://odaalvino.com.br",
+      inLanguage: "es-AR",
+      potentialAction: {
+        "@type": "SearchAction",
+        target: "https://odaalvino.com.br/?s={search_term_string}",
+        "query-input": "required name=search_term_string",
+      },
+    },
+    {
+      "@type": "Organization",
+      "@id": "https://odaalvino.com.br/#organization",
+      name: "ODA AL VINO",
+      url: "https://odaalvino.com.br",
+      logo: {
+        "@type": "ImageObject",
+        url: "https://odaalvino.com.br/oda/brand/logo_crema_horizontal.svg",
+      },
+      sameAs: [
+        "https://www.instagram.com/odaalvino",
+        "https://www.facebook.com/odaalvino",
+      ],
+    },
+  ],
 };
 
 export default function RootLayout({
@@ -47,6 +92,13 @@ export default function RootLayout({
   return (
     <html lang="es" className="h-full antialiased">
       <head>
+        {/* JSON-LD Schema */}
+        <Script
+          id="schema-website-org"
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema) }}
+        />
+
         {/* Google Tag Manager */}
         <Script
           id="gtm-script"
