@@ -134,10 +134,8 @@ export default function CompliancePage() {
                   {t("complianceTermsTitle", language) || "Términos y Condiciones"}
                 </h2>
               </div>
-              <div className="prose prose-wine max-w-none">
-                <p className="text-wine/80 text-base leading-relaxed whitespace-pre-wrap">
-                  {t("complianceTermsContent", language)}
-                </p>
+              <div className="prose prose-wine max-w-none text-wine/80 text-base leading-relaxed">
+                <div dangerouslySetInnerHTML={{ __html: t("complianceTermsContent", language) }} />
               </div>
             </section>
           </Reveal>
@@ -150,10 +148,8 @@ export default function CompliancePage() {
                   {t("compliancePrivacyTitle", language) || "Política de Privacidad"}
                 </h2>
               </div>
-              <div className="prose prose-wine max-w-none">
-                <p className="text-wine/80 text-base leading-relaxed whitespace-pre-wrap">
-                  {t("compliancePrivacyContent", language)}
-                </p>
+              <div className="prose prose-wine max-w-none text-wine/80 text-base leading-relaxed">
+                <div dangerouslySetInnerHTML={{ __html: t("compliancePrivacyContent", language) }} />
               </div>
             </section>
           </Reveal>
@@ -166,10 +162,8 @@ export default function CompliancePage() {
                   {t("complianceCookiesTitle", language) || "Política de Cookies"}
                 </h2>
               </div>
-              <div className="prose prose-wine max-w-none">
-                <p className="text-wine/80 text-base leading-relaxed whitespace-pre-wrap">
-                  {t("complianceCookiesContent", language)}
-                </p>
+              <div className="prose prose-wine max-w-none text-wine/80 text-base leading-relaxed">
+                <div dangerouslySetInnerHTML={{ __html: t("complianceCookiesContent", language) }} />
               </div>
 
               <div className="mt-8 pt-8 border-t border-wine/20">
