@@ -171,6 +171,12 @@ export default function CompliancePage() {
                   {t("complianceCookiesContent", language)}
                 </p>
               </div>
+
+              <div className="mt-8 pt-8 border-t border-wine/20">
+                <p className="text-xs text-wine/50">
+                  {t("healthWarningText", language)}
+                </p>
+              </div>
             </section>
           </Reveal>
         </div>

@@ -68,6 +68,10 @@ export function AgeGateModal() {
           {t("ageGateDisclaimer", language)}
         </p>
 
+        <p className="text-xs text-paper/60 mt-3">
+          {t("healthWarningText", language)}
+        </p>
+
         {rejectionMessage && (
           <p className="text-sm text-harvest font-semibold">
             Reintentar

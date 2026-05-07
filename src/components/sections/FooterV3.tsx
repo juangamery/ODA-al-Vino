@@ -192,6 +192,10 @@ export function FooterV3() {
             className="h-20 md:h-28 w-auto opacity-100 select-none"
           />
         </a>
+
+        <p className="text-[8px] text-wine/30 text-center mt-8">
+          {t("healthWarningText", language)}
+        </p>
       </div>
     </footer>
   );
