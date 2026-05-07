@@ -7,6 +7,16 @@ const nextConfig: NextConfig = {
     imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
     minimumCacheTTL: 60 * 60 * 24 * 365, // 1 año
   },
+  async redirects() {
+    return [
+      {
+        source: '/:path*',
+        has: [{ type: 'host', value: 'www.odaalvino.com.br' }],
+        destination: 'https://odaalvino.com.br/:path*',
+        permanent: true,
+      },
+    ];
+  },
 };
 
 export default nextConfig;
