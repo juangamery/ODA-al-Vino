@@ -115,13 +115,13 @@ export const translations = {
     footerLearnMore: "Conocer más",
     footerOrganizedBy: "Organizado por",
 
-    // ========== AGE GATE (no activo) ==========
-    ageGateLabel: "✦ Verificación de Edad ✦",
-    ageGateTitle: "ODA al Vino",
-    ageGateMessage: "Para acceder a este sitio, debes confirmar que eres mayor de 21 años.",
-    ageGateButton: "Tengo 21+ años",
-    ageGateExit: "Salir",
-    ageGateDisclaimer: "Confirmando que eres mayor de 21 años según la ley local",
+    // ========== AGE GATE MODAL ==========
+    ageGateLabel: "Verificación de Edad",
+    ageGateTitle: "ODA AL VINO",
+    ageGateMessage: "¿Eres mayor de 18 años?",
+    ageGateButton: "Tengo 18+",
+    ageGateExit: "No tengo 18",
+    ageGateDisclaimer: "El consumo de bebidas alcohólicas es exclusivo para mayores de 18 años. Este evento contiene alcohol. Por favor, consume con responsabilidad.",
 
     // ========== AUTHORITY ==========
     authorityBodegas: "Bodegas",
@@ -251,14 +251,6 @@ export const translations = {
     cookieConsentCancel: "Cancelar",
     cookieConsentReadMore: "Lee más en nuestra",
     cookieConsentPolicyLink: "Política de Cookies",
-
-    // ========== AGE GATE MODAL ==========
-    ageGateTitle: "Verificación de Edad",
-    ageGateQuestion: "¿Eres mayor de 18 años?",
-    ageGateDisclaimer: "El consumo de bebidas alcohólicas es exclusivo para mayores de 18 años. Este evento contiene alcohol. Por favor, consume con responsabilidad.",
-    ageGateYes: "Tengo 18+",
-    ageGateNo: "No tengo 18",
-    ageGateRetry: "Reintentar",
   },
   pt: {
     // ========== HERO V3 ==========
@@ -372,13 +364,13 @@ export const translations = {
     footerLearnMore: "Saiba mais",
     footerOrganizedBy: "Organizado por",
 
-    // ========== AGE GATE (não ativo) ==========
-    ageGateLabel: "✦ Verificação de Idade ✦",
-    ageGateTitle: "ODA ao Vinho",
-    ageGateMessage: "Para acessar este site, você deve confirmar que tem mais de 21 anos.",
-    ageGateButton: "Tenho 21+ anos",
-    ageGateExit: "Sair",
-    ageGateDisclaimer: "Confirmando que você tem mais de 21 anos pela lei local",
+    // ========== AGE GATE MODAL ==========
+    ageGateLabel: "Verificação de Idade",
+    ageGateTitle: "ODA AO VINHO",
+    ageGateMessage: "Você tem 18 anos ou mais?",
+    ageGateButton: "Tenho 18+",
+    ageGateExit: "Não tenho 18",
+    ageGateDisclaimer: "O consumo de bebidas alcoólicas é exclusivo para maiores de 18 anos. Este evento contém álcool. Por favor, consuma com responsabilidade.",
 
     // ========== AUTHORITY ==========
     authorityBodegas: "Adegas",
@@ -508,14 +500,6 @@ export const translations = {
     cookieConsentCancel: "Cancelar",
     cookieConsentReadMore: "Leia mais em nossa",
     cookieConsentPolicyLink: "Política de Cookies",
-
-    // ========== AGE GATE MODAL ==========
-    ageGateTitle: "Verificação de Idade",
-    ageGateQuestion: "Você tem 18 anos ou mais?",
-    ageGateDisclaimer: "O consumo de bebidas alcoólicas é exclusivo para maiores de 18 anos. Este evento contém álcool. Por favor, consuma com responsabilidade.",
-    ageGateYes: "Tenho 18+",
-    ageGateNo: "Não tenho 18",
-    ageGateRetry: "Tentar novamente",
   },
 };
 

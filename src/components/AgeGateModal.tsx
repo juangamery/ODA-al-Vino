@@ -52,12 +52,16 @@ export function AgeGateModal() {
   return (
     <div className="fixed inset-0 bg-black/80 z-50 flex items-center justify-center">
       <div className="bg-wine rounded-lg p-8 max-w-md mx-4 text-center space-y-6">
+        <p className="text-sm text-paper/70 uppercase tracking-widest font-semibold">
+          {t("ageGateLabel", language)}
+        </p>
+
         <h2 className="font-serif text-3xl text-paper">
           {t("ageGateTitle", language)}
         </h2>
 
         <p className="text-lg text-paper/90">
-          {t("ageGateQuestion", language)}
+          {t("ageGateMessage", language)}
         </p>
 
         <p className="text-sm text-paper/75 leading-relaxed">
@@ -66,7 +70,7 @@ export function AgeGateModal() {
 
         {rejectionMessage && (
           <p className="text-sm text-harvest font-semibold">
-            {t("ageGateRetry", language)}
+            Reintentar
           </p>
         )}
 
@@ -75,7 +79,7 @@ export function AgeGateModal() {
             onClick={handleAccept}
             className="flex-1 bg-harvest text-wine font-bold py-3 rounded-lg hover:bg-harvest/90 transition-colors"
           >
-            {t("ageGateYes", language)}
+            {t("ageGateButton", language)}
           </button>
           <button
             onClick={handleReject}
@@ -86,7 +90,7 @@ export function AgeGateModal() {
                 : "hover:bg-paper/10"
             }`}
           >
-            {t("ageGateNo", language)}
+            {t("ageGateExit", language)}
           </button>
         </div>
       </div>
