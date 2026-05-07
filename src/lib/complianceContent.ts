@@ -367,12 +367,12 @@ COMO GERENCIAR SUAS PREFERÊNCIAS DE COOKIES?
 
 Ao utilizar um navegador da Web para acessar os serviços da ODA AL VINO, há a opção para permitir, recusar ou gerenciar o armazenamento dos cookies de acordo com as suas preferências e diretamente em seu navegador, dessa forma utilize as instruções abaixo, de acordo com cada navegador:
 
-• Para mais informações sobre gestão de Cookies no browser Firefox, clique aqui;
-• Para mais informações sobre gestão de Cookies no browser Chrome, clique aqui;
+• Para mais informações sobre gestão de Cookies no browser Firefox, <a href="https://support.mozilla.org/pt-BR/kb/impeca-que-sites-armazenem-cookies-e-dados-no-fire" target="_blank">clique aqui</a>;
+• Para mais informações sobre gestão de Cookies no browser Chrome, <a href="https://support.google.com/accounts/answer/61416?hl=pt-BR&co=GENIE.Platform=Desktop" target="_blank">clique aqui</a>;
 • Para mais informações sobre gestão de Cookies a partir no browser Internet Explorer, clique aqui;
-• Para mais informações sobre gestão de Cookies a partir do Safari, clique aqui;
-• Para mais informações sobre gestão de Cookies no browser Opera, clique aqui;
-• Para mais informações sobre a gestão de Cookies no browser Microsoft Edge, clique aqui;
+• Para mais informações sobre gestão de Cookies a partir do Safari, <a href="https://support.apple.com/pt-br/guide/safari/ibrw850f6c51/16.1/mac/13.0" target="_blank">clique aqui</a>;
+• Para mais informações sobre gestão de Cookies no browser Opera, <a href="https://help.opera.com/en/latest/web-preferences/" target="_blank">clique aqui</a>;
+• Para mais informações sobre a gestão de Cookies no browser Microsoft Edge, <a href="https://support.microsoft.com/pt-br/windows/gerencie-cookies-no-microsoft-edge-exibir-permitir-bloquear-excluir-e-usar-168dab11-0753-043d-7c16-ede5947fc64d" target="_blank">clique aqui</a>;
 
 Ressalta-se que a desativação de determinados cookies pode impedir o funcionamento adequado de alguns dos serviços, no todo ou em parte.
 
@@ -746,12 +746,12 @@ Cookies persistentes o permanentes: Se trata de cookies permanentes, los cuales 
 
 Al utilizar un navegador de Web para acceder a los servicios de ODA AL VINO, hay la opción para permitir, rechazar o gestionar el almacenamiento de los cookies de acuerdo con sus preferencias y directamente en su navegador, de esa forma utilice las instrucciones a continuación, de acuerdo con cada navegador:
 
-• Para más información sobre gestión de Cookies en el navegador Firefox, haga clic aquí;
-• Para más información sobre gestión de Cookies en el navegador Chrome, haga clic aquí;
+• Para más información sobre gestión de Cookies en el navegador Firefox, <a href="https://support.mozilla.org/pt-BR/kb/impeca-que-sites-armazenem-cookies-e-dados-no-fire" target="_blank">haga clic aquí</a>;
+• Para más información sobre gestión de Cookies en el navegador Chrome, <a href="https://support.google.com/accounts/answer/61416?hl=pt-BR&co=GENIE.Platform=Desktop" target="_blank">haga clic aquí</a>;
 • Para más información sobre gestión de Cookies a partir en el navegador Internet Explorer, haga clic aquí;
-• Para más información sobre gestión de Cookies a partir del Safari, haga clic aquí;
-• Para más información sobre gestión de Cookies en el navegador Opera, haga clic aquí;
-• Para más información sobre la gestión de Cookies en el navegador Microsoft Edge, haga clic aquí;
+• Para más información sobre gestión de Cookies a partir del Safari, <a href="https://support.apple.com/pt-br/guide/safari/ibrw850f6c51/16.1/mac/13.0" target="_blank">haga clic aquí</a>;
+• Para más información sobre gestión de Cookies en el navegador Opera, <a href="https://help.opera.com/en/latest/web-preferences/" target="_blank">haga clic aquí</a>;
+• Para más información sobre la gestión de Cookies en el navegador Microsoft Edge, <a href="https://support.microsoft.com/pt-br/windows/gerencie-cookies-no-microsoft-edge-exibir-permitir-bloquear-excluir-e-usar-168dab11-0753-043d-7c16-ede5947fc64d" target="_blank">haga clic aquí</a>;
 
 Se destaca que la desactivación de determinados cookies puede impedir el funcionamiento adecuado de algunos de los servicios, en todo o en parte.
 
