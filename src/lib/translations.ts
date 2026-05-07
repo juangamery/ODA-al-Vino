@@ -251,6 +251,9 @@ export const translations = {
     cookieConsentCancel: "Cancelar",
     cookieConsentReadMore: "Lee más en nuestra",
     cookieConsentPolicyLink: "Política de Cookies",
+
+    // ========== HEALTH WARNING ==========
+    healthWarningText: "Beber con moderación, prohibida su venta a menores de 18 años",
   },
   pt: {
     // ========== HERO V3 ==========
@@ -500,6 +503,9 @@ export const translations = {
     cookieConsentCancel: "Cancelar",
     cookieConsentReadMore: "Leia mais em nossa",
     cookieConsentPolicyLink: "Política de Cookies",
+
+    // ========== HEALTH WARNING ==========
+    healthWarningText: "Beber com moderação, venda proibida para menores de 18 anos",
   },
 };
 
