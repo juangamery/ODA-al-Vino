@@ -372,7 +372,7 @@ Ao utilizar um navegador da Web para acessar os serviços da ODA AL VINO, há a 
 • Para mais informações sobre gestão de Cookies a partir no browser Internet Explorer, clique aqui;
 • Para mais informações sobre gestão de Cookies a partir do Safari, <a href="https://support.apple.com/pt-br/guide/safari/ibrw850f6c51/16.1/mac/13.0" target="_blank">clique aqui</a>;
 • Para mais informações sobre gestão de Cookies no browser Opera, <a href="https://help.opera.com/en/latest/web-preferences/" target="_blank">clique aqui</a>;
-• Para mais informações sobre a gestão de Cookies no browser Microsoft Edge, <a href="https://support.microsoft.com/pt-br/windows/gerencie-cookies-no-microsoft-edge-exibir-permitir-bloquear-excluir-e-usar-168dab11-0753-043d-7c16-ede5947fc64d" target="_blank">clique aqui</a>;
+• Para mais informações sobre a gestão de Cookies no browser Microsoft Edge, <a href="https://support.microsoft.com/pt-br/windows/manage-cookies-in-microsoft-edge-view-allow-block-delete-and-use-168dab11-0753-043d-7c16-ede5947fc64d" target="_blank">clique aqui</a>;
 
 Ressalta-se que a desativação de determinados cookies pode impedir o funcionamento adequado de alguns dos serviços, no todo ou em parte.
 
@@ -751,7 +751,7 @@ Al utilizar un navegador de Web para acceder a los servicios de ODA AL VINO, hay
 • Para más información sobre gestión de Cookies a partir en el navegador Internet Explorer, haga clic aquí;
 • Para más información sobre gestión de Cookies a partir del Safari, <a href="https://support.apple.com/pt-br/guide/safari/ibrw850f6c51/16.1/mac/13.0" target="_blank">haga clic aquí</a>;
 • Para más información sobre gestión de Cookies en el navegador Opera, <a href="https://help.opera.com/en/latest/web-preferences/" target="_blank">haga clic aquí</a>;
-• Para más información sobre la gestión de Cookies en el navegador Microsoft Edge, <a href="https://support.microsoft.com/pt-br/windows/gerencie-cookies-no-microsoft-edge-exibir-permitir-bloquear-excluir-e-usar-168dab11-0753-043d-7c16-ede5947fc64d" target="_blank">haga clic aquí</a>;
+• Para más información sobre la gestión de Cookies en el navegador Microsoft Edge, <a href="https://support.microsoft.com/pt-br/windows/manage-cookies-in-microsoft-edge-view-allow-block-delete-and-use-168dab11-0753-043d-7c16-ede5947fc64d" target="_blank">haga clic aquí</a>;
 
 Se destaca que la desactivación de determinados cookies puede impedir el funcionamiento adecuado de algunos de los servicios, en todo o en parte.
 
