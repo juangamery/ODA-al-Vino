@@ -118,12 +118,12 @@ export function CookieConsent() {
     <div
       ref={bannerRef}
       className="fixed bottom-0 left-0 right-0 z-40 p-4 md:p-6"
-      style={{ opacity: 0 }}
+      style={{ opacity: isVisible ? 1 : 0 }}
     >
       <div
         ref={contentRef}
         className="mx-auto max-w-4xl bg-gradient-to-r from-wine/95 to-plum/95 backdrop-blur-md rounded-2xl p-6 md:p-8 shadow-2xl border border-paper/20"
-        style={{ opacity: 0 }}
+        style={{ opacity: isVisible ? 1 : 0 }}
       >
         {!showCustomize ? (
           // Main Banner
