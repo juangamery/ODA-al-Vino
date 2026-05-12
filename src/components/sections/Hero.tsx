@@ -56,7 +56,15 @@ export function Hero() {
 
           <Reveal delay={0.8} direction="up">
             <div className="flex flex-wrap gap-4">
-              <Button size="lg" variant="primary">
+              <Button
+                size="lg"
+                variant="primary"
+                onClick={() => {
+                  window.location.href = "https://painel.odaalvino.com.br/login";
+                }}
+                data-event="initiate_checkout"
+                data-event-location="hero"
+              >
                 Comprar entradas
               </Button>
               <Button size="lg" variant="outline">

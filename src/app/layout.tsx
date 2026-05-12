@@ -178,6 +178,42 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
           }}
         />
 
+        {/* Meta Pixel Event Tracking */}
+        <Script
+          id="meta-pixel-events"
+          strategy="afterInteractive"
+          dangerouslySetInnerHTML={{
+            __html: `
+              document.addEventListener('click', function(e) {
+                const target = e.target.closest('[data-event]');
+                if (target) {
+                  const event = target.getAttribute('data-event');
+                  const location = target.getAttribute('data-event-location') || 'unknown';
+
+                  if (typeof fbq === 'function') {
+                    if (event === 'purchase_click') {
+                      fbq('track', 'Purchase', {
+                        value: 630,
+                        currency: 'BRL',
+                        content_name: 'ODA AL VINO 2026',
+                        content_category: 'ticket'
+                      });
+                    } else if (event === 'initiate_checkout') {
+                      fbq('track', 'InitiateCheckout', {
+                        value: 630,
+                        currency: 'BRL',
+                        content_name: 'ODA AL VINO 2026',
+                        content_category: 'ticket'
+                      });
+                    }
+                    console.log('[Meta Pixel Event]', event, { location });
+                  }
+                }
+              });
+            `,
+          }}
+        />
+
         {/* Preload critical fonts */}
         <link
           rel="preload"
