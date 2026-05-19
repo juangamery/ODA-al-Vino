@@ -217,7 +217,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         {/* Preload critical fonts */}
         <link
           rel="preload"
-          href="/oda/Fonts/CCSBelvareRegular.ttf"
+          href="/oda/Fonts/ccsbelvareregular.ttf"
           as="font"
           type="font/ttf"
           crossOrigin="anonymous"
