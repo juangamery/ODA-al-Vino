@@ -206,9 +206,10 @@ export function BodegasV3() {
                   );
                 })()}
               </span>
-              <br />
-              {t("bodegasTitleC", language)}
             </h2>
+            <p className="normal-case tracking-widest text-sm text-paper/60 uppercase mt-1">
+              {t("bodegasTitleC", language)}
+            </p>
           </Reveal>
 
           <Reveal delay={0.3}>
