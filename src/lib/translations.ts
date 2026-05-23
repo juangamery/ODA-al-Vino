@@ -125,7 +125,7 @@ export const translations = {
 
     // ========== AUTHORITY ==========
     authorityBodegas: "Bodegas",
-    authorityBodegasSub: "de todo el país",
+    authorityBodegasSub: "en promedio",
     authorityEtiquetas: "Etiquetas",
     authorityEtiquetasSub: "presentadas",
     authorityYears: "Años",
@@ -377,7 +377,7 @@ export const translations = {
 
     // ========== AUTHORITY ==========
     authorityBodegas: "Adegas",
-    authorityBodegasSub: "de todo o país",
+    authorityBodegasSub: "em média",
     authorityEtiquetas: "Rótulos",
     authorityEtiquetasSub: "apresentados",
     authorityYears: "Anos",
