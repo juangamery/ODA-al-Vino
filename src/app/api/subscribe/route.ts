@@ -9,15 +9,38 @@ const supabase = createClient(
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
+const ALLOWED_ORIGINS = [
+  "https://odaalvino.com.br",
+  "https://www.odaalvino.com.br",
+  "https://odaalvino.com.ar",
+  "https://www.odaalvino.com.ar",
+];
+
+function corsHeaders(origin: string | null) {
+  const allowed = origin && ALLOWED_ORIGINS.includes(origin) ? origin : ALLOWED_ORIGINS[0];
+  return {
+    "Access-Control-Allow-Origin": allowed,
+    "Access-Control-Allow-Methods": "POST, OPTIONS",
+    "Access-Control-Allow-Headers": "Content-Type",
+  };
+}
+
+export async function OPTIONS(request: NextRequest) {
+  const origin = request.headers.get("origin");
+  return new NextResponse(null, { status: 204, headers: corsHeaders(origin) });
+}
+
 export async function POST(request: NextRequest) {
+  const origin = request.headers.get("origin");
+  const headers = corsHeaders(origin);
+
   try {
     const { email } = await request.json();
 
     if (!email) {
-      return NextResponse.json({ error: "Email required" }, { status: 400 });
+      return NextResponse.json({ error: "Email required" }, { status: 400, headers });
     }
 
-    // Save to Supabase
     const { error: dbError } = await supabase
       .from("newsletter_subscribers")
       .insert([{
@@ -28,10 +51,9 @@ export async function POST(request: NextRequest) {
 
     if (dbError) {
       console.error("DB Error:", dbError);
-      return NextResponse.json({ error: "Could not save email" }, { status: 500 });
+      return NextResponse.json({ error: "Could not save email" }, { status: 500, headers });
     }
 
-    // Send welcome email
     await resend.emails.send({
       from: "ODA al Vino <noreply@oda-al-vino.com>",
       to: email,
@@ -39,9 +61,9 @@ export async function POST(request: NextRequest) {
       html: `<h1>Bienvenido!</h1><p>Te has suscrito a nuestro newsletter. Pronto recibirás noticias sobre ODA al Vino.</p>`,
     });
 
-    return NextResponse.json({ success: true });
+    return NextResponse.json({ success: true }, { headers });
   } catch (error) {
     console.error("Error:", error);
-    return NextResponse.json({ error: "Something went wrong" }, { status: 500 });
+    return NextResponse.json({ error: "Something went wrong" }, { status: 500, headers });
   }
 }

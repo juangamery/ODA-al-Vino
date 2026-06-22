@@ -4,13 +4,13 @@ import "./globals.css";
 import { LayoutClient } from "@/components/LayoutClient";
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://odaalvino.com.br"),
+  metadataBase: new URL("https://www.odaalvino.com.br"),
   title: {
     default: "ODA AL VINO 2026 | El vino nos reúne",
     template: "%s | ODA AL VINO 2026",
   },
   description:
-    "Viví la experiencia del vino más importante de la Triple Frontera. 10° edición OAV - 25 años ODA.",
+    "Viví la experiencia del vino más importante de la Triple Frontera. 10° edición OAV · 25 años ODA.",
   icons: {
     icon: "/favicon.png",
     apple: "/favicon.png",
@@ -24,16 +24,16 @@ export const metadata: Metadata = {
     type: "website",
     title: "ODA AL VINO 2026 | El vino nos reúne",
     description:
-      "Viví la experiencia del vino más importante de la Triple Frontera. 10° edición OAV - 25 años ODA.",
+      "Viví la experiencia del vino más importante de la Triple Frontera. 10° edición OAV · 25 años ODA.",
     images: [
       {
-        url: "https://odaalvino.com.br/og-image-2026.jpg",
+        url: "https://www.odaalvino.com.br/og-image-2026.jpg",
         width: 1200,
         height: 1200,
         alt: "ODA AL VINO 2026",
       },
     ],
-    url: "https://odaalvino.com.br",
+    url: "https://www.odaalvino.com.br",
   },
   twitter: {
     site: "@odaalvino",
@@ -43,11 +43,11 @@ export const metadata: Metadata = {
     "theme-color": "#47072c",
   },
   alternates: {
-    canonical: "https://odaalvino.com.br",
+    canonical: "https://www.odaalvino.com.br",
     languages: {
-      "pt-BR": "https://odaalvino.com.br",
+      "pt-BR": "https://www.odaalvino.com.br",
       "es-AR": "https://odaalvino.com.ar",
-      "x-default": "https://odaalvino.com.br",
+      "x-default": "https://www.odaalvino.com.br",
     },
   },
 };
