@@ -171,7 +171,7 @@ export function FooterV3() {
               {t("footerCopyright", language)}
             </p>
             <a
-              href="https://web7.ar"
+              href="https://www.web7.com.ar/"
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center gap-2 group"
