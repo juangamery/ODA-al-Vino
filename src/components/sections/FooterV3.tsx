@@ -166,9 +166,26 @@ export function FooterV3() {
 
         {/* Base */}
         <div className="border-t border-wine/8 pt-8 flex flex-col md:flex-row items-center justify-between gap-4">
-          <p className="text-[10px] font-bold uppercase tracking-[0.3em] text-wine/25">
-            {t("footerCopyright", language)}
-          </p>
+          <div className="flex flex-col gap-3">
+            <p className="text-[10px] font-bold uppercase tracking-[0.3em] text-wine/25">
+              {t("footerCopyright", language)}
+            </p>
+            <a
+              href="https://web7.ar"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-2 group"
+            >
+              <span className="text-[9px] font-bold uppercase tracking-[0.25em] text-wine/20 group-hover:text-wine/40 transition-colors">
+                Desarrollado por
+              </span>
+              <img
+                src="/oda/brand/logo-web7.svg"
+                alt="Web7"
+                className="h-3 w-auto opacity-20 group-hover:opacity-50 transition-opacity"
+              />
+            </a>
+          </div>
           <p className="text-[10px] font-bold uppercase tracking-[0.3em] text-wine/20">
             {t("footerEdition", language)}
           </p>
