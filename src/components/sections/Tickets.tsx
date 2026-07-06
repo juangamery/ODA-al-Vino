@@ -104,7 +104,7 @@ export function Tickets() {
   const { language } = useLanguage();
   const lots = getLots(language);
   const includes = getIncludes(language);
-  const [selectedLot, setSelectedLot] = useState(1);
+  const [selectedLot, setSelectedLot] = useState(2);
   const [currency, setCurrency] = useState<"brl" | "ars" | "pyg">("brl");
   const [isMisioneros, setIsMisioneros] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
@@ -120,8 +120,8 @@ export function Tickets() {
       cards,
       { opacity: 0, scale: 0.5, y: 20 },
       {
-        opacity: (i) => (i === 1 ? 1 : 0.5),
-        scale: (i) => (i === 1 ? 1 : 0.95),
+        opacity: (i) => (i === 2 ? 1 : 0.5),
+        scale: (i) => (i === 2 ? 1 : 0.95),
         y: 0,
         duration: 0.8,
         stagger: 0.15,
