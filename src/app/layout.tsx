@@ -57,24 +57,19 @@ const websiteSchema = {
   "@graph": [
     {
       "@type": "WebSite",
-      "@id": "https://odaalvino.com.br/#website",
+      "@id": "https://www.odaalvino.com.br/#website",
       name: "ODA AL VINO",
-      url: "https://odaalvino.com.br",
+      url: "https://www.odaalvino.com.br",
       inLanguage: "es-AR",
-      potentialAction: {
-        "@type": "SearchAction",
-        target: "https://odaalvino.com.br/?s={search_term_string}",
-        "query-input": "required name=search_term_string",
-      },
     },
     {
       "@type": "Organization",
-      "@id": "https://odaalvino.com.br/#organization",
+      "@id": "https://www.odaalvino.com.br/#organization",
       name: "ODA AL VINO",
-      url: "https://odaalvino.com.br",
+      url: "https://www.odaalvino.com.br",
       logo: {
         "@type": "ImageObject",
-        url: "https://odaalvino.com.br/oda/brand/logo_crema_horizontal.svg",
+        url: "https://www.odaalvino.com.br/oda/brand/logo_crema_horizontal.svg",
       },
       sameAs: [
         "https://www.instagram.com/odaalvino",
