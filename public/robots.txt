@@ -11,4 +11,4 @@ Disallow: /node_modules/
 Crawl-delay: 1
 
 # Reference to sitemap for discovery
-Sitemap: https://odaalvino.com.br/sitemap.xml
+Sitemap: https://www.odaalvino.com.br/sitemap.xml
