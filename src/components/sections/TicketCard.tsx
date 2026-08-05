@@ -104,7 +104,7 @@ export function TicketCard({ lot, isSelected, onClick, index }: TicketCardProps)
         {/* Content Overlay - Text inside ticket */}
         <div className="absolute inset-0 flex flex-col justify-between p-6 md:p-8">
           {/* Top: DISPONIBLE line (only for first lot) */}
-          {isSelected && lot.number === 3 && (
+          {isSelected && lot.number === 4 && (
             <div className="flex items-center gap-3 mb-2">
               <div className="h-px flex-1 bg-harvest/60" />
               <span className="text-[8px] font-bold tracking-[0.25em] text-harvest uppercase whitespace-nowrap">

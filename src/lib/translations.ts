@@ -50,13 +50,13 @@ export const translations = {
     bodegasParticipants: "Algunas de las bodegas participantes",
 
     // ========== TICKETS ==========
-    ticketsMarqueeText: "ENTRADAS · LOTE 3 · TERCERA ETAPA · PRECIO ESPECIAL · CUPOS LIMITADOS",
+    ticketsMarqueeText: "ENTRADAS · LOTE 4 · CUARTA ETAPA · ÚLTIMO LOTE · CUPOS LIMITADOS",
     ticketsLabel: "Lote 3 — Tercera etapa",
     ticketsTitle: "Asegurá tu",
     ticketsTitleScript: "Lugar",
     ticketsTitleC: "en ODA al Vino",
     ticketsSubtitle: "Una única entrada. El precio cambia según el momento.",
-    ticketsDescription: "Accedé al precio de tercera etapa antes de que suba.",
+    ticketsDescription: "Último lote disponible. Una vez agotado no habrá más entradas.",
     ticketsPriceLabel: "Precio actual",
     ticketsCurrencyLabel: "BRL",
     ticketsBtnBuy: "Comprar Ahora",
@@ -73,8 +73,8 @@ export const translations = {
     ticketsUrgency: "↑ El precio aumenta en las próximas etapas",
     ticketsLot1Label: "Vencido",
     ticketsLot2Label: "Vencido",
-    ticketsLot3Label: "Disponible",
-    ticketsLot4Label: "Último lote",
+    ticketsLot3Label: "Vencido",
+    ticketsLot4Label: "Disponible",
     ticketsNoIntermediary: "Sin intermediarios · Acceso garantizado",
 
     // ========== IGUAZU ==========
@@ -302,13 +302,13 @@ export const translations = {
     bodegasParticipants: "Algumas das adegas participantes",
 
     // ========== TICKETS ==========
-    ticketsMarqueeText: "INGRESSOS · LOTE 3 · TERCEIRA ETAPA · PREÇO ESPECIAL · COTAS LIMITADAS",
+    ticketsMarqueeText: "INGRESSOS · LOTE 4 · QUARTA ETAPA · ÚLTIMO LOTE · COTAS LIMITADAS",
     ticketsLabel: "Lote 3 — Terceira etapa",
     ticketsTitle: "Garanta seu",
     ticketsTitleScript: "Lugar",
     ticketsTitleC: "em ODA ao Vinho",
     ticketsSubtitle: "Um único ingresso. O preço muda de acordo com o momento.",
-    ticketsDescription: "Acesse o preço da terceira etapa antes que aumente.",
+    ticketsDescription: "Último lote disponível. Esgotado este, não haverá mais ingressos.",
     ticketsPriceLabel: "Preço atual",
     ticketsCurrencyLabel: "BRL",
     ticketsBtnBuy: "Comprar Agora",
@@ -325,8 +325,8 @@ export const translations = {
     ticketsUrgency: "↑ O preço aumenta nas próximas etapas",
     ticketsLot1Label: "Encerrado",
     ticketsLot2Label: "Encerrado",
-    ticketsLot3Label: "Disponível",
-    ticketsLot4Label: "Último lote",
+    ticketsLot3Label: "Encerrado",
+    ticketsLot4Label: "Disponível",
     ticketsNoIntermediary: "Sem intermediários · Acesso garantido",
 
     // ========== IGUAZU ==========
