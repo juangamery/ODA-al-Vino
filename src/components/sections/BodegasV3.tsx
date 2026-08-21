@@ -331,22 +331,18 @@ export function BodegasV3() {
           <div
             className="flex whitespace-nowrap gap-12"
             style={{
-              animation: "marquee-infinite 12s linear infinite",
+              animation: "marquee-infinite 20s linear infinite",
               willChange: "transform"
             }}
           >
-            {shuffledBodegas.map((bodega, i) => (
-              <div key={`a-${i}`} className="flex items-center gap-4 font-serif text-4xl md:text-5xl lg:text-6xl uppercase text-paper/80 flex-shrink-0">
-                <span>{bodega}</span>
-                <span className="text-harvest text-2xl md:text-3xl">★</span>
-              </div>
-            ))}
-            {shuffledBodegas.map((bodega, i) => (
-              <div key={`b-${i}`} className="flex items-center gap-4 font-serif text-4xl md:text-5xl lg:text-6xl uppercase text-paper/80 flex-shrink-0">
-                <span>{bodega}</span>
-                <span className="text-harvest text-2xl md:text-3xl">★</span>
-              </div>
-            ))}
+            {[...Array(4)].map((_, set) =>
+              shuffledBodegas.map((bodega, i) => (
+                <div key={`${set}-${i}`} className="flex items-center gap-4 font-serif text-4xl md:text-5xl lg:text-6xl uppercase text-paper/80 flex-shrink-0">
+                  <span>{bodega}</span>
+                  <span className="text-harvest text-2xl md:text-3xl">★</span>
+                </div>
+              ))
+            )}
           </div>
         </div>
       </div>
@@ -354,7 +350,7 @@ export function BodegasV3() {
       <style>{`
         @keyframes marquee-infinite {
           0% { transform: translateX(0); }
-          100% { transform: translateX(-50%); }
+          100% { transform: translateX(-25%); }
         }
       `}</style>
 
