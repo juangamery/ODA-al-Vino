@@ -298,20 +298,20 @@ export function Tickets() {
               </div>
 
               {/* Vale de Consumo + Sponsor — grid lado a lado */}
-              <div className="grid grid-cols-2 gap-3 md:gap-4 mb-6 md:mb-8">
+              <div className="grid grid-cols-2 gap-3 md:gap-4 mb-3 md:mb-4">
                 {/* Vale de Consumo */}
                 <div className="bg-plum/10 border-l-4 border-plum rounded-lg p-4 md:p-6">
                   <p className="text-paper/70 text-xs md:text-sm mb-2 md:mb-3 uppercase tracking-widest font-bold">{t("ticketsVoucherLabel", language)}</p>
                   <p className="font-serif text-2xl md:text-4xl lg:text-5xl text-paper font-bold mb-2">
                     {getVoucherPrice(lots[selectedLot])}
                   </p>
-                  <p className="text-plum text-xs font-bold uppercase tracking-widest">
+                  <p className="text-paper text-xs font-bold uppercase tracking-widest">
                     {t("ticketsVoucherLocation", language)}
                   </p>
                 </div>
 
                 {/* Sponsor: Rio Uruguay */}
-                <div className="bg-paper/10 border border-paper/20 rounded-lg p-4 md:p-6 flex flex-col items-center justify-center gap-3 text-center">
+                <div className="rounded-lg p-4 md:p-6 flex flex-col items-center justify-center gap-3 text-center" style={{ backgroundColor: "#770047" }}>
                   <p className="text-paper/60 text-[10px] uppercase tracking-[0.3em] font-bold">¿Venís de lejos?</p>
                   <img
                     src="/oda/brand/logo-rio-uruguay.svg"
