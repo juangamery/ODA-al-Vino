@@ -55,12 +55,12 @@ const hotels: Hotel[] = [
     name: "Hotel Arami",
     offer: { es: "USD 66 + IVA / USD 88 + IVA", pt: "USD 66 + IVA / USD 88 + IVA" },
     note: { es: "Por categoría de habitación", pt: "Por categoria do quarto" },
-    href: "https://www.hotelarami.com.ar/",
+    href: "https://aramihotel.com.ar/",
   },
   {
     name: "Hotel Saint George",
     offer: { es: "USD 129 + IVA", pt: "USD 129 + IVA" },
-    href: "https://www.saintgeorgehotel.com.ar/",
+    href: "https://www.hotelsaintgeorge.com/",
   },
 ];
 
