@@ -331,7 +331,7 @@ export function BodegasV3() {
           <div
             className="flex whitespace-nowrap gap-12"
             style={{
-              animation: "marquee-infinite 22s linear infinite",
+              animation: "marquee-infinite 12s linear infinite",
               willChange: "transform"
             }}
           >
