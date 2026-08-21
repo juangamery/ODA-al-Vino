@@ -2,6 +2,7 @@
 
 import { Reveal } from "@/components/motion/Reveal";
 import { TicketCard } from "./TicketCard";
+import { RioUruguayModal } from "./RioUruguayModal";
 import { useState, useRef, useEffect } from "react";
 import { gsap } from "@/lib/gsap";
 import { useGSAP } from "@gsap/react";
@@ -105,6 +106,7 @@ export function Tickets() {
   const lots = getLots(language);
   const includes = getIncludes(language);
   const [selectedLot, setSelectedLot] = useState(3);
+  const [modalOpen, setModalOpen] = useState(false);
   const [currency, setCurrency] = useState<"brl" | "ars" | "pyg">("brl");
   const [isMisioneros, setIsMisioneros] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
@@ -319,6 +321,12 @@ export function Tickets() {
                   <p className="font-serif text-xl md:text-2xl text-harvest font-bold leading-tight">
                     30% OFF<br />en tu viaje
                   </p>
+                  <button
+                    onClick={(e) => { e.stopPropagation(); setModalOpen(true); }}
+                    className="mt-1 text-[10px] font-bold uppercase tracking-widest text-paper/70 border border-paper/30 rounded-full px-3 py-1.5 hover:border-paper/70 hover:text-paper transition-all duration-200 cursor-pointer"
+                  >
+                    Ver beneficio
+                  </button>
                 </div>
               </div>
 
@@ -427,6 +435,8 @@ export function Tickets() {
           100% { transform: translateX(-100%); }
         }
       `}</style>
+
+      <RioUruguayModal isOpen={modalOpen} onClose={() => setModalOpen(false)} />
     </>
   );
 }
