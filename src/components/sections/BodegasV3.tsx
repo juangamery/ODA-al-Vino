@@ -55,107 +55,107 @@ const regions: Region[] = [
 ];
 
 const bodegas = [
-  "A 16",
-  "Alma Negra",
+  "Jorge Rubio",
   "Antigal",
-  "Araujo",
-  "Argaña",
-  "Argento",
-  "Arístides",
-  "Atamisque",
-  "Bemberg",
-  "Bianchi",
-  "Cara Sur",
-  "Carinae",
-  "Caro",
-  "Catena Zapata",
-  "Celler del Pi",
-  "Château Subsónico",
-  "Claroscuro",
-  "Clos de Los Andes",
-  "Chacra",
-  "Colosso Wine",
-  "Conejo Verde",
-  "Conte Grand",
-  "Cruzat",
-  "Cuchillo de Palo",
-  "Cuchillo de Palo Domingo Molina",
-  "Doña Paula",
-  "Durigutti",
-  "El Esteco",
-  "El Porvenir",
-  "Escorihuela Gascón",
-  "Etchart",
-  "Familia Altieri",
-  "Familia Blanco",
-  "Familia Falasco",
-  "Familia Zuccardi",
-  "Finca Ambrosía",
-  "Finca Flichman",
-  "Finca Iral",
-  "Finca La Anita",
-  "Finca Suarez",
-  "Flecha de Los Andes",
-  "Funckenhausen",
-  "Gauchezco",
-  "Ginard Ballester",
-  "Goyenechea",
-  "Heracles",
-  "Huarpe",
-  "Humberto Canale",
-  "Humberto Canale Jorge Rubio",
-  "Kalós",
-  "La Dolfina",
-  "La Florita",
-  "La Macarena",
-  "La Magdalena",
-  "La Mansa",
-  "Lacoste de Los Andes",
-  "Lagarde",
-  "La Madrid",
-  "Las Moras",
-  "Las Mojaras",
-  "Laureano Gómez",
-  "Lauri Viana",
-  "Los Dragones",
-  "Los Haroldos",
-  "Luigi Bosca",
-  "Makila",
-  "Matervini",
-  "Mauricio Lorca",
-  "Michelini",
-  "Mufatto",
-  "Monteviejo",
-  "Mosquita Muerta",
-  "Navarro Correas",
   "Ojo de Tigre",
-  "Otronia",
-  "Patritti",
-  "Piedra Negra",
-  "Puna",
-  "Renacer",
-  "Ribera del Cuarzo",
-  "Riglos",
-  "Rocamadre",
+  "Don Bosco",
+  "Bemberg",
+  "Escorihuela",
   "Rutini",
-  "Saint Rose",
-  "Salentein",
-  "San Huberto",
-  "Sánchez Carrillo",
-  "Sin Reglas",
+  "Ernesto Catena",
+  "Catena Zapata",
+  "Falasco",
+  "Chateau Subsónico",
+  "Goyenechea",
   "Sottano",
-  "Sposato",
-  "Susana Balbo",
-  "Séptima",
-  "Cordorníu",
-  "Trapiche",
-  "Trivento",
-  "Viejo Isaías",
-  "Vignes des Andes",
-  "Vignes des Andes Vistalba",
+  "Mil Demonios",
+  "Colosso",
+  "Viña Alicia",
+  "Heracles",
+  "Makila",
+  "Argana",
+  "Gloria Galvagno",
+  "Domingo Molina",
+  "La Anita",
   "Yacochuya",
-  "Bousquet",
-  "Nina",
+  "El Porvenir",
+  "Funckenhausen",
+  "Puna",
+  "La Macarena",
+  "Maison Pouget",
+  "Mauricio Lorca",
+  "Ojo de Agua",
+  "Penedo Borges",
+  "Primogénito",
+  "Finca Iral",
+  "La Coste de los Andes",
+  "Navarro Correas",
+  "El Esteco",
+  "Las Moras",
+  "Trapiche",
+  "Séptima",
+  "Domaine Bousquet",
+  "Cuarto Surco",
+  "Mosquita Muerta",
+  "Salentein",
+  "Antucura",
+  "Luigi Bosca",
+  "Cicchitti",
+  "Proyecto X",
+  "Achaval",
+  "Monte Viejo",
+  "Huentala",
+  "Mil Suelos",
+  "Lui",
+  "Desquiciado",
+  "Los Imposibles",
+  "La Azul",
+  "Benegas",
+  "Budeguer",
+  "Sposato",
+  "Grazie Mille",
+  "Kalos Cru",
+  "CarinaE",
+  "Lauri Viana",
+  "Sánchez Carrillo",
+  "Andillian",
+  "López",
+  "Finca Los Maza",
+  "Diamandes",
+  "Rosell Boher",
+  "Renacer",
+  "A16",
+  "Flechas de los Andes",
+  "Familia Altieri",
+  "Freixenet",
+  "Doña Paula",
+  "Zuccardi",
+  "Cara Sur",
+  "Los Dragones",
+  "Michelini i Mufatto",
+  "Finca Suarez",
+  "Claroscuro",
+  "Matervini",
+  "Caro",
+  "Susana Balbo",
+  "Ballester",
+  "Durigutti",
+  "Vistalba",
+  "Ribera del Cuarzo",
+  "Due Continenti",
+  "A Corazón Abierto",
+  "Montequieto",
+  "Casa Araujo",
+  "Rocamadre",
+  "Casa Gli Amici",
+  "Colomé",
+  "Bianchi",
+  "Isasmendi",
+  "Aceites Olei Guardia",
+  "Mal Wine",
+  "Gimenez Riili",
+  "El Lado Polo del Mundo",
+  "San Huberto",
 ];
 
 // Shuffle array function
@@ -323,34 +323,18 @@ export function BodegasV3() {
           <div
             className="flex whitespace-nowrap gap-12"
             style={{
-              animation: "marquee-infinite 22.5s linear infinite",
+              animation: "marquee-infinite 80s linear infinite",
               willChange: "transform"
             }}
           >
-            {/* First set - shuffled */}
             {shuffledBodegas.map((bodega, i) => (
-              <div key={`set1-${i}`} className="flex items-center gap-4 font-serif text-4xl md:text-5xl lg:text-6xl uppercase text-paper/80 flex-shrink-0">
+              <div key={`a-${i}`} className="flex items-center gap-4 font-serif text-4xl md:text-5xl lg:text-6xl uppercase text-paper/80 flex-shrink-0">
                 <span>{bodega}</span>
                 <span className="text-harvest text-2xl md:text-3xl">★</span>
               </div>
             ))}
-            {/* Seamless loop - second set identical to first */}
             {shuffledBodegas.map((bodega, i) => (
-              <div key={`set2-${i}`} className="flex items-center gap-4 font-serif text-4xl md:text-5xl lg:text-6xl uppercase text-paper/80 flex-shrink-0">
-                <span>{bodega}</span>
-                <span className="text-harvest text-2xl md:text-3xl">★</span>
-              </div>
-            ))}
-            {/* Third set - copy for extended marquee */}
-            {shuffledBodegas.map((bodega, i) => (
-              <div key={`set3-${i}`} className="flex items-center gap-4 font-serif text-4xl md:text-5xl lg:text-6xl uppercase text-paper/80 flex-shrink-0">
-                <span>{bodega}</span>
-                <span className="text-harvest text-2xl md:text-3xl">★</span>
-              </div>
-            ))}
-            {/* Fourth set - copy for smooth loop return */}
-            {shuffledBodegas.map((bodega, i) => (
-              <div key={`set4-${i}`} className="flex items-center gap-4 font-serif text-4xl md:text-5xl lg:text-6xl uppercase text-paper/80 flex-shrink-0">
+              <div key={`b-${i}`} className="flex items-center gap-4 font-serif text-4xl md:text-5xl lg:text-6xl uppercase text-paper/80 flex-shrink-0">
                 <span>{bodega}</span>
                 <span className="text-harvest text-2xl md:text-3xl">★</span>
               </div>
@@ -362,7 +346,7 @@ export function BodegasV3() {
       <style>{`
         @keyframes marquee-infinite {
           0% { transform: translateX(0); }
-          100% { transform: translateX(-100%); }
+          100% { transform: translateX(-50%); }
         }
       `}</style>
     </section>
