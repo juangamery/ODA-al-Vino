@@ -329,22 +329,18 @@ export function BodegasV3() {
         </div>
         <div className="overflow-hidden py-8">
           <div
-            className="flex whitespace-nowrap gap-12"
+            className="flex items-center"
             style={{
               animation: "marquee-infinite 60s linear infinite",
               willChange: "transform"
             }}
           >
-            {shuffledBodegas.map((bodega, i) => (
-              <div key={`a-${i}`} className="flex items-center gap-4 font-serif text-4xl md:text-5xl lg:text-6xl uppercase text-paper/80 flex-shrink-0">
-                <span>{bodega}</span>
-                <span className="text-harvest text-2xl md:text-3xl">★</span>
-              </div>
-            ))}
-            {shuffledBodegas.map((bodega, i) => (
-              <div key={`b-${i}`} className="flex items-center gap-4 font-serif text-4xl md:text-5xl lg:text-6xl uppercase text-paper/80 flex-shrink-0">
-                <span>{bodega}</span>
-                <span className="text-harvest text-2xl md:text-3xl">★</span>
+            {[0, 1].map((set) => (
+              <div key={set} className="flex items-center gap-10 flex-shrink-0" style={{ paddingRight: "2.5rem" }}>
+                {shuffledBodegas.flatMap((bodega, i) => [
+                  <span key={`n-${i}`} className="font-serif text-4xl md:text-5xl lg:text-6xl uppercase text-paper/80 whitespace-nowrap">{bodega}</span>,
+                  <span key={`s-${i}`} className="text-harvest text-2xl md:text-3xl flex-shrink-0">★</span>,
+                ])}
               </div>
             ))}
           </div>
