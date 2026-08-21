@@ -5,6 +5,7 @@ import Image from "next/image";
 import { Reveal } from "@/components/motion/Reveal";
 import { useLanguage } from "@/context/LanguageContext";
 import { t } from "@/lib/translations";
+import { BodegasModal } from "./BodegasModal";
 
 type RegionDescKey = "mendozaDesc" | "sanjuanDesc" | "saltaDesc" | "lariojDesc" | "patagoniaDesc";
 
@@ -172,6 +173,7 @@ export function BodegasV3() {
   const { language } = useLanguage();
   const [selectedRegion, setSelectedRegion] = useState(0);
   const [shuffledBodegas] = useState(() => shuffleArray(bodegas));
+  const [modalOpen, setModalOpen] = useState(false);
 
   return (
     <section id="bodegas" className="bg-olive overflow-hidden relative py-28 md:py-40">
@@ -318,12 +320,18 @@ export function BodegasV3() {
           <p className="lato-expanded text-[10px] text-paper/50 uppercase tracking-widest">
             {t("bodegasParticipants", language)}
           </p>
+          <button
+            onClick={() => setModalOpen(true)}
+            className="lato-expanded text-[10px] uppercase tracking-widest font-bold text-paper/60 border border-paper/30 rounded-full px-4 py-2 hover:border-paper/70 hover:text-paper transition-all duration-200 cursor-pointer flex-shrink-0"
+          >
+            {language === "pt" ? "Ver todas" : "Ver todas"}
+          </button>
         </div>
         <div className="overflow-hidden py-8">
           <div
             className="flex whitespace-nowrap gap-12"
             style={{
-              animation: "marquee-infinite 80s linear infinite",
+              animation: "marquee-infinite 45s linear infinite",
               willChange: "transform"
             }}
           >
@@ -349,6 +357,8 @@ export function BodegasV3() {
           100% { transform: translateX(-50%); }
         }
       `}</style>
+
+      <BodegasModal isOpen={modalOpen} onClose={() => setModalOpen(false)} />
     </section>
   );
 }
