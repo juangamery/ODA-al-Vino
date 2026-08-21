@@ -252,6 +252,14 @@ export const translations = {
     cookieConsentReadMore: "Lee más en nuestra",
     cookieConsentPolicyLink: "Política de Cookies",
 
+    // ========== HOTELES ==========
+    hotelesLabel: "Alojamiento Oficial",
+    hotelesTitle: "Hoteles",
+    hotelesTitleScript: "asociados",
+    hotelesDesc: "Hospedajes recomendados en Puerto Iguazú para los asistentes al evento. Tarifas especiales negociadas para ODA al Vino 2026.",
+    hotelesReservar: "Reservar",
+    hotelesConsultar: "Consultar",
+
     // ========== HEALTH WARNING ==========
     healthWarningText: "Beber con moderación, prohibida su venta a menores de 18 años",
   },
@@ -503,6 +511,14 @@ export const translations = {
     cookieConsentCancel: "Cancelar",
     cookieConsentReadMore: "Leia mais em nossa",
     cookieConsentPolicyLink: "Política de Cookies",
+
+    // ========== HOTELES ==========
+    hotelesLabel: "Hospedagem Oficial",
+    hotelesTitle: "Hotéis",
+    hotelesTitleScript: "parceiros",
+    hotelesDesc: "Hospedagens recomendadas em Puerto Iguazú para os participantes do evento. Tarifas especiais negociadas para ODA al Vino 2026.",
+    hotelesReservar: "Reservar",
+    hotelesConsultar: "Consultar",
 
     // ========== HEALTH WARNING ==========
     healthWarningText: "Beber com moderação, venda proibida para menores de 18 anos",

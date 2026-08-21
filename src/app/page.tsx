@@ -9,6 +9,7 @@ import { FloatingHeader } from "@/components/layout/FloatingHeader";
 import { HeroV3 } from "@/components/sections/HeroV3";
 import { ManifestoV3 } from "@/components/sections/ManifestoV3";
 import { SealDivider } from "@/components/sections/SealDivider";
+import { HotelesV1 } from "@/components/sections/HotelesV1";
 import { Tickets } from "@/components/sections/Tickets";
 import { VenueV3 } from "@/components/sections/VenueV3";
 import { WhatsAppButton } from "@/components/WhatsAppButton";
@@ -136,6 +137,8 @@ export default function Home() {
       <Authority />
 
       <Tickets />
+
+      <HotelesV1 />
 
       <BodegasV3 />
 
