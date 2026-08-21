@@ -331,7 +331,7 @@ export function BodegasV3() {
           <div
             className="flex items-center"
             style={{
-              animation: "marquee-infinite 60s linear infinite",
+              animation: "marquee-infinite 30s linear infinite",
               willChange: "transform"
             }}
           >
