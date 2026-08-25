@@ -6,6 +6,7 @@ Disallow: /_next/
 Disallow: /static/
 Disallow: /*.json$
 Disallow: /node_modules/
+Disallow: /inscripcion
 
 # Crawl delay (optional, conservative 1 second)
 Crawl-delay: 1
