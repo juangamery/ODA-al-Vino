@@ -10,7 +10,17 @@ export async function POST(request: NextRequest) {
   }
 
   const passcode = body.passcode ?? "";
-  if (!passcode || !checkAdminPasscode(passcode)) {
+  let valid: boolean;
+  try {
+    valid = !!passcode && checkAdminPasscode(passcode);
+  } catch (e) {
+    console.error("admin login config error:", e);
+    return NextResponse.json(
+      { error: "El panel no está configurado: falta CATAS_ADMIN_PASSCODE en las variables de entorno." },
+      { status: 500 }
+    );
+  }
+  if (!valid) {
     return NextResponse.json({ error: "Clave incorrecta." }, { status: 401 });
   }
 

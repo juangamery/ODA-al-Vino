@@ -84,13 +84,21 @@ export function AdminPanel() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ passcode }),
       });
+      let data: { error?: string } = {};
+      try {
+        data = await res.json();
+      } catch {
+        // respuesta no-JSON (ej. error 500 genérico del servidor)
+      }
       if (!res.ok) {
-        const data = await res.json();
-        setLoginError(data.error ?? "Clave incorrecta.");
+        setLoginError(data.error ?? `Error inesperado (${res.status}). Probá de nuevo.`);
         return;
       }
       setPasscode("");
       await loadData();
+    } catch (e) {
+      console.error(e);
+      setLoginError("No se pudo conectar con el servidor. Probá de nuevo.");
     } finally {
       setLoggingIn(false);
     }
