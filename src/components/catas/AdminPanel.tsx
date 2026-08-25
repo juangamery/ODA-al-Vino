@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
-import { DAYS, SALAS, SCHEDULE, SLOTS, salaById, type DayId, type SalaId } from "@/lib/catas/schedule";
+import { DAYS, SALAS, SCHEDULE, SLOTS, cataId, salaById, type DayId, type SalaId } from "@/lib/catas/schedule";
 import { Button } from "@/components/ui/Button";
 
 interface SelectionRow {
@@ -25,6 +25,11 @@ interface CupoRow {
   sala_id: SalaId;
   ocupados: number;
   cupo_max: number;
+}
+
+interface Attendee {
+  nombre: string;
+  contacto: string;
 }
 
 export function AdminPanel() {
@@ -98,39 +103,72 @@ export function AdminPanel() {
     setCupos([]);
   };
 
-  const perCata = useMemo(() => {
-    return cupos
-      .filter((c) => (filterDay === "todos" || c.day === filterDay) && (filterSala === "todas" || c.sala_id === filterSala))
-      .map((c) => {
-        const sala = salaById(c.sala_id);
-        const cata = SCHEDULE[c.day]?.[c.slot]?.[c.sala_id];
-        const day = DAYS.find((d) => d.id === c.day);
-        return { ...c, salaNombre: sala?.nombre ?? c.sala_id, bodega: cata?.bodega ?? "—", dayLabel: day?.label ?? c.day };
-      })
-      .sort((a, b) => (a.dayLabel + a.slot).localeCompare(b.dayLabel + b.slot));
-  }, [cupos, filterDay, filterSala]);
-
-  const filteredRegs = useMemo(() => {
-    return registrations.filter((r) =>
-      r.catas_selections.some(
-        (sel) => (filterDay === "todos" || sel.day === filterDay) && (filterSala === "todas" || sel.sala_id === filterSala)
-      )
-    );
-  }, [registrations, filterDay, filterSala]);
-
-  const exportCsv = () => {
-    if (!registrations.length) return;
-    const header = ["Nombre", "Contacto", "Fecha", "Catas"];
-    const rows = registrations.map((r) => {
-      const detalle = r.catas_selections
-        .map((sel) => {
-          const day = DAYS.find((d) => d.id === sel.day);
-          const sala = salaById(sel.sala_id);
-          return `${day?.label} ${sel.slot} ${sala?.nombre}: ${sel.bodega}`;
-        })
-        .join(" | ");
-      return [r.nombre, r.contacto, new Date(r.created_at).toLocaleString("es-AR"), detalle];
+  // cataId -> lista de inscriptos en esa cata puntual.
+  const attendeesByCata = useMemo(() => {
+    const map = new Map<string, Attendee[]>();
+    registrations.forEach((r) => {
+      r.catas_selections.forEach((sel) => {
+        const key = cataId(sel.day, sel.slot, sel.sala_id);
+        const list = map.get(key) ?? [];
+        list.push({ nombre: r.nombre, contacto: r.contacto });
+        map.set(key, list);
+      });
     });
+    return map;
+  }, [registrations]);
+
+  const cupoByCata = useMemo(() => {
+    const map = new Map<string, CupoRow>();
+    cupos.forEach((c) => map.set(cataId(c.day, c.slot, c.sala_id), c));
+    return map;
+  }, [cupos]);
+
+  // Estructura principal: sala → (día, horario) → bodega + inscriptos.
+  const salaSections = useMemo(() => {
+    const visibleSalas = filterSala === "todas" ? SALAS : SALAS.filter((s) => s.id === filterSala);
+    const visibleDays = filterDay === "todos" ? DAYS : DAYS.filter((d) => d.id === filterDay);
+
+    return visibleSalas
+      .map((sala) => {
+        const rows = visibleDays.flatMap((day) =>
+          SLOTS.map((slot) => {
+            const cata = SCHEDULE[day.id][slot]?.[sala.id];
+            if (!cata) return null;
+            const key = cataId(day.id, slot, sala.id);
+            const attendees = (attendeesByCata.get(key) ?? []).slice().sort((a, b) => a.nombre.localeCompare(b.nombre));
+            const cupo = cupoByCata.get(key);
+            return { day, slot, cata, attendees, cupoMax: cupo?.cupo_max ?? sala.pax };
+          })
+        ).filter((r): r is NonNullable<typeof r> => r !== null);
+
+        const total = rows.reduce((acc, r) => acc + r.attendees.length, 0);
+        return { sala, rows, total };
+      })
+      .filter((s) => s.rows.length > 0);
+  }, [filterSala, filterDay, attendeesByCata, cupoByCata]);
+
+  const totalInscriptos = registrations.length;
+
+  const buildCsvRows = (onlySala?: SalaId) => {
+    const rows: string[][] = [];
+    SALAS.forEach((sala) => {
+      if (onlySala && sala.id !== onlySala) return;
+      DAYS.forEach((day) => {
+        SLOTS.forEach((slot) => {
+          const cata = SCHEDULE[day.id][slot]?.[sala.id];
+          if (!cata) return;
+          const key = cataId(day.id, slot, sala.id);
+          const attendees = (attendeesByCata.get(key) ?? []).slice().sort((a, b) => a.nombre.localeCompare(b.nombre));
+          attendees.forEach((a) => rows.push([sala.nombre, day.label, slot, cata.bodega, a.nombre, a.contacto]));
+        });
+      });
+    });
+    return rows;
+  };
+
+  const downloadCsv = (rows: string[][], filename: string) => {
+    if (!rows.length) return;
+    const header = ["Sala", "Día", "Horario", "Bodega", "Nombre", "Contacto"];
     const csv = [header, ...rows]
       .map((row) => row.map((cell) => `"${String(cell).replace(/"/g, '""')}"`).join(","))
       .join("\n");
@@ -138,11 +176,17 @@ export function AdminPanel() {
     const url = URL.createObjectURL(blob);
     const a = document.createElement("a");
     a.href = url;
-    a.download = "inscripciones_oav_2026.csv";
+    a.download = filename;
     document.body.appendChild(a);
     a.click();
     document.body.removeChild(a);
     URL.revokeObjectURL(url);
+  };
+
+  const exportAll = () => downloadCsv(buildCsvRows(), "inscripciones_oav_2026_completo.csv");
+  const exportSala = (salaId: SalaId) => {
+    const sala = salaById(salaId);
+    downloadCsv(buildCsvRows(salaId), `inscripciones_oav_2026_${sala?.nombre.toLowerCase() ?? salaId}.csv`);
   };
 
   if (authed === null) {
@@ -175,15 +219,22 @@ export function AdminPanel() {
   }
 
   return (
-    <div className="mx-auto max-w-4xl px-5 py-8 md:py-12">
-      <div className="mb-4 flex items-center justify-between">
+    <div className="mx-auto max-w-5xl px-5 py-8 md:py-12">
+      <div className="mb-1 flex flex-wrap items-center justify-between gap-2">
         <h1 className="text-2xl text-wine">Panel de administración</h1>
-        <button onClick={handleLogout} className="rounded-full border border-wine/25 px-3 py-1.5 text-xs text-wine/70 hover:border-wine/50">
+        <button
+          onClick={handleLogout}
+          className="rounded-full border border-wine/25 px-3 py-1.5 text-xs text-wine/70 hover:border-wine/50"
+        >
           Cerrar panel
         </button>
       </div>
+      <p className="mb-4 text-[12.5px] text-wine/50">
+        {totalInscriptos} inscripto{totalInscriptos === 1 ? "" : "s"} en total · organizado por sala para control en
+        la entrada.
+      </p>
 
-      <div className="mb-4 flex flex-wrap gap-2">
+      <div className="mb-6 flex flex-wrap gap-2">
         <select
           value={filterDay}
           onChange={(e) => setFilterDay(e.target.value as DayId | "todos")}
@@ -208,76 +259,87 @@ export function AdminPanel() {
             </option>
           ))}
         </select>
-        <button onClick={loadData} className="rounded-lg border border-wine/25 bg-white px-3 py-2 text-xs text-wine hover:border-wine/50">
+        <button
+          onClick={loadData}
+          className="rounded-lg border border-wine/25 bg-white px-3 py-2 text-xs text-wine hover:border-wine/50"
+        >
           Actualizar
         </button>
-        <button onClick={exportCsv} className="rounded-lg border border-wine/25 bg-white px-3 py-2 text-xs text-wine hover:border-wine/50">
-          Descargar CSV
+        <button
+          onClick={exportAll}
+          className="rounded-lg border border-wine/25 bg-wine px-3 py-2 text-xs font-semibold text-paper hover:bg-plum"
+        >
+          Descargar CSV completo
         </button>
       </div>
 
       {loadError && <p className="mb-4 text-sm text-plum">{loadError}</p>}
       {loading && <p className="mb-4 text-sm text-wine/50">Cargando…</p>}
 
-      <div className="mb-6 grid grid-cols-2 gap-2 sm:grid-cols-3 md:grid-cols-4">
-        {perCata.length === 0 && !loading && <p className="text-sm text-wine/40">No hay catas para este filtro.</p>}
-        {perCata.map((c) => (
-          <div key={`${c.day}-${c.slot}-${c.sala_id}`} className="rounded-lg border border-wine/15 bg-white/60 p-2.5 text-[11.5px]">
-            <b className="block font-serif text-base normal-case tracking-normal text-plum">
-              {c.ocupados} / {c.cupo_max}
-            </b>
-            {c.bodega}
-            <br />
-            {c.dayLabel.split(" ")[0]} · {c.slot} · {c.salaNombre}
-          </div>
+      {!loading && salaSections.length === 0 && (
+        <p className="py-8 text-center text-sm text-wine/40">No hay catas para este filtro.</p>
+      )}
+
+      <div className="space-y-6">
+        {salaSections.map(({ sala, rows, total }) => (
+          <section key={sala.id} className="overflow-hidden rounded-2xl border border-wine/15 bg-white/60">
+            <header className="flex flex-wrap items-center justify-between gap-2 bg-wine/8 px-4 py-3">
+              <div>
+                <h2 className="font-serif text-lg normal-case tracking-normal text-wine">Sala {sala.nombre}</h2>
+                <p className="text-[11.5px] text-wine/60">
+                  {total} inscripto{total === 1 ? "" : "s"} · cupo {sala.pax} por cata
+                </p>
+              </div>
+              <button
+                onClick={() => exportSala(sala.id)}
+                className="rounded-full border border-wine/25 bg-white px-3 py-1.5 text-[11px] text-wine hover:border-wine/50"
+              >
+                CSV de esta sala
+              </button>
+            </header>
+            <div className="divide-y divide-wine/10">
+              {rows.map((row) => (
+                <div key={`${row.day.id}-${row.slot}`} className="px-4 py-3">
+                  <div className="mb-2 flex flex-wrap items-center justify-between gap-2">
+                    <div>
+                      <span className="lato-expanded text-[10px] text-plum">
+                        {row.day.label} · {row.slot}
+                      </span>
+                      <p className="font-serif text-base normal-case tracking-normal text-wine">{row.cata.bodega}</p>
+                    </div>
+                    <span
+                      className={`rounded-full px-2.5 py-1 text-[10.5px] ${
+                        row.attendees.length >= row.cupoMax ? "bg-plum/15 text-plum" : "bg-wine/8 text-wine/60"
+                      }`}
+                    >
+                      {row.attendees.length}/{row.cupoMax}
+                    </span>
+                  </div>
+                  {row.attendees.length === 0 ? (
+                    <p className="text-[12px] italic text-wine/40">Sin inscriptos todavía.</p>
+                  ) : (
+                    <ol className="space-y-1 text-[12.5px] text-wine/80">
+                      {row.attendees.map((a, i) => (
+                        <li
+                          key={i}
+                          className="flex items-baseline justify-between gap-3 border-b border-dashed border-wine/10 pb-1 last:border-0"
+                        >
+                          <span>
+                            {i + 1}. {a.nombre}
+                          </span>
+                          <span className="shrink-0 text-wine/50">{a.contacto}</span>
+                        </li>
+                      ))}
+                    </ol>
+                  )}
+                </div>
+              ))}
+            </div>
+          </section>
         ))}
       </div>
 
-      {filteredRegs.length === 0 ? (
-        <p className="py-8 text-center text-sm text-wine/40">No hay inscriptos para este filtro.</p>
-      ) : (
-        <div className="overflow-x-auto rounded-lg border border-wine/15">
-          <table className="w-full text-[12.5px]">
-            <thead>
-              <tr className="bg-wine/5 text-left text-[10.5px] uppercase tracking-wide text-plum">
-                <th className="px-3 py-2">Nombre</th>
-                <th className="px-3 py-2">Contacto</th>
-                <th className="px-3 py-2">Catas elegidas</th>
-                <th className="px-3 py-2">Fecha</th>
-              </tr>
-            </thead>
-            <tbody>
-              {filteredRegs
-                .slice()
-                .sort((a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime())
-                .map((r) => (
-                  <tr key={r.id} className="border-t border-wine/10 align-top">
-                    <td className="px-3 py-2">{r.nombre}</td>
-                    <td className="px-3 py-2">{r.contacto}</td>
-                    <td className="px-3 py-2">
-                      {r.catas_selections
-                        .filter(
-                          (sel) => (filterDay === "todos" || sel.day === filterDay) && (filterSala === "todas" || sel.sala_id === filterSala)
-                        )
-                        .map((sel, i) => {
-                          const day = DAYS.find((d) => d.id === sel.day);
-                          const sala = salaById(sel.sala_id);
-                          return (
-                            <div key={i}>
-                              {day?.label.split(" ")[0]} {sel.slot} · {sala?.nombre}: {sel.bodega}
-                            </div>
-                          );
-                        })}
-                    </td>
-                    <td className="px-3 py-2 whitespace-nowrap">{new Date(r.created_at).toLocaleString("es-AR")}</td>
-                  </tr>
-                ))}
-            </tbody>
-          </table>
-        </div>
-      )}
-
-      <p className="mt-4 text-[11.5px] leading-relaxed text-wine/50">
+      <p className="mt-6 text-[11.5px] leading-relaxed text-wine/50">
         Los datos se leen directamente de la base del formulario. Compartí siempre el mismo enlace de inscripción
         para que todas las respuestas queden juntas.
       </p>
