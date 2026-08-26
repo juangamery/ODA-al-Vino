@@ -2,8 +2,10 @@ import { NextRequest, NextResponse } from "next/server";
 import { Resend } from "resend";
 import { getSupabaseAdmin } from "@/lib/catas/supabaseAdmin";
 import { DAYS, getCata, salaById, validateSelections, type Selection } from "@/lib/catas/schedule";
+import { checkParticipant, ParticipantsApiError } from "@/lib/catas/participantsApi";
 
 const resend = process.env.RESEND_API_KEY ? new Resend(process.env.RESEND_API_KEY) : null;
+const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 interface Body {
   nombre?: string;
@@ -20,19 +22,39 @@ export async function POST(request: NextRequest) {
   }
 
   const nombre = (body.nombre ?? "").trim();
-  const contacto = (body.contacto ?? "").trim();
+  const contacto = (body.contacto ?? "").trim().toLowerCase();
   const selections = Array.isArray(body.selections) ? body.selections : [];
 
   if (!nombre || !contacto) {
-    return NextResponse.json(
-      { error: "Completá nombre y un email o teléfono de contacto." },
-      { status: 400 }
-    );
+    return NextResponse.json({ error: "Completá nombre y email." }, { status: 400 });
+  }
+  if (!EMAIL_RE.test(contacto)) {
+    return NextResponse.json({ error: "Ingresá un email válido." }, { status: 400 });
   }
 
   const validation = validateSelections(selections);
   if (!validation.ok) {
     return NextResponse.json({ error: validation.error }, { status: 400 });
+  }
+
+  // Sólo participantes confirmados de la edición vigente pueden anotarse a las catas.
+  try {
+    const participantCheck = await checkParticipant(contacto);
+    if (!participantCheck.is_participant) {
+      return NextResponse.json(
+        {
+          error:
+            "Este email no corresponde a un participante confirmado de ODA al Vino 2026. Usá el mismo email con el que compraste tu entrada.",
+        },
+        { status: 403 }
+      );
+    }
+  } catch (e) {
+    console.error("participant check error:", e instanceof ParticipantsApiError ? e.code : e);
+    return NextResponse.json(
+      { error: "No pudimos verificar tu inscripción en este momento. Probá de nuevo en unos minutos." },
+      { status: 503 }
+    );
   }
 
   const payload = selections.map((sel) => {
@@ -78,7 +100,7 @@ export async function POST(request: NextRequest) {
     resend.emails
       .send({
         from: "ODA al Vino <noreply@oda-al-vino.com>",
-        to: contacto.includes("@") ? contacto : "inscripciones@oda-al-vino.com",
+        to: contacto,
         subject: "Tu inscripción a las salas de degustación · ODA al Vino 2026",
         html: `<h1>¡Listo, ${nombre}!</h1><p>Tu inscripción a las salas de degustación quedó confirmada:</p><ul>${resumen}</ul>`,
       })
