@@ -320,7 +320,7 @@ export function CatasForm() {
         </div>
 
         <aside
-          className={`rounded-2xl border border-wine/15 bg-white/70 backdrop-blur-sm md:sticky md:top-6 md:max-h-none md:overflow-visible md:p-5 md:shadow-none ${
+          className={`rounded-2xl border border-harvest bg-harvest backdrop-blur-sm md:sticky md:top-6 md:max-h-none md:overflow-visible md:p-5 md:shadow-none ${
             ticketExpanded ? "max-h-[80vh] overflow-y-auto" : "max-h-[64px] overflow-hidden"
           } fixed inset-x-0 bottom-0 z-40 rounded-b-none border-x-0 border-b-0 p-4 shadow-[0_-8px_30px_rgba(71,7,44,0.15)] transition-[max-height] duration-300 md:static md:rounded-2xl md:border`}
         >
@@ -328,12 +328,12 @@ export function CatasForm() {
             onClick={() => setTicketExpanded((v) => !v)}
             className="flex w-full items-center justify-between md:hidden"
           >
-            <span className="font-serif text-lg normal-case tracking-normal text-wine">Tu ticket · {totalSelected}</span>
-            <span className={`transition-transform ${ticketExpanded ? "rotate-180" : ""}`}>▲</span>
+            <span className="font-serif text-lg normal-case tracking-normal text-paper">Tu ticket · {totalSelected}</span>
+            <span className={`text-paper transition-transform ${ticketExpanded ? "rotate-180" : ""}`}>▲</span>
           </button>
 
-          <h3 className="hidden font-serif text-xl normal-case tracking-normal text-wine md:block">Tu ticket</h3>
-          <p className="mb-3 mt-1 hidden text-sm text-wine/60 md:block">
+          <h3 className="hidden font-serif text-xl normal-case tracking-normal text-paper md:block">Tu ticket</h3>
+          <p className="mb-3 mt-1 hidden text-sm text-paper/75 md:block">
             {totalSelected} cata{totalSelected === 1 ? "" : "s"} elegida{totalSelected === 1 ? "" : "s"} (máx.{" "}
             {MAX_PER_DAY} por día)
           </p>
@@ -341,9 +341,9 @@ export function CatasForm() {
           <div className="mt-3 md:mt-0">
             {DAYS.map((d) => (
               <div key={d.id} className="mb-4">
-                <div className="lato-expanded mb-2 text-xs text-plum">{d.label}</div>
+                <div className="lato-expanded mb-2 text-xs text-paper/80">{d.label}</div>
                 {selections[d.id].length === 0 ? (
-                  <p className="text-sm italic text-wine/40">Todavía no elegiste ninguna sala.</p>
+                  <p className="text-sm italic text-paper/60">Todavía no elegiste ninguna sala.</p>
                 ) : (
                   selections[d.id].map((sel) => {
                     const sala = salaById(sel.salaId)!;
@@ -351,7 +351,7 @@ export function CatasForm() {
                     return (
                       <div
                         key={`${sel.slot}-${sel.salaId}`}
-                        className="mb-2 flex items-start justify-between gap-2 rounded-lg bg-wine/5 px-3 py-2.5 text-sm"
+                        className="mb-2 flex items-start justify-between gap-2 rounded-lg bg-paper/90 px-3 py-2.5 text-sm"
                       >
                         <div>
                           <b className="block text-base text-wine">{cata.bodega}</b>
@@ -373,7 +373,7 @@ export function CatasForm() {
             ))}
 
             <div className="mb-4">
-              <label htmlFor="nombre" className="lato-expanded mb-1.5 block text-xs text-plum">
+              <label htmlFor="nombre" className="lato-expanded mb-1.5 block text-xs text-paper/80">
                 Nombre y apellido
               </label>
               <input
@@ -382,11 +382,11 @@ export function CatasForm() {
                 value={nombre}
                 onChange={(e) => setNombre(e.target.value)}
                 placeholder="Ej: Marina Suárez"
-                className="w-full rounded-lg border border-wine/25 bg-white px-3.5 py-3 text-base text-wine placeholder:text-wine/35 focus:outline-none focus:ring-2 focus:ring-harvest"
+                className="w-full rounded-lg border border-wine/15 bg-paper px-3.5 py-3 text-base text-wine placeholder:text-wine/35 focus:outline-none focus:ring-2 focus:ring-wine"
               />
             </div>
             <div className="mb-4">
-              <label htmlFor="contacto" className="lato-expanded mb-1.5 block text-xs text-plum">
+              <label htmlFor="contacto" className="lato-expanded mb-1.5 block text-xs text-paper/80">
                 Email
               </label>
               <input
@@ -395,16 +395,18 @@ export function CatasForm() {
                 value={contacto}
                 onChange={(e) => setContacto(e.target.value)}
                 placeholder="El mismo con el que compraste tu entrada"
-                className="w-full rounded-lg border border-wine/25 bg-white px-3.5 py-3 text-base text-wine placeholder:text-wine/35 focus:outline-none focus:ring-2 focus:ring-harvest"
+                className="w-full rounded-lg border border-wine/15 bg-paper px-3.5 py-3 text-base text-wine placeholder:text-wine/35 focus:outline-none focus:ring-2 focus:ring-wine"
               />
               {participantStatus === "checking" && (
-                <p className="mt-1.5 text-sm text-wine/50">Verificando participante…</p>
+                <p className="mt-1.5 rounded-lg bg-paper/90 px-3 py-2 text-sm text-wine/70">Verificando participante…</p>
               )}
               {participantStatus === "confirmed" && (
-                <p className="mt-1.5 text-sm text-harvest">✓ Participante confirmado de ODA al Vino 2026</p>
+                <p className="mt-1.5 rounded-lg bg-paper/90 px-3 py-2 text-sm text-harvest">
+                  ✓ Participante confirmado de ODA al Vino 2026
+                </p>
               )}
               {participantStatus === "not_found" && (
-                <p className="mt-1.5 text-sm text-plum">
+                <p className="mt-1.5 rounded-lg bg-paper/90 px-3 py-2 text-sm text-plum">
                   No encontramos este email entre los participantes confirmados. Usá el mismo con el que compraste tu
                   entrada.
                 </p>
@@ -412,6 +414,7 @@ export function CatasForm() {
             </div>
 
             <Button
+              variant="secondary"
               className="w-full !text-base"
               disabled={submitting || participantStatus === "checking" || participantStatus === "not_found"}
               onClick={handleSubmit}
@@ -420,7 +423,7 @@ export function CatasForm() {
             </Button>
 
             {formError && (
-              <div className="mt-2.5 rounded-lg border border-plum/40 bg-plum/10 px-3 py-2.5 text-sm text-plum">
+              <div className="mt-2.5 rounded-lg border border-plum/40 bg-paper px-3 py-2.5 text-sm text-plum">
                 {formError}
               </div>
             )}
