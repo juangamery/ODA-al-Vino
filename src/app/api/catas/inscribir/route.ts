@@ -50,7 +50,10 @@ export async function POST(request: NextRequest) {
       );
     }
   } catch (e) {
-    console.error("participant check error:", e instanceof ParticipantsApiError ? e.code : e);
+    console.error(
+      "participant check error:",
+      e instanceof ParticipantsApiError ? `${e.code} status=${e.status} body=${e.body}` : e
+    );
     return NextResponse.json(
       { error: "No pudimos verificar tu inscripción en este momento. Probá de nuevo en unos minutos." },
       { status: 503 }

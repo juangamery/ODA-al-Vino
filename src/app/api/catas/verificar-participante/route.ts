@@ -21,7 +21,10 @@ export async function GET(request: NextRequest) {
     // Chequeo en vivo: si el API externo falla (timeout, rate limit, token rotado),
     // no bloqueamos al usuario mientras escribe — el submit vuelve a validar,
     // ahí sí de forma estricta.
-    console.error("verificar-participante error:", e instanceof ParticipantsApiError ? e.code : e);
+    console.error(
+      "verificar-participante error:",
+      e instanceof ParticipantsApiError ? `${e.code} status=${e.status} body=${e.body}` : e
+    );
     return NextResponse.json({ is_participant: null });
   }
 }
