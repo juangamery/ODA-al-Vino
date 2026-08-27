@@ -38,6 +38,11 @@ export async function POST(request: NextRequest) {
   }
 
   // Sólo participantes confirmados de la edición vigente pueden anotarse a las catas.
+  // Si el API del CRM responde explícitamente "no es participante", bloqueamos.
+  // Si el API del CRM falla (caído, mal configurado del otro lado, timeout), dejamos
+  // pasar la inscripción sin verificar — TEMPORAL mientras el equipo de OAV soluciona
+  // crm.odaalvino.com.br (ver logs: "participant check error"). Apenas el CRM vuelva a
+  // responder normalmente, la validación real se reactiva sola, sin tocar este código.
   try {
     const participantCheck = await checkParticipant(contacto);
     if (!participantCheck.is_participant) {
@@ -51,12 +56,8 @@ export async function POST(request: NextRequest) {
     }
   } catch (e) {
     console.error(
-      "participant check error:",
+      "participant check error (dejando pasar sin verificar):",
       e instanceof ParticipantsApiError ? `${e.code} status=${e.status} body=${e.body}` : e
-    );
-    return NextResponse.json(
-      { error: "No pudimos verificar tu inscripción en este momento. Probá de nuevo en unos minutos." },
-      { status: 503 }
     );
   }
 
