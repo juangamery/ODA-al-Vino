@@ -236,7 +236,7 @@ export function CatasForm() {
             return (
               <div key={slot} className="mb-10">
                 <div className="mb-4 flex items-center gap-3">
-                  <span className="rounded-full bg-wine px-5 py-2 font-serif text-lg normal-case tracking-normal text-paper md:text-xl">
+                  <span className="rounded-full bg-wine px-5 py-2 font-sans text-lg font-bold text-paper md:text-xl">
                     {slot}
                   </span>
                   <span className="lato-expanded text-xs text-plum">hs</span>
