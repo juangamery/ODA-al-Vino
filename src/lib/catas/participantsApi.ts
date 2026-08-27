@@ -26,7 +26,12 @@ export interface ParticipantCheckResult {
 }
 
 export class ParticipantsApiError extends Error {
-  constructor(public code: "UNAUTHORIZED" | "RATE_LIMITED" | "BAD_REQUEST" | "UPSTREAM_ERROR", message: string) {
+  constructor(
+    public code: "UNAUTHORIZED" | "RATE_LIMITED" | "BAD_REQUEST" | "UPSTREAM_ERROR",
+    message: string,
+    public status?: number,
+    public body?: string
+  ) {
     super(message);
     this.name = "ParticipantsApiError";
   }
@@ -47,16 +52,36 @@ export async function checkParticipant(email: string): Promise<ParticipantCheckR
   });
 
   if (res.status === 401) {
-    throw new ParticipantsApiError("UNAUTHORIZED", "El token del API de participantes fue rechazado (¿rotado?).");
+    throw new ParticipantsApiError(
+      "UNAUTHORIZED",
+      "El token del API de participantes fue rechazado (¿rotado?).",
+      res.status,
+      await res.text().catch(() => "")
+    );
   }
   if (res.status === 429) {
-    throw new ParticipantsApiError("RATE_LIMITED", "Rate limit del API de participantes excedido.");
+    throw new ParticipantsApiError(
+      "RATE_LIMITED",
+      "Rate limit del API de participantes excedido.",
+      res.status,
+      await res.text().catch(() => "")
+    );
   }
   if (res.status === 400) {
-    throw new ParticipantsApiError("BAD_REQUEST", "Email inválido para el API de participantes.");
+    throw new ParticipantsApiError(
+      "BAD_REQUEST",
+      "Email inválido para el API de participantes.",
+      res.status,
+      await res.text().catch(() => "")
+    );
   }
   if (!res.ok) {
-    throw new ParticipantsApiError("UPSTREAM_ERROR", `API de participantes respondió ${res.status}.`);
+    throw new ParticipantsApiError(
+      "UPSTREAM_ERROR",
+      `API de participantes respondió ${res.status}.`,
+      res.status,
+      await res.text().catch(() => "")
+    );
   }
 
   return res.json();

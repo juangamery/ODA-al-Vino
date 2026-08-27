@@ -28,6 +28,7 @@ interface CupoRow {
 }
 
 interface Attendee {
+  id: string;
   nombre: string;
   contacto: string;
 }
@@ -50,6 +51,8 @@ export function AdminPanel() {
   const [cupoInput, setCupoInput] = useState("");
   const [savingCupo, setSavingCupo] = useState(false);
   const [cupoError, setCupoError] = useState<string | null>(null);
+
+  const [deletingId, setDeletingId] = useState<string | null>(null);
 
   const loadData = async () => {
     setLoading(true);
@@ -123,7 +126,7 @@ export function AdminPanel() {
       r.catas_selections.forEach((sel) => {
         const key = cataId(sel.day, sel.slot, sel.sala_id);
         const list = map.get(key) ?? [];
-        list.push({ nombre: r.nombre, contacto: r.contacto });
+        list.push({ id: r.id, nombre: r.nombre, contacto: r.contacto });
         map.set(key, list);
       });
     });
@@ -234,6 +237,33 @@ export function AdminPanel() {
       setCupoError("No se pudo actualizar el cupo.");
     } finally {
       setSavingCupo(false);
+    }
+  };
+
+  const handleDelete = async (attendee: Attendee) => {
+    const confirmed = window.confirm(
+      `¿Eliminar la inscripción de ${attendee.nombre} (${attendee.contacto})? Esto borra TODAS las salas que eligió, no sólo esta, y libera su cupo. No se puede deshacer.`
+    );
+    if (!confirmed) return;
+
+    setDeletingId(attendee.id);
+    try {
+      const res = await fetch("/api/catas/admin/inscripcion", {
+        method: "DELETE",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ id: attendee.id }),
+      });
+      const data = await res.json();
+      if (!res.ok) {
+        alert(data.error ?? "No se pudo eliminar la inscripción.");
+        return;
+      }
+      await loadData();
+    } catch (e) {
+      console.error(e);
+      alert("No se pudo eliminar la inscripción.");
+    } finally {
+      setDeletingId(null);
     }
   };
 
@@ -410,13 +440,23 @@ export function AdminPanel() {
                     <ol className="space-y-1 text-[12.5px] text-wine/80">
                       {row.attendees.map((a, i) => (
                         <li
-                          key={i}
+                          key={a.id}
                           className="flex items-baseline justify-between gap-3 border-b border-dashed border-wine/10 pb-1 last:border-0"
                         >
                           <span>
                             {i + 1}. {a.nombre}
                           </span>
-                          <span className="shrink-0 text-wine/50">{a.contacto}</span>
+                          <span className="flex items-center gap-2">
+                            <span className="text-wine/50">{a.contacto}</span>
+                            <button
+                              onClick={() => handleDelete(a)}
+                              disabled={deletingId === a.id}
+                              title="Eliminar esta inscripción"
+                              className="text-wine/40 hover:text-plum disabled:opacity-40"
+                            >
+                              {deletingId === a.id ? "…" : "✕"}
+                            </button>
+                          </span>
                         </li>
                       ))}
                     </ol>
