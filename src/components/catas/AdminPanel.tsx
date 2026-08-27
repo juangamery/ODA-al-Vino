@@ -46,6 +46,11 @@ export function AdminPanel() {
   const [filterDay, setFilterDay] = useState<DayId | "todos">("todos");
   const [filterSala, setFilterSala] = useState<SalaId | "todas">("todas");
 
+  const [editingSala, setEditingSala] = useState<SalaId | null>(null);
+  const [cupoInput, setCupoInput] = useState("");
+  const [savingCupo, setSavingCupo] = useState(false);
+  const [cupoError, setCupoError] = useState<string | null>(null);
+
   const loadData = async () => {
     setLoading(true);
     setLoadError(null);
@@ -197,6 +202,41 @@ export function AdminPanel() {
     downloadCsv(buildCsvRows(salaId), `inscripciones_oav_2026_${sala?.nombre.toLowerCase() ?? salaId}.csv`);
   };
 
+  const startEditCupo = (salaId: SalaId, currentMax: number) => {
+    setEditingSala(salaId);
+    setCupoInput(String(currentMax));
+    setCupoError(null);
+  };
+
+  const saveCupo = async (salaId: SalaId) => {
+    const value = Number(cupoInput);
+    if (!Number.isInteger(value) || value < 1) {
+      setCupoError("Ingresá un número entero mayor a 0.");
+      return;
+    }
+    setSavingCupo(true);
+    setCupoError(null);
+    try {
+      const res = await fetch("/api/catas/admin/cupo", {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ salaId, cupoMax: value }),
+      });
+      const data = await res.json();
+      if (!res.ok) {
+        setCupoError(data.error ?? "No se pudo actualizar el cupo.");
+        return;
+      }
+      setEditingSala(null);
+      await loadData();
+    } catch (e) {
+      console.error(e);
+      setCupoError("No se pudo actualizar el cupo.");
+    } finally {
+      setSavingCupo(false);
+    }
+  };
+
   if (authed === null) {
     return <div className="py-24 text-center text-wine/60">Cargando…</div>;
   }
@@ -289,22 +329,63 @@ export function AdminPanel() {
       )}
 
       <div className="space-y-6">
-        {salaSections.map(({ sala, rows, total }) => (
+        {salaSections.map(({ sala, rows, total }) => {
+          const currentCupo = rows[0]?.cupoMax ?? sala.pax;
+          const isEditing = editingSala === sala.id;
+          return (
           <section key={sala.id} className="overflow-hidden rounded-2xl border border-wine/15 bg-white/60">
             <header className="flex flex-wrap items-center justify-between gap-2 bg-wine/8 px-4 py-3">
               <div>
                 <h2 className="font-serif text-lg normal-case tracking-normal text-wine">Sala {sala.nombre}</h2>
                 <p className="text-[11.5px] text-wine/60">
-                  {total} inscripto{total === 1 ? "" : "s"} · cupo {sala.pax} por cata
+                  {total} inscripto{total === 1 ? "" : "s"} · cupo {currentCupo} por cata
                 </p>
               </div>
-              <button
-                onClick={() => exportSala(sala.id)}
-                className="rounded-full border border-wine/25 bg-white px-3 py-1.5 text-[11px] text-wine hover:border-wine/50"
-              >
-                CSV de esta sala
-              </button>
+              {isEditing ? (
+                <div className="flex items-center gap-2">
+                  <input
+                    type="number"
+                    min={1}
+                    autoFocus
+                    value={cupoInput}
+                    onChange={(e) => setCupoInput(e.target.value)}
+                    onKeyDown={(e) => e.key === "Enter" && saveCupo(sala.id)}
+                    className="w-20 rounded-lg border border-wine/25 bg-white px-2 py-1.5 text-sm text-wine focus:outline-none focus:ring-2 focus:ring-harvest"
+                  />
+                  <button
+                    onClick={() => saveCupo(sala.id)}
+                    disabled={savingCupo}
+                    className="rounded-full bg-wine px-3 py-1.5 text-[11px] font-semibold text-paper hover:bg-plum disabled:opacity-50"
+                  >
+                    {savingCupo ? "Guardando…" : "Guardar"}
+                  </button>
+                  <button
+                    onClick={() => setEditingSala(null)}
+                    className="text-[11px] text-wine/50 hover:text-wine"
+                  >
+                    Cancelar
+                  </button>
+                </div>
+              ) : (
+                <div className="flex gap-2">
+                  <button
+                    onClick={() => startEditCupo(sala.id, currentCupo)}
+                    className="rounded-full border border-wine/25 bg-white px-3 py-1.5 text-[11px] text-wine hover:border-wine/50"
+                  >
+                    Editar cupo
+                  </button>
+                  <button
+                    onClick={() => exportSala(sala.id)}
+                    className="rounded-full border border-wine/25 bg-white px-3 py-1.5 text-[11px] text-wine hover:border-wine/50"
+                  >
+                    CSV de esta sala
+                  </button>
+                </div>
+              )}
             </header>
+            {isEditing && cupoError && (
+              <p className="border-b border-wine/10 bg-plum/10 px-4 py-2 text-[11.5px] text-plum">{cupoError}</p>
+            )}
             <div className="divide-y divide-wine/10">
               {rows.map((row) => (
                 <div key={`${row.day.id}-${row.slot}`} className="px-4 py-3">
@@ -344,7 +425,8 @@ export function AdminPanel() {
               ))}
             </div>
           </section>
-        ))}
+          );
+        })}
       </div>
 
       <p className="mt-6 text-[11.5px] leading-relaxed text-wine/50">
