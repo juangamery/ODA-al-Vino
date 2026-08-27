@@ -4,6 +4,7 @@ import { useEffect, useMemo, useState } from "react";
 import {
   DAYS,
   MAX_PER_DAY,
+  SALAS,
   SCHEDULE,
   SLOTS,
   SalaId,
@@ -193,6 +194,17 @@ export function CatasForm() {
           Viernes 04 y sábado 05 de septiembre. Podés elegir hasta {MAX_PER_DAY} catas por día. Si dos salas
           coinciden en el mismo horario, sólo podés estar en una.
         </p>
+        <div className="mx-auto mt-4 flex max-w-xl flex-wrap items-center justify-center gap-2">
+          <span className="lato-expanded text-xs text-plum">Las salas:</span>
+          {SALAS.map((sala) => (
+            <span
+              key={sala.id}
+              className="rounded-full bg-wine/8 px-3 py-1 text-sm font-semibold text-wine normal-case tracking-normal"
+            >
+              {sala.nombre}
+            </span>
+          ))}
+        </div>
       </header>
 
       <div className="mx-auto flex max-w-[1180px] flex-wrap justify-center gap-2 px-5 py-4">
