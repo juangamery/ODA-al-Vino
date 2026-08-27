@@ -194,7 +194,7 @@ export function CatasForm() {
           Viernes 04 y sábado 05 de septiembre. Podés elegir hasta {MAX_PER_DAY} catas por día. Si dos salas
           coinciden en el mismo horario, sólo podés estar en una.
         </p>
-        <div className="mx-auto mt-4 flex max-w-xl flex-wrap items-center justify-center gap-2">
+        <div className="mx-auto mt-4 flex max-w-xl flex-wrap items-center justify-center gap-x-3 gap-y-2 md:max-w-none md:flex-nowrap md:whitespace-nowrap">
           <span className="lato-expanded text-xs text-plum">Las salas:</span>
           {SALAS.map((sala) => (
             <span
