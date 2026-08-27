@@ -270,7 +270,7 @@ export function CatasForm() {
                         }`}
                       >
                         <div className="lato-expanded text-xs text-plum">{sala.nombre}</div>
-                        <div className="mt-1.5 font-serif text-xl normal-case tracking-normal text-wine">
+                        <div className="mt-1.5 font-serif text-2xl normal-case tracking-normal text-wine md:text-[26px]">
                           {cata.bodega}
                         </div>
                         <div className={`mt-1.5 text-base ${cata.profesional ? "text-wine/70" : "italic text-wine/40"}`}>
