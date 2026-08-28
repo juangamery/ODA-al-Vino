@@ -10,6 +10,7 @@ const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 interface Body {
   nombre?: string;
   contacto?: string;
+  documento?: string;
   selections?: Selection[];
 }
 
@@ -23,10 +24,11 @@ export async function POST(request: NextRequest) {
 
   const nombre = (body.nombre ?? "").trim();
   const contacto = (body.contacto ?? "").trim().toLowerCase();
+  const documento = (body.documento ?? "").trim();
   const selections = Array.isArray(body.selections) ? body.selections : [];
 
-  if (!nombre || !contacto) {
-    return NextResponse.json({ error: "Completá nombre y email." }, { status: 400 });
+  if (!nombre || !contacto || !documento) {
+    return NextResponse.json({ error: "Completá nombre, documento y email." }, { status: 400 });
   }
   if (!EMAIL_RE.test(contacto)) {
     return NextResponse.json({ error: "Ingresá un email válido." }, { status: 400 });
@@ -38,18 +40,18 @@ export async function POST(request: NextRequest) {
   }
 
   // Sólo participantes confirmados de la edición vigente pueden anotarse a las catas.
+  // Se busca por documento (DNI/CPF/RUT/Cédula), no por email.
   // Si el API del CRM responde explícitamente "no es participante", bloqueamos.
-  // Si el API del CRM falla (caído, mal configurado del otro lado, timeout), dejamos
-  // pasar la inscripción sin verificar — TEMPORAL mientras el equipo de OAV soluciona
-  // crm.odaalvino.com.br (ver logs: "participant check error"). Apenas el CRM vuelva a
+  // Si el API del CRM falla (caído, timeout), dejamos pasar la inscripción sin
+  // verificar — ver logs: "participant check error". Apenas el CRM vuelva a
   // responder normalmente, la validación real se reactiva sola, sin tocar este código.
   try {
-    const participantCheck = await checkParticipant(contacto);
+    const participantCheck = await checkParticipant(documento);
     if (!participantCheck.is_participant) {
       return NextResponse.json(
         {
           error:
-            "Este email no corresponde a un participante confirmado de ODA al Vino 2026. Usá el mismo email con el que compraste tu entrada.",
+            "Este documento no corresponde a un participante confirmado de ODA al Vino 2026. Usá el mismo documento con el que compraste tu entrada.",
         },
         { status: 403 }
       );

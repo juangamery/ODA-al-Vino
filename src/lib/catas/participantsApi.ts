@@ -1,8 +1,11 @@
 /**
- * Cliente del API externo del CRM de OAV para verificar si un email
- * corresponde a un participante confirmado de la edición vigente.
- * Server-side únicamente: el token es secreto y nunca debe llegar al cliente.
- * Ver: apiparticipantcheck.md
+ * Cliente del API externo del CRM de OAV para verificar si un documento
+ * (DNI/CPF/RUT/Cédula) corresponde a un participante confirmado de la
+ * edición vigente. Server-side únicamente: el token es secreto y nunca
+ * debe llegar al cliente.
+ * Ver: apiparticipantcheck.md — el admin del CRM confirmó reemplazar la
+ * búsqueda por email (como decía la doc original) por búsqueda por
+ * documento (param `document`).
  */
 
 const API_BASE = "https://crm.odaalvino.com.br/api/external";
@@ -37,14 +40,14 @@ export class ParticipantsApiError extends Error {
   }
 }
 
-export async function checkParticipant(email: string): Promise<ParticipantCheckResult> {
+export async function checkParticipant(document: string): Promise<ParticipantCheckResult> {
   const token = process.env.OAV_PARTICIPANTS_API_TOKEN;
   if (!token) {
     throw new Error("Falta OAV_PARTICIPANTS_API_TOKEN en el entorno");
   }
 
   const url = new URL(`${API_BASE}/participants/check`);
-  url.searchParams.set("email", email);
+  url.searchParams.set("document", document);
 
   const res = await fetch(url, {
     headers: { "X-API-Token": token },
@@ -70,7 +73,7 @@ export async function checkParticipant(email: string): Promise<ParticipantCheckR
   if (res.status === 400) {
     throw new ParticipantsApiError(
       "BAD_REQUEST",
-      "Email inválido para el API de participantes.",
+      "Documento inválido o faltante para el API de participantes.",
       res.status,
       await res.text().catch(() => "")
     );
