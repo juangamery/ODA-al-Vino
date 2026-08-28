@@ -45,6 +45,7 @@ export function CatasForm() {
   const [activeDay, setActiveDay] = useState<DayId>(DAYS[0].id);
   const [selections, setSelections] = useState<SelectionsByDay>(EMPTY_SELECTIONS);
   const [counts, setCounts] = useState<Record<string, number>>({});
+  const [cupoMax, setCupoMax] = useState<Record<string, number>>({});
   const [openDetails, setOpenDetails] = useState<Set<string>>(new Set());
   const [ticketExpanded, setTicketExpanded] = useState(false);
 
@@ -61,6 +62,7 @@ export function CatasForm() {
       const res = await fetch("/api/catas/disponibilidad", { cache: "no-store" });
       const data = await res.json();
       if (data?.counts) setCounts(data.counts);
+      if (data?.cupoMax) setCupoMax(data.cupoMax);
     } catch (e) {
       console.error("No se pudo cargar la disponibilidad", e);
     }
@@ -309,13 +311,14 @@ export function CatasForm() {
                     const id = cataId(activeDay, slot, salaId);
                     const isSelected = daySelections.some((s) => s.slot === slot && s.salaId === salaId);
                     const ocupados = counts[id] ?? 0;
-                    const full = ocupados >= sala.pax && !isSelected;
+                    const pax = cupoMax[id] ?? sala.pax;
+                    const full = ocupados >= pax && !isSelected;
                     const slotTaken = takenSlots.has(slot) && !isSelected;
                     const maxReached = dayMaxReached && !isSelected;
                     const disabled = full || slotTaken || maxReached;
                     const hasExtra = !!(cata.restaurante || cata.presenta);
                     const detailsOpen = openDetails.has(id);
-                    const low = sala.pax - ocupados <= 5 && !full;
+                    const low = pax - ocupados <= 5 && !full;
 
                     return (
                       <div
@@ -342,7 +345,7 @@ export function CatasForm() {
                               full ? "bg-plum/15 text-plum" : low ? "bg-harvest/20 text-harvest" : "bg-wine/8 text-wine/60"
                             }`}
                           >
-                            {full ? t("catasSinCupo", language) : `${ocupados}/${sala.pax}`}
+                            {full ? t("catasSinCupo", language) : `${ocupados}/${pax}`}
                           </span>
                           {hasExtra && (
                             <button
