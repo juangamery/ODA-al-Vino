@@ -6,6 +6,10 @@ import { checkParticipant, ParticipantsApiError } from "@/lib/catas/participants
 import { t, type Language } from "@/lib/translations";
 
 const resend = process.env.RESEND_API_KEY ? new Resend(process.env.RESEND_API_KEY) : null;
+// Kill switch temporal para probar el flujo sin mandarle mails de verdad a
+// nadie: poné CATAS_SKIP_CONFIRMATION_EMAIL=true en Vercel y listo, sin
+// tocar código. Sacala (o ponela en false) para reactivar el envío.
+const skipConfirmationEmail = process.env.CATAS_SKIP_CONFIRMATION_EMAIL === "true";
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 const errorCodeKey = {
@@ -95,7 +99,9 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ error: t("catasErrGuardarRetry", lang) }, { status: 500 });
   }
 
-  if (resend) {
+  if (resend && skipConfirmationEmail) {
+    console.log("inscribir: envío de mail de confirmación saltado (CATAS_SKIP_CONFIRMATION_EMAIL=true)");
+  } else if (resend) {
     const resumen = selections
       .map((sel) => {
         const cata = getCata(sel.day, sel.slot, sel.salaId)!;
