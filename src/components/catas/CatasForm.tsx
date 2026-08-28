@@ -31,6 +31,7 @@ export function CatasForm() {
 
   const [nombre, setNombre] = useState("");
   const [contacto, setContacto] = useState("");
+  const [documento, setDocumento] = useState("");
   const [participantStatus, setParticipantStatus] = useState<ParticipantStatus>("idle");
   const [submitting, setSubmitting] = useState(false);
   const [formError, setFormError] = useState<string | null>(null);
@@ -51,19 +52,20 @@ export function CatasForm() {
   }, []);
 
   useEffect(() => {
-    const email = contacto.trim().toLowerCase();
-    if (!EMAIL_RE.test(email)) {
+    const doc = documento.trim();
+    if (doc.length < 5) {
       setParticipantStatus("idle");
       return;
     }
     setParticipantStatus("checking");
     const timeout = setTimeout(async () => {
       try {
-        const res = await fetch(`/api/catas/verificar-participante?email=${encodeURIComponent(email)}`);
+        const res = await fetch(`/api/catas/verificar-participante?document=${encodeURIComponent(doc)}`);
         const data = await res.json();
         if (data.is_participant === true) {
           setParticipantStatus("confirmed");
           setNombre((prev) => (prev.trim() ? prev : data.nombre ?? prev));
+          setContacto((prev) => (prev.trim() ? prev : data.email ?? prev));
         } else if (data.is_participant === false) {
           setParticipantStatus("not_found");
         } else {
@@ -75,7 +77,7 @@ export function CatasForm() {
       }
     }, 500);
     return () => clearTimeout(timeout);
-  }, [contacto]);
+  }, [documento]);
 
   const totalSelected = selections.viernes.length + selections.sabado.length;
 
@@ -103,10 +105,11 @@ export function CatasForm() {
     setFormError(null);
     const trimmedNombre = nombre.trim();
     const trimmedContacto = contacto.trim();
+    const trimmedDocumento = documento.trim();
     const allSelections = [...selections.viernes, ...selections.sabado];
 
-    if (!trimmedNombre || !trimmedContacto) {
-      setFormError("Completá nombre y email.");
+    if (!trimmedNombre || !trimmedDocumento || !trimmedContacto) {
+      setFormError("Completá nombre, documento y email.");
       return;
     }
     if (!EMAIL_RE.test(trimmedContacto)) {
@@ -115,7 +118,7 @@ export function CatasForm() {
     }
     if (participantStatus === "not_found") {
       setFormError(
-        "Este email no corresponde a un participante confirmado de ODA al Vino 2026. Usá el mismo email con el que compraste tu entrada."
+        "Este documento no corresponde a un participante confirmado de ODA al Vino 2026. Usá el mismo documento con el que compraste tu entrada."
       );
       return;
     }
@@ -130,7 +133,12 @@ export function CatasForm() {
       const res = await fetch("/api/catas/inscribir", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ nombre: trimmedNombre, contacto: trimmedContacto, selections: allSelections }),
+        body: JSON.stringify({
+          nombre: trimmedNombre,
+          contacto: trimmedContacto,
+          documento: trimmedDocumento,
+          selections: allSelections,
+        }),
       });
       const data = await res.json();
 
@@ -149,6 +157,7 @@ export function CatasForm() {
       setConfirmation({ nombre: trimmedNombre, items });
       setNombre("");
       setContacto("");
+      setDocumento("");
       setParticipantStatus("idle");
       setSelections(EMPTY_SELECTIONS);
       await loadCounts();
@@ -385,6 +394,33 @@ export function CatasForm() {
             ))}
 
             <div className="mb-4">
+              <label htmlFor="documento" className="lato-expanded mb-1.5 block text-xs text-paper/80">
+                Documento (DNI / RG / Cédula)
+              </label>
+              <input
+                id="documento"
+                type="text"
+                value={documento}
+                onChange={(e) => setDocumento(e.target.value)}
+                placeholder="El mismo con el que compraste tu entrada"
+                className="w-full rounded-lg border border-wine/15 bg-paper px-3.5 py-3 text-base text-wine placeholder:text-wine/35 focus:outline-none focus:ring-2 focus:ring-wine"
+              />
+              {participantStatus === "checking" && (
+                <p className="mt-1.5 rounded-lg bg-paper/90 px-3 py-2 text-sm text-wine/70">Verificando participante…</p>
+              )}
+              {participantStatus === "confirmed" && (
+                <p className="mt-1.5 rounded-lg bg-paper/90 px-3 py-2 text-sm text-harvest">
+                  ✓ Participante confirmado de ODA al Vino 2026
+                </p>
+              )}
+              {participantStatus === "not_found" && (
+                <p className="mt-1.5 rounded-lg bg-paper/90 px-3 py-2 text-sm text-plum">
+                  No encontramos este documento entre los participantes confirmados. Usá el mismo con el que
+                  compraste tu entrada.
+                </p>
+              )}
+            </div>
+            <div className="mb-4">
               <label htmlFor="nombre" className="lato-expanded mb-1.5 block text-xs text-paper/80">
                 Nombre y apellido
               </label>
@@ -406,23 +442,9 @@ export function CatasForm() {
                 type="email"
                 value={contacto}
                 onChange={(e) => setContacto(e.target.value)}
-                placeholder="El mismo con el que compraste tu entrada"
+                placeholder="Para confirmarte el cupo"
                 className="w-full rounded-lg border border-wine/15 bg-paper px-3.5 py-3 text-base text-wine placeholder:text-wine/35 focus:outline-none focus:ring-2 focus:ring-wine"
               />
-              {participantStatus === "checking" && (
-                <p className="mt-1.5 rounded-lg bg-paper/90 px-3 py-2 text-sm text-wine/70">Verificando participante…</p>
-              )}
-              {participantStatus === "confirmed" && (
-                <p className="mt-1.5 rounded-lg bg-paper/90 px-3 py-2 text-sm text-harvest">
-                  ✓ Participante confirmado de ODA al Vino 2026
-                </p>
-              )}
-              {participantStatus === "not_found" && (
-                <p className="mt-1.5 rounded-lg bg-paper/90 px-3 py-2 text-sm text-plum">
-                  No encontramos este email entre los participantes confirmados. Usá el mismo con el que compraste tu
-                  entrada.
-                </p>
-              )}
             </div>
 
             <Button
