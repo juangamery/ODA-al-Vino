@@ -13,8 +13,11 @@ import {
   salaById,
   validateSelections,
   type DayId,
+  type ValidationErrorCode,
 } from "@/lib/catas/schedule";
 import { Button } from "@/components/ui/Button";
+import { useLanguage } from "@/context/LanguageContext";
+import { t } from "@/lib/translations";
 
 type SelectionsByDay = Record<DayId, Selection[]>;
 type ParticipantStatus = "idle" | "checking" | "confirmed" | "not_found";
@@ -22,7 +25,23 @@ type ParticipantStatus = "idle" | "checking" | "confirmed" | "not_found";
 const EMPTY_SELECTIONS: SelectionsByDay = { viernes: [], sabado: [] };
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
+const DAY_LABEL_KEY: Record<DayId, "catasDayViernes" | "catasDaySabado"> = {
+  viernes: "catasDayViernes",
+  sabado: "catasDaySabado",
+};
+
+const ERROR_CODE_KEY: Record<
+  ValidationErrorCode,
+  "catasErrVacio" | "catasErrMaxDia" | "catasErrConflicto" | "catasErrCataInvalida"
+> = {
+  EMPTY: "catasErrVacio",
+  MAX_PER_DAY: "catasErrMaxDia",
+  SLOT_CONFLICT: "catasErrConflicto",
+  INVALID_CATA: "catasErrCataInvalida",
+};
+
 export function CatasForm() {
+  const { language, setLanguage } = useLanguage();
   const [activeDay, setActiveDay] = useState<DayId>(DAYS[0].id);
   const [selections, setSelections] = useState<SelectionsByDay>(EMPTY_SELECTIONS);
   const [counts, setCounts] = useState<Record<string, number>>({});
@@ -109,22 +128,21 @@ export function CatasForm() {
     const allSelections = [...selections.viernes, ...selections.sabado];
 
     if (!trimmedNombre || !trimmedDocumento || !trimmedContacto) {
-      setFormError("Completá nombre, documento y email.");
+      setFormError(t("catasErrCompletar", language));
       return;
     }
     if (!EMAIL_RE.test(trimmedContacto)) {
-      setFormError("Ingresá un email válido.");
+      setFormError(t("catasErrEmailInvalido", language));
       return;
     }
     if (participantStatus === "not_found") {
-      setFormError(
-        "Este documento no corresponde a un participante confirmado de ODA al Vino 2026. Usá el mismo documento con el que compraste tu entrada."
-      );
+      setFormError(t("catasErrNoParticipante", language));
       return;
     }
     const validation = validateSelections(allSelections);
     if (!validation.ok) {
-      setFormError(validation.error ?? "Revisá tu selección.");
+      const key = validation.errorCode ? ERROR_CODE_KEY[validation.errorCode] : "catasErrGuardar";
+      setFormError(t(key, language));
       return;
     }
 
@@ -138,21 +156,21 @@ export function CatasForm() {
           contacto: trimmedContacto,
           documento: trimmedDocumento,
           selections: allSelections,
+          lang: language,
         }),
       });
       const data = await res.json();
 
       if (!res.ok) {
-        setFormError(data.error ?? "Hubo un problema al guardar la inscripción.");
+        setFormError(data.error ?? t("catasErrGuardar", language));
         await loadCounts();
         return;
       }
 
       const items = allSelections.map((sel) => {
-        const day = DAYS.find((d) => d.id === sel.day)!;
         const sala = salaById(sel.salaId)!;
         const cata = SCHEDULE[sel.day][sel.slot]![sel.salaId]!;
-        return `${day.label} · ${sel.slot} · ${sala.nombre}: ${cata.bodega}`;
+        return `${t(DAY_LABEL_KEY[sel.day], language)} · ${sel.slot} · ${sala.nombre}: ${cata.bodega}`;
       });
       setConfirmation({ nombre: trimmedNombre, items });
       setNombre("");
@@ -163,7 +181,7 @@ export function CatasForm() {
       await loadCounts();
     } catch (e) {
       console.error(e);
-      setFormError("Hubo un problema al guardar la inscripción. Probá de nuevo en unos segundos.");
+      setFormError(t("catasErrGuardarRetry", language));
     } finally {
       setSubmitting(false);
     }
@@ -177,8 +195,10 @@ export function CatasForm() {
     return (
       <div className="mx-auto max-w-lg px-5 py-24 text-center">
         <img src="/oda/brand/lacre_oav.svg" alt="" className="mx-auto mb-6 h-16 w-16" />
-        <p className="script text-4xl text-wine mb-2">¡Listo, {confirmation.nombre}!</p>
-        <p className="text-wine/70 mb-8">Tu inscripción a las salas de degustación quedó confirmada.</p>
+        <p className="script text-4xl text-wine mb-2">
+          {t("catasListo", language)}, {confirmation.nombre}!
+        </p>
+        <p className="text-wine/70 mb-8">{t("catasConfirmationSubtitle", language)}</p>
         <ul className="mb-8 space-y-2 rounded-2xl border border-wine/15 bg-white/50 p-5 text-left text-base text-wine/90">
           {confirmation.items.map((item, i) => (
             <li key={i} className="border-b border-wine/10 pb-2 last:border-0 last:pb-0">
@@ -187,7 +207,7 @@ export function CatasForm() {
           ))}
         </ul>
         <Button variant="outline" onClick={() => setConfirmation(null)}>
-          Hacer otra inscripción
+          {t("catasHacerOtra", language)}
         </Button>
       </div>
     );
@@ -195,16 +215,35 @@ export function CatasForm() {
 
   return (
     <div className="min-h-screen bg-paper pb-28 md:pb-16">
-      <header className="px-5 pb-4 pt-10 text-center md:pt-16">
+      <div className="flex justify-end px-5 pt-4">
+        <div className="flex overflow-hidden rounded-full border border-wine/25">
+          <button
+            onClick={() => setLanguage("es")}
+            className={`px-3 py-1.5 text-xs font-semibold transition ${
+              language === "es" ? "bg-wine text-paper" : "text-wine/60 hover:text-wine"
+            }`}
+          >
+            🇦🇷 ES
+          </button>
+          <button
+            onClick={() => setLanguage("pt")}
+            className={`px-3 py-1.5 text-xs font-semibold transition ${
+              language === "pt" ? "bg-wine text-paper" : "text-wine/60 hover:text-wine"
+            }`}
+          >
+            🇧🇷 PT
+          </button>
+        </div>
+      </div>
+      <header className="px-5 pb-4 pt-6 text-center md:pt-10">
         <img src="/oda/brand/logo_violeta_horizontal.svg" alt="ODA al Vino" className="mx-auto mb-6 h-10 md:h-12" />
         <p className="lato-expanded text-xs text-plum">ODA al Vino · 2026</p>
-        <h1 className="mt-2 text-3xl text-wine md:text-5xl">Inscripción a salas de degustación</h1>
+        <h1 className="mt-2 text-3xl text-wine md:text-5xl">{t("catasHeaderTitle", language)}</h1>
         <p className="mx-auto mt-3 max-w-xl text-base leading-relaxed text-wine/70 normal-case tracking-normal font-sans md:text-lg">
-          Viernes 04 y sábado 05 de septiembre. Podés elegir hasta {MAX_PER_DAY} catas por día. Si dos salas
-          coinciden en el mismo horario, sólo podés estar en una.
+          {t("catasHeaderSubtitle", language)}
         </p>
         <div className="mx-auto mt-4 flex max-w-xl flex-wrap items-center justify-center gap-x-3 gap-y-2 md:max-w-none md:flex-nowrap md:whitespace-nowrap">
-          <span className="lato-expanded text-xs text-plum">Las salas:</span>
+          <span className="lato-expanded text-xs text-plum">{t("catasSalasLabel", language)}</span>
           {SALAS.map((sala) => (
             <span
               key={sala.id}
@@ -230,7 +269,7 @@ export function CatasForm() {
                   : "border-wine/25 bg-white/40 text-wine/80 hover:border-wine/50"
               }`}
             >
-              {d.label}
+              {t(DAY_LABEL_KEY[d.id], language)}
               <span className="flex gap-1">
                 {Array.from({ length: MAX_PER_DAY }).map((_, i) => (
                   <span
@@ -260,7 +299,7 @@ export function CatasForm() {
                   <span className="rounded-full bg-wine px-5 py-2 font-sans text-lg font-bold text-paper md:text-xl">
                     {slot}
                   </span>
-                  <span className="lato-expanded text-xs text-plum">hs</span>
+                  <span className="lato-expanded text-xs text-plum">{t("catasHoursAbbrev", language)}</span>
                   <span className="h-px flex-1 bg-wine/15" />
                 </div>
                 <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
@@ -295,7 +334,7 @@ export function CatasForm() {
                           {cata.bodega}
                         </div>
                         <div className={`mt-1.5 text-base ${cata.profesional ? "text-wine/70" : "italic text-wine/40"}`}>
-                          Presenta: {cata.profesional ?? "A confirmar"}
+                          {t("catasPresenta", language)}: {cata.profesional ?? t("catasPorConfirmar", language)}
                         </div>
                         <div className="mt-4 flex items-center justify-between">
                           <span
@@ -303,7 +342,7 @@ export function CatasForm() {
                               full ? "bg-plum/15 text-plum" : low ? "bg-harvest/20 text-harvest" : "bg-wine/8 text-wine/60"
                             }`}
                           >
-                            {full ? "Sin cupo" : `${ocupados}/${sala.pax}`}
+                            {full ? t("catasSinCupo", language) : `${ocupados}/${sala.pax}`}
                           </span>
                           {hasExtra && (
                             <button
@@ -313,7 +352,7 @@ export function CatasForm() {
                               }}
                               className="text-sm text-plum underline"
                             >
-                              Ver más
+                              {t("catasVerMas", language)}
                             </button>
                           )}
                         </div>
@@ -321,12 +360,12 @@ export function CatasForm() {
                           <div className="mt-3 space-y-1 border-t border-dashed border-wine/20 pt-3 text-sm text-wine/70">
                             {cata.restaurante && (
                               <div>
-                                <b className="text-wine">Restaurante:</b> {cata.restaurante}
+                                <b className="text-wine">{t("catasRestaurante", language)}:</b> {cata.restaurante}
                               </div>
                             )}
                             {cata.presenta && (
                               <div>
-                                <b className="text-wine">Presenta:</b> {cata.presenta}
+                                <b className="text-wine">{t("catasPresenta", language)}:</b> {cata.presenta}
                               </div>
                             )}
                           </div>
@@ -349,22 +388,27 @@ export function CatasForm() {
             onClick={() => setTicketExpanded((v) => !v)}
             className="flex w-full items-center justify-between md:hidden"
           >
-            <span className="font-serif text-lg normal-case tracking-normal text-paper">Tu ticket · {totalSelected}</span>
+            <span className="font-serif text-lg normal-case tracking-normal text-paper">
+              {t("catasTuTicket", language)} · {totalSelected}
+            </span>
             <span className={`text-paper transition-transform ${ticketExpanded ? "rotate-180" : ""}`}>▲</span>
           </button>
 
-          <h3 className="hidden font-serif text-xl normal-case tracking-normal text-paper md:block">Tu ticket</h3>
+          <h3 className="hidden font-serif text-xl normal-case tracking-normal text-paper md:block">
+            {t("catasTuTicket", language)}
+          </h3>
           <p className="mb-3 mt-1 hidden text-sm text-paper/75 md:block">
-            {totalSelected} cata{totalSelected === 1 ? "" : "s"} elegida{totalSelected === 1 ? "" : "s"} (máx.{" "}
-            {MAX_PER_DAY} por día)
+            {totalSelected} {t(totalSelected === 1 ? "catasCataSingular" : "catasCataPlural", language)}{" "}
+            {t(totalSelected === 1 ? "catasElegidaSingular" : "catasElegidaPlural", language)} (
+            {t("catasMaxPorDia", language)})
           </p>
 
           <div className="mt-3 md:mt-0">
             {DAYS.map((d) => (
               <div key={d.id} className="mb-4">
-                <div className="lato-expanded mb-2 text-xs text-paper/80">{d.label}</div>
+                <div className="lato-expanded mb-2 text-xs text-paper/80">{t(DAY_LABEL_KEY[d.id], language)}</div>
                 {selections[d.id].length === 0 ? (
-                  <p className="text-sm italic text-paper/60">Todavía no elegiste ninguna sala.</p>
+                  <p className="text-sm italic text-paper/60">{t("catasSinSalaElegida", language)}</p>
                 ) : (
                   selections[d.id].map((sel) => {
                     const sala = salaById(sel.salaId)!;
@@ -395,54 +439,55 @@ export function CatasForm() {
 
             <div className="mb-4">
               <label htmlFor="documento" className="lato-expanded mb-1.5 block text-xs text-paper/80">
-                Documento (DNI / RG / Cédula)
+                {t("catasDocumentoLabel", language)}
               </label>
               <input
                 id="documento"
                 type="text"
                 value={documento}
                 onChange={(e) => setDocumento(e.target.value)}
-                placeholder="El mismo con el que compraste tu entrada"
+                placeholder={t("catasDocumentoPlaceholder", language)}
                 className="w-full rounded-lg border border-wine/15 bg-paper px-3.5 py-3 text-base text-wine placeholder:text-wine/35 focus:outline-none focus:ring-2 focus:ring-wine"
               />
               {participantStatus === "checking" && (
-                <p className="mt-1.5 rounded-lg bg-paper/90 px-3 py-2 text-sm text-wine/70">Verificando participante…</p>
+                <p className="mt-1.5 rounded-lg bg-paper/90 px-3 py-2 text-sm text-wine/70">
+                  {t("catasVerificando", language)}
+                </p>
               )}
               {participantStatus === "confirmed" && (
                 <p className="mt-1.5 rounded-lg bg-paper/90 px-3 py-2 text-sm text-harvest">
-                  ✓ Participante confirmado de ODA al Vino 2026
+                  {t("catasConfirmado", language)}
                 </p>
               )}
               {participantStatus === "not_found" && (
                 <p className="mt-1.5 rounded-lg bg-paper/90 px-3 py-2 text-sm text-plum">
-                  No encontramos este documento entre los participantes confirmados. Usá el mismo con el que
-                  compraste tu entrada.
+                  {t("catasNoEncontrado", language)}
                 </p>
               )}
             </div>
             <div className="mb-4">
               <label htmlFor="nombre" className="lato-expanded mb-1.5 block text-xs text-paper/80">
-                Nombre y apellido
+                {t("catasNombreLabel", language)}
               </label>
               <input
                 id="nombre"
                 type="text"
                 value={nombre}
                 onChange={(e) => setNombre(e.target.value)}
-                placeholder="Ej: Marina Suárez"
+                placeholder={t("catasNombrePlaceholder", language)}
                 className="w-full rounded-lg border border-wine/15 bg-paper px-3.5 py-3 text-base text-wine placeholder:text-wine/35 focus:outline-none focus:ring-2 focus:ring-wine"
               />
             </div>
             <div className="mb-4">
               <label htmlFor="contacto" className="lato-expanded mb-1.5 block text-xs text-paper/80">
-                Email
+                {t("catasEmailLabel", language)}
               </label>
               <input
                 id="contacto"
                 type="email"
                 value={contacto}
                 onChange={(e) => setContacto(e.target.value)}
-                placeholder="Para confirmarte el cupo"
+                placeholder={t("catasEmailPlaceholder", language)}
                 className="w-full rounded-lg border border-wine/15 bg-paper px-3.5 py-3 text-base text-wine placeholder:text-wine/35 focus:outline-none focus:ring-2 focus:ring-wine"
               />
             </div>
@@ -453,7 +498,7 @@ export function CatasForm() {
               disabled={submitting || participantStatus === "checking" || participantStatus === "not_found"}
               onClick={handleSubmit}
             >
-              {submitting ? "Guardando…" : "Confirmar inscripción"}
+              {submitting ? t("catasGuardando", language) : t("catasConfirmarBtn", language)}
             </Button>
 
             {formError && (
