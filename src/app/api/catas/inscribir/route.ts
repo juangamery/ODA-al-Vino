@@ -3,15 +3,24 @@ import { Resend } from "resend";
 import { getSupabaseAdmin } from "@/lib/catas/supabaseAdmin";
 import { DAYS, getCata, salaById, validateSelections, type Selection } from "@/lib/catas/schedule";
 import { checkParticipant, ParticipantsApiError } from "@/lib/catas/participantsApi";
+import { t, type Language } from "@/lib/translations";
 
 const resend = process.env.RESEND_API_KEY ? new Resend(process.env.RESEND_API_KEY) : null;
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+const errorCodeKey = {
+  EMPTY: "catasErrVacio",
+  MAX_PER_DAY: "catasErrMaxDia",
+  SLOT_CONFLICT: "catasErrConflicto",
+  INVALID_CATA: "catasErrCataInvalida",
+} as const;
 
 interface Body {
   nombre?: string;
   contacto?: string;
   documento?: string;
   selections?: Selection[];
+  lang?: string;
 }
 
 export async function POST(request: NextRequest) {
@@ -22,21 +31,23 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ error: "Body inválido" }, { status: 400 });
   }
 
+  const lang: Language = body.lang === "pt" ? "pt" : "es";
   const nombre = (body.nombre ?? "").trim();
   const contacto = (body.contacto ?? "").trim().toLowerCase();
   const documento = (body.documento ?? "").trim();
   const selections = Array.isArray(body.selections) ? body.selections : [];
 
   if (!nombre || !contacto || !documento) {
-    return NextResponse.json({ error: "Completá nombre, documento y email." }, { status: 400 });
+    return NextResponse.json({ error: t("catasErrCompletar", lang) }, { status: 400 });
   }
   if (!EMAIL_RE.test(contacto)) {
-    return NextResponse.json({ error: "Ingresá un email válido." }, { status: 400 });
+    return NextResponse.json({ error: t("catasErrEmailInvalido", lang) }, { status: 400 });
   }
 
   const validation = validateSelections(selections);
   if (!validation.ok) {
-    return NextResponse.json({ error: validation.error }, { status: 400 });
+    const key = validation.errorCode ? errorCodeKey[validation.errorCode] : "catasErrGuardar";
+    return NextResponse.json({ error: t(key, lang) }, { status: 400 });
   }
 
   // Sólo participantes confirmados de la edición vigente pueden anotarse a las catas.
@@ -48,13 +59,7 @@ export async function POST(request: NextRequest) {
   try {
     const participantCheck = await checkParticipant(documento);
     if (!participantCheck.is_participant) {
-      return NextResponse.json(
-        {
-          error:
-            "Este documento no corresponde a un participante confirmado de ODA al Vino 2026. Usá el mismo documento con el que compraste tu entrada.",
-        },
-        { status: 403 }
-      );
+      return NextResponse.json({ error: t("catasErrNoParticipante", lang) }, { status: 403 });
     }
   } catch (e) {
     console.error(
@@ -80,17 +85,14 @@ export async function POST(request: NextRequest) {
       const [, day, slot, salaId] = error.message.split(":");
       const sala = salaById(salaId);
       const cata = getCata(day as Selection["day"], slot, salaId as Selection["salaId"]);
-      const label = cata ? `"${cata.bodega}" (${sala?.nombre ?? salaId}, ${slot})` : "una de las salas elegidas";
+      const label = cata ? `"${cata.bodega}" (${sala?.nombre ?? salaId}, ${slot})` : "";
       return NextResponse.json(
-        { error: `${label} se quedó sin cupo justo ahora. Elegí otra opción.` },
+        { error: `${label} ${t("catasErrCupoLlenoSufijo", lang)}`.trim() },
         { status: 409 }
       );
     }
     console.error("inscribir error:", error);
-    return NextResponse.json(
-      { error: "Hubo un problema al guardar la inscripción. Probá de nuevo en unos segundos." },
-      { status: 500 }
-    );
+    return NextResponse.json({ error: t("catasErrGuardarRetry", lang) }, { status: 500 });
   }
 
   if (resend) {
@@ -103,12 +105,18 @@ export async function POST(request: NextRequest) {
       })
       .join("");
 
+    const subject =
+      lang === "pt"
+        ? "Sua inscrição para as salas de degustação · ODA al Vino 2026"
+        : "Tu inscripción a las salas de degustación · ODA al Vino 2026";
+    const heading = `${t("catasListo", lang)}, ${nombre}!`;
+
     resend.emails
       .send({
         from: "ODA al Vino <noreply@oda-al-vino.com>",
         to: contacto,
-        subject: "Tu inscripción a las salas de degustación · ODA al Vino 2026",
-        html: `<h1>¡Listo, ${nombre}!</h1><p>Tu inscripción a las salas de degustación quedó confirmada:</p><ul>${resumen}</ul>`,
+        subject,
+        html: `<h1>${heading}</h1><p>${t("catasConfirmationSubtitle", lang)}</p><ul>${resumen}</ul>`,
       })
       .catch((e) => console.error("email confirmación error:", e));
   }

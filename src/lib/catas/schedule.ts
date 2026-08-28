@@ -167,9 +167,14 @@ export function forEachCataPuntual(
   });
 }
 
+export type ValidationErrorCode = "EMPTY" | "MAX_PER_DAY" | "SLOT_CONFLICT" | "INVALID_CATA";
+
 export interface ValidationResult {
   ok: boolean;
+  /** Mensaje en español, listo para usar donde no haga falta i18n (ej. API). */
   error?: string;
+  /** Código estable para que el cliente arme el mensaje traducido con t(). */
+  errorCode?: ValidationErrorCode;
 }
 
 /**
@@ -178,18 +183,18 @@ export interface ValidationResult {
  */
 export function validateSelections(selections: Selection[]): ValidationResult {
   if (selections.length === 0) {
-    return { ok: false, error: "Elegí al menos una sala." };
+    return { ok: false, error: "Elegí al menos una sala.", errorCode: "EMPTY" };
   }
 
   for (const day of DAYS.map((d) => d.id)) {
     const daySelections = selections.filter((s) => s.day === day);
     if (daySelections.length > MAX_PER_DAY) {
-      return { ok: false, error: `Máximo ${MAX_PER_DAY} catas por día.` };
+      return { ok: false, error: `Máximo ${MAX_PER_DAY} catas por día.`, errorCode: "MAX_PER_DAY" };
     }
     const slots = new Set<string>();
     for (const sel of daySelections) {
       if (slots.has(sel.slot)) {
-        return { ok: false, error: "No podés elegir dos salas en el mismo horario." };
+        return { ok: false, error: "No podés elegir dos salas en el mismo horario.", errorCode: "SLOT_CONFLICT" };
       }
       slots.add(sel.slot);
     }
@@ -197,7 +202,7 @@ export function validateSelections(selections: Selection[]): ValidationResult {
 
   for (const sel of selections) {
     if (!getCata(sel.day, sel.slot, sel.salaId)) {
-      return { ok: false, error: "Una de las catas elegidas no existe." };
+      return { ok: false, error: "Una de las catas elegidas no existe.", errorCode: "INVALID_CATA" };
     }
   }
 
