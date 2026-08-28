@@ -20,9 +20,12 @@ export async function GET() {
   }
 
   const counts: Record<string, number> = {};
+  const cupoMax: Record<string, number> = {};
   for (const row of data ?? []) {
-    counts[cataId(row.day, row.slot, row.sala_id)] = row.ocupados;
+    const id = cataId(row.day, row.slot, row.sala_id);
+    counts[id] = row.ocupados;
+    cupoMax[id] = row.cupo_max;
   }
 
-  return NextResponse.json({ counts });
+  return NextResponse.json({ counts, cupoMax });
 }
