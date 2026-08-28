@@ -1,6 +1,16 @@
 import { NextRequest, NextResponse } from "next/server";
 import { checkParticipant, ParticipantsApiError } from "@/lib/catas/participantsApi";
 
+/**
+ * El CRM devuelve nombres en mayúsculas ("JAIR ALFONSO KAO"). Los pasamos a
+ * Título Inicial porque se autocompletan en un input editable y en la
+ * confirmación se muestran con una tipografía manuscrita, que en mayúsculas
+ * sostenidas se ve mal.
+ */
+function toTitleCase(value: string): string {
+  return value.toLowerCase().replace(/(^|[\s'-])\p{L}/gu, (c) => c.toUpperCase());
+}
+
 export async function GET(request: NextRequest) {
   const document = (request.nextUrl.searchParams.get("document") ?? "").trim();
 
@@ -17,8 +27,8 @@ export async function GET(request: NextRequest) {
     const { first_name, last_name, email } = result.participant;
     return NextResponse.json({
       is_participant: true,
-      nombre: `${first_name} ${last_name}`.trim(),
-      email: email || undefined,
+      nombre: toTitleCase(`${first_name} ${last_name}`.trim()),
+      email: email ? email.toLowerCase() : undefined,
     });
   } catch (e) {
     // Chequeo en vivo: si el API externo falla (timeout, rate limit, token rotado),
