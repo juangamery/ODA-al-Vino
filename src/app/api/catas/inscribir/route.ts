@@ -81,6 +81,7 @@ export async function POST(request: NextRequest) {
   const { data, error } = await supabase.rpc("catas_inscribir", {
     p_nombre: nombre,
     p_contacto: contacto,
+    p_documento: documento,
     p_selections: payload,
   });
 
@@ -92,6 +93,14 @@ export async function POST(request: NextRequest) {
       const label = cata ? `"${cata.bodega}" (${sala?.nombre ?? salaId}, ${slot})` : "";
       return NextResponse.json(
         { error: `${label} ${t("catasErrCupoLlenoSufijo", lang)}`.trim() },
+        { status: 409 }
+      );
+    }
+    if (error.message?.includes("LIMITE_DIA")) {
+      const [, day] = error.message.split(":");
+      const dayLabel = DAYS.find((d) => d.id === day)?.label ?? day;
+      return NextResponse.json(
+        { error: `${t("catasErrLimiteDocumentoPrefijo", lang)} ${dayLabel}.` },
         { status: 409 }
       );
     }

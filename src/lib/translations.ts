@@ -309,6 +309,7 @@ export const translations = {
     catasErrConflicto: "No podés elegir dos salas en el mismo horario.",
     catasErrCataInvalida: "Una de las catas elegidas no existe.",
     catasErrCupoLlenoSufijo: "se quedó sin cupo justo ahora. Elegí otra opción.",
+    catasErrLimiteDocumentoPrefijo: "Este documento ya tiene el máximo de 2 catas anotadas para",
   },
   pt: {
     // ========== HERO V3 ==========
@@ -616,6 +617,7 @@ export const translations = {
     catasErrConflicto: "Você não pode escolher duas salas no mesmo horário.",
     catasErrCataInvalida: "Uma das degustações escolhidas não existe.",
     catasErrCupoLlenoSufijo: "ficou sem vagas agora. Escolha outra opção.",
+    catasErrLimiteDocumentoPrefijo: "Este documento já tem o máximo de 2 degustações marcadas para",
   },
 };
 
