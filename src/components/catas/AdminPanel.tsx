@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
-import { DAYS, SALAS, SCHEDULE, SLOTS, cataId, salaById, type DayId, type SalaId } from "@/lib/catas/schedule";
+import { DAYS, SALAS, SCHEDULE, SLOTS, cataId, getCata, salaById, type DayId, type SalaId } from "@/lib/catas/schedule";
 import { Button } from "@/components/ui/Button";
 
 interface SelectionRow {
@@ -44,6 +44,7 @@ export function AdminPanel() {
   const [loadError, setLoadError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
 
+  const [view, setView] = useState<"sala" | "panorama">("sala");
   const [filterDay, setFilterDay] = useState<DayId | "todos">("todos");
   const [filterSala, setFilterSala] = useState<SalaId | "todas">("todas");
 
@@ -164,6 +165,44 @@ export function AdminPanel() {
   }, [filterSala, filterDay, attendeesByCata, cupoByCata]);
 
   const totalInscriptos = registrations.length;
+
+  // Panorama: métricas generales de ocupación, calculadas sobre los mismos
+  // datos que ya trae /api/catas/admin/data — no pega a ningún endpoint nuevo.
+  const panorama = useMemo(() => {
+    const totalCatasElegidas = cupos.reduce((acc, c) => acc + c.ocupados, 0);
+    const totalCupoMax = cupos.reduce((acc, c) => acc + c.cupo_max, 0);
+
+    const porDia = DAYS.map((day) => {
+      const rows = cupos.filter((c) => c.day === day.id);
+      const ocupados = rows.reduce((acc, c) => acc + c.ocupados, 0);
+      const cupoMax = rows.reduce((acc, c) => acc + c.cupo_max, 0);
+      return { day, ocupados, cupoMax };
+    });
+
+    const catasOrdenadas = cupos
+      .map((c) => {
+        const cata = getCata(c.day, c.slot, c.sala_id);
+        const sala = salaById(c.sala_id);
+        const pct = c.cupo_max > 0 ? Math.round((100 * c.ocupados) / c.cupo_max) : 0;
+        return { ...c, bodega: cata?.bodega ?? "—", salaNombre: sala?.nombre ?? c.sala_id, pct };
+      })
+      .sort((a, b) => b.pct - a.pct);
+
+    const vacias = catasOrdenadas.filter((c) => c.ocupados === 0);
+
+    const bodegaCounts = new Map<string, number>();
+    registrations.forEach((r) =>
+      r.catas_selections.forEach((sel) => {
+        bodegaCounts.set(sel.bodega, (bodegaCounts.get(sel.bodega) ?? 0) + 1);
+      })
+    );
+    const topBodegas = Array.from(bodegaCounts.entries())
+      .map(([bodega, inscriptos]) => ({ bodega, inscriptos }))
+      .sort((a, b) => b.inscriptos - a.inscriptos)
+      .slice(0, 10);
+
+    return { totalCatasElegidas, totalCupoMax, porDia, catasOrdenadas, vacias, topBodegas };
+  }, [cupos, registrations]);
 
   const buildCsvRows = (onlySala?: SalaId) => {
     const rows: string[][] = [];
@@ -312,52 +351,80 @@ export function AdminPanel() {
         la entrada.
       </p>
 
-      <div className="mb-6 flex flex-wrap gap-2">
-        <select
-          value={filterDay}
-          onChange={(e) => setFilterDay(e.target.value as DayId | "todos")}
-          className="rounded-lg border border-wine/25 bg-white px-3 py-2 text-xs text-wine"
-        >
-          <option value="todos">Todos los días</option>
-          {DAYS.map((d) => (
-            <option key={d.id} value={d.id}>
-              {d.label}
-            </option>
-          ))}
-        </select>
-        <select
-          value={filterSala}
-          onChange={(e) => setFilterSala(e.target.value as SalaId | "todas")}
-          className="rounded-lg border border-wine/25 bg-white px-3 py-2 text-xs text-wine"
-        >
-          <option value="todas">Todas las salas</option>
-          {SALAS.map((s) => (
-            <option key={s.id} value={s.id}>
-              {s.nombre}
-            </option>
-          ))}
-        </select>
+      <div className="mb-4 flex gap-1 rounded-full border border-wine/15 bg-white/60 p-1 text-xs">
         <button
-          onClick={loadData}
-          className="rounded-lg border border-wine/25 bg-white px-3 py-2 text-xs text-wine hover:border-wine/50"
+          onClick={() => setView("sala")}
+          className={`rounded-full px-3 py-1.5 ${view === "sala" ? "bg-wine text-paper" : "text-wine/60 hover:text-wine"}`}
         >
-          Actualizar
+          Por sala
         </button>
         <button
-          onClick={exportAll}
-          className="rounded-lg border border-wine/25 bg-wine px-3 py-2 text-xs font-semibold text-paper hover:bg-plum"
+          onClick={() => setView("panorama")}
+          className={`rounded-full px-3 py-1.5 ${view === "panorama" ? "bg-wine text-paper" : "text-wine/60 hover:text-wine"}`}
         >
-          Descargar CSV completo
+          Panorama
         </button>
       </div>
+
+      {view === "sala" && (
+        <div className="mb-6 flex flex-wrap gap-2">
+          <select
+            value={filterDay}
+            onChange={(e) => setFilterDay(e.target.value as DayId | "todos")}
+            className="rounded-lg border border-wine/25 bg-white px-3 py-2 text-xs text-wine"
+          >
+            <option value="todos">Todos los días</option>
+            {DAYS.map((d) => (
+              <option key={d.id} value={d.id}>
+                {d.label}
+              </option>
+            ))}
+          </select>
+          <select
+            value={filterSala}
+            onChange={(e) => setFilterSala(e.target.value as SalaId | "todas")}
+            className="rounded-lg border border-wine/25 bg-white px-3 py-2 text-xs text-wine"
+          >
+            <option value="todas">Todas las salas</option>
+            {SALAS.map((s) => (
+              <option key={s.id} value={s.id}>
+                {s.nombre}
+              </option>
+            ))}
+          </select>
+          <button
+            onClick={loadData}
+            className="rounded-lg border border-wine/25 bg-white px-3 py-2 text-xs text-wine hover:border-wine/50"
+          >
+            Actualizar
+          </button>
+          <button
+            onClick={exportAll}
+            className="rounded-lg border border-wine/25 bg-wine px-3 py-2 text-xs font-semibold text-paper hover:bg-plum"
+          >
+            Descargar CSV completo
+          </button>
+        </div>
+      )}
+      {view === "panorama" && (
+        <div className="mb-6">
+          <button
+            onClick={loadData}
+            className="rounded-lg border border-wine/25 bg-white px-3 py-2 text-xs text-wine hover:border-wine/50"
+          >
+            Actualizar
+          </button>
+        </div>
+      )}
 
       {loadError && <p className="mb-4 text-sm text-plum">{loadError}</p>}
       {loading && <p className="mb-4 text-sm text-wine/50">Cargando…</p>}
 
-      {!loading && salaSections.length === 0 && (
+      {view === "sala" && !loading && salaSections.length === 0 && (
         <p className="py-8 text-center text-sm text-wine/40">No hay catas para este filtro.</p>
       )}
 
+      {view === "sala" && (
       <div className="space-y-6">
         {salaSections.map(({ sala, rows, total }) => {
           const currentCupo = rows[0]?.cupoMax ?? sala.pax;
@@ -468,6 +535,118 @@ export function AdminPanel() {
           );
         })}
       </div>
+      )}
+
+      {view === "panorama" && !loading && (
+        <div className="space-y-6">
+          <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
+            {[
+              { label: "Inscripciones", value: totalInscriptos },
+              { label: "Catas elegidas", value: panorama.totalCatasElegidas },
+              {
+                label: "Ocupación general",
+                value:
+                  panorama.totalCupoMax > 0
+                    ? `${Math.round((100 * panorama.totalCatasElegidas) / panorama.totalCupoMax)}%`
+                    : "—",
+              },
+              { label: "Catas sin inscriptos", value: panorama.vacias.length },
+            ].map((tile) => (
+              <div key={tile.label} className="rounded-2xl border border-wine/15 bg-white/60 px-4 py-3">
+                <p className="text-2xl text-wine">{tile.value}</p>
+                <p className="text-[11px] text-wine/60">{tile.label}</p>
+              </div>
+            ))}
+          </div>
+
+          <div className="rounded-2xl border border-wine/15 bg-white/60 p-4">
+            <h2 className="mb-3 font-serif text-lg normal-case tracking-normal text-wine">Ocupación por día</h2>
+            <div className="space-y-3">
+              {panorama.porDia.map(({ day, ocupados, cupoMax }) => {
+                const pct = cupoMax > 0 ? Math.round((100 * ocupados) / cupoMax) : 0;
+                return (
+                  <div key={day.id}>
+                    <div className="mb-1 flex items-center justify-between text-[12px] text-wine/70">
+                      <span>{day.label}</span>
+                      <span>
+                        {ocupados}/{cupoMax} · {pct}%
+                      </span>
+                    </div>
+                    <div className="h-2 overflow-hidden rounded-full bg-wine/10">
+                      <div
+                        className="h-full rounded-full bg-harvest"
+                        style={{ width: `${Math.min(pct, 100)}%` }}
+                      />
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+
+          <div className="rounded-2xl border border-wine/15 bg-white/60 p-4">
+            <h2 className="mb-3 font-serif text-lg normal-case tracking-normal text-wine">
+              Ocupación por cata (de más a menos llena)
+            </h2>
+            <div className="max-h-[28rem] overflow-y-auto">
+              <table className="w-full text-left text-[12px]">
+                <thead className="sticky top-0 bg-paper text-wine/50">
+                  <tr>
+                    <th className="py-1.5 pr-2 font-normal">Bodega</th>
+                    <th className="py-1.5 pr-2 font-normal">Sala</th>
+                    <th className="py-1.5 pr-2 font-normal">Día · horario</th>
+                    <th className="py-1.5 pr-2 text-right font-normal">Ocupación</th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-wine/10">
+                  {panorama.catasOrdenadas.map((c) => (
+                    <tr key={cataId(c.day, c.slot, c.sala_id)}>
+                      <td className="py-1.5 pr-2 text-wine">{c.bodega}</td>
+                      <td className="py-1.5 pr-2 text-wine/70">{c.salaNombre}</td>
+                      <td className="py-1.5 pr-2 text-wine/70">
+                        {DAYS.find((d) => d.id === c.day)?.label} · {c.slot}
+                      </td>
+                      <td className="py-1.5 pr-2 text-right">
+                        <span
+                          className={`rounded-full px-2 py-0.5 text-[10.5px] ${
+                            c.pct >= 90
+                              ? "bg-plum/15 text-plum"
+                              : c.pct >= 50
+                                ? "bg-harvest/20 text-wine"
+                                : c.ocupados === 0
+                                  ? "bg-wine/5 text-wine/40"
+                                  : "bg-wine/8 text-wine/60"
+                          }`}
+                        >
+                          {c.ocupados}/{c.cupo_max} ({c.pct}%)
+                        </span>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <div className="rounded-2xl border border-wine/15 bg-white/60 p-4">
+            <h2 className="mb-3 font-serif text-lg normal-case tracking-normal text-wine">Bodegas más elegidas</h2>
+            {panorama.topBodegas.length === 0 ? (
+              <p className="text-[12px] italic text-wine/40">Todavía no hay inscripciones.</p>
+            ) : (
+              <ol className="space-y-1.5 text-[12.5px] text-wine/80">
+                {panorama.topBodegas.map((b, i) => (
+                  <li key={b.bodega} className="flex items-center justify-between gap-3">
+                    <span>
+                      {i + 1}. {b.bodega}
+                    </span>
+                    <span className="text-wine/50">{b.inscriptos}</span>
+                  </li>
+                ))}
+              </ol>
+            )}
+          </div>
+        </div>
+      )}
 
       <p className="mt-6 text-[11.5px] leading-relaxed text-wine/50">
         Los datos se leen directamente de la base del formulario. Compartí siempre el mismo enlace de inscripción
