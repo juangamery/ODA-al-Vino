@@ -1,7 +1,20 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
-import { DAYS, SALAS, SCHEDULE, SLOTS, cataId, getCata, salaById, type DayId, type SalaId } from "@/lib/catas/schedule";
+import {
+  DAYS,
+  MAX_PER_DAY,
+  SALAS,
+  SCHEDULE,
+  SLOTS,
+  cataId,
+  getCata,
+  salaById,
+  validateSelections,
+  type DayId,
+  type SalaId,
+  type Selection,
+} from "@/lib/catas/schedule";
 import { Button } from "@/components/ui/Button";
 
 interface SelectionRow {
@@ -54,6 +67,14 @@ export function AdminPanel() {
   const [cupoError, setCupoError] = useState<string | null>(null);
 
   const [deletingId, setDeletingId] = useState<string | null>(null);
+
+  const [showManualAdd, setShowManualAdd] = useState(false);
+  const [manualNombre, setManualNombre] = useState("");
+  const [manualDocumento, setManualDocumento] = useState("");
+  const [manualContacto, setManualContacto] = useState("");
+  const [manualSelections, setManualSelections] = useState<Selection[]>([]);
+  const [manualError, setManualError] = useState<string | null>(null);
+  const [manualSaving, setManualSaving] = useState(false);
 
   const loadData = async () => {
     setLoading(true);
@@ -306,6 +327,64 @@ export function AdminPanel() {
     }
   };
 
+  const toggleManualSelection = (sel: Selection) => {
+    setManualError(null);
+    setManualSelections((prev) => {
+      const exists = prev.some((s) => s.day === sel.day && s.slot === sel.slot && s.salaId === sel.salaId);
+      if (exists) {
+        return prev.filter((s) => !(s.day === sel.day && s.slot === sel.slot && s.salaId === sel.salaId));
+      }
+      return [...prev, sel];
+    });
+  };
+
+  const resetManualForm = () => {
+    setManualNombre("");
+    setManualDocumento("");
+    setManualContacto("");
+    setManualSelections([]);
+    setManualError(null);
+  };
+
+  const handleManualSubmit = async () => {
+    if (!manualNombre.trim() || !manualDocumento.trim() || !manualContacto.trim()) {
+      setManualError("Completá nombre, documento y email.");
+      return;
+    }
+    const validation = validateSelections(manualSelections);
+    if (!validation.ok) {
+      setManualError(validation.error ?? "Revisá las catas elegidas.");
+      return;
+    }
+    setManualSaving(true);
+    setManualError(null);
+    try {
+      const res = await fetch("/api/catas/admin/inscripcion", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          nombre: manualNombre.trim(),
+          documento: manualDocumento.trim(),
+          contacto: manualContacto.trim(),
+          selections: manualSelections,
+        }),
+      });
+      const data = await res.json();
+      if (!res.ok) {
+        setManualError(data.error ?? "No se pudo guardar la inscripción.");
+        return;
+      }
+      resetManualForm();
+      setShowManualAdd(false);
+      await loadData();
+    } catch (e) {
+      console.error(e);
+      setManualError("No se pudo guardar la inscripción.");
+    } finally {
+      setManualSaving(false);
+    }
+  };
+
   if (authed === null) {
     return <div className="py-24 text-center text-wine/60">Cargando…</div>;
   }
@@ -364,6 +443,102 @@ export function AdminPanel() {
         >
           Panorama
         </button>
+      </div>
+
+      <div className="mb-6">
+        <button
+          onClick={() => setShowManualAdd((v) => !v)}
+          className="rounded-lg border border-wine/25 bg-white px-3 py-2 text-xs text-wine hover:border-wine/50"
+        >
+          {showManualAdd ? "Cancelar alta manual" : "+ Agregar inscripción manual"}
+        </button>
+        {showManualAdd && (
+          <div className="mt-3 rounded-2xl border border-wine/15 bg-white/60 p-4">
+            <p className="mb-3 text-[11.5px] leading-relaxed text-wine/60">
+              Para casos puntuales (ej. el validador de documento no le funciona a alguien). Esto NO verifica contra
+              el CRM de participantes — asumís que ya confirmaste que es una persona válida. Sí respeta el cupo y el
+              máximo de {MAX_PER_DAY} catas por día.
+            </p>
+            <div className="mb-3 grid gap-2 sm:grid-cols-3">
+              <input
+                type="text"
+                value={manualNombre}
+                onChange={(e) => setManualNombre(e.target.value)}
+                placeholder="Nombre completo"
+                className="rounded-lg border border-wine/25 bg-white px-3 py-2 text-sm text-wine focus:outline-none focus:ring-2 focus:ring-harvest"
+              />
+              <input
+                type="text"
+                value={manualDocumento}
+                onChange={(e) => setManualDocumento(e.target.value)}
+                placeholder="Documento (DNI/RG/Cédula)"
+                className="rounded-lg border border-wine/25 bg-white px-3 py-2 text-sm text-wine focus:outline-none focus:ring-2 focus:ring-harvest"
+              />
+              <input
+                type="email"
+                value={manualContacto}
+                onChange={(e) => setManualContacto(e.target.value)}
+                placeholder="Email"
+                className="rounded-lg border border-wine/25 bg-white px-3 py-2 text-sm text-wine focus:outline-none focus:ring-2 focus:ring-harvest"
+              />
+            </div>
+
+            <div className="mb-3 grid gap-3 sm:grid-cols-2">
+              {DAYS.map((day) => (
+                <div key={day.id} className="rounded-xl border border-wine/10 p-3">
+                  <p className="mb-2 lato-expanded text-[10px] text-plum">{day.label}</p>
+                  <div className="space-y-1.5">
+                    {SLOTS.flatMap((slot) =>
+                      SALAS.map((sala) => {
+                        const cata = SCHEDULE[day.id][slot]?.[sala.id];
+                        if (!cata) return null;
+                        const key = cataId(day.id, slot, sala.id);
+                        const cupo = cupoByCata.get(key);
+                        const ocupados = cupo?.ocupados ?? 0;
+                        const cupoMax = cupo?.cupo_max ?? sala.pax;
+                        const checked = manualSelections.some(
+                          (s) => s.day === day.id && s.slot === slot && s.salaId === sala.id
+                        );
+                        const full = ocupados >= cupoMax && !checked;
+                        return (
+                          <label
+                            key={key}
+                            className={`flex items-center justify-between gap-2 text-[11.5px] ${
+                              full ? "text-wine/30" : "text-wine/80"
+                            }`}
+                          >
+                            <span className="flex items-center gap-1.5">
+                              <input
+                                type="checkbox"
+                                checked={checked}
+                                disabled={full}
+                                onChange={() => toggleManualSelection({ day: day.id, slot, salaId: sala.id })}
+                              />
+                              {slot} · {sala.nombre} · {cata.bodega}
+                            </span>
+                            <span>
+                              {ocupados}/{cupoMax}
+                            </span>
+                          </label>
+                        );
+                      })
+                    )}
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            {manualError && <p className="mb-3 text-[12px] text-plum">{manualError}</p>}
+
+            <button
+              onClick={handleManualSubmit}
+              disabled={manualSaving}
+              className="rounded-full bg-wine px-4 py-2 text-xs font-semibold text-paper hover:bg-plum disabled:opacity-50"
+            >
+              {manualSaving ? "Guardando…" : "Guardar inscripción"}
+            </button>
+          </div>
+        )}
       </div>
 
       {view === "sala" && (
