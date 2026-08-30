@@ -38,7 +38,10 @@ export async function POST(request: NextRequest) {
   const lang: Language = body.lang === "pt" ? "pt" : "es";
   const nombre = (body.nombre ?? "").trim();
   const contacto = (body.contacto ?? "").trim().toLowerCase();
-  const documento = (body.documento ?? "").trim();
+  // Mayúsculas: mismo motivo que en verificar-participante — evita que una
+  // persona quede fuera del CRM, o esquive el límite de 2 catas/día, sólo
+  // por haber tipeado su documento con otra capitalización.
+  const documento = (body.documento ?? "").trim().toUpperCase();
   const selections = Array.isArray(body.selections) ? body.selections : [];
 
   if (!nombre || !contacto || !documento) {
