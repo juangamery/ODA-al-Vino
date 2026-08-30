@@ -126,14 +126,26 @@ export async function POST(request: NextRequest) {
         : "Tu inscripción a las salas de degustación · ODA al Vino 2026";
     const heading = `${t("catasListo", lang)}, ${nombre}!`;
 
-    resend.emails
-      .send({
+    // Hay que esperar el envío antes de devolver la respuesta: si se dispara
+    // sin await, Vercel puede congelar la función serverless apenas se
+    // manda el response, y el mail nunca termina de salir.
+    // El SDK de Resend NO tira excepción ante un error de la API (dominio
+    // sin verificar, API key inválida, etc.) — devuelve { error } en la
+    // respuesta resuelta, así que hay que chequearlo explícitamente además
+    // de envolver en try/catch por si falla la conexión en sí.
+    try {
+      const { error: resendError } = await resend.emails.send({
         from: "ODA al Vino <noreply@oda-al-vino.com>",
         to: contacto,
         subject,
         html: `<h1>${heading}</h1><p>${t("catasConfirmationSubtitle", lang)}</p><ul>${resumen}</ul>`,
-      })
-      .catch((e) => console.error("email confirmación error:", e));
+      });
+      if (resendError) {
+        console.error("email confirmación error (respuesta de Resend):", resendError);
+      }
+    } catch (e) {
+      console.error("email confirmación error (excepción):", e);
+    }
   }
 
   return NextResponse.json({ success: true, id: data });
