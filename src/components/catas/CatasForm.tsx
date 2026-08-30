@@ -242,17 +242,13 @@ export function CatasForm() {
         <p className="lato-expanded text-xs text-plum">ODA al Vino · 2026</p>
         <h1
           className="mt-2 text-3xl text-wine md:text-5xl"
-          // La "Ç" de CCS Belvare tiene la cedilla dibujada muy larga y colgando,
-          // que a tamaño de titular se confunde con una "Q" — sólo pasa en
-          // portugués ("Inscrição" se leía "InscriQão"), el español no usa
-          // cedilla. Probamos reemplazar sólo esa letra con unicode-range, pero
-          // el navegador corta el texto en dos fuentes distintas justo ahí y
-          // eso hace desaparecer la tilde de la "Ã" que sigue ("ção" se leía
-          // sin tilde). La única forma de evitar ambos bugs a la vez es no
-          // mezclar fuentes dentro de la palabra: en portugués el título entero
-          // usa la tipografía de respaldo de la marca (Georgia), ya declarada
-          // como fallback de --font-serif.
-          style={language === "pt" ? { fontFamily: "Georgia, serif" } : undefined}
+          // La "Ç" de CCS Belvare en MAYÚSCULA tiene la cedilla dibujada muy
+          // larga y colgando, que a tamaño de titular se confunde con una "Q"
+          // ("INSCRIÇÃO" se leía "INSCRIQÃO") — sólo pasa en portugués, el
+          // español no usa cedilla. En minúscula el mismo glyph es una cedilla
+          // normal y se lee bien, así que en portugués desactivamos el
+          // text-transform:uppercase de los <h1> en vez de cambiar de fuente.
+          style={language === "pt" ? { textTransform: "none" } : undefined}
         >
           {t("catasHeaderTitle", language)}
         </h1>
