@@ -12,7 +12,10 @@ function toTitleCase(value: string): string {
 }
 
 export async function GET(request: NextRequest) {
-  const document = (request.nextUrl.searchParams.get("document") ?? "").trim();
+  // Mayúsculas: algunos documentos son códigos alfanuméricos (no sólo DNI
+  // numérico), y si alguien lo tipea en minúscula, una comparación exacta
+  // del lado del CRM podría no encontrarlo aunque sea el documento correcto.
+  const document = (request.nextUrl.searchParams.get("document") ?? "").trim().toUpperCase();
 
   // Sin formato estándar (DNI, CPF, RUT, Cédula) — sólo exigimos que no esté vacío.
   if (!document) {

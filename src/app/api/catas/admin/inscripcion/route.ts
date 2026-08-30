@@ -29,7 +29,9 @@ export async function POST(request: NextRequest) {
 
   const nombre = (body.nombre ?? "").trim();
   const contacto = (body.contacto ?? "").trim().toLowerCase();
-  const documento = (body.documento ?? "").trim();
+  // Mayúsculas: consistente con /api/catas/inscribir, para que el límite de
+  // 2 catas/día por documento no se pueda esquivar con otra capitalización.
+  const documento = (body.documento ?? "").trim().toUpperCase();
   const selections = Array.isArray(body.selections) ? body.selections : [];
 
   if (!nombre || !contacto || !documento) {
