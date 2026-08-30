@@ -1,0 +1,105 @@
+{
+  "category": "kinetic-type",
+  "duration_s": 15,
+  "fps": 30,
+  "canvas": { "w": 1080, "h": 1920, "aspect": "9:16" },
+
+  "style": "Warm, editorial wine-fair motion graphic for the Triple Frontera. No narration, no live-action — motion and color carry the brand. Confident uppercase serif (CCS Belvare) for headline type, one cursive script word (Luxurious Script) as the sole emotional accent on 'Reúne', Lato for all supporting data/body text. Palette cycles through solid color-block grounds (paper cream base, wine/plum/olive/harvest as accent blocks and text) rather than gradients or photography — feels like a print/letterpress wine-label system set in motion. Pacing is quick and celebratory: hard, confident entrances (stagger/slam/wipe), brief holds for legibility, then a clean handoff to the next beat. Closes on a still, settled brand lockup — the one moment the piece stops moving.",
+
+  "palette": ["#fff5e1", "#47072c", "#700143", "#4c5409", "#7c8419"],
+
+  "font": {
+    "headline": {
+      "family": "CCS Belvare",
+      "role": "uppercase display serif — hero tagline words, section headers",
+      "file": "/home/user/ODA-al-Vino/OAVv2/oda-al-vino/project/assets/fonts/ccsbelvareregular.ttf"
+    },
+    "script": {
+      "family": "Luxurious Script",
+      "role": "cursive emphasis — the single word 'Reúne' only",
+      "file": "/home/user/ODA-al-Vino/OAVv2/oda-al-vino/project/assets/fonts/LuxuriousScript-Regular.ttf"
+    },
+    "body": {
+      "family": "Lato",
+      "role": "sans body/data — stat numbers, labels, date/venue, CTA",
+      "files": [
+        "/home/user/ODA-al-Vino/OAVv2/oda-al-vino/project/assets/fonts/Lato-Regular.ttf",
+        "/home/user/ODA-al-Vino/OAVv2/oda-al-vino/project/assets/fonts/Lato-Bold.ttf",
+        "/home/user/ODA-al-Vino/OAVv2/oda-al-vino/project/assets/fonts/Lato-BoldItalic.ttf"
+      ]
+    }
+  },
+
+  "beats": [0.5, 3.2, 6.0, 8.5, 11.2, 13.3],
+  "export": "mp4",
+
+  "asset_needs": [],
+
+  "block": null,
+  "customize": null,
+
+  "content": {
+    "scenes": [
+      {
+        "id": "hook-line-build",
+        "start": 0,
+        "end": 3.0,
+        "text": "El vino nos",
+        "emphasis_words": ["vino"],
+        "emotion": "inviting, confident open",
+        "motion": "cold open: solid wine (#47072c) ground fills instantly at frame 0 (the film's first pixel, no wipe). 'EL VINO NOS' enters via wave (per-letter stagger .04s, power4.out) building left-to-right in CCS Belvare uppercase, paper-cream ink. Emphasis word 'VINO' gets scale_punch (back.out(2.2)) + glow flash on the beat (0.5s). Exit/handoff: none — text and wine ground both HOLD static into scene 2; the handoff is a hold, not a cut, so 'Reúne' can draw on top of this same frame.",
+        "beats": [0.5]
+      },
+      {
+        "id": "hero-reune-script",
+        "start": 3.0,
+        "end": 5.5,
+        "text": "Reúne",
+        "emphasis_words": ["Reúne"],
+        "emotion": "warm emotional peak — the tagline's payoff",
+        "motion": "ground flip via bar_wipe: a paper-cream color-block wipes L→R across the wine ground (.25s, power2.inOut) while 'EL VINO NOS' recolors wine-ink→plum through the same .25s via color_shift, staying legible on the new ground. 'Reúne' then reveals via pen-draw (SVG stroke-dashoffset path-draw, Luxurious Script, plum #700143 ink, ~0.8s power1.inOut) as if signed onto the page. Hold ~0.35s so 'El vino nos Reúne' reads as one lockup. Exit/handoff: pattern-interrupt — the whole lockup snaps out with a fast scale_out (.12s power3.in) as the olive ground hard-cuts in underneath (no dissolve).",
+        "beats": [3.2]
+      },
+      {
+        "id": "stat-beat-bodegas-etiquetas",
+        "start": 5.5,
+        "end": 8.0,
+        "text": "+150 Bodegas · +700 Etiquetas",
+        "emphasis_words": ["150", "700"],
+        "emotion": "scale, credibility — quick punch of numbers",
+        "motion": "olive (#4c5409) ground hard-cuts in (the pattern-interrupt promised by scene 2's exit — no wipe). '+150' count-up (numeral animates 0→150 over .35s power2.out) with scale_punch entrance, 'Bodegas' label slide_bottom beneath in Lato Bold. At the midpoint, '+700'/'Etiquetas' whip-replaces the pair via slide_left (power4.out, .18s) on the same vertical axis while the numeral simultaneously count-ups 0→700 — one motif, two payloads. Exit/handoff: group slide_out (upward, power2.in) as the harvest ground bar_wipes in from the bottom, carrying the vertical vector into scene 4.",
+        "beats": [6.0]
+      },
+      {
+        "id": "stat-beat-asistentes-edicion",
+        "start": 8.0,
+        "end": 10.5,
+        "text": "+2.000 Asistentes · 10° Edición (desde 2015)",
+        "emphasis_words": ["2.000", "10°"],
+        "emotion": "momentum, legacy",
+        "motion": "harvest (#7c8419) ground arrives via bottom-to-top bar_wipe (.2s — continuing scene 3's exit vector). '+2.000 Asistentes' count-up (0→2.000, .4s power2.out) + word_reveal stagger on the label. A swap-wipe (slide_left, power4.out, .18s — same rhythm/axis as scene 3's swap) replaces it with '10° Edición', with '(desde 2015)' fade_in-ing smaller/italic beneath a beat later. Exit/handoff: hard L→R bar_wipe to wine ground for scene 5, matching the wipe language used throughout.",
+        "beats": [8.5]
+      },
+      {
+        "id": "event-details",
+        "start": 10.5,
+        "end": 13.0,
+        "text": "4 y 5 de Septiembre 2026 — Iguassu Urban Mall, Puerto Iguazú",
+        "emphasis_words": ["4", "5", "Septiembre"],
+        "emotion": "informational anchor — where/when, still confident pace",
+        "motion": "wine (#47072c) ground returns via L→R bar_wipe. Date '4 Y 5 DE SEPTIEMBRE' enters as a single clean slide_bottom (power4.out, no stagger — deliberately calmer than the stat beats) in CCS Belvare; venue/city line fade_in-s ~0.15s after, smaller in Lato beneath. Emphasis words '4'/'5'/'Septiembre' get a color_shift-to-harvest pulse on the beat (11.2s); this beat breathes longer than the others. Exit/handoff: soft cross-dissolve — group scale_out + fade_out (.4s power2.in) as the ground itself crossfades wine→paper-cream (opacity blend, not a hard wipe), downshifting the film's motion to set up the still close.",
+        "beats": [11.2]
+      },
+      {
+        "id": "closing-lockup-cta",
+        "start": 13.0,
+        "end": 15.0,
+        "text": "ODA al Vino — Asegurá tu entrada",
+        "emphasis_words": ["Asegurá tu entrada"],
+        "emotion": "settled, celebratory close — the one still moment",
+        "motion": "paper-cream (#fff5e1) ground settles in, continuing scene 5's cross-dissolve — the only soft, non-wipe transition in the piece, signaling arrival. Logo (/home/user/ODA-al-Vino/OAVv2/oda-al-vino/project/assets/logo_violeta_horizontal.svg, violet/plum mark) scale_grow entrance (scale .92→1, opacity 0→1, power2.out, .5s), centered. Date/edition line fade_in-s beneath, staggered ~0.1s after the logo lands. 'Asegurá tu entrada' CTA in plum (#700143) Lato Bold arrives via slide_bottom, then the whole lockup settles into a single hold_breath cycle (scale to 1.015, sine.inOut) — the one still moment named in the emotion/style brief. Exit/handoff: none — holds to the final frame/black.",
+        "beats": [13.3]
+      }
+    ]
+  }
+}
