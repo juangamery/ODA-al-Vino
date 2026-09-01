@@ -30,7 +30,7 @@ export async function GET(request: NextRequest) {
 
   try {
     const { data, error } = await resend.emails.send({
-      from: "ODA al Vino <noreply@oda-al-vino.com>",
+      from: "ODA al Vino <noreply@odavinoteca.com.ar>",
       to,
       subject: "Prueba de envío · ODA al Vino 2026",
       html: "<p>Este es un mail de prueba del panel admin, para confirmar que Resend está enviando correctamente. No corresponde a ninguna inscripción real.</p>",
