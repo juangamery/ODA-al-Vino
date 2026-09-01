@@ -3,7 +3,7 @@ import { Resend } from "resend";
 import { CATAS_ADMIN_COOKIE, verifyAdminSessionToken } from "@/lib/catas/adminAuth";
 import { getSupabaseAdmin } from "@/lib/catas/supabaseAdmin";
 import { buildConfirmationEmail } from "@/lib/catas/emailTemplate";
-import type { DayId, SalaId } from "@/lib/catas/schedule";
+import type { DayId, SalaId, Selection } from "@/lib/catas/schedule";
 
 export const dynamic = "force-dynamic";
 export const maxDuration = 300;
@@ -21,6 +21,53 @@ interface RegistrationRow {
   catas_selections: SelectionRow[];
 }
 
+interface Persona {
+  nombre: string;
+  contacto: string;
+  selections: Selection[];
+}
+
+/**
+ * Junta las inscripciones por persona (nombre + email, normalizados) antes
+ * de mandar nada. Bastante gente completó el formulario varias veces (una
+ * cata por vez) en vez de elegir las 2 juntas — sin esto cada quien
+ * recibiría un mail separado por cada envío suelto, en vez de uno solo con
+ * toda su selección. También junta variantes de mayúsculas del mismo
+ * nombre ("Julia rainho meister" / "Julia Rainho Meister").
+ */
+function agruparPorPersona(rows: RegistrationRow[]): Persona[] {
+  const grupos = new Map<string, Persona>();
+
+  for (const r of rows) {
+    const key = `${r.nombre.trim().toLowerCase()}|||${r.contacto.trim().toLowerCase()}`;
+    const existente = grupos.get(key);
+    const nuevasSelections: Selection[] = r.catas_selections.map((s) => ({
+      day: s.day,
+      slot: s.slot,
+      salaId: s.sala_id,
+    }));
+
+    if (existente) {
+      existente.selections.push(...nuevasSelections);
+    } else {
+      grupos.set(key, { nombre: r.nombre.trim(), contacto: r.contacto.trim(), selections: nuevasSelections });
+    }
+  }
+
+  // Por si la misma cata puntual quedó guardada duplicada entre envíos.
+  for (const persona of grupos.values()) {
+    const vistas = new Set<string>();
+    persona.selections = persona.selections.filter((s) => {
+      const key = `${s.day}__${s.slot}__${s.salaId}`;
+      if (vistas.has(key)) return false;
+      vistas.add(key);
+      return true;
+    });
+  }
+
+  return Array.from(grupos.values());
+}
+
 /**
  * Reenvío masivo del mail de confirmación a TODAS las inscripciones ya
  * guardadas — pensado como corrida única para ponerse al día después de
@@ -35,9 +82,9 @@ interface RegistrationRow {
  * y cuántas catas tiene cada uno, para revisar antes del envío real.
  * ?dryRun=false hace el envío de verdad.
  *
- * Con ~90 inscripciones y un pequeño delay entre envíos (para no pegarle
- * al rate limit de Resend), la corrida real puede tardar más de un
- * minuto — de ahí el maxDuration alto.
+ * Con ~150-190 personas y un pequeño delay entre envíos (para no pegarle
+ * al rate limit de Resend), la corrida real puede tardar varios minutos —
+ * de ahí el maxDuration alto.
  */
 export async function GET(request: NextRequest) {
   const token = request.cookies.get(CATAS_ADMIN_COOKIE)?.value;
@@ -65,16 +112,15 @@ export async function GET(request: NextRequest) {
   }
 
   const rows = (registrations ?? []) as unknown as RegistrationRow[];
-  const conCatas = rows.filter((r) => r.catas_selections.length > 0);
+  const personas = agruparPorPersona(rows).filter((p) => p.selections.length > 0);
 
   if (dryRun) {
     return NextResponse.json({
       dryRun: true,
       lang,
       totalInscripciones: rows.length,
-      seEnviarianA: conCatas.length,
-      sinCatas: rows.length - conCatas.length,
-      destinatarios: conCatas.map((r) => ({ nombre: r.nombre, contacto: r.contacto, catas: r.catas_selections.length })),
+      personasUnicas: personas.length,
+      destinatarios: personas.map((p) => ({ nombre: p.nombre, contacto: p.contacto, catas: p.selections.length })),
     });
   }
 
@@ -82,23 +128,22 @@ export async function GET(request: NextRequest) {
   const enviados: string[] = [];
   const fallidos: { contacto: string; motivo: string }[] = [];
 
-  for (const r of conCatas) {
-    const selections = r.catas_selections.map((s) => ({ day: s.day, slot: s.slot, salaId: s.sala_id }));
-    const { subject, html } = buildConfirmationEmail(r.nombre, selections, lang);
+  for (const p of personas) {
+    const { subject, html } = buildConfirmationEmail(p.nombre, p.selections, lang);
     try {
       const { error } = await resend.emails.send({
         from: "ODA al Vino <noreply@odavinoteca.com.ar>",
-        to: r.contacto,
+        to: p.contacto,
         subject,
         html,
       });
       if (error) {
-        fallidos.push({ contacto: r.contacto, motivo: JSON.stringify(error) });
+        fallidos.push({ contacto: p.contacto, motivo: JSON.stringify(error) });
       } else {
-        enviados.push(r.contacto);
+        enviados.push(p.contacto);
       }
     } catch (e) {
-      fallidos.push({ contacto: r.contacto, motivo: e instanceof Error ? e.message : String(e) });
+      fallidos.push({ contacto: p.contacto, motivo: e instanceof Error ? e.message : String(e) });
     }
     // Pequeño respiro entre envíos para no pegarle al rate limit de Resend.
     await new Promise((resolve) => setTimeout(resolve, 400));
@@ -107,7 +152,7 @@ export async function GET(request: NextRequest) {
   return NextResponse.json({
     dryRun: false,
     lang,
-    totalProcesados: conCatas.length,
+    totalProcesados: personas.length,
     enviadosOk: enviados.length,
     fallidos,
   });
