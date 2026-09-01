@@ -55,7 +55,11 @@ export function CatasForm() {
   const [participantStatus, setParticipantStatus] = useState<ParticipantStatus>("idle");
   const [submitting, setSubmitting] = useState(false);
   const [formError, setFormError] = useState<string | null>(null);
-  const [confirmation, setConfirmation] = useState<{ nombre: string; items: string[] } | null>(null);
+  const [confirmation, setConfirmation] = useState<{
+    nombre: string;
+    documento: string;
+    items: { day: DayId; slot: string; salaNombre: string; bodega: string }[];
+  } | null>(null);
 
   const loadCounts = async () => {
     try {
@@ -172,9 +176,9 @@ export function CatasForm() {
       const items = allSelections.map((sel) => {
         const sala = salaById(sel.salaId)!;
         const cata = SCHEDULE[sel.day][sel.slot]![sel.salaId]!;
-        return `${t(DAY_LABEL_KEY[sel.day], language)} · ${sel.slot} · ${sala.nombre}: ${cata.bodega}`;
+        return { day: sel.day, slot: sel.slot, salaNombre: sala.nombre, bodega: cata.bodega };
       });
-      setConfirmation({ nombre: trimmedNombre, items });
+      setConfirmation({ nombre: trimmedNombre, documento: trimmedDocumento, items });
       setNombre("");
       setContacto("");
       setDocumento("");
@@ -200,11 +204,20 @@ export function CatasForm() {
         <p className="script text-4xl text-wine mb-2">
           {t("catasListo", language)}, {confirmation.nombre}!
         </p>
-        <p className="text-wine/70 mb-8">{t("catasConfirmationSubtitle", language)}</p>
-        <ul className="mb-8 space-y-2 rounded-2xl border border-wine/15 bg-white/50 p-5 text-left text-base text-wine/90">
+        <p className="text-wine/70 mb-4">{t("catasConfirmationSubtitle", language)}</p>
+        <p className="mb-6 inline-block rounded-full bg-harvest/15 px-4 py-1.5 text-sm font-semibold text-wine">
+          {t("catasEmailDocumento", language)}: {confirmation.documento}
+        </p>
+        <ul className="mb-8 space-y-3 text-left">
           {confirmation.items.map((item, i) => (
-            <li key={i} className="border-b border-wine/10 pb-2 last:border-0 last:pb-0">
-              {item}
+            <li key={i} className="rounded-xl border border-wine/15 bg-white/60 px-4 py-3">
+              <p className="lato-expanded text-[10px] text-plum">
+                {t(DAY_LABEL_KEY[item.day], language)} · {item.slot} {t("catasHoursAbbrev", language)}
+              </p>
+              <p className="font-serif text-lg normal-case tracking-normal text-wine">{item.bodega}</p>
+              <p className="text-xs text-wine/60">
+                {t("catasEmailSala", language)}: {item.salaNombre}
+              </p>
             </li>
           ))}
         </ul>
@@ -455,6 +468,9 @@ export function CatasForm() {
               <label htmlFor="documento" className="lato-expanded mb-1.5 block text-xs text-paper/80">
                 {t("catasDocumentoLabel", language)}
               </label>
+              <p className="mb-1.5 text-xs normal-case leading-relaxed tracking-normal text-paper/70">
+                {t("catasDocumentoAyuda", language)}
+              </p>
               <input
                 id="documento"
                 type="text"

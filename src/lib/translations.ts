@@ -285,6 +285,8 @@ export const translations = {
     catasSinSalaElegida: "Todavía no elegiste ninguna sala.",
     catasDocumentoLabel: "Documento (DNI / RG / Cédula)",
     catasDocumentoPlaceholder: "El mismo con el que compraste tu entrada",
+    catasDocumentoAyuda:
+      "Lo usamos para identificarte en la puerta de cada sala. Si alguien más compró tu entrada, poné tu propio documento para que la inscripción quede a tu nombre.",
     catasNombreLabel: "Nombre y apellido",
     catasNombrePlaceholder: "Ej: Marina Suárez",
     catasEmailLabel: "Email",
@@ -598,6 +600,8 @@ export const translations = {
     catasSinSalaElegida: "Você ainda não escolheu nenhuma sala.",
     catasDocumentoLabel: "Documento (DNI / RG / Cédula)",
     catasDocumentoPlaceholder: "O mesmo com que você comprou seu ingresso",
+    catasDocumentoAyuda:
+      "Usamos para identificar você na porta de cada sala. Se outra pessoa comprou seu ingresso, coloque o seu próprio documento para que a inscrição fique no seu nome.",
     catasNombreLabel: "Nome e sobrenome",
     catasNombrePlaceholder: "Ex: Marina Suárez",
     catasEmailLabel: "Email",
