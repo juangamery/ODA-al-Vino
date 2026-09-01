@@ -3,6 +3,7 @@ import { Resend } from "resend";
 import { getSupabaseAdmin } from "@/lib/catas/supabaseAdmin";
 import { DAYS, getCata, salaById, validateSelections, type Selection } from "@/lib/catas/schedule";
 import { checkParticipant, ParticipantsApiError } from "@/lib/catas/participantsApi";
+import { buildConfirmationEmail } from "@/lib/catas/emailTemplate";
 import { t, type Language } from "@/lib/translations";
 
 const resend = process.env.RESEND_API_KEY ? new Resend(process.env.RESEND_API_KEY) : null;
@@ -114,20 +115,7 @@ export async function POST(request: NextRequest) {
   if (resend && skipConfirmationEmail) {
     console.log("inscribir: envío de mail de confirmación saltado (CATAS_SKIP_CONFIRMATION_EMAIL=true)");
   } else if (resend) {
-    const resumen = selections
-      .map((sel) => {
-        const cata = getCata(sel.day, sel.slot, sel.salaId)!;
-        const sala = salaById(sel.salaId);
-        const day = DAYS.find((d) => d.id === sel.day);
-        return `<li>${day?.label} · ${sel.slot} · ${sala?.nombre}: ${cata.bodega}</li>`;
-      })
-      .join("");
-
-    const subject =
-      lang === "pt"
-        ? "Sua inscrição para as salas de degustação · ODA al Vino 2026"
-        : "Tu inscripción a las salas de degustación · ODA al Vino 2026";
-    const heading = `${t("catasListo", lang)}, ${nombre}!`;
+    const { subject, html } = buildConfirmationEmail(nombre, selections, lang);
 
     // Hay que esperar el envío antes de devolver la respuesta: si se dispara
     // sin await, Vercel puede congelar la función serverless apenas se
@@ -147,7 +135,7 @@ export async function POST(request: NextRequest) {
         from: "ODA al Vino <noreply@odavinoteca.com.ar>",
         to: contacto,
         subject,
-        html: `<h1>${heading}</h1><p>${t("catasConfirmationSubtitle", lang)}</p><ul>${resumen}</ul>`,
+        html,
       });
       if (resendError) {
         console.error("email confirmación error (respuesta de Resend):", resendError);
