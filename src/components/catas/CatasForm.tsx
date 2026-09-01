@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
+import Link from "next/link";
 import {
   DAYS,
   MAX_PER_DAY,
@@ -279,6 +280,12 @@ export function CatasForm() {
             </span>
           ))}
         </div>
+        <Link
+          href="/inscripcion/consultar"
+          className="mt-4 inline-block text-sm text-plum underline normal-case tracking-normal"
+        >
+          {t("catasConsultarLink", language)}
+        </Link>
       </header>
 
       <div className="mx-auto flex max-w-[1180px] flex-wrap justify-center gap-2 px-5 py-4">
