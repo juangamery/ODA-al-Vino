@@ -310,6 +310,10 @@ export const translations = {
     catasErrCataInvalida: "Una de las catas elegidas no existe.",
     catasErrCupoLlenoSufijo: "se quedó sin cupo justo ahora. Elegí otra opción.",
     catasErrLimiteDocumentoPrefijo: "Este documento ya tiene el máximo de 2 catas anotadas para",
+    catasEmailDetalle: "Tu selección",
+    catasEmailSala: "Sala",
+    catasEmailCierre: "Nos vemos en la cata.",
+    catasEmailNoResponder: "Este es un mail automático, no hace falta responder.",
   },
   pt: {
     // ========== HERO V3 ==========
@@ -618,6 +622,10 @@ export const translations = {
     catasErrCataInvalida: "Uma das degustações escolhidas não existe.",
     catasErrCupoLlenoSufijo: "ficou sem vagas agora. Escolha outra opção.",
     catasErrLimiteDocumentoPrefijo: "Este documento já tem o máximo de 2 degustações marcadas para",
+    catasEmailDetalle: "Sua seleção",
+    catasEmailSala: "Sala",
+    catasEmailCierre: "Nos vemos na degustação.",
+    catasEmailNoResponder: "Este é um email automático, não é necessário responder.",
   },
 };
 
