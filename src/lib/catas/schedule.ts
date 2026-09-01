@@ -72,7 +72,7 @@ export const SCHEDULE: Record<DayId, DaySchedule> = {
       patagonia: { bodega: "Catena Zapata", profesional: "Arnaldo Gometz", restaurante: "Café & Bistró La Carolina (CDE)", presenta: "The Birth of Cabernet Sauvignon" },
       cuyo: { bodega: "Maison Pouget", profesional: "Ricardo Scandura & Pablo Delgado", restaurante: "El Quincho del Tío Querido" },
       iguazu: { bodega: "Trapiche", profesional: "La Reina del Baile", restaurante: "Yvyrá del Hotel O2", presenta: "Terroirs de Argentina" },
-      argentina: { bodega: "Cicchitti", profesional: "José Cicchitti", restaurante: "La Toscana", presenta: "Cicchitti Emblema" },
+      argentina: { bodega: "Rutini Wines", restaurante: "La Toscana" },
       atlantica: { bodega: "Desquiciado", profesional: "Gonzalo Camagnini", presenta: "Alfa Malbec & Lanzamiento Salvaje Pinot Noir" },
     },
     "18:30–19:15": {
