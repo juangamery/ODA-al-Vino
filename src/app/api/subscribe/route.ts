@@ -54,12 +54,19 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: "Could not save email" }, { status: 500, headers });
     }
 
-    await resend.emails.send({
-      from: "ODA al Vino <noreply@oda-al-vino.com>",
+    // "oda-al-vino.com" nunca estuvo verificado en Resend, así que Resend
+    // rechazaba el envío con 403 sin que el código lo notara (el SDK no
+    // tira excepción en errores de la API, resuelve con { error }) —
+    // usamos el dominio que sí está verificado, y ahora sí logueamos si falla.
+    const { error: resendError } = await resend.emails.send({
+      from: "ODA al Vino <noreply@odavinoteca.com.ar>",
       to: email,
       subject: "Bienvenido a ODA al Vino 🍷",
       html: `<h1>Bienvenido!</h1><p>Te has suscrito a nuestro newsletter. Pronto recibirás noticias sobre ODA al Vino.</p>`,
     });
+    if (resendError) {
+      console.error("subscribe: email de bienvenida error:", resendError);
+    }
 
     return NextResponse.json({ success: true }, { headers });
   } catch (error) {

@@ -138,7 +138,13 @@ export async function POST(request: NextRequest) {
     // de envolver en try/catch por si falla la conexión en sí.
     try {
       const { error: resendError } = await resend.emails.send({
-        from: "ODA al Vino <noreply@oda-al-vino.com>",
+        // odavinoteca.com.ar es el único dominio verificado en la cuenta de
+        // Resend — con "oda-al-vino.com" (sin verificar) Resend rechazaba
+        // TODOS los envíos con 403, lo cual era la causa real de que nunca
+        // llegara el mail de confirmación. Migrar a un dominio propio de
+        // OAV queda pendiente (requiere tocar DNS con cuidado, ver el
+        // registro SPF existente para no romper la casilla de mail actual).
+        from: "ODA al Vino <noreply@odavinoteca.com.ar>",
         to: contacto,
         subject,
         html: `<h1>${heading}</h1><p>${t("catasConfirmationSubtitle", lang)}</p><ul>${resumen}</ul>`,
