@@ -43,7 +43,8 @@ function selectionCardHtml(sel: Selection, lang: Language): string {
 export function buildConfirmationEmail(
   nombre: string,
   selections: Selection[],
-  lang: Language
+  lang: Language,
+  documento?: string
 ): { subject: string; html: string } {
   const subject =
     lang === "pt"
@@ -56,6 +57,16 @@ export function buildConfirmationEmail(
     .sort((a, b) => (a.day === b.day ? a.slot.localeCompare(b.slot) : a.day === "viernes" ? -1 : 1))
     .map((sel) => selectionCardHtml(sel, lang))
     .join("");
+
+  // Varias entradas se compraron en grupo y quedaron con el mismo email de
+  // contacto — el documento identifica claramente de quién es cada mail
+  // cuando quien compró se los tiene que reenviar a sus amigos.
+  const documentoHtml = documento
+    ? `
+                <div style="display:inline-block;background-color:#fff5e1;color:#47072c;font-family:Arial,Helvetica,sans-serif;font-size:12px;font-weight:bold;padding:6px 12px;border-radius:20px;margin-bottom:20px;">
+                  ${t("catasEmailDocumento", lang)}: ${escapeHtml(documento)}
+                </div>`
+    : "";
 
   const html = `<!DOCTYPE html>
 <html lang="${lang}">
@@ -86,9 +97,9 @@ export function buildConfirmationEmail(
                 <h1 style="margin:0 0 8px;font-family:Georgia,'Times New Roman',serif;color:#47072c;font-size:28px;font-weight:normal;">
                   ${t("catasListo", lang)}, ${escapeHtml(nombre)}!
                 </h1>
-                <p style="margin:0 0 24px;font-family:Arial,Helvetica,sans-serif;color:#47072c;font-size:15px;line-height:1.5;">
+                <p style="margin:0 0 16px;font-family:Arial,Helvetica,sans-serif;color:#47072c;font-size:15px;line-height:1.5;">
                   ${t("catasConfirmationSubtitle", lang)}
-                </p>
+                </p>${documentoHtml}
                 <div style="font-family:Arial,Helvetica,sans-serif;color:#700143;font-size:11px;letter-spacing:2px;text-transform:uppercase;margin-bottom:12px;">
                   ${t("catasEmailDetalle", lang)}
                 </div>

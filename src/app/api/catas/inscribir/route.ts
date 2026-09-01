@@ -115,7 +115,7 @@ export async function POST(request: NextRequest) {
   if (resend && skipConfirmationEmail) {
     console.log("inscribir: envío de mail de confirmación saltado (CATAS_SKIP_CONFIRMATION_EMAIL=true)");
   } else if (resend) {
-    const { subject, html } = buildConfirmationEmail(nombre, selections, lang);
+    const { subject, html } = buildConfirmationEmail(nombre, selections, lang, documento);
 
     // Hay que esperar el envío antes de devolver la respuesta: si se dispara
     // sin await, Vercel puede congelar la función serverless apenas se

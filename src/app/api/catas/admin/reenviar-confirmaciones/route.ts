@@ -18,12 +18,14 @@ interface RegistrationRow {
   id: string;
   nombre: string;
   contacto: string;
+  documento: string | null;
   catas_selections: SelectionRow[];
 }
 
 interface Persona {
   nombre: string;
   contacto: string;
+  documento?: string;
   selections: Selection[];
 }
 
@@ -46,11 +48,13 @@ function agruparPorPersona(rows: RegistrationRow[]): Persona[] {
       slot: s.slot,
       salaId: s.sala_id,
     }));
+    const documento = r.documento?.trim() || undefined;
 
     if (existente) {
       existente.selections.push(...nuevasSelections);
+      if (!existente.documento && documento) existente.documento = documento;
     } else {
-      grupos.set(key, { nombre: r.nombre.trim(), contacto: r.contacto.trim(), selections: nuevasSelections });
+      grupos.set(key, { nombre: r.nombre.trim(), contacto: r.contacto.trim(), documento, selections: nuevasSelections });
     }
   }
 
@@ -103,7 +107,7 @@ export async function GET(request: NextRequest) {
   const supabase = getSupabaseAdmin();
   const { data: registrations, error: fetchError } = await supabase
     .from("catas_registrations")
-    .select("id, nombre, contacto, catas_selections(day, slot, sala_id)")
+    .select("id, nombre, contacto, documento, catas_selections(day, slot, sala_id)")
     .order("created_at", { ascending: true });
 
   if (fetchError) {
@@ -120,7 +124,12 @@ export async function GET(request: NextRequest) {
       lang,
       totalInscripciones: rows.length,
       personasUnicas: personas.length,
-      destinatarios: personas.map((p) => ({ nombre: p.nombre, contacto: p.contacto, catas: p.selections.length })),
+      destinatarios: personas.map((p) => ({
+        nombre: p.nombre,
+        contacto: p.contacto,
+        documento: p.documento ?? null,
+        catas: p.selections.length,
+      })),
     });
   }
 
@@ -129,7 +138,7 @@ export async function GET(request: NextRequest) {
   const fallidos: { contacto: string; motivo: string }[] = [];
 
   for (const p of personas) {
-    const { subject, html } = buildConfirmationEmail(p.nombre, p.selections, lang);
+    const { subject, html } = buildConfirmationEmail(p.nombre, p.selections, lang, p.documento);
     try {
       const { error } = await resend.emails.send({
         from: "ODA al Vino <noreply@odavinoteca.com.ar>",
