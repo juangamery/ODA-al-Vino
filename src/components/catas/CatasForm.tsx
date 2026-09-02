@@ -282,7 +282,7 @@ export function CatasForm() {
         </div>
         <Link
           href="/inscripcion/consultar"
-          className="mt-4 inline-block text-sm text-plum underline normal-case tracking-normal"
+          className="mt-5 inline-flex items-center justify-center rounded-full border-2 border-wine px-6 py-3 text-sm font-semibold uppercase tracking-[0.16em] text-wine transition-all duration-300 hover:bg-wine hover:text-paper active:scale-95"
         >
           {t("catasConsultarLink", language)}
         </Link>
