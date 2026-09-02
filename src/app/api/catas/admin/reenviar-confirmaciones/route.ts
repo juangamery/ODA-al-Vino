@@ -98,6 +98,10 @@ export async function GET(request: NextRequest) {
 
   const dryRun = request.nextUrl.searchParams.get("dryRun") !== "false";
   const lang = request.nextUrl.searchParams.get("lang") === "pt" ? "pt" : "es";
+  // Para reintentar sólo a quienes falló el envío (ej: se cortó por la cuota
+  // diaria de Resend) sin volver a mandarle a quien ya recibió su mail hoy.
+  // ?contactos=mail1@x.com,mail2@x.com
+  const contactosFiltro = request.nextUrl.searchParams.get("contactos");
 
   const apiKey = process.env.RESEND_API_KEY;
   if (!apiKey) {
@@ -116,7 +120,17 @@ export async function GET(request: NextRequest) {
   }
 
   const rows = (registrations ?? []) as unknown as RegistrationRow[];
-  const personas = agruparPorPersona(rows).filter((p) => p.selections.length > 0);
+  let personas = agruparPorPersona(rows).filter((p) => p.selections.length > 0);
+
+  if (contactosFiltro) {
+    const set = new Set(
+      contactosFiltro
+        .split(",")
+        .map((c) => c.trim().toLowerCase())
+        .filter(Boolean)
+    );
+    personas = personas.filter((p) => set.has(p.contacto.toLowerCase()));
+  }
 
   if (dryRun) {
     return NextResponse.json({
