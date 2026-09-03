@@ -126,6 +126,46 @@ export function buildConfirmationEmail(
   return { subject, html };
 }
 
+const DAY_MAX = 2;
+const DAYS_ORDER: Selection["day"][] = ["viernes", "sabado"];
+
+/**
+ * A quienes les quedaron menos de 2 catas en algún día (porque nunca
+ * llegaron a elegir nada para ese día, no porque se les haya recortado) se
+ * les avisa que todavía pueden completar su selección.
+ */
+function lugaresLibresHtml(selections: Selection[], lang: Language): string {
+  const counts: Record<string, number> = {};
+  for (const s of selections) counts[s.day] = (counts[s.day] ?? 0) + 1;
+
+  const libres = DAYS_ORDER.map((day) => ({ day, libres: DAY_MAX - (counts[day] ?? 0) })).filter(
+    (d) => d.libres > 0
+  );
+  if (libres.length === 0) return "";
+
+  const partes = libres.map(
+    (d) =>
+      `${d.libres} ${t(d.libres === 1 ? "catasCataSingular" : "catasCataPlural", lang)} ${t(
+        "catasEmailLimiteLibreSufijo",
+        lang
+      )} ${dayLabel(d.day, lang)}`
+  );
+  const texto = partes.length === 2 ? `${partes[0]} ${t("catasEmailLimiteY", lang)} ${partes[1]}` : partes[0];
+
+  return `
+                <div style="margin:20px 0;padding:14px 16px;border:1px dashed #7c8419;border-radius:8px;background-color:#7c841914;">
+                  <p style="margin:0 0 6px;font-family:Arial,Helvetica,sans-serif;color:#47072c;font-size:13px;font-weight:bold;">
+                    ${t("catasEmailLimiteLibreTitulo", lang)}
+                  </p>
+                  <p style="margin:0;font-family:Arial,Helvetica,sans-serif;color:#47072c;font-size:13px;line-height:1.5;">
+                    ${texto}. <a href="https://www.odaalvino.com.br/inscripcion" style="color:#700143;">${t(
+                      "catasEmailLimiteLibreLink",
+                      lang
+                    )}</a>
+                  </p>
+                </div>`;
+}
+
 /**
  * Mail de ajuste: se manda a quienes quedaron con más catas de las
  * permitidas (por el bug de límite descripto en la migración
@@ -185,6 +225,7 @@ export function buildLimiteAjustadoEmail(
                   ${t("catasEmailDetalle", lang)}
                 </div>
                 ${cardsHtml}
+                ${lugaresLibresHtml(selections, lang)}
                 <p style="margin:24px 0 0;font-family:Arial,Helvetica,sans-serif;color:#47072c;font-size:14px;line-height:1.6;">
                   ${t("catasEmailLimiteCierre", lang)}
                 </p>
