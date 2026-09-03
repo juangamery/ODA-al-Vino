@@ -36,7 +36,9 @@ export async function GET(request: NextRequest) {
   }
 
   const dryRun = request.nextUrl.searchParams.get("dryRun") !== "false";
-  const lang = request.nextUrl.searchParams.get("lang") === "pt" ? "pt" : "es";
+  // Los 11 afectados son todos de Brasil — este mail va en portugués por
+  // default (se puede pasar ?lang=es para forzarlo al español si hiciera falta).
+  const lang = request.nextUrl.searchParams.get("lang") === "es" ? "es" : "pt";
 
   const apiKey = process.env.RESEND_API_KEY;
   if (!apiKey) {
