@@ -335,6 +335,10 @@ export const translations = {
     catasEmailLimiteCierre:
       "Si querés modificar tu selección o tenés alguna consulta al respecto, escribinos a contato@odaalvino.com.br y te ayudamos.",
     catasEmailLimiteContacto: "Este mail fue generado automáticamente por el sistema de inscripción de ODA al Vino 2026.",
+    catasEmailLimiteLibreTitulo: "Te quedan lugares libres:",
+    catasEmailLimiteLibreSufijo: "libres el",
+    catasEmailLimiteY: "y",
+    catasEmailLimiteLibreLink: "Completá tu selección acá",
   },
   pt: {
     // ========== HERO V3 ==========
@@ -668,6 +672,10 @@ export const translations = {
     catasEmailLimiteCierre:
       "Se quiser alterar sua seleção ou tiver alguma dúvida, escreva para contato@odaalvino.com.br e nós te ajudamos.",
     catasEmailLimiteContacto: "Este e-mail foi gerado automaticamente pelo sistema de inscrição da ODA ao Vinho 2026.",
+    catasEmailLimiteLibreTitulo: "Ainda restam vagas livres:",
+    catasEmailLimiteLibreSufijo: "livres em",
+    catasEmailLimiteY: "e",
+    catasEmailLimiteLibreLink: "Complete sua seleção aqui",
   },
 };
 
