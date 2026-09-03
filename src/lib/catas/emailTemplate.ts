@@ -247,3 +247,84 @@ export function buildLimiteAjustadoEmail(
 
   return { subject, html };
 }
+
+/**
+ * Mail recordatorio: se manda a quienes ya se anotaron a alguna cata pero
+ * todavía tienen lugares libres (menos de 2 en algún día), invitándolos a
+ * completar su selección. A diferencia de buildLimiteAjustadoEmail, acá no
+ * hubo ningún ajuste — es sólo un recordatorio positivo.
+ */
+export function buildLugaresDisponiblesEmail(
+  nombre: string,
+  selections: Selection[],
+  lang: Language
+): { subject: string; html: string } {
+  const subject =
+    lang === "pt"
+      ? "Ainda dá tempo de completar sua seleção de degustações · ODA al Vino 2026"
+      : "Todavía podés completar tu selección de catas · ODA al Vino 2026";
+
+  const cardsHtml = selections
+    .slice()
+    .sort((a, b) => (a.day === b.day ? a.slot.localeCompare(b.slot) : a.day === "viernes" ? -1 : 1))
+    .map((sel) => selectionCardHtml(sel, lang))
+    .join("");
+
+  const html = `<!DOCTYPE html>
+<html lang="${lang}">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>${escapeHtml(subject)}</title>
+  </head>
+  <body style="margin:0;padding:0;background-color:#fff5e1;">
+    <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background-color:#fff5e1;">
+      <tr>
+        <td align="center" style="padding:24px 16px;">
+          <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="max-width:560px;">
+            <tr>
+              <td style="background-color:#47072c;padding:28px 24px;text-align:center;border-radius:12px 12px 0 0;">
+                <img
+                  src="https://www.odaalvino.com.br/oda/brand/logo-email-crema.png"
+                  alt="ODA al Vino · 10ª edición"
+                  width="200"
+                  height="59"
+                  style="display:block;margin:0 auto;width:200px;height:59px;border:0;"
+                />
+                <div style="font-family:Arial,Helvetica,sans-serif;color:#e8c9a0;font-size:11px;letter-spacing:2px;margin-top:8px;">2026</div>
+              </td>
+            </tr>
+            <tr>
+              <td style="background-color:#ffffff;padding:32px 24px;">
+                <h1 style="margin:0 0 8px;font-family:Georgia,'Times New Roman',serif;color:#47072c;font-size:26px;font-weight:normal;">
+                  ${t("catasEmailLimiteSaludo", lang)}, ${escapeHtml(nombre)}
+                </h1>
+                <p style="margin:0 0 16px;font-family:Arial,Helvetica,sans-serif;color:#47072c;font-size:15px;line-height:1.6;">
+                  ${t("catasEmailDisponibleIntro", lang)}
+                </p>
+                <div style="font-family:Arial,Helvetica,sans-serif;color:#700143;font-size:11px;letter-spacing:2px;text-transform:uppercase;margin-bottom:12px;">
+                  ${t("catasEmailDetalle", lang)}
+                </div>
+                ${cardsHtml}
+                ${lugaresLibresHtml(selections, lang)}
+                <p style="margin:24px 0 0;font-family:Arial,Helvetica,sans-serif;color:#47072c;font-size:14px;line-height:1.6;">
+                  ${t("catasEmailDisponibleCierre", lang)}
+                </p>
+              </td>
+            </tr>
+            <tr>
+              <td style="background-color:#fff5e1;padding:16px 24px;text-align:center;border-radius:0 0 12px 12px;">
+                <p style="margin:0;font-family:Arial,Helvetica,sans-serif;color:#47072c99;font-size:11px;">
+                  ${t("catasEmailLimiteContacto", lang)}
+                </p>
+              </td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+    </table>
+  </body>
+</html>`;
+
+  return { subject, html };
+}
