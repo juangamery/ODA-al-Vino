@@ -340,6 +340,10 @@ export const translations = {
     catasEmailLimiteLibreSufijoPlural: "libres el",
     catasEmailLimiteY: "y",
     catasEmailLimiteLibreLink: "Completá tu selección acá",
+    catasEmailDisponibleIntro:
+      "Vimos que ya te anotaste a alguna cata, pero todavía te quedan lugares libres para completar tu selección. Esto es lo que tenés confirmado hasta ahora:",
+    catasEmailDisponibleCierre:
+      "Podés sumar más catas cuando quieras, hasta agotar el cupo de cada sala. Cualquier consulta, escribinos a contato@odaalvino.com.br.",
   },
   pt: {
     // ========== HERO V3 ==========
@@ -678,6 +682,10 @@ export const translations = {
     catasEmailLimiteLibreSufijoPlural: "livres em",
     catasEmailLimiteY: "e",
     catasEmailLimiteLibreLink: "Complete sua seleção aqui",
+    catasEmailDisponibleIntro:
+      "Vimos que você já se inscreveu em alguma degustação, mas ainda restam vagas para completar sua seleção. Isto é o que você já tem confirmado até agora:",
+    catasEmailDisponibleCierre:
+      "Você pode adicionar mais degustações quando quiser, até esgotar as vagas de cada sala. Qualquer dúvida, escreva para contato@odaalvino.com.br.",
   },
 };
 
