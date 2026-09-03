@@ -146,7 +146,7 @@ function lugaresLibresHtml(selections: Selection[], lang: Language): string {
   const partes = libres.map(
     (d) =>
       `${d.libres} ${t(d.libres === 1 ? "catasCataSingular" : "catasCataPlural", lang)} ${t(
-        "catasEmailLimiteLibreSufijo",
+        d.libres === 1 ? "catasEmailLimiteLibreSufijoSingular" : "catasEmailLimiteLibreSufijoPlural",
         lang
       )} ${dayLabel(d.day, lang)}`
   );

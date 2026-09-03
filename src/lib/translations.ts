@@ -331,12 +331,13 @@ export const translations = {
     catasVolverInscripcion: "Volver a inscripción",
     catasEmailLimiteSaludo: "Hola",
     catasEmailLimiteIntro:
-      "Te escribimos desde el sistema de inscripción de ODA al Vino 2026 para informarte un ajuste en tu inscripción a las salas de degustación. Detectamos que tu inscripción superaba el máximo permitido de 4 catas (2 por día), así que la ajustamos priorizando tus primeras selecciones. A continuación, el detalle de las catas que quedaron confirmadas:",
+      "El sistema de inscripción de ODA al Vino 2026 detecta automáticamente cuando una inscripción supera el máximo permitido de 4 catas (2 por día), y ajusta la selección priorizando las primeras elegidas. Así quedó tu inscripción, con el detalle de las catas confirmadas:",
     catasEmailLimiteCierre:
       "Si querés modificar tu selección o tenés alguna consulta al respecto, escribinos a contato@odaalvino.com.br y te ayudamos.",
     catasEmailLimiteContacto: "Este mail fue generado automáticamente por el sistema de inscripción de ODA al Vino 2026.",
     catasEmailLimiteLibreTitulo: "Te quedan lugares libres:",
-    catasEmailLimiteLibreSufijo: "libres el",
+    catasEmailLimiteLibreSufijoSingular: "libre el",
+    catasEmailLimiteLibreSufijoPlural: "libres el",
     catasEmailLimiteY: "y",
     catasEmailLimiteLibreLink: "Completá tu selección acá",
   },
@@ -668,12 +669,13 @@ export const translations = {
     catasVolverInscripcion: "Voltar à inscrição",
     catasEmailLimiteSaludo: "Olá",
     catasEmailLimiteIntro:
-      "Escrevemos do sistema de inscrição da ODA ao Vinho 2026 para informar um ajuste na sua inscrição para as salas de degustação. Detectamos que sua inscrição superava o máximo permitido de 4 degustações (2 por dia), então ajustamos priorizando suas primeiras seleções. A seguir, o detalhe das degustações que ficaram confirmadas:",
+      "O sistema de inscrição da ODA ao Vinho 2026 detecta automaticamente quando uma inscrição ultrapassa o máximo permitido de 4 degustações (2 por dia), e ajusta a seleção priorizando as primeiras escolhidas. Assim ficou sua inscrição, com o detalhe das degustações confirmadas:",
     catasEmailLimiteCierre:
       "Se quiser alterar sua seleção ou tiver alguma dúvida, escreva para contato@odaalvino.com.br e nós te ajudamos.",
     catasEmailLimiteContacto: "Este e-mail foi gerado automaticamente pelo sistema de inscrição da ODA ao Vinho 2026.",
     catasEmailLimiteLibreTitulo: "Ainda restam vagas livres:",
-    catasEmailLimiteLibreSufijo: "livres em",
+    catasEmailLimiteLibreSufijoSingular: "livre em",
+    catasEmailLimiteLibreSufijoPlural: "livres em",
     catasEmailLimiteY: "e",
     catasEmailLimiteLibreLink: "Complete sua seleção aqui",
   },
