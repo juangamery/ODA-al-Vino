@@ -1,3 +1,4 @@
+import { randomUUID } from "crypto";
 import { NextRequest, NextResponse } from "next/server";
 import { CATAS_ADMIN_COOKIE, verifyAdminSessionToken } from "@/lib/catas/adminAuth";
 import { getSupabaseAdmin } from "@/lib/catas/supabaseAdmin";
@@ -13,6 +14,13 @@ const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
  * participante válido. Sí respeta las mismas reglas de negocio (máximo 2
  * catas por día, sin conflicto de horario, cupo disponible) porque usa la
  * misma función atómica catas_inscribir.
+ *
+ * Documento y contacto son opcionales acá (a diferencia del formulario
+ * público) — hay casos donde el organizador sólo tiene el nombre a mano.
+ * catas_inscribir exige ambos campos no vacíos, así que si faltan se generan
+ * placeholders únicos ("SIN-DOCUMENTO-...", "sin-contacto+...@..."): no
+ * apuntan a nadie real, no reciben mail de confirmación, y como son únicos
+ * no chocan entre sí ni afectan el límite de 2 catas/día de otras personas.
  */
 export async function POST(request: NextRequest) {
   const token = request.cookies.get(CATAS_ADMIN_COOKIE)?.value;
@@ -28,18 +36,21 @@ export async function POST(request: NextRequest) {
   }
 
   const nombre = (body.nombre ?? "").trim();
-  const contacto = (body.contacto ?? "").trim().toLowerCase();
+  const contactoIngresado = (body.contacto ?? "").trim().toLowerCase();
   // Mayúsculas: consistente con /api/catas/inscribir, para que el límite de
   // 2 catas/día por documento no se pueda esquivar con otra capitalización.
-  const documento = (body.documento ?? "").trim().toUpperCase();
+  const documentoIngresado = (body.documento ?? "").trim().toUpperCase();
   const selections = Array.isArray(body.selections) ? body.selections : [];
 
-  if (!nombre || !contacto || !documento) {
-    return NextResponse.json({ error: "Completá nombre, documento y email." }, { status: 400 });
+  if (!nombre) {
+    return NextResponse.json({ error: "Completá al menos el nombre." }, { status: 400 });
   }
-  if (!EMAIL_RE.test(contacto)) {
-    return NextResponse.json({ error: "Ingresá un email válido." }, { status: 400 });
+  if (contactoIngresado && !EMAIL_RE.test(contactoIngresado)) {
+    return NextResponse.json({ error: "Ingresá un email válido, o dejalo vacío si no lo tenés." }, { status: 400 });
   }
+
+  const contacto = contactoIngresado || `sin-contacto+${randomUUID()}@sin-datos.odaalvino.local`;
+  const documento = documentoIngresado || `SIN-DOCUMENTO-${randomUUID().slice(0, 8).toUpperCase()}`;
 
   const validation = validateSelections(selections);
   if (!validation.ok) {
