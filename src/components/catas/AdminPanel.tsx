@@ -347,8 +347,8 @@ export function AdminPanel() {
   };
 
   const handleManualSubmit = async () => {
-    if (!manualNombre.trim() || !manualDocumento.trim() || !manualContacto.trim()) {
-      setManualError("Completá nombre, documento y email.");
+    if (!manualNombre.trim()) {
+      setManualError("Completá al menos el nombre.");
       return;
     }
     const validation = validateSelections(manualSelections);
@@ -455,9 +455,11 @@ export function AdminPanel() {
         {showManualAdd && (
           <div className="mt-3 rounded-2xl border border-wine/15 bg-white/60 p-4">
             <p className="mb-3 text-[11.5px] leading-relaxed text-wine/60">
-              Para casos puntuales (ej. el validador de documento no le funciona a alguien). Esto NO verifica contra
-              el CRM de participantes — asumís que ya confirmaste que es una persona válida. Sí respeta el cupo y el
-              máximo de {MAX_PER_DAY} catas por día.
+              Para casos puntuales (ej. el validador de documento no le funciona a alguien, o sólo tenés el nombre).
+              Esto NO verifica contra el CRM de participantes — asumís que ya confirmaste que es una persona válida.
+              Sí respeta el cupo y el máximo de {MAX_PER_DAY} catas por día. Documento y email son opcionales: si no
+              los cargás, esa persona no va a recibir mail de confirmación ni se va a poder identificar por
+              documento más adelante.
             </p>
             <div className="mb-3 grid gap-2 sm:grid-cols-3">
               <input
@@ -471,14 +473,14 @@ export function AdminPanel() {
                 type="text"
                 value={manualDocumento}
                 onChange={(e) => setManualDocumento(e.target.value)}
-                placeholder="Documento (DNI/RG/Cédula)"
+                placeholder="Documento (opcional)"
                 className="rounded-lg border border-wine/25 bg-white px-3 py-2 text-sm text-wine focus:outline-none focus:ring-2 focus:ring-harvest"
               />
               <input
                 type="email"
                 value={manualContacto}
                 onChange={(e) => setManualContacto(e.target.value)}
-                placeholder="Email"
+                placeholder="Email (opcional)"
                 className="rounded-lg border border-wine/25 bg-white px-3 py-2 text-sm text-wine focus:outline-none focus:ring-2 focus:ring-harvest"
               />
             </div>
