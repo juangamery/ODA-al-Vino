@@ -329,6 +329,12 @@ export const translations = {
     catasConsultarResultSubtitle: "Así quedó tu selección:",
     catasConsultarBack: "Buscar otro documento",
     catasVolverInscripcion: "Volver a inscripción",
+    catasEmailLimiteSaludo: "Hola",
+    catasEmailLimiteIntro:
+      "Te escribimos desde el sistema de inscripción de ODA al Vino 2026 para informarte un ajuste en tu inscripción a las salas de degustación. Detectamos que tu inscripción superaba el máximo permitido de 4 catas (2 por día), así que la ajustamos priorizando tus primeras selecciones. A continuación, el detalle de las catas que quedaron confirmadas:",
+    catasEmailLimiteCierre:
+      "Si querés modificar tu selección o tenés alguna consulta al respecto, escribinos a contato@odaalvino.com.br y te ayudamos.",
+    catasEmailLimiteContacto: "Este mail fue generado automáticamente por el sistema de inscripción de ODA al Vino 2026.",
   },
   pt: {
     // ========== HERO V3 ==========
@@ -656,6 +662,12 @@ export const translations = {
     catasConsultarResultSubtitle: "Assim ficou sua seleção:",
     catasConsultarBack: "Buscar outro documento",
     catasVolverInscripcion: "Voltar à inscrição",
+    catasEmailLimiteSaludo: "Olá",
+    catasEmailLimiteIntro:
+      "Escrevemos do sistema de inscrição da ODA ao Vinho 2026 para informar um ajuste na sua inscrição para as salas de degustação. Detectamos que sua inscrição superava o máximo permitido de 4 degustações (2 por dia), então ajustamos priorizando suas primeiras seleções. A seguir, o detalhe das degustações que ficaram confirmadas:",
+    catasEmailLimiteCierre:
+      "Se quiser alterar sua seleção ou tiver alguma dúvida, escreva para contato@odaalvino.com.br e nós te ajudamos.",
+    catasEmailLimiteContacto: "Este e-mail foi gerado automaticamente pelo sistema de inscrição da ODA ao Vinho 2026.",
   },
 };
 

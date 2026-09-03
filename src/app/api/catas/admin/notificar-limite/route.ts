@@ -2,30 +2,33 @@ import { NextRequest, NextResponse } from "next/server";
 import { Resend } from "resend";
 import { CATAS_ADMIN_COOKIE, verifyAdminSessionToken } from "@/lib/catas/adminAuth";
 import { getSupabaseAdmin } from "@/lib/catas/supabaseAdmin";
-import { buildConfirmationEmail } from "@/lib/catas/emailTemplate";
+import { buildLimiteAjustadoEmail } from "@/lib/catas/emailTemplate";
 import { agruparPorPersona, type RegistrationRow } from "@/lib/catas/agruparPersonas";
 
 export const dynamic = "force-dynamic";
-export const maxDuration = 300;
+export const maxDuration = 120;
 
 /**
- * Reenvío masivo del mail de confirmación a TODAS las inscripciones ya
- * guardadas — pensado como corrida única para ponerse al día después de
- * arreglar el bug del dominio de Resend (nadie había recibido confirmación
- * hasta ahora, así que no hay riesgo de duplicar envíos reales).
- *
- * No sabemos en qué idioma se inscribió cada persona (no se guarda), así
- * que todo va en español por default — se puede pasar ?lang=pt para
- * mandarlo todo en portugués en su lugar.
- *
- * ?dryRun=true (default) NO manda nada — sólo devuelve a quién le mandaría
- * y cuántas catas tiene cada uno, para revisar antes del envío real.
- * ?dryRun=false hace el envío de verdad.
- *
- * Con ~150-190 personas y un pequeño delay entre envíos (para no pegarle
- * al rate limit de Resend), la corrida real puede tardar varios minutos —
- * de ahí el maxDuration alto.
+ * Gente que quedó con más catas de las permitidas (arriba de 4, o más de 2
+ * en un mismo día) por el bug de límite que arregla la migración
+ * 0005_limite_robusto.sql, y ya se les recortó la inscripción a mano en la
+ * base. Nombre+contacto normalizados (mismo criterio que agruparPorPersona)
+ * para identificar a quién avisar.
  */
+const AFECTADOS_DEFAULT = [
+  { nombre: "diego poletto", contacto: "poletto@gmail.com" },
+  { nombre: "julia rainho meister", contacto: "juliarainho@yahoo.com.br" },
+  { nombre: "marilia coral dos santos hesse", contacto: "marilia_hesse@hotmail.com" },
+  { nombre: "cleusa luzia faccio", contacto: "cleusaconto@gmail.com" },
+  { nombre: "emilene de carvalho lourenço", contacto: "emilenedecarvalholourenco@gmail.com" },
+  { nombre: "carlos scholze", contacto: "fernanda_hirt@yahoo.com.br" },
+  { nombre: "fernanda raquel hirt", contacto: "fernanda_hirt@yahoo.com.br" },
+  { nombre: "franciele natividade", contacto: "fran.natividade@hotmail.com" },
+  { nombre: "homero antônio rosa junior", contacto: "htim2007@uol.com.br" },
+  { nombre: "rafael antonio dos santos correia", contacto: "ras_correia@yahoo.com.br" },
+  { nombre: "simone cristina dos santos barbosa", contacto: "simonetitina@hotmail.com" },
+];
+
 export async function GET(request: NextRequest) {
   const token = request.cookies.get(CATAS_ADMIN_COOKIE)?.value;
   if (!verifyAdminSessionToken(token)) {
@@ -34,10 +37,6 @@ export async function GET(request: NextRequest) {
 
   const dryRun = request.nextUrl.searchParams.get("dryRun") !== "false";
   const lang = request.nextUrl.searchParams.get("lang") === "pt" ? "pt" : "es";
-  // Para reintentar sólo a quienes falló el envío (ej: se cortó por la cuota
-  // diaria de Resend) sin volver a mandarle a quien ya recibió su mail hoy.
-  // ?contactos=mail1@x.com,mail2@x.com
-  const contactosFiltro = request.nextUrl.searchParams.get("contactos");
 
   const apiKey = process.env.RESEND_API_KEY;
   if (!apiKey) {
@@ -51,33 +50,27 @@ export async function GET(request: NextRequest) {
     .order("created_at", { ascending: true });
 
   if (fetchError) {
-    console.error("reenviar-confirmaciones fetch error:", fetchError);
+    console.error("notificar-limite fetch error:", fetchError);
     return NextResponse.json({ error: "No se pudo cargar la lista de inscripciones" }, { status: 500 });
   }
 
   const rows = (registrations ?? []) as unknown as RegistrationRow[];
-  let personas = agruparPorPersona(rows).filter((p) => p.selections.length > 0);
+  const todasLasPersonas = agruparPorPersona(rows);
 
-  if (contactosFiltro) {
-    const set = new Set(
-      contactosFiltro
-        .split(",")
-        .map((c) => c.trim().toLowerCase())
-        .filter(Boolean)
-    );
-    personas = personas.filter((p) => set.has(p.contacto.toLowerCase()));
-  }
+  const objetivo = new Set(AFECTADOS_DEFAULT.map((a) => `${a.nombre}|||${a.contacto}`));
+  const personas = todasLasPersonas.filter((p) =>
+    objetivo.has(`${p.nombre.trim().toLowerCase()}|||${p.contacto.trim().toLowerCase()}`)
+  );
 
   if (dryRun) {
     return NextResponse.json({
       dryRun: true,
       lang,
-      totalInscripciones: rows.length,
-      personasUnicas: personas.length,
+      objetivo: AFECTADOS_DEFAULT.length,
+      encontrados: personas.length,
       destinatarios: personas.map((p) => ({
         nombre: p.nombre,
         contacto: p.contacto,
-        documento: p.documento ?? null,
         catas: p.selections.length,
       })),
     });
@@ -88,7 +81,7 @@ export async function GET(request: NextRequest) {
   const fallidos: { contacto: string; motivo: string }[] = [];
 
   for (const p of personas) {
-    const { subject, html } = buildConfirmationEmail(p.nombre, p.selections, lang, p.documento);
+    const { subject, html } = buildLimiteAjustadoEmail(p.nombre, p.selections, lang);
     try {
       const { error } = await resend.emails.send({
         from: "ODA al Vino <noreply@odavinoteca.com.ar>",
@@ -104,7 +97,6 @@ export async function GET(request: NextRequest) {
     } catch (e) {
       fallidos.push({ contacto: p.contacto, motivo: e instanceof Error ? e.message : String(e) });
     }
-    // Pequeño respiro entre envíos para no pegarle al rate limit de Resend.
     await new Promise((resolve) => setTimeout(resolve, 400));
   }
 
