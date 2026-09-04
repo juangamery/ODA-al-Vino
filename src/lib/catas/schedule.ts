@@ -126,7 +126,6 @@ export const SCHEDULE: Record<DayId, DaySchedule> = {
       cuyo: { bodega: "Maison Pouget", profesional: "Ricardo Scandura & Pablo Delgado", restaurante: "El Quincho del Tío Querido" },
       iguazu: { bodega: "Durigutti", profesional: "Mateo Durigutti", presenta: "Pruecto las Compuertas 1914 Malbec Histórico" },
       argentina: { bodega: "Falasco Wines", profesional: "Agente 007", presenta: "Brassano Malbec & Chaardonnay" },
-      atlantica: { bodega: "Familia Altieri", profesional: "Miss Dulce", restaurante: "Café & Bistró La Carolina (CDE)", presenta: "Lanzamiento Sangiovese" },
     },
   },
 };
