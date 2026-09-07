@@ -74,7 +74,7 @@ export const translations = {
     ticketsLot1Label: "Vencido",
     ticketsLot2Label: "Vencido",
     ticketsLot3Label: "Vencido",
-    ticketsLot4Label: "Disponible",
+    ticketsLot4Label: "Agotado",
     ticketsNoIntermediary: "Sin intermediarios · Acceso garantizado",
 
     // ========== IGUAZU ==========
@@ -416,7 +416,7 @@ export const translations = {
     ticketsLot1Label: "Encerrado",
     ticketsLot2Label: "Encerrado",
     ticketsLot3Label: "Encerrado",
-    ticketsLot4Label: "Disponível",
+    ticketsLot4Label: "Esgotado",
     ticketsNoIntermediary: "Sem intermediários · Acesso garantido",
 
     // ========== IGUAZU ==========
