@@ -106,11 +106,11 @@ export function TicketCard({ lot, isSelected, onClick, index }: TicketCardProps)
           {/* Top: DISPONIBLE line (only for first lot) */}
           {isSelected && lot.number === 4 && (
             <div className="flex items-center gap-3 mb-2">
-              <div className="h-px flex-1 bg-harvest/60" />
-              <span className="text-[8px] font-bold tracking-[0.25em] text-harvest uppercase whitespace-nowrap">
-                Disponible
+              <div className="h-px flex-1 bg-wine/30" />
+              <span className="text-[8px] font-bold tracking-[0.25em] text-wine/50 uppercase whitespace-nowrap">
+                Agotado
               </span>
-              <div className="h-px flex-1 bg-harvest/60" />
+              <div className="h-px flex-1 bg-wine/30" />
             </div>
           )}
 
@@ -219,27 +219,11 @@ export function TicketCard({ lot, isSelected, onClick, index }: TicketCardProps)
         ≈ ARS ${lot.ars || "−"} · ≈ PYG ₲{lot.pyg || "−"}
       </div>
 
-      {/* Buy Button */}
+      {/* Buy Button — deshabilitado, evento finalizado */}
       {isSelected && (
-        <a
-          href="https://painel.odaalvino.com.br/login"
-          target="_blank"
-          rel="noopener noreferrer"
-          onClick={(e) => {
-            e.stopPropagation();
-            const gtag = (window as any).gtag;
-            if (gtag) {
-              gtag('event', 'purchase_click', {
-                'event_category': 'engagement',
-                'event_label': 'ticket_card',
-                'lot_number': `lot_${lot.number}`,
-              });
-            }
-          }}
-          className="mt-4 inline-block w-full rounded-lg bg-harvest px-4 py-2 text-center text-xs md:text-sm font-bold uppercase tracking-wider text-paper transition hover:bg-harvest/90 hover:shadow-lg"
-        >
-          Comprar Ahora
-        </a>
+        <div className="mt-4 w-full rounded-lg bg-wine/10 border border-wine/20 px-4 py-2 text-center text-xs md:text-sm font-bold uppercase tracking-wider text-wine/40 cursor-default select-none">
+          Entradas Agotadas
+        </div>
       )}
 
       <style>{`
