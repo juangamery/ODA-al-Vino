@@ -392,25 +392,10 @@ export function Tickets() {
                 </div>
               </div>
 
-              {/* CTA Principal - Grande y Llamativo - Always Clickeable */}
-              <a
-                href="https://painel.odaalvino.com.br/login"
-                target="_blank"
-                rel="noopener noreferrer"
-                onClick={() => {
-                  const gtag = (window as any).gtag;
-                  if (gtag) {
-                    gtag('event', 'purchase_click', {
-                      'event_category': 'engagement',
-                      'event_label': 'main_cta',
-                      'lot_number': `lot_${lots[selectedLot].number}`,
-                    });
-                  }
-                }}
-                className="block w-full text-center font-serif text-base md:text-lg lg:text-2xl font-bold uppercase tracking-wider py-4 md:py-6 rounded-full shadow-2xl mb-3 md:mb-4 bg-paper hover:bg-paper/95 text-wine cursor-pointer transition-colors duration-300"
-              >
+              {/* CTA — Evento finalizado */}
+              <div className="block w-full text-center font-serif text-base md:text-lg lg:text-2xl font-bold uppercase tracking-wider py-4 md:py-6 rounded-full mb-3 md:mb-4 bg-paper/20 text-paper/50 border border-paper/20 cursor-default select-none">
                 {t("ticketsBtnBuy", language)}
-              </a>
+              </div>
 
               {/* Microcopy Footer */}
               <p className="text-center text-xs text-paper/70 font-semibold">
