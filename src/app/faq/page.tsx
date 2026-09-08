@@ -56,7 +56,7 @@ const faqSchema = {
       name: '¿Cuándo es el evento?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'ODA al Vino 2026 se realiza los días 4 y 5 de septiembre.',
+        text: 'ODA al Vino 2026 se realiza los días 4 y 5 de septiembre, de 15hs a 20hs.',
       },
     },
     {
