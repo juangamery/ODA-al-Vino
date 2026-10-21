@@ -235,9 +235,6 @@ export function BodegasV3() {
                   }`}
                 >
                   <div className="flex-1">
-                    <p className="lato-expanded text-[10px] text-paper/50 uppercase tracking-widest mb-1">
-                      {region.pct}
-                    </p>
                     <h3 className="font-serif text-[clamp(1.5rem,2.5vw,2rem)] uppercase text-paper leading-tight">
                       {region.name}
                     </h3>
@@ -279,9 +276,6 @@ export function BodegasV3() {
                   <h4 className="font-serif text-[clamp(2.5rem,6vw,4rem)] uppercase text-paper leading-tight">
                     {regions[selectedRegion].name}
                   </h4>
-                  <p className="script text-[clamp(1.5rem,3vw,3rem)] text-harvest mt-2">
-                    {regions[selectedRegion].pct}
-                  </p>
                 </div>
 
                 {/* Características visuales */}

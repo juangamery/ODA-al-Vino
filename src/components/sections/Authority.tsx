@@ -15,32 +15,32 @@ interface Stat {
 
 function getStats(lang: Language): Stat[] {
   return [
-    { value: 200, prefix: "+", suffix: "", label: t("authorityBodegas", lang), sub: t("authorityBodegasSub", lang) },
-    { value: 700, prefix: "+", suffix: "", label: t("authorityEtiquetas", lang), sub: t("authorityEtiquetasSub", lang) },
+    { value: 105, prefix: "", suffix: "", label: t("authorityBodegas", lang), sub: t("authorityBodegasSub", lang) },
+    { value: 500, prefix: "+", suffix: "", label: t("authorityEtiquetas", lang), sub: t("authorityEtiquetasSub", lang) },
     { value: 10, prefix: "", suffix: "", label: t("authorityYears", lang), sub: t("authorityYearsSub", lang) },
-    { value: 2000, prefix: "+", suffix: "", label: t("authorityAsistentes", lang), sub: t("authorityAsistentesSub", lang) },
+    { value: 370, prefix: "", suffix: "", label: t("authorityAsistentes", lang), sub: t("authorityAsistentesSub", lang) },
   ];
 }
 
 function CounterNumber({ target, prefix = "", suffix = "", trigger = true }: { target: number; prefix?: string; suffix?: string; trigger?: boolean }) {
-  const [count, setCount] = useState(0);
+  const [count, setCount] = useState(target); // Start at target for SSR/SEO
+  const animationStarted = useRef(false);
 
   useEffect(() => {
-    if (!trigger) return;
+    if (!trigger || animationStarted.current) return;
+    animationStarted.current = true;
 
+    setCount(0);
     let animationId: number | null = null;
     const startTime = Date.now();
-    const duration = 1800; // 1.8 seconds animation
+    const duration = 1800;
 
     const animate = () => {
       const elapsed = Date.now() - startTime;
-
       if (elapsed >= duration) {
         setCount(target);
       } else {
-        const progress = elapsed / duration;
-        const currentValue = Math.floor(target * progress);
-        setCount(currentValue);
+        setCount(Math.floor(target * (elapsed / duration)));
         animationId = requestAnimationFrame(animate);
       }
     };
@@ -48,9 +48,7 @@ function CounterNumber({ target, prefix = "", suffix = "", trigger = true }: { t
     animationId = requestAnimationFrame(animate);
 
     return () => {
-      if (animationId !== null) {
-        cancelAnimationFrame(animationId);
-      }
+      if (animationId !== null) cancelAnimationFrame(animationId);
     };
   }, [target, trigger]);
 

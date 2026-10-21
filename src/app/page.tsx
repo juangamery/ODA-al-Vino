@@ -9,16 +9,17 @@ import { FloatingHeader } from "@/components/layout/FloatingHeader";
 import { HeroV3 } from "@/components/sections/HeroV3";
 import { ManifestoV3 } from "@/components/sections/ManifestoV3";
 import { SealDivider } from "@/components/sections/SealDivider";
-import { HotelesV1 } from "@/components/sections/HotelesV1";
+
 import { Tickets } from "@/components/sections/Tickets";
 import { VenueV3 } from "@/components/sections/VenueV3";
+import { GalleryV1 } from "@/components/sections/GalleryV1";
 import { WhatsAppButton } from "@/components/WhatsAppButton";
 import { Marquee } from "@/components/ui/Marquee";
 
 export const metadata: Metadata = {
-  title: 'ODA AL VINO 2026 | Festival de Vinos en Iguazú - Triple Frontera',
+  title: 'ODA AL VINO 2026 | 10ª Edición — Festival de Vinos en Iguazú',
   description:
-    'El evento de vinos más importante de la Triple Frontera vuelve en 2026. 10ª edición en Iguazú: catas, bodegas, gastronomía y experiencias únicas. ¡Comprá tu entrada!',
+    'La 10ª edición de ODA al Vino se realizó en septiembre de 2026 en Puerto Iguazú. 105 bodegas, +500 etiquetas y dos jornadas únicas de descubrimiento del vino argentino.',
   alternates: {
     canonical: 'https://odaalvino.com.br',
     languages: {
@@ -28,9 +29,9 @@ export const metadata: Metadata = {
     },
   },
   openGraph: {
-    title: 'ODA AL VINO 2026 | Festival de Vinos en Iguazú - Triple Frontera',
+    title: 'ODA AL VINO 2026 | 10ª Edición — Festival de Vinos en Iguazú',
     description:
-      'El evento de vinos más importante de la Triple Frontera vuelve en 2026. 10ª edición en Iguazú: catas, bodegas, gastronomía y experiencias únicas. ¡Comprá tu entrada!',
+      'La 10ª edición de ODA al Vino se realizó en septiembre de 2026 en Puerto Iguazú. 105 bodegas, +500 etiquetas y dos jornadas únicas de descubrimiento del vino argentino.',
     url: 'https://odaalvino.com.br',
     type: 'website',
     images: [
@@ -38,15 +39,15 @@ export const metadata: Metadata = {
         url: 'https://odaalvino.com.br/og-image-2026.jpg',
         width: 1200,
         height: 1200,
-        alt: 'ODA AL VINO 2026',
+        alt: 'ODA AL VINO 2026 — 10ª Edición',
       },
     ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'ODA AL VINO 2026 | Festival de Vinos en Iguazú - Triple Frontera',
+    title: 'ODA AL VINO 2026 | 10ª Edición — Festival de Vinos en Iguazú',
     description:
-      'El evento de vinos más importante de la Triple Frontera vuelve en 2026. 10ª edición en Iguazú: catas, bodegas, gastronomía y experiencias únicas.',
+      'La 10ª edición de ODA al Vino se realizó en septiembre de 2026 en Puerto Iguazú. 105 bodegas, +500 etiquetas y dos jornadas únicas.',
     images: ['https://odaalvino.com.br/og-image-2026.jpg'],
   },
 }
@@ -69,14 +70,14 @@ const eventSchema = {
   '@type': 'Event',
   name: 'ODA AL VINO 2026 — 10ª Edición',
   description:
-    'La experiencia de vinos más importante de la Triple Frontera. Más de 200 bodegas argentinas, masterclasses, gastronomía y encuentros con productores.',
-  startDate: '2026-09-04T12:00:00-03:00',
-  endDate: '2026-09-05T22:00:00-03:00',
-  eventStatus: 'https://schema.org/EventScheduled',
+    'La décima edición de ODA al Vino reunió 105 bodegas argentinas en Puerto Iguazú. Más de 500 etiquetas, masterclasses, gastronomía y 370 personas en charlas y degustaciones.',
+  startDate: '2026-09-04T15:00:00-03:00',
+  endDate: '2026-09-05T20:00:00-03:00',
+  eventStatus: 'https://schema.org/EventCompleted',
   eventAttendanceMode: 'https://schema.org/OfflineEventAttendanceMode',
   location: {
     '@type': 'Place',
-    name: 'Iguazú, Misiones',
+    name: 'Iguazú Urban Mall, Puerto Iguazú',
     address: {
       '@type': 'PostalAddress',
       addressLocality: 'Puerto Iguazú',
@@ -89,15 +90,6 @@ const eventSchema = {
     '@type': 'Organization',
     name: 'ODA Vinoteca',
     url: 'https://odaalvino.com.br',
-  },
-  offers: {
-    '@type': 'Offer',
-    url: 'https://odaalvino.com.br/#entradas',
-    priceCurrency: 'BRL',
-    price: '630',
-    priceValidUntil: '2026-09-04',
-    availability: 'https://schema.org/InStock',
-    validFrom: '2025-01-01',
   },
   performer: {
     '@type': 'Organization',
@@ -129,7 +121,7 @@ export default function Home() {
       <ExperienceV3 />
 
       <Marquee
-        text="+100 BODEGAS · +700 ETIQUETAS · 10 AÑOS · +2000 ASISTENTES · TRIPLE FRONTERA ·"
+        text="105 BODEGAS · +500 ETIQUETAS · 10 AÑOS · 370 PERSONAS EN CHARLAS · TRIPLE FRONTERA ·"
         variant="harvest"
         speed={35}
       />
@@ -138,7 +130,7 @@ export default function Home() {
 
       <Tickets />
 
-      <HotelesV1 />
+      <GalleryV1 />
 
       <BodegasV3 />
 

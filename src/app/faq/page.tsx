@@ -4,9 +4,9 @@ import { LayoutClient } from "@/components/LayoutClient";
 import FaqPage from "@/components/sections/FaqPage";
 
 export const metadata: Metadata = {
-  title: 'Preguntas Frecuentes | ODA AL VINO 2026 en Iguazú',
+  title: 'Preguntas Frecuentes | ODA AL VINO — 10ª Edición Iguazú',
   description:
-    'Todo lo que necesitás saber sobre ODA al Vino 2026 en Iguazú: cómo comprar entradas, qué incluye la experiencia, alojamiento y más. Resolvé tus dudas aquí.',
+    'Preguntas frecuentes sobre ODA al Vino: qué es el evento, qué edición se realizó, cuántas bodegas participaron, cómo llegar a Iguazú y más.',
   alternates: {
     canonical: 'https://odaalvino.com.br/faq',
     languages: {
@@ -48,15 +48,23 @@ const faqSchema = {
       name: '¿Qué es ODA al Vino?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'ODA al Vino es la principal experiencia del vino en la Triple Frontera. Un encuentro donde más de 200 bodegas argentinas presentan sus vinos en un entorno diseñado para descubrir, aprender y disfrutar. En su 10ª edición, el evento celebra además los 25 años de trayectoria de ODA Vinoteca.',
+        text: 'ODA al Vino es la principal experiencia del vino en la Triple Frontera. Un encuentro anual donde bodegas argentinas presentan sus vinos en un entorno diseñado para descubrir, aprender y disfrutar. En su 10ª edición (2026), el evento celebra además los 25 años de trayectoria de ODA Vinoteca.',
       },
     },
     {
       '@type': 'Question',
-      name: '¿Cuándo es el evento?',
+      name: '¿Cuándo fue la última edición?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'ODA al Vino 2026 se realiza los días 4 y 5 de septiembre, de 15hs a 20hs.',
+        text: 'La décima edición de ODA al Vino se realizó el 4 y 5 de septiembre de 2026 en Puerto Iguazú, Argentina, de 15hs a 20hs.',
+      },
+    },
+    {
+      '@type': 'Question',
+      name: '¿Cuándo será la próxima edición?',
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: 'Próximamente compartiremos las novedades de la próxima edición a través de nuestros canales oficiales.',
       },
     },
     {
@@ -77,22 +85,6 @@ const faqSchema = {
     },
     {
       '@type': 'Question',
-      name: '¿Cuál es el precio de las entradas?',
-      acceptedAnswer: {
-        '@type': 'Answer',
-        text: 'Los precios se organizan por etapas (lotes). El valor inicial comienza desde R$ 630 y aumenta progresivamente a medida que se acerca el evento. Recomendamos asegurar tu lugar con anticipación.',
-      },
-    },
-    {
-      '@type': 'Question',
-      name: '¿Hay descuentos disponibles?',
-      acceptedAnswer: {
-        '@type': 'Answer',
-        text: 'Sí. El mejor valor está disponible en las primeras etapas de venta. También existen condiciones especiales para residentes de Misiones y promociones puntuales.',
-      },
-    },
-    {
-      '@type': 'Question',
       name: '¿Qué incluye la entrada?',
       acceptedAnswer: {
         '@type': 'Answer',
@@ -101,18 +93,10 @@ const faqSchema = {
     },
     {
       '@type': 'Question',
-      name: '¿Puedo comprar entradas el mismo día?',
+      name: '¿Qué bodegas participaron en 2026?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'Sí, sujeto a disponibilidad. El evento tiene capacidad limitada, por lo que recomendamos comprar anticipadamente.',
-      },
-    },
-    {
-      '@type': 'Question',
-      name: '¿Qué bodegas participan?',
-      acceptedAnswer: {
-        '@type': 'Answer',
-        text: 'Más de 200 bodegas de las principales regiones vitivinícolas de Argentina, desde productores históricos hasta proyectos boutique, con una selección curada que garantiza calidad y diversidad.',
+        text: 'En la 10ª edición (2026) participaron 105 bodegas de las principales regiones vitivinícolas de Argentina, desde productores históricos hasta proyectos boutique.',
       },
     },
     {

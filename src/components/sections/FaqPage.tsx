@@ -9,32 +9,29 @@ import { FloatingHeader } from "@/components/layout/FloatingHeader";
 
 interface FAQItem {
   id: number;
-  questionKey: "faqQuestion1" | "faqQuestion2" | "faqQuestion3" | "faqQuestion4" | "faqQuestion5" | "faqQuestion6" | "faqQuestion7" | "faqQuestion8" | "faqQuestion9" | "faqQuestion10" | "faqQuestion11" | "faqQuestion12" | "faqQuestion13" | "faqQuestion14" | "faqQuestion15" | "faqQuestion16" | "faqQuestion17" | "faqQuestion18" | "faqQuestion19" | "faqQuestion20";
-  answerKey: "faqAnswer1" | "faqAnswer2" | "faqAnswer3" | "faqAnswer4" | "faqAnswer5" | "faqAnswer6" | "faqAnswer7" | "faqAnswer8" | "faqAnswer9" | "faqAnswer10" | "faqAnswer11" | "faqAnswer12" | "faqAnswer13" | "faqAnswer14" | "faqAnswer15" | "faqAnswer16" | "faqAnswer17" | "faqAnswer18" | "faqAnswer19" | "faqAnswer20";
+  questionKey: "faqQuestion1" | "faqQuestion2" | "faqQuestion3" | "faqQuestion4" | "faqQuestion5" | "faqQuestion6" | "faqQuestion7" | "faqQuestion8" | "faqQuestion9" | "faqQuestion10" | "faqQuestion11" | "faqQuestion12" | "faqQuestion13" | "faqQuestion14" | "faqQuestion15" | "faqQuestion16" | "faqQuestion17" | "faqQuestion18" | "faqQuestion19" | "faqQuestion20" | "faqQuestion21";
+  answerKey: "faqAnswer1" | "faqAnswer2" | "faqAnswer3" | "faqAnswer4" | "faqAnswer5" | "faqAnswer6" | "faqAnswer7" | "faqAnswer8" | "faqAnswer9" | "faqAnswer10" | "faqAnswer11" | "faqAnswer12" | "faqAnswer13" | "faqAnswer14" | "faqAnswer15" | "faqAnswer16" | "faqAnswer17" | "faqAnswer18" | "faqAnswer19" | "faqAnswer20" | "faqAnswer21";
 }
 
 const faqItems: FAQItem[] = [
   // Block 1: General Event Info
   { id: 1, questionKey: "faqQuestion1", answerKey: "faqAnswer1" },
   { id: 2, questionKey: "faqQuestion2", answerKey: "faqAnswer2" },
+  { id: 21, questionKey: "faqQuestion21", answerKey: "faqAnswer21" },
   { id: 3, questionKey: "faqQuestion3", answerKey: "faqAnswer3" },
   { id: 4, questionKey: "faqQuestion4", answerKey: "faqAnswer4" },
-  // Block 2: Tickets & Pricing
-  { id: 5, questionKey: "faqQuestion5", answerKey: "faqAnswer5" },
-  { id: 6, questionKey: "faqQuestion6", answerKey: "faqAnswer6" },
+  // Block 2: Experience & Activities (purchase questions hidden post-event)
   { id: 7, questionKey: "faqQuestion7", answerKey: "faqAnswer7" },
-  { id: 8, questionKey: "faqQuestion8", answerKey: "faqAnswer8" },
-  // Block 3: Experience & Activities
   { id: 9, questionKey: "faqQuestion9", answerKey: "faqAnswer9" },
   { id: 10, questionKey: "faqQuestion10", answerKey: "faqAnswer10" },
   { id: 11, questionKey: "faqQuestion11", answerKey: "faqAnswer11" },
   { id: 12, questionKey: "faqQuestion12", answerKey: "faqAnswer12" },
-  // Block 4: Travel to Iguazú
+  // Block 3: Travel to Iguazú
   { id: 13, questionKey: "faqQuestion13", answerKey: "faqAnswer13" },
   { id: 14, questionKey: "faqQuestion14", answerKey: "faqAnswer14" },
   { id: 15, questionKey: "faqQuestion15", answerKey: "faqAnswer15" },
   { id: 16, questionKey: "faqQuestion16", answerKey: "faqAnswer16" },
-  // Block 5: Logistics & Practical
+  // Block 4: Logistics & Practical
   { id: 17, questionKey: "faqQuestion17", answerKey: "faqAnswer17" },
   { id: 18, questionKey: "faqQuestion18", answerKey: "faqAnswer18" },
   { id: 19, questionKey: "faqQuestion19", answerKey: "faqAnswer19" },
