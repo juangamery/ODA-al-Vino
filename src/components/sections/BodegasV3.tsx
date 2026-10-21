@@ -218,6 +218,9 @@ export function BodegasV3() {
             <p className="text-lg md:text-xl text-paper/70 max-w-2xl">
               {t("bodegasDescription", language)}
             </p>
+            <p className="text-base md:text-lg text-paper/60 max-w-2xl mt-4">
+              {t("bodegasDescription2", language)}
+            </p>
           </Reveal>
         </div>
 

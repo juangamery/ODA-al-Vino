@@ -22,7 +22,7 @@ export function Tickets() {
       </div>
 
       <section
-        id="entradas"
+        id="oav-2026"
         className="bg-paper overflow-hidden relative py-28 md:py-40"
       >
         {/* Patrón de fondo */}
@@ -45,29 +45,16 @@ export function Tickets() {
 
           {/* Título */}
           <Reveal variant="clip" delay={0.1}>
-            <h2 className="font-serif text-[clamp(3.5rem,7vw,6.5rem)] leading-[0.88] uppercase text-wine mb-6 text-left">
-              {t("ticketsTitle", language)} <br className="block md:hidden" />
-              {t("ticketsTitleScript", language)}
-              <br /> {t("ticketsTitleC", language)}
+            <h2 className="font-serif text-[clamp(2.75rem,6vw,5.5rem)] leading-[1] pt-[0.15em] uppercase text-wine mb-10 text-left max-w-5xl">
+              {t("ticketsTitle", language)}
             </h2>
           </Reveal>
 
-          {/* Subtítulo */}
+          {/* Introducción */}
           <Reveal delay={0.2}>
-            <p className="text-left text-xl md:text-2xl text-wine/70 mb-10 max-w-2xl font-serif italic">
-              {t("ticketsSubtitle", language)}
+            <p className="text-lg md:text-xl text-wine/75 leading-relaxed max-w-3xl">
+              {t("ticketsDescription", language)}
             </p>
-          </Reveal>
-
-          {/* Cuerpo post-evento */}
-          <Reveal delay={0.3}>
-            <div className="max-w-3xl">
-              {t("ticketsDescription", language).split("\n\n").map((paragraph, i) => (
-                <p key={i} className="text-lg md:text-xl text-wine/75 leading-relaxed mb-6">
-                  {paragraph}
-                </p>
-              ))}
-            </div>
           </Reveal>
         </div>
       </section>

@@ -9,46 +9,40 @@ import { FloatingHeader } from "@/components/layout/FloatingHeader";
 import { HeroV3 } from "@/components/sections/HeroV3";
 import { ManifestoV3 } from "@/components/sections/ManifestoV3";
 import { SealDivider } from "@/components/sections/SealDivider";
-
 import { Tickets } from "@/components/sections/Tickets";
 import { VenueV3 } from "@/components/sections/VenueV3";
-import { GalleryV1 } from "@/components/sections/GalleryV1";
 import { WhatsAppButton } from "@/components/WhatsAppButton";
 import { Marquee } from "@/components/ui/Marquee";
 
+const HOME_TITLE = 'ODA Al Vino | El vino nos reúne en la Triple Frontera'
+const HOME_DESCRIPTION =
+  'Conocé ODA Al Vino, el encuentro dedicado al vino argentino en Puerto Iguazú. Reviví su décima edición, descubrí experiencias, bodegas e historias.'
+
 export const metadata: Metadata = {
-  title: 'ODA AL VINO 2026 | 10ª Edición — Festival de Vinos en Iguazú',
-  description:
-    'La 10ª edición de ODA al Vino se realizó en septiembre de 2026 en Puerto Iguazú. 105 bodegas, +500 etiquetas y dos jornadas únicas de descubrimiento del vino argentino.',
+  title: { absolute: HOME_TITLE },
+  description: HOME_DESCRIPTION,
   alternates: {
-    canonical: 'https://odaalvino.com.br',
-    languages: {
-      'pt-BR': 'https://odaalvino.com.br',
-      'es-AR': 'https://odaalvino.com.ar',
-      'x-default': 'https://odaalvino.com.br',
-    },
+    canonical: 'https://www.odaalvino.com.br',
   },
   openGraph: {
-    title: 'ODA AL VINO 2026 | 10ª Edición — Festival de Vinos en Iguazú',
-    description:
-      'La 10ª edición de ODA al Vino se realizó en septiembre de 2026 en Puerto Iguazú. 105 bodegas, +500 etiquetas y dos jornadas únicas de descubrimiento del vino argentino.',
-    url: 'https://odaalvino.com.br',
+    title: HOME_TITLE,
+    description: HOME_DESCRIPTION,
+    url: 'https://www.odaalvino.com.br',
     type: 'website',
     images: [
       {
-        url: 'https://odaalvino.com.br/og-image-2026.jpg',
+        url: 'https://www.odaalvino.com.br/og-image-2026.jpg',
         width: 1200,
         height: 1200,
-        alt: 'ODA AL VINO 2026 — 10ª Edición',
+        alt: 'ODA Al Vino — 10ª edición 2026',
       },
     ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'ODA AL VINO 2026 | 10ª Edición — Festival de Vinos en Iguazú',
-    description:
-      'La 10ª edición de ODA al Vino se realizó en septiembre de 2026 en Puerto Iguazú. 105 bodegas, +500 etiquetas y dos jornadas únicas.',
-    images: ['https://odaalvino.com.br/og-image-2026.jpg'],
+    title: HOME_TITLE,
+    description: HOME_DESCRIPTION,
+    images: ['https://www.odaalvino.com.br/og-image-2026.jpg'],
   },
 }
 
@@ -85,11 +79,11 @@ const eventSchema = {
       addressCountry: 'AR',
     },
   },
-  image: 'https://odaalvino.com.br/og-image-2026.jpg',
+  image: 'https://www.odaalvino.com.br/og-image-2026.jpg',
   organizer: {
     '@type': 'Organization',
     name: 'ODA Vinoteca',
-    url: 'https://odaalvino.com.br',
+    url: 'https://www.odaalvino.com.br',
   },
   performer: {
     '@type': 'Organization',
@@ -101,7 +95,7 @@ export default function Home() {
   return (
     <main className="bg-paper text-wine">
       <h1 className="sr-only">
-        ODA AL VINO 2026 — Festival de Vinos en Iguazú, Triple Frontera
+        ODA Al Vino — El vino nos reúne en la Triple Frontera
       </h1>
       <FloatingHeader />
       <WhatsAppButton />
@@ -114,14 +108,14 @@ export default function Home() {
       <ManifestoV3 />
 
       <Marquee
-        text="ODA AL VINO · 10° EDICIÓN · IGUAZÚ · ARGENTINA · 4 Y 5 DE SEPTIEMBRE · EL VINO NOS REÚNE · ODA AL VINO · 10° EDICIÓN · IGUAZÚ · ARGENTINA · 4 Y 5 DE SEPTIEMBRE · EL VINO NOS REÚNE ·"
+        text="ODA AL VINO · 10° EDICIÓN · IGUAZÚ · ARGENTINA · 4 Y 5 DE SEPTIEMBRE 2026 · EL VINO NOS REÚNE · ODA AL VINO · 10° EDICIÓN · IGUAZÚ · ARGENTINA · 4 Y 5 DE SEPTIEMBRE 2026 · EL VINO NOS REÚNE ·"
         variant="dark"
       />
 
       <ExperienceV3 />
 
       <Marquee
-        text="105 BODEGAS · +500 ETIQUETAS · 10 AÑOS · 370 PERSONAS EN CHARLAS · TRIPLE FRONTERA ·"
+        text="105 BODEGAS · +500 ETIQUETAS · 10 AÑOS · TRIPLE FRONTERA · ODA AL VINO 2026 ·"
         variant="harvest"
         speed={35}
       />
@@ -130,14 +124,12 @@ export default function Home() {
 
       <Tickets />
 
-      <GalleryV1 />
+      <VenueV3 />
 
       <BodegasV3 />
 
-      <VenueV3 />
-
       <Marquee
-        text="ODA AL VINO · 4 Y 5 SEPTIEMBRE · IGUAZÚ · ARGENTINA · 10° EDICIÓN ·"
+        text="ODA AL VINO · 4 Y 5 DE SEPTIEMBRE 2026 · IGUAZÚ · ARGENTINA · 10° EDICIÓN ·"
         variant="dark"
         speed={38}
       />

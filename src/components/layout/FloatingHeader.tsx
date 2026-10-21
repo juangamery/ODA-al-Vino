@@ -27,8 +27,8 @@ export function FloatingHeader() {
     { label: t("navManifiesto", language), href: "#manifiesto" },
     { label: t("navExperiencia", language), href: "#experiencia" },
     { label: t("navBodegas", language), href: "#bodegas" },
-    { label: t("navDestino", language), href: "#iguazu" },
     { label: t("navComunidad", language), href: "#comunidad" },
+    { label: t("navDestino", language), href: "#iguazu" },
     { label: t("navFaq", language), href: "/faq" },
   ];
 
@@ -109,6 +109,13 @@ export function FloatingHeader() {
             </button>
 
             <LanguageSwitch />
+            <a
+              href="#oav-2026"
+              onClick={(e) => handleNavClick(e, "#oav-2026")}
+              className="rounded-full bg-paper px-3 md:px-5 py-2 text-[10px] md:text-[11px] font-bold uppercase tracking-widest text-wine transition hover:bg-harvest hover:text-paper whitespace-nowrap"
+            >
+              {t("navRevivir", language)}
+            </a>
           </div>
         </div>
 

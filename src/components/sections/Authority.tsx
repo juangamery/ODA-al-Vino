@@ -29,6 +29,7 @@ function CounterNumber({ target, prefix = "", suffix = "", trigger = true }: { t
   useEffect(() => {
     if (!trigger || animationStarted.current) return;
     animationStarted.current = true;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
 
     setCount(0);
     let animationId: number | null = null;

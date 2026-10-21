@@ -2,158 +2,57 @@ import type { Metadata } from 'next'
 import Script from 'next/script'
 import { LayoutClient } from "@/components/LayoutClient";
 import FaqPage from "@/components/sections/FaqPage";
+import { translations } from "@/lib/translations";
+import { faqItems } from "@/lib/faq";
+
+const TITLE = 'Preguntas frecuentes'
+const DESCRIPTION =
+  'Todo lo que necesitás saber sobre ODA Al Vino, su experiencia y sus próximas novedades: qué es, dónde se realiza, la décima edición 2026 y más.'
 
 export const metadata: Metadata = {
-  title: 'Preguntas Frecuentes | ODA AL VINO — 10ª Edición Iguazú',
-  description:
-    'Preguntas frecuentes sobre ODA al Vino: qué es el evento, qué edición se realizó, cuántas bodegas participaron, cómo llegar a Iguazú y más.',
+  title: TITLE,
+  description: DESCRIPTION,
   alternates: {
-    canonical: 'https://odaalvino.com.br/faq',
-    languages: {
-      'pt-BR': 'https://odaalvino.com.br/faq',
-      'es-AR': 'https://odaalvino.com.ar/faq',
-      'x-default': 'https://odaalvino.com.br/faq',
-    },
+    canonical: 'https://www.odaalvino.com.br/faq',
   },
   openGraph: {
-    title: 'Preguntas Frecuentes | ODA AL VINO 2026 en Iguazú',
-    description:
-      'Todo lo que necesitás saber sobre ODA al Vino 2026 en Iguazú: cómo comprar entradas, qué incluye la experiencia, alojamiento y más.',
-    url: 'https://odaalvino.com.br/faq',
+    title: TITLE,
+    description: DESCRIPTION,
+    url: 'https://www.odaalvino.com.br/faq',
     type: 'website',
     images: [
       {
-        url: 'https://odaalvino.com.br/og-image-2026.jpg',
+        url: 'https://www.odaalvino.com.br/og-image-2026.jpg',
         width: 1200,
         height: 1200,
-        alt: 'ODA AL VINO 2026 — Preguntas Frecuentes',
+        alt: 'ODA Al Vino — Preguntas frecuentes',
       },
     ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Preguntas Frecuentes | ODA AL VINO 2026 en Iguazú',
-    description:
-      'Todo lo que necesitás saber sobre ODA al Vino 2026 en Iguazú: cómo comprar entradas, qué incluye la experiencia, alojamiento y más.',
-    images: ['https://odaalvino.com.br/og-image-2026.jpg'],
+    title: TITLE,
+    description: DESCRIPTION,
+    images: ['https://www.odaalvino.com.br/og-image-2026.jpg'],
   },
 }
 
 const faqSchema = {
   '@context': 'https://schema.org',
   '@type': 'FAQPage',
-  mainEntity: [
-    {
-      '@type': 'Question',
-      name: '¿Qué es ODA al Vino?',
-      acceptedAnswer: {
-        '@type': 'Answer',
-        text: 'ODA al Vino es la principal experiencia del vino en la Triple Frontera. Un encuentro anual donde bodegas argentinas presentan sus vinos en un entorno diseñado para descubrir, aprender y disfrutar. En su 10ª edición (2026), el evento celebra además los 25 años de trayectoria de ODA Vinoteca.',
-      },
+  mainEntity: faqItems.map(({ questionKey, answerKey }) => ({
+    '@type': 'Question',
+    name: translations.es[questionKey],
+    acceptedAnswer: {
+      '@type': 'Answer',
+      text: translations.es[answerKey],
     },
-    {
-      '@type': 'Question',
-      name: '¿Cuándo fue la última edición?',
-      acceptedAnswer: {
-        '@type': 'Answer',
-        text: 'La décima edición de ODA al Vino se realizó el 4 y 5 de septiembre de 2026 en Puerto Iguazú, Argentina, de 15hs a 20hs.',
-      },
-    },
-    {
-      '@type': 'Question',
-      name: '¿Cuándo será la próxima edición?',
-      acceptedAnswer: {
-        '@type': 'Answer',
-        text: 'Próximamente compartiremos las novedades de la próxima edición a través de nuestros canales oficiales.',
-      },
-    },
-    {
-      '@type': 'Question',
-      name: '¿Dónde se realiza?',
-      acceptedAnswer: {
-        '@type': 'Answer',
-        text: 'En Iguazú, Argentina, en el corazón de la Triple Frontera, con acceso directo desde Brasil, Paraguay y Argentina.',
-      },
-    },
-    {
-      '@type': 'Question',
-      name: '¿A quién está dirigido?',
-      acceptedAnswer: {
-        '@type': 'Answer',
-        text: 'ODA al Vino es para quienes quieren disfrutar y entender el vino: amantes del vino, turistas, profesionales del sector y personas curiosas que desean aprender. No es necesario tener experiencia previa.',
-      },
-    },
-    {
-      '@type': 'Question',
-      name: '¿Qué incluye la entrada?',
-      acceptedAnswer: {
-        '@type': 'Answer',
-        text: 'Cada entrada incluye acceso al evento, copa de cristal modelo AFNOR, degustaciones ilimitadas, acceso a charlas y masterclasses y un vale de consumo para ODA Vinoteca y ODA Duty Free.',
-      },
-    },
-    {
-      '@type': 'Question',
-      name: '¿Qué bodegas participaron en 2026?',
-      acceptedAnswer: {
-        '@type': 'Answer',
-        text: 'En la 10ª edición (2026) participaron 105 bodegas de las principales regiones vitivinícolas de Argentina, desde productores históricos hasta proyectos boutique.',
-      },
-    },
-    {
-      '@type': 'Question',
-      name: '¿Hay actividades además de degustaciones?',
-      acceptedAnswer: {
-        '@type': 'Answer',
-        text: 'Sí. El evento incluye masterclasses, charlas, experiencias gastronómicas y encuentros con productores. ODA al Vino combina disfrute con aprendizaje.',
-      },
-    },
-    {
-      '@type': 'Question',
-      name: '¿Puedo ir si es mi primer evento de vino?',
-      acceptedAnswer: {
-        '@type': 'Answer',
-        text: 'Sí. ODA al Vino está pensado para acompañarte, no para exigirte conocimiento. Podés venir a aprender, descubrir y disfrutar a tu ritmo.',
-      },
-    },
-    {
-      '@type': 'Question',
-      name: '¿Cómo llego a Iguazú?',
-      acceptedAnswer: {
-        '@type': 'Answer',
-        text: 'Iguazú cuenta con aeropuerto internacional y acceso por ruta desde Argentina, Brasil y Paraguay.',
-      },
-    },
-    {
-      '@type': 'Question',
-      name: '¿Dónde puedo hospedarme?',
-      acceptedAnswer: {
-        '@type': 'Answer',
-        text: 'Hay opciones para todos los perfiles, desde hoteles hasta posadas. Recomendamos reservar con anticipación.',
-      },
-    },
-    {
-      '@type': 'Question',
-      name: '¿Qué puedo hacer además del evento?',
-      acceptedAnswer: {
-        '@type': 'Answer',
-        text: 'Podés visitar las Cataratas del Iguazú, el Parque Nacional y recorrer la Triple Frontera. Es un destino ideal para combinar turismo y experiencia.',
-      },
-    },
-    {
-      '@type': 'Question',
-      name: '¿Cuál es la mejor época para visitar?',
-      acceptedAnswer: {
-        '@type': 'Answer',
-        text: 'Septiembre es ideal, con clima agradable y condiciones perfectas para disfrutar del evento y el destino.',
-      },
-    },
-  ],
+  })),
 }
 
 export default function FAQ() {
   return (
     <>
-      <h1>Preguntas Frecuentes — ODA AL VINO 2026</h1>
       <LayoutClient>
         <FaqPage />
       </LayoutClient>

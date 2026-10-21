@@ -17,7 +17,7 @@ export function HeroV3() {
   const svgRef = useRef<HTMLImageElement>(null);
   const eyebrowRef = useRef<HTMLParagraphElement>(null);
   const titleRef = useRef<HTMLDivElement>(null);
-  const titleARef = useRef<HTMLHeadingElement>(null);
+  const titleARef = useRef<HTMLParagraphElement>(null);
   const titleScriptRef = useRef<HTMLParagraphElement>(null);
   const subtitleRef = useRef<HTMLParagraphElement>(null);
 
@@ -145,13 +145,13 @@ export function HeroV3() {
 
           {/* Título dinámico - más armónico */}
           <div ref={titleRef} className="mb-0 opacity-0" style={{ marginTop: 'clamp(0px, 1vw, 35px)' }}>
-            <h1
+            <p
               ref={titleARef}
-              className="font-serif uppercase text-wine mb-0 leading-[0.75]"
+              className="font-serif uppercase tracking-[0.05em] text-wine mb-0 leading-[0.75]"
               style={{ fontSize: 'clamp(40px, 8vw, 96px)' }}
             >
               {t("heroTitleA", language)}
-            </h1>
+            </p>
             <p
               ref={titleScriptRef}
               className="script normal-case italic text-wine leading-[0.85]"

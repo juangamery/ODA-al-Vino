@@ -6,11 +6,11 @@ import { LayoutClient } from "@/components/LayoutClient";
 export const metadata: Metadata = {
   metadataBase: new URL("https://www.odaalvino.com.br"),
   title: {
-    default: "ODA AL VINO 2026 | El vino nos reúne",
-    template: "%s | ODA AL VINO 2026",
+    default: "ODA Al Vino | El vino nos reúne en la Triple Frontera",
+    template: "%s | ODA Al Vino",
   },
   description:
-    "Viví la experiencia del vino más importante de la Triple Frontera. 10° edición OAV · 25 años ODA.",
+    "Conocé ODA Al Vino, el encuentro dedicado al vino argentino en Puerto Iguazú. Reviví su décima edición, descubrí experiencias, bodegas e historias.",
   icons: {
     icon: "/favicon.png",
     apple: "/favicon.png",
@@ -22,9 +22,9 @@ export const metadata: Metadata = {
     siteName: "ODA AL VINO",
     locale: "es_AR",
     type: "website",
-    title: "ODA AL VINO 2026 | El vino nos reúne",
+    title: "ODA Al Vino | El vino nos reúne en la Triple Frontera",
     description:
-      "Viví la experiencia del vino más importante de la Triple Frontera. 10° edición OAV · 25 años ODA.",
+      "Conocé ODA Al Vino, el encuentro dedicado al vino argentino en Puerto Iguazú. Reviví su décima edición, descubrí experiencias, bodegas e historias.",
     images: [
       {
         url: "https://www.odaalvino.com.br/og-image-2026.jpg",
@@ -41,14 +41,6 @@ export const metadata: Metadata = {
   },
   other: {
     "theme-color": "#47072c",
-  },
-  alternates: {
-    canonical: "https://www.odaalvino.com.br",
-    languages: {
-      "pt-BR": "https://www.odaalvino.com.br",
-      "es-AR": "https://odaalvino.com.ar",
-      "x-default": "https://www.odaalvino.com.br",
-    },
   },
 };
 
