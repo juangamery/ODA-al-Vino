@@ -2,13 +2,14 @@
 
 import { useState } from "react";
 import { useLanguage } from "@/context/LanguageContext";
+import { historias } from "@/lib/historias";
 import { t } from "@/lib/translations";
 
 export function FooterV3() {
   const { language } = useLanguage();
   const [email, setEmail] = useState("");
   const [loading, setLoading] = useState(false);
-  const [message, setMessage] = useState("");
+  const [status, setStatus] = useState<"idle" | "ok" | "error">("idle");
 
   const handleNewsletterSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -18,28 +19,24 @@ export function FooterV3() {
       const res = await fetch("/api/subscribe", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email }),
+        body: JSON.stringify({ email, language }),
       });
-
-      if (res.ok) {
-        setMessage("✓ Suscrito exitosamente");
-        setEmail("");
-      } else {
-        setMessage("✗ Error al suscribirse");
-      }
-    } catch (error) {
-      setMessage("✗ Error de conexión");
+      setStatus(res.ok ? "ok" : "error");
+      if (res.ok) setEmail("");
+    } catch {
+      setStatus("error");
     }
 
     setLoading(false);
-    setTimeout(() => setMessage(""), 3000);
   };
 
   const navLinks = [
-    { label: t("navInicio", language), href: "#inicio" },
-    { label: t("navManifiesto", language), href: "#manifiesto" },
-    { label: t("navExperiencia", language), href: "#experiencia" },
-    { label: t("navDestino", language), href: "#iguazu" },
+    { label: t("navInicio", language), href: "/#inicio" },
+    { label: t("navManifiesto", language), href: "/#manifiesto" },
+    { label: t("navExperiencia", language), href: "/#experiencia" },
+    { label: t("navDestino", language), href: "/#iguazu" },
+    ...(historias.length > 0 ? [{ label: t("navHistorias", language), href: "/historias" }] : []),
+    { label: t("navFaq", language), href: "/faq" },
     { label: t("compliancePageTitle", language), href: "/compliance" },
   ];
 
@@ -137,30 +134,43 @@ export function FooterV3() {
 
         {/* Newsletter */}
         <div className="border-t border-wine/8 py-12 mt-8">
-          <p className="text-[10px] font-bold uppercase tracking-[0.35em] text-wine/60 text-center mb-6">
-            Mantente informado
+          <h2 className="font-serif text-2xl md:text-3xl uppercase text-wine text-center mb-3">
+            {t("subscribeTitle", language)}
+          </h2>
+          <p className="text-sm md:text-base text-wine/65 text-center max-w-lg mx-auto mb-6">
+            {t("subscribeText", language)}
           </p>
-          <form onSubmit={handleNewsletterSubmit} className="max-w-md mx-auto flex gap-2">
+          <form onSubmit={handleNewsletterSubmit} className="max-w-lg mx-auto flex flex-col sm:flex-row gap-2">
+            <label htmlFor="footer-email" className="sr-only">{t("subscribePlaceholder", language)}</label>
             <input
+              id="footer-email"
               type="email"
-              placeholder="Tu email"
+              autoComplete="email"
+              placeholder={t("subscribePlaceholder", language)}
               value={email}
-              onChange={(e) => setEmail(e.target.value)}
+              onChange={(e) => { setEmail(e.target.value); setStatus("idle"); }}
               required
               disabled={loading}
-              className="px-4 py-2 bg-wine/10 text-wine placeholder:text-wine/40 border border-wine/20 rounded flex-1 text-sm disabled:opacity-50"
+              className="px-4 py-3 bg-wine/10 text-wine placeholder:text-wine/40 border border-wine/20 rounded flex-1 text-sm disabled:opacity-50"
             />
             <button
               type="submit"
               disabled={loading}
-              className="px-4 py-2 bg-wine text-paper rounded font-bold text-sm hover:bg-wine/90 transition disabled:opacity-50"
+              className="px-5 py-3 bg-wine text-paper rounded font-bold text-sm hover:bg-wine/90 transition disabled:opacity-50 whitespace-nowrap"
             >
-              {loading ? "..." : "Suscribir"}
+              {loading ? "..." : t("subscribeButton", language)}
             </button>
           </form>
-          {message && (
-            <p className="text-center text-xs text-wine/70 mt-2">{message}</p>
-          )}
+          <p role="status" aria-live="polite" className="text-center text-sm text-wine/80 mt-3 min-h-5">
+            {status === "ok" && t("subscribeSuccess", language)}
+            {status === "error" && t("subscribeError", language)}
+          </p>
+          <p className="text-center text-[11px] text-wine/45 mt-1 max-w-lg mx-auto">
+            {t("subscribeConsent", language)}{" "}
+            <a href="/compliance" className="underline underline-offset-2 hover:text-wine/70">
+              {t("subscribeConsentLink", language)}
+            </a>.
+          </p>
         </div>
 
         {/* Base */}

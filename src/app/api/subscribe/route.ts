@@ -35,19 +35,26 @@ export async function POST(request: NextRequest) {
   const headers = corsHeaders(origin);
 
   try {
-    const { email } = await request.json();
+    const body = await request.json();
+    const email = typeof body.email === "string" ? body.email.trim().toLowerCase() : "";
+    const language = body.language === "pt" ? "pt" : "es";
 
-    if (!email) {
-      return NextResponse.json({ error: "Email required" }, { status: 400, headers });
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      return NextResponse.json({ error: "Valid email required" }, { status: 400, headers });
     }
 
     const { error: dbError } = await supabase
       .from("newsletter_subscribers")
       .insert([{
         email,
-        language: "es",
+        language,
         subscribed_at: new Date().toISOString()
       }]);
+
+    // 23505 = unique_violation: ya estaba suscripto, no es un error para el usuario.
+    if (dbError?.code === "23505") {
+      return NextResponse.json({ success: true }, { headers });
+    }
 
     if (dbError) {
       console.error("DB Error:", dbError);
@@ -61,8 +68,10 @@ export async function POST(request: NextRequest) {
     const { error: resendError } = await resend.emails.send({
       from: "ODA al Vino <noreply@odavinoteca.com.ar>",
       to: email,
-      subject: "Bienvenido a ODA al Vino 🍷",
-      html: `<h1>Bienvenido!</h1><p>Te has suscrito a nuestro newsletter. Pronto recibirás noticias sobre ODA al Vino.</p>`,
+      subject: language === "pt" ? "Bem-vindo à ODA al Vino 🍷" : "Bienvenido a ODA al Vino 🍷",
+      html: language === "pt"
+        ? `<h1>Bem-vindo!</h1><p>Você se inscreveu para receber novidades, histórias e conteúdos da ODA al Vino.</p>`
+        : `<h1>¡Bienvenido!</h1><p>Te suscribiste para recibir novedades, historias y contenidos de ODA al Vino.</p>`,
     });
     if (resendError) {
       console.error("subscribe: email de bienvenida error:", resendError);

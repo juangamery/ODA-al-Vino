@@ -11,6 +11,8 @@ import { ManifestoV3 } from "@/components/sections/ManifestoV3";
 import { SealDivider } from "@/components/sections/SealDivider";
 import { Tickets } from "@/components/sections/Tickets";
 import { VenueV3 } from "@/components/sections/VenueV3";
+import { GalleryV1 } from "@/components/sections/GalleryV1";
+import { HistoriasHome } from "@/components/sections/HistoriasHome";
 import { WhatsAppButton } from "@/components/WhatsAppButton";
 import { Marquee } from "@/components/ui/Marquee";
 
@@ -128,6 +130,8 @@ export default function Home() {
 
       <BodegasV3 />
 
+      <GalleryV1 />
+
       <Marquee
         text="ODA AL VINO · 4 Y 5 DE SEPTIEMBRE 2026 · IGUAZÚ · ARGENTINA · 10° EDICIÓN ·"
         variant="dark"
@@ -137,6 +141,8 @@ export default function Home() {
       <Community />
 
       <Iguazu />
+
+      <HistoriasHome />
 
       <FinalV3 />
 

@@ -6,6 +6,7 @@ import { cn } from "@/lib/utils";
 import { LanguageSwitch } from "@/components/LanguageSwitch";
 import { useLanguage } from "@/context/LanguageContext";
 import { t } from "@/lib/translations";
+import { historias } from "@/lib/historias";
 
 export function FloatingHeader() {
   const { language } = useLanguage();
@@ -15,8 +16,8 @@ export function FloatingHeader() {
   const router = useRouter();
 
   const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
-    // Si estamos en /faq y es un link a una sección, ir a home con el anchor
-    if (pathname === "/faq" && href.startsWith("#")) {
+    // Fuera de la home, los links a secciones llevan a la home con el anchor
+    if (pathname !== "/" && href.startsWith("#")) {
       e.preventDefault();
       router.push(`/${href}`);
     }
@@ -29,6 +30,7 @@ export function FloatingHeader() {
     { label: t("navBodegas", language), href: "#bodegas" },
     { label: t("navComunidad", language), href: "#comunidad" },
     { label: t("navDestino", language), href: "#iguazu" },
+    ...(historias.length > 0 ? [{ label: t("navHistorias", language), href: "/historias" }] : []),
     { label: t("navFaq", language), href: "/faq" },
   ];
 
