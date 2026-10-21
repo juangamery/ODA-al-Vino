@@ -39,7 +39,6 @@ export function FooterV3() {
     { label: t("navInicio", language), href: "#inicio" },
     { label: t("navManifiesto", language), href: "#manifiesto" },
     { label: t("navExperiencia", language), href: "#experiencia" },
-    { label: t("navEntradas", language), href: "#tickets" },
     { label: t("navDestino", language), href: "#iguazu" },
     { label: t("compliancePageTitle", language), href: "/compliance" },
   ];
