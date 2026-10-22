@@ -15,14 +15,22 @@ interface Foto {
 
 // Selección editorial de la décima edición (8 a 12 fotos reales de OAV 2026).
 const FOTOS: Foto[] = [
+  { src: "/oda/gallery/oav26/oav26-muro-bodegas-oda-al-vino.webp", alt: "Muro de bienvenida de ODA Al Vino con los nombres de bodegas participantes y piezas de ediciones anteriores", ancho: 2000, alto: 1334 },
   { src: "/oda/gallery/oav26/oav26-degustacion-publico-barra.webp", alt: "Público degustando vinos en una de las barras de la décima edición de ODA Al Vino", ancho: 2000, alto: 1334 },
-  { src: "/oda/gallery/oav26/oav26-brindis-el-esteco.webp", alt: "Dos visitantes brindan con vino tinto en el stand de El Esteco", ancho: 2000, alto: 1334 },
+  { src: "/oda/gallery/oav26/oav26-stand-luigi-bosca.webp", alt: "Representante de Luigi Bosca muestra un Cabernet Franc en su stand", ancho: 2000, alto: 1334 },
   { src: "/oda/gallery/oav26/oav26-charla-catena-zapata.webp", alt: "Charla sobre Catena Zapata: el orador muestra la ilustración de la etiqueta Birth of Cabernet", ancho: 2000, alto: 1334 },
+  { src: "/oda/gallery/oav26/oav26-muro-25-anos-historia.webp", alt: "Muro «25 años de historia, 10 años de encuentros» con fotos de ODA Vinoteca y ODA Al Vino", ancho: 1334, alto: 2000 },
+  { src: "/oda/gallery/oav26/oav26-brindis-el-esteco.webp", alt: "Dos visitantes brindan con vino tinto en el stand de El Esteco", ancho: 2000, alto: 1334 },
   { src: "/oda/gallery/oav26/oav26-degustacion-guiada-rutini-charla.webp", alt: "Degustación guiada de Rutini Wines en una sala con estantes de madera", ancho: 2000, alto: 1334 },
-  { src: "/oda/gallery/oav26/oav26-degustacion-guiada-rutini-servicio.webp", alt: "El presentador de Rutini Wines sirve vino a los participantes de la degustación guiada", ancho: 2000, alto: 1334 },
+  { src: "/oda/gallery/oav26/oav26-stand-makila.webp", alt: "Productor de Makila presenta sus vinos a los visitantes", ancho: 2000, alto: 1334 },
   { src: "/oda/gallery/oav26/oav26-photocall-el-vino-nos-reune.webp", alt: "Photocall «El vino nos reúne» de la décima edición, con bolas espejadas y carteles de neón", ancho: 1500, alto: 1000 },
+  { src: "/oda/gallery/oav26/oav26-stand-don-bosco.webp", alt: "Dos representantes de Bodega Don Bosco sonríen detrás de su mesa de vinos", ancho: 2000, alto: 1334 },
+  { src: "/oda/gallery/oav26/oav26-degustacion-guiada-rutini-servicio.webp", alt: "El presentador de Rutini Wines sirve vino a los participantes de la degustación guiada", ancho: 2000, alto: 1334 },
   { src: "/oda/gallery/oav26/oav26-neon-oda-vinoteca-25-anos.webp", alt: "Cartel de neón de ODA Vinoteca y sus 25 años de aniversario", ancho: 1500, alto: 1000 },
 ];
+
+// La primera foto va destacada (2x2) solo si así la grilla de 4 columnas queda completa.
+const DESTACADA = FOTOS.length % 4 === 1;
 
 const ARCHIVO_URL = "https://drive.google.com/drive/folders/1oaUiNLSvSgaieUWs3c15Ll8-m-ZXpn4G";
 
@@ -74,7 +82,7 @@ export function GalleryV1() {
         {FOTOS.length > 0 && (
           <ul className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4 mb-16">
             {FOTOS.map((f, i) => (
-              <li key={f.src} className={i === 0 ? "col-span-2 row-span-2" : ""}>
+              <li key={f.src} className={DESTACADA && i === 0 ? "col-span-2 row-span-2" : ""}>
                 <button
                   type="button"
                   onClick={() => setAbierta(i)}
@@ -84,7 +92,7 @@ export function GalleryV1() {
                     src={f.src}
                     alt={f.alt}
                     fill
-                    sizes={i === 0 ? "(max-width: 768px) 100vw, 50vw" : "(max-width: 768px) 50vw, 25vw"}
+                    sizes={DESTACADA && i === 0 ? "(max-width: 768px) 100vw, 50vw" : "(max-width: 768px) 50vw, 25vw"}
                     className="object-cover transition-transform duration-700 group-hover:scale-105"
                   />
                 </button>
