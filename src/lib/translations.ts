@@ -49,6 +49,8 @@ export const translations = {
     lariojDesc: "En el límite norte de Cuyo, compartiendo características con el NOA. Productora histórica de Torrontés y Malbec. El clima seco y la elevación generan vinos de carácter mineral y elegancia natural.",
     patagoniaDesc: "La región más austral, a menor altitud pero con amplitud térmica extrema. Clima frío, vientos intensos y ciclos largos crean Pinot Noir de elegancia incomparable. Sauvignon Blanc y Chardonnay destacan entre los blancos, frescos y aromáticos.",
     bodegasParticipants: "Bodegas participantes de la 10ª edición",
+    sponsorsLabel: "Acompañaron la 10ª edición",
+    sponsorsTitle: "Gracias a las marcas que hicieron posible ODA Al Vino 2026.",
 
     // ========== TICKETS ==========
     ticketsMarqueeText: "ODA AL VINO 2026 · EVENTO FINALIZADO · 10ª EDICIÓN · GRACIAS POR SER PARTE · IGUAZÚ · SEPTIEMBRE 2026",
@@ -439,6 +441,8 @@ export const translations = {
     lariojDesc: "No limite norte de Cuyo, compartilhando características com o NOA. Produtora histórica de Torrontés e Malbec. O clima seco e a elevação geram vinhos de caráter mineral e elegância natural.",
     patagoniaDesc: "A região mais austral, em menor altitude mas com amplitude térmica extrema. Clima frio, ventos intensos e ciclos longos criam Pinot Noir de elegância incomparável. Sauvignon Blanc e Chardonnay destacam-se entre os brancos, frescos e aromáticos.",
     bodegasParticipants: "Adegas participantes da 10ª edição",
+    sponsorsLabel: "Acompanharam a 10ª edição",
+    sponsorsTitle: "Obrigado às marcas que tornaram possível a ODA Al Vino 2026.",
 
     // ========== TICKETS ==========
     ticketsMarqueeText: "ODA AL VINO 2026 · EVENTO ENCERRADO · 10ª EDIÇÃO · OBRIGADO POR PARTICIPAR · IGUAZÚ · SETEMBRO 2026",

@@ -12,6 +12,7 @@ import { SealDivider } from "@/components/sections/SealDivider";
 import { Tickets } from "@/components/sections/Tickets";
 import { VenueV3 } from "@/components/sections/VenueV3";
 import { GalleryV1 } from "@/components/sections/GalleryV1";
+import { Sponsors } from "@/components/sections/Sponsors";
 import { HistoriasHome } from "@/components/sections/HistoriasHome";
 import { WhatsAppButton } from "@/components/WhatsAppButton";
 import { Marquee } from "@/components/ui/Marquee";
@@ -129,6 +130,8 @@ export default function Home() {
       <VenueV3 />
 
       <BodegasV3 />
+
+      <Sponsors />
 
       <GalleryV1 />
 
