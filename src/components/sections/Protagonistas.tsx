@@ -20,6 +20,8 @@ const PROTAGONISTAS: { foto: string; nombre: string; rol?: { es: string; pt: str
   { foto: "jose-lorca", nombre: "José Lorca", bodega: "Mauricio Lorca" },
   { foto: "pancho-bugallo", nombre: "Pancho Bugallo", rol: { es: "Propietario", pt: "Dono" }, bodega: "Cara Sur" },
   { foto: "andres-biscaizaque", nombre: "Andrés Biscaizaque", bodega: "Los Dragones" },
+  { foto: "juan-diego-pannocchia", nombre: "Juan Diego Pannocchia", rol: { es: "Enólogo y propietario", pt: "Enólogo e dono" }, bodega: "Cuarto Surco" },
+  { foto: "juan-pablo-diaz", nombre: "Juan Pablo Díaz", rol: { es: "Enólogo", pt: "Enólogo" }, bodega: "López" },
 ];
 
 const TEXTOS = {
