@@ -10,7 +10,6 @@ import { HeroV3 } from "@/components/sections/HeroV3";
 import { ManifestoV3 } from "@/components/sections/ManifestoV3";
 import { SealDivider } from "@/components/sections/SealDivider";
 import { Tickets } from "@/components/sections/Tickets";
-import { VenueV3 } from "@/components/sections/VenueV3";
 import { GalleryV1 } from "@/components/sections/GalleryV1";
 import { Sponsors } from "@/components/sections/Sponsors";
 import { HistoriasHome } from "@/components/sections/HistoriasHome";
@@ -126,8 +125,6 @@ export default function Home() {
       <Authority />
 
       <Tickets />
-
-      <VenueV3 />
 
       <BodegasV3 />
 
