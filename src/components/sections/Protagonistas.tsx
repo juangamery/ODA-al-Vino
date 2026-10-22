@@ -33,12 +33,16 @@ const TEXTOS = {
   },
 };
 
+const mitad = Math.ceil(PROTAGONISTAS.length / 2);
+const filaA = PROTAGONISTAS.slice(0, mitad);
+const filaB = PROTAGONISTAS.slice(mitad);
+
 export function Protagonistas() {
   const { language } = useLanguage();
   const lang = language as "es" | "pt";
 
   return (
-    <section id="protagonistas" className="bg-paper py-24 md:py-32">
+    <section id="protagonistas" className="bg-paper py-24 md:py-32 overflow-hidden">
       <div className="mx-auto max-w-[1440px] px-8 md:px-16 lg:px-24">
         <Reveal>
           <p className="lato-expanded text-[10px] text-wine/50 uppercase tracking-[0.35em] font-bold mb-4">
@@ -51,31 +55,67 @@ export function Protagonistas() {
           </h2>
         </Reveal>
         <Reveal delay={0.2}>
-          <p className="text-lg text-wine/70 leading-relaxed max-w-2xl mb-14">{TEXTOS.texto[lang]}</p>
+          <p className="text-lg text-wine/70 leading-relaxed max-w-2xl mb-10 md:mb-12">{TEXTOS.texto[lang]}</p>
         </Reveal>
 
-        <ul className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 md:gap-6">
-          {PROTAGONISTAS.map((p, i) => (
-            <li key={p.foto}>
-              <Reveal delay={(i % 5) * 0.08}>
-                <figure>
-                  <Image
-                    src={`/oda/protagonistas/${p.foto}.webp`}
-                    alt={`${p.nombre}${p.rol ? `, ${p.rol[lang]}` : ""} de ${p.bodega}`}
-                    width={900}
-                    height={1125}
-                    sizes="(max-width: 768px) 50vw, (max-width: 1024px) 33vw, 20vw"
-                    className="w-full h-auto rounded-lg"
-                  />
-                  <figcaption className="sr-only">
-                    {p.nombre} — {p.rol ? `${p.rol[lang]}, ` : ""}{p.bodega}
-                  </figcaption>
-                </figure>
-              </Reveal>
-            </li>
-          ))}
-        </ul>
       </div>
+
+      {/* Dos filas en movimiento continuo y en sentidos opuestos; se pausan al pasar el mouse o tocar */}
+      <div className="-mt-6 md:-mt-8">
+        {[filaA, filaB].map((fila, f) => (
+          <div key={f} className="protagonistas-viewport overflow-hidden py-10 md:py-12">
+            <ul
+              className={`protagonistas-track flex w-max ${f === 0 ? "protagonistas-left" : "protagonistas-right"}`}
+              style={{ animationDuration: `${fila.length * 6}s` }}
+            >
+              {[0, 1].map((copia) =>
+                fila.map((p, i) => (
+                  <li
+                    key={`${copia}-${p.foto}`}
+                    aria-hidden={copia === 1 || undefined}
+                    className="flex-shrink-0 w-[44vw] sm:w-[30vw] md:w-[22vw] lg:w-[17vw] max-w-[260px] px-2 md:px-3"
+                  >
+                    <figure
+                      className="protagonista-card"
+                      style={{ "--tilt": `${(i % 2 === 0 ? -1 : 1) * 1.5}deg` } as React.CSSProperties}
+                    >
+                      <Image
+                        src={`/oda/protagonistas/${p.foto}.webp`}
+                        alt={copia === 0 ? `${p.nombre}${p.rol ? `, ${p.rol[lang]}` : ""} de ${p.bodega}` : ""}
+                        width={900}
+                        height={1125}
+                        sizes="(max-width: 640px) 44vw, (max-width: 1024px) 26vw, 260px"
+                        className="w-full h-auto rounded-lg shadow-[0_14px_28px_rgba(71,7,44,0.2)]"
+                      />
+                      {copia === 0 && (
+                        <figcaption className="sr-only">
+                          {p.nombre} — {p.rol ? `${p.rol[lang]}, ` : ""}{p.bodega}
+                        </figcaption>
+                      )}
+                    </figure>
+                  </li>
+                ))
+              )}
+            </ul>
+          </div>
+        ))}
+      </div>
+
+      <style>{`
+        @keyframes protagonistas-left { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+        @keyframes protagonistas-right { from { transform: translateX(-50%); } to { transform: translateX(0); } }
+        .protagonistas-track { animation-timing-function: linear; animation-iteration-count: infinite; will-change: transform; }
+        .protagonistas-left { animation-name: protagonistas-left; }
+        .protagonistas-right { animation-name: protagonistas-right; }
+        .protagonistas-viewport:hover .protagonistas-track,
+        .protagonistas-viewport:active .protagonistas-track { animation-play-state: paused; }
+        .protagonista-card { transform: rotate(var(--tilt)); transition: transform 0.5s ease-out; }
+        .protagonista-card:hover { transform: translateY(-8px) scale(1.04) rotate(0deg); }
+        @media (prefers-reduced-motion: reduce) {
+          .protagonistas-track { animation: none; }
+          .protagonistas-viewport { overflow-x: auto; }
+        }
+      `}</style>
     </section>
   );
 }
