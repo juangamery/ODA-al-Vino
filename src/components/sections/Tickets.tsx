@@ -1,8 +1,33 @@
 "use client";
 
+import Image from "next/image";
 import { Reveal } from "@/components/motion/Reveal";
 import { useLanguage } from "@/context/LanguageContext";
-import { t } from "@/lib/translations";
+import { t, type Language } from "@/lib/translations";
+
+type EjeN = 1 | 2 | 3 | 4;
+
+// Al sumar la foto de un eje, pasa automáticamente al formato reportaje (foto + texto).
+const EJES: { n: EjeN; foto?: { src: string; alt: string } }[] = [
+  { n: 1, foto: { src: "/oda/gallery/oav26/oav26-degustacion-etiqueta.webp", alt: "Un visitante lee la etiqueta de una botella mientras degusta un vino tinto en ODA Al Vino 2026" } },
+  { n: 2, foto: { src: "/oda/gallery/oav26/oav26-brindis-el-esteco.webp", alt: "Dos visitantes brindan con vino tinto en el stand de El Esteco durante ODA Al Vino 2026" } },
+  { n: 3 }, // Conocimiento: falta foto de charla, masterclass o degustación guiada
+  { n: 4 }, // Semana ODA: falta foto de las capacitaciones
+];
+const conFoto = EJES.filter((e) => e.foto);
+const sinFoto = EJES.filter((e) => !e.foto);
+
+function EjeTexto({ n, language }: { n: EjeN; language: Language }) {
+  const cierre = t(`eje${n}Cierre`, language);
+  return (
+    <div>
+      <p className="font-serif text-2xl md:text-3xl text-plum leading-tight mb-5">{t(`eje${n}Dato`, language)}</p>
+      <h3 className="font-serif text-3xl md:text-4xl uppercase text-wine leading-[1.05] mb-5">{t(`eje${n}Title`, language)}</h3>
+      <p className="text-base md:text-lg text-wine/75 leading-relaxed">{t(`eje${n}Text`, language)}</p>
+      {cierre && <p className="mt-5 text-base md:text-lg text-wine/90 italic leading-relaxed">{cierre}</p>}
+    </div>
+  );
+}
 
 export function Tickets() {
   const { language } = useLanguage();
@@ -56,6 +81,33 @@ export function Tickets() {
               {t("ticketsDescription", language)}
             </p>
           </Reveal>
+
+          {/* Ejes con fotografía: reportaje alternado */}
+          <div className="mt-20 md:mt-28 space-y-20 md:space-y-28">
+            {conFoto.map((eje, i) => (
+              <div key={eje.n} className="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-14 items-center">
+                <Reveal className={`md:col-span-7 ${i % 2 === 1 ? "md:order-2" : ""}`}>
+                  <div className="relative aspect-[3/2] overflow-hidden rounded-lg bg-wine/10">
+                    <Image src={eje.foto!.src} alt={eje.foto!.alt} fill sizes="(max-width: 768px) 100vw, 58vw" className="object-cover" />
+                  </div>
+                </Reveal>
+                <Reveal delay={0.15} className="md:col-span-5">
+                  <EjeTexto n={eje.n} language={language} />
+                </Reveal>
+              </div>
+            ))}
+          </div>
+
+          {/* Ejes que todavía no tienen fotografía */}
+          {sinFoto.length > 0 && (
+            <div className="mt-20 md:mt-28 grid grid-cols-1 md:grid-cols-2 gap-14 md:gap-20 border-t border-wine/15 pt-14 md:pt-20">
+              {sinFoto.map((eje, i) => (
+                <Reveal key={eje.n} delay={i * 0.1}>
+                  <EjeTexto n={eje.n} language={language} />
+                </Reveal>
+              ))}
+            </div>
+          )}
         </div>
       </section>
 

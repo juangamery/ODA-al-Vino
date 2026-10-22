@@ -14,7 +14,13 @@ interface Foto {
 }
 
 // Selección editorial de la décima edición (8 a 12 fotos reales de OAV 2026).
-const FOTOS: Foto[] = [];
+const FOTOS: Foto[] = [
+  { src: "/oda/gallery/oav26/oav26-degustacion-publico-barra.webp", alt: "Público degustando vinos en una de las barras de la décima edición de ODA Al Vino", ancho: 2000, alto: 1334 },
+  { src: "/oda/gallery/oav26/oav26-brindis-el-esteco.webp", alt: "Dos visitantes brindan con vino tinto en el stand de El Esteco", ancho: 2000, alto: 1334 },
+  { src: "/oda/gallery/oav26/oav26-degustacion-etiqueta.webp", alt: "Un visitante lee la etiqueta de una botella mientras degusta un vino tinto", ancho: 2000, alto: 1334 },
+  { src: "/oda/gallery/oav26/oav26-photocall-el-vino-nos-reune.webp", alt: "Photocall «El vino nos reúne» de la décima edición, con bolas espejadas y carteles de neón", ancho: 1500, alto: 1000 },
+  { src: "/oda/gallery/oav26/oav26-neon-oda-vinoteca-25-anos.webp", alt: "Cartel de neón de ODA Vinoteca y sus 25 años de aniversario", ancho: 1500, alto: 1000 },
+];
 
 const ARCHIVO_URL = "https://drive.google.com/drive/folders/1oaUiNLSvSgaieUWs3c15Ll8-m-ZXpn4G";
 
