@@ -11,11 +11,15 @@ const PROTAGONISTAS: { foto: string; nombre: string; rol?: { es: string; pt: str
   { foto: "ramiro-barrillo", nombre: "Ramiro Barrillo", rol: { es: "Enólogo", pt: "Enólogo" }, bodega: "Diamandes" },
   { foto: "natalia-suarez", nombre: "Natalia Suarez", rol: { es: "Sommelier", pt: "Sommelier" }, bodega: "La Coste de los Andes" },
   { foto: "alicia-cruz", nombre: "Alicia Cruz", bodega: "Flechas de los Andes" },
+  { foto: "lucas-ballester", nombre: "Lucas Ballester", bodega: "Wineco" },
+  { foto: "lucca-isasmendi", nombre: "Lucca Isasmendi", rol: { es: "Enólogo", pt: "Enólogo" }, bodega: "Isasmendi" },
+  { foto: "colo-sejantovich", nombre: "Colo Sejantovich", bodega: "Mil Suelos" },
+  { foto: "leandro-azin", nombre: "Leandro Azin", rol: { es: "Propietario y enólogo", pt: "Proprietário e enólogo" }, bodega: "A Corazón Abierto" },
 ];
 
 const TEXTOS = {
   label: { es: "10ª Edición · ODA al Vino 2026", pt: "10ª Edição · ODA al Vino 2026" },
-  titulo: { es: "Protagonistas de la décima edición.", pt: "Protagonistas da décima edição." },
+  titulo: { es: "Conocé las personalidades de ODA al Vino.", pt: "Conheça as personalidades da ODA al Vino." },
   texto: {
     es: "Enólogos, sommeliers y referentes de bodegas que compartieron sus vinos y su conocimiento con nuestra comunidad.",
     pt: "Enólogos, sommeliers e referências de adegas que compartilharam seus vinhos e seu conhecimento com a nossa comunidade.",
