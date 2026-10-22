@@ -15,6 +15,11 @@ const PROTAGONISTAS: { foto: string; nombre: string; rol?: { es: string; pt: str
   { foto: "lucca-isasmendi", nombre: "Lucca Isasmendi", rol: { es: "Enólogo", pt: "Enólogo" }, bodega: "Isasmendi" },
   { foto: "colo-sejantovich", nombre: "Colo Sejantovich", bodega: "Mil Suelos" },
   { foto: "leandro-azin", nombre: "Leandro Azin", rol: { es: "Propietario y enólogo", pt: "Proprietário e enólogo" }, bodega: "A Corazón Abierto" },
+  { foto: "carlos-timoner", nombre: "Carlos Timoner", bodega: "Susana Balbo" },
+  { foto: "gabriel-guardia", nombre: "Gabriel Guardia", rol: { es: "Propietario", pt: "Proprietário" }, bodega: "Aceites Olei Guardia" },
+  { foto: "jose-lorca", nombre: "José Lorca", bodega: "Mauricio Lorca" },
+  { foto: "pancho-bugallo", nombre: "Pancho Bugallo", rol: { es: "Propietario", pt: "Dono" }, bodega: "Cara Sur" },
+  { foto: "andres-biscaizaque", nombre: "Andrés Biscaizaque", bodega: "Los Dragones" },
 ];
 
 const TEXTOS = {
