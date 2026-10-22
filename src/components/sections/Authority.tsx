@@ -97,6 +97,17 @@ export function Authority() {
 
       <div className="mx-auto max-w-[1440px] px-8 md:px-16 lg:px-24 py-28 md:py-40">
 
+        <Reveal>
+          <p className="lato-expanded text-[10px] text-paper/55 uppercase tracking-[0.35em] font-bold mb-4">
+            ✦ {t("authoritySubtitle", language)} ✦
+          </p>
+        </Reveal>
+        <Reveal variant="clip" delay={0.1}>
+          <h2 className="font-serif text-[clamp(2.25rem,5vw,4.5rem)] leading-[0.95] pt-[0.1em] uppercase text-paper mb-16 md:mb-24 max-w-4xl">
+            {t("authorityTitle", language)}
+          </h2>
+        </Reveal>
+
         {/* Stats grid */}
         <div className="relative grid grid-cols-2 lg:grid-cols-4 gap-y-16 gap-x-8 divide-x divide-paper/20">
             {stats.map((s, i) => (

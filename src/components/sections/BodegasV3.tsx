@@ -119,6 +119,9 @@ export function BodegasV3() {
             <p className="text-base md:text-lg text-paper/60 max-w-2xl mt-4">
               {t("bodegasDescription2", language)}
             </p>
+            <p className="lato-expanded text-[11px] uppercase tracking-[0.2em] text-harvest/90 max-w-2xl mt-6 leading-relaxed">
+              {t("bodegasRegiones", language)}
+            </p>
           </Reveal>
         </div>
 

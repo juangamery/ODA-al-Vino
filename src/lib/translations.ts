@@ -41,6 +41,7 @@ export const translations = {
     bodegasTitleC: "en la 10ª edición",
     bodegasDescription: "Desde diferentes regiones vitivinícolas de Argentina, 105 bodegas participaron de ODA Al Vino 2026, compartiendo sus vinos, sus territorios y sus historias con el público de la Triple Frontera.",
     bodegasDescription2: "Más de 500 etiquetas permitieron descubrir diferentes expresiones del vino argentino, desde productores históricos hasta proyectos emergentes.",
+    bodegasRegiones: "Representando Mendoza, Patagonia (Neuquén, Río Negro), Catamarca, Jujuy, Salta, San Juan, La Rioja y Buenos Aires.",
     bodegasVarietals: "Varietales destacados:",
     bodegasRegionDesc: "Esta región aporta una selección curada de bodegas que representan lo mejor de sus tradiciones vitivinícolas y proyectos innovadores.",
     mendozaDesc: "A 800-1200m de altitud en el pie de los Andes. La Cordillera actúa como barrera natural, generando un clima ideal: seco y cálido, moderado por la altura. La tierra del Malbec argentino, con tradición inquebrantable desde Luján de Cuyo hasta el Valle de Uco.",
@@ -149,6 +150,8 @@ export const translations = {
     authorityYearsSub: "de encuentros",
     authorityAsistentes: "Personas",
     authorityAsistentesSub: "en experiencias de conocimiento · 2026",
+    authorityTitle: "La dimensión de nuestra 10ª edición",
+    authoritySubtitle: "ODA al Vino 2026 en números",
 
     // ========== COMMUNITY ==========
     communityTitle: "Comunidad",
@@ -431,6 +434,7 @@ export const translations = {
     bodegasTitleC: "na 10ª edição",
     bodegasDescription: "De diferentes regiões vitivinícolas da Argentina, 105 adegas participaram da ODA Al Vino 2026, compartilhando seus vinhos, seus territórios e suas histórias com o público da Tríplice Fronteira.",
     bodegasDescription2: "Mais de 500 rótulos permitiram descobrir diferentes expressões do vinho argentino, desde produtores históricos até projetos emergentes.",
+    bodegasRegiones: "Representando Mendoza, Patagônia (Neuquén, Rio Negro), Catamarca, Jujuy, Salta, San Juan, La Rioja e Buenos Aires.",
     bodegasVarietals: "Variedades em destaque:",
     bodegasRegionDesc: "Esta região contribui com uma seleção curada de adegas que representam o melhor de suas tradições vitivinícolas e projetos inovadores.",
     mendozaDesc: "A 800-1200m de altitude no pé dos Andes. A Cordilheira atua como barreira natural, gerando um clima ideal: seco e quente, moderado pela altitude. A terra do Malbec argentino, com tradição inabalável desde Luján de Cuyo até o Valle de Uco.",
@@ -539,6 +543,8 @@ export const translations = {
     authorityYearsSub: "de encontros",
     authorityAsistentes: "Pessoas",
     authorityAsistentesSub: "em experiências de conhecimento · 2026",
+    authorityTitle: "A dimensão da nossa 10ª edição",
+    authoritySubtitle: "ODA al Vino 2026 em números",
 
     // ========== COMMUNITY ==========
     communityTitle: "Comunidade",
