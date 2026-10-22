@@ -22,6 +22,22 @@ export interface Historia {
   relacionadas?: string[]; // slugs
 }
 
+// Para publicar un artículo, agregar un objeto como este (fotos en public/oda/historias/):
+// {
+//   slug: "semana-oda-2026",                       // URL: /historias/semana-oda-2026
+//   titulo: "Título del artículo",
+//   bajada: "Una o dos líneas que resumen el artículo.",
+//   descripcionSeo: "Descripción para Google (hasta ~155 caracteres).",
+//   fecha: "2026-11-05",
+//   autor: "Nombre de quien firma",
+//   imagen: { src: "/oda/historias/semana-oda-2026.webp", alt: "Qué muestra la foto", ancho: 2000, alto: 1334 },
+//   cuerpo: [
+//     { tipo: "p", texto: "Párrafo con un [enlace interno](/faq)." },
+//     { tipo: "h2", texto: "Subtítulo" },
+//     { tipo: "img", src: "/oda/historias/foto-2.webp", alt: "…", ancho: 2000, alto: 1334, epigrafe: "Opcional" },
+//   ],
+//   relacionadas: ["otro-slug"],                   // opcional
+// },
 export const historias: Historia[] = [];
 
 export const historiasOrdenadas = [...historias].sort((a, b) => b.fecha.localeCompare(a.fecha));

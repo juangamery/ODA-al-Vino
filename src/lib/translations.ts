@@ -48,7 +48,7 @@ export const translations = {
     saltaDesc: "A altitudes extremas en los Valles Calchaquíes, hasta 3.300m sobre el nivel del mar. El Torrontés es la joya autóctona: un blanco aromático y fresco que solo existe en estas alturas. Malbec, Cabernet Franc y Tannat completan la expresión de esta región singular.",
     lariojDesc: "En el límite norte de Cuyo, compartiendo características con el NOA. Productora histórica de Torrontés y Malbec. El clima seco y la elevación generan vinos de carácter mineral y elegancia natural.",
     patagoniaDesc: "La región más austral, a menor altitud pero con amplitud térmica extrema. Clima frío, vientos intensos y ciclos largos crean Pinot Noir de elegancia incomparable. Sauvignon Blanc y Chardonnay destacan entre los blancos, frescos y aromáticos.",
-    bodegasParticipants: "Bodegas que forman parte de la historia de ODA al Vino",
+    bodegasParticipants: "Bodegas participantes de la 10ª edición",
 
     // ========== TICKETS ==========
     ticketsMarqueeText: "ODA AL VINO 2026 · EVENTO FINALIZADO · 10ª EDICIÓN · GRACIAS POR SER PARTE · IGUAZÚ · SEPTIEMBRE 2026",
@@ -438,7 +438,7 @@ export const translations = {
     saltaDesc: "A altitudes extremas nos Vales Calchaquíes, até 3.300m acima do nível do mar. O Torrontés é a joia autóctone: um branco aromático e fresco que existe apenas nestas altitudes. Malbec, Cabernet Franc e Tannat completam a expressão desta região singular.",
     lariojDesc: "No limite norte de Cuyo, compartilhando características com o NOA. Produtora histórica de Torrontés e Malbec. O clima seco e a elevação geram vinhos de caráter mineral e elegância natural.",
     patagoniaDesc: "A região mais austral, em menor altitude mas com amplitude térmica extrema. Clima frio, ventos intensos e ciclos longos criam Pinot Noir de elegância incomparável. Sauvignon Blanc e Chardonnay destacam-se entre os brancos, frescos e aromáticos.",
-    bodegasParticipants: "Adegas que fazem parte da história da ODA al Vino",
+    bodegasParticipants: "Adegas participantes da 10ª edição",
 
     // ========== TICKETS ==========
     ticketsMarqueeText: "ODA AL VINO 2026 · EVENTO ENCERRADO · 10ª EDIÇÃO · OBRIGADO POR PARTICIPAR · IGUAZÚ · SETEMBRO 2026",

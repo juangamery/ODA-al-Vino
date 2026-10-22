@@ -6,6 +6,7 @@ import { Reveal } from "@/components/motion/Reveal";
 import { useLanguage } from "@/context/LanguageContext";
 import { t } from "@/lib/translations";
 import { BodegasModal } from "./BodegasModal";
+import { BODEGAS_2026 } from "@/lib/bodegas2026";
 
 type RegionDescKey = "mendozaDesc" | "sanjuanDesc" | "saltaDesc" | "lariojDesc" | "patagoniaDesc";
 
@@ -55,109 +56,6 @@ const regions: Region[] = [
   },
 ];
 
-const bodegas = [
-  "Jorge Rubio",
-  "Antigal",
-  "Ojo de Tigre",
-  "Don Bosco",
-  "Bemberg",
-  "Escorihuela",
-  "Rutini",
-  "Ernesto Catena",
-  "Catena Zapata",
-  "Falasco",
-  "Chateau Subsónico",
-  "Goyenechea",
-  "Sottano",
-  "Mil Demonios",
-  "Colosso",
-  "Viña Alicia",
-  "Heracles",
-  "Makila",
-  "Argana",
-  "Gloria Galvagno",
-  "Domingo Molina",
-  "La Anita",
-  "Yacochuya",
-  "El Porvenir",
-  "Funckenhausen",
-  "Puna",
-  "La Macarena",
-  "Maison Pouget",
-  "Mauricio Lorca",
-  "Ojo de Agua",
-  "Penedo Borges",
-  "Primogénito",
-  "Finca Iral",
-  "La Coste de los Andes",
-  "Navarro Correas",
-  "El Esteco",
-  "Las Moras",
-  "Trapiche",
-  "Séptima",
-  "Domaine Bousquet",
-  "Cuarto Surco",
-  "Mosquita Muerta",
-  "Salentein",
-  "Antucura",
-  "Luigi Bosca",
-  "Cicchitti",
-  "Proyecto X",
-  "Achaval",
-  "Monte Viejo",
-  "Huentala",
-  "Mil Suelos",
-  "Lui",
-  "Desquiciado",
-  "Los Imposibles",
-  "La Azul",
-  "Benegas",
-  "Budeguer",
-  "Sposato",
-  "Grazie Mille",
-  "Kalos Cru",
-  "CarinaE",
-  "Lauri Viana",
-  "Sánchez Carrillo",
-  "Andillian",
-  "López",
-  "Finca Los Maza",
-  "Diamandes",
-  "Rosell Boher",
-  "Renacer",
-  "A16",
-  "Flechas de los Andes",
-  "Familia Altieri",
-  "Freixenet",
-  "Doña Paula",
-  "Zuccardi",
-  "Cara Sur",
-  "Los Dragones",
-  "Michelini i Mufatto",
-  "Finca Suarez",
-  "Claroscuro",
-  "Matervini",
-  "Caro",
-  "Susana Balbo",
-  "Ballester",
-  "Durigutti",
-  "Vistalba",
-  "Ribera del Cuarzo",
-  "Due Continenti",
-  "A Corazón Abierto",
-  "Montequieto",
-  "Casa Araujo",
-  "Rocamadre",
-  "Casa Gli Amici",
-  "Colomé",
-  "Bianchi",
-  "Isasmendi",
-  "Aceites Olei Guardia",
-  "Mal Wine",
-  "Gimenez Riili",
-  "El Lado Polo del Mundo",
-  "San Huberto",
-];
 
 // Shuffle array function
 const shuffleArray = (arr: string[]): string[] => {
@@ -172,7 +70,7 @@ const shuffleArray = (arr: string[]): string[] => {
 export function BodegasV3() {
   const { language } = useLanguage();
   const [selectedRegion, setSelectedRegion] = useState(0);
-  const [shuffledBodegas] = useState(() => shuffleArray(bodegas));
+  const [shuffledBodegas] = useState(() => shuffleArray(BODEGAS_2026));
   const [modalOpen, setModalOpen] = useState(false);
 
   return (
