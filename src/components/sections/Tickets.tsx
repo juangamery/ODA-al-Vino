@@ -10,8 +10,8 @@ type EjeN = 1 | 2 | 3 | 4;
 // Al sumar la foto de un eje, pasa automáticamente al formato reportaje (foto + texto).
 const EJES: { n: EjeN; foto?: { src: string; alt: string } }[] = [
   { n: 1, foto: { src: "/oda/gallery/oav26/oav26-degustacion-etiqueta.webp", alt: "Un visitante lee la etiqueta de una botella mientras degusta un vino tinto en ODA Al Vino 2026" } },
-  { n: 2, foto: { src: "/oda/gallery/oav26/oav26-brindis-el-esteco.webp", alt: "Dos visitantes brindan con vino tinto en el stand de El Esteco durante ODA Al Vino 2026" } },
-  { n: 3 }, // Conocimiento: falta foto de charla, masterclass o degustación guiada
+  { n: 2, foto: { src: "/oda/gallery/oav26/oav26-comunidad-grupo-brindis.webp", alt: "Un grupo numeroso de visitantes brinda y celebra con copas en alto durante ODA Al Vino 2026" } },
+  { n: 3, foto: { src: "/oda/gallery/oav26/oav26-degustacion-guiada-mauricio-lorca.webp", alt: "Degustación guiada de Mauricio Lorca: el presentador muestra una botella ante una mesa de participantes" } },
   { n: 4 }, // Semana ODA: falta foto de las capacitaciones
 ];
 const conFoto = EJES.filter((e) => e.foto);

@@ -17,7 +17,9 @@ interface Foto {
 const FOTOS: Foto[] = [
   { src: "/oda/gallery/oav26/oav26-degustacion-publico-barra.webp", alt: "Público degustando vinos en una de las barras de la décima edición de ODA Al Vino", ancho: 2000, alto: 1334 },
   { src: "/oda/gallery/oav26/oav26-brindis-el-esteco.webp", alt: "Dos visitantes brindan con vino tinto en el stand de El Esteco", ancho: 2000, alto: 1334 },
-  { src: "/oda/gallery/oav26/oav26-degustacion-etiqueta.webp", alt: "Un visitante lee la etiqueta de una botella mientras degusta un vino tinto", ancho: 2000, alto: 1334 },
+  { src: "/oda/gallery/oav26/oav26-charla-catena-zapata.webp", alt: "Charla sobre Catena Zapata: el orador muestra la ilustración de la etiqueta Birth of Cabernet", ancho: 2000, alto: 1334 },
+  { src: "/oda/gallery/oav26/oav26-degustacion-guiada-rutini-charla.webp", alt: "Degustación guiada de Rutini Wines en una sala con estantes de madera", ancho: 2000, alto: 1334 },
+  { src: "/oda/gallery/oav26/oav26-degustacion-guiada-rutini-servicio.webp", alt: "El presentador de Rutini Wines sirve vino a los participantes de la degustación guiada", ancho: 2000, alto: 1334 },
   { src: "/oda/gallery/oav26/oav26-photocall-el-vino-nos-reune.webp", alt: "Photocall «El vino nos reúne» de la décima edición, con bolas espejadas y carteles de neón", ancho: 1500, alto: 1000 },
   { src: "/oda/gallery/oav26/oav26-neon-oda-vinoteca-25-anos.webp", alt: "Cartel de neón de ODA Vinoteca y sus 25 años de aniversario", ancho: 1500, alto: 1000 },
 ];
