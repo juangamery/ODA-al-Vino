@@ -12,7 +12,7 @@ const EJES: { n: EjeN; foto?: { src: string; alt: string } }[] = [
   { n: 1, foto: { src: "/oda/gallery/oav26/oav26-degustacion-etiqueta.webp", alt: "Un visitante lee la etiqueta de una botella mientras degusta un vino tinto en ODA Al Vino 2026" } },
   { n: 2, foto: { src: "/oda/gallery/oav26/oav26-comunidad-grupo-brindis.webp", alt: "Un grupo numeroso de visitantes brinda y celebra con copas en alto durante ODA Al Vino 2026" } },
   { n: 3, foto: { src: "/oda/gallery/oav26/oav26-degustacion-guiada-mauricio-lorca.webp", alt: "Degustación guiada de Mauricio Lorca: el presentador muestra una botella ante una mesa de participantes" } },
-  { n: 4 }, // Semana ODA: falta foto de las capacitaciones
+  { n: 4, foto: { src: "/oda/gallery/oav26/oav26-degustacion-guiada-bianchi.webp", alt: "Degustación guiada de Bodegas Bianchi: el presentador habla frente a una mesa larga de participantes" } },
 ];
 const conFoto = EJES.filter((e) => e.foto);
 const sinFoto = EJES.filter((e) => !e.foto);
