@@ -78,6 +78,8 @@ const LOGOS: { file: string; nombre: string; w: number; h: number }[] = [
   { file: "agua-de-las-misiones", nombre: "Agua de las Misiones", w: 210, h: 93 },
   { file: "el-quincho-del-tio-querido", nombre: "El Quincho del Tío Querido", w: 212, h: 168 },
   { file: "riosma", nombre: "Riosma", w: 294, h: 59 },
+  { file: "la-carolina", nombre: "La Carolina Café · Bistró · Bar", w: 239, h: 105 },
+  { file: "la-toscana-trattoria", nombre: "La Toscana Trattoria", w: 226, h: 84 },
 ];
 
 export function Sponsors() {
