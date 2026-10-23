@@ -19,9 +19,13 @@ const sinFoto = EJES.filter((e) => !e.foto);
 
 function EjeTexto({ n, language }: { n: EjeN; language: Language }) {
   const cierre = t(`eje${n}Cierre`, language);
+  const dato2 = t(`eje${n}Dato2`, language);
   return (
     <div>
-      <p className="font-serif text-2xl md:text-3xl text-plum leading-tight mb-5">{t(`eje${n}Dato`, language)}</p>
+      <p className="font-serif text-2xl md:text-3xl text-plum leading-tight mb-5">
+        {t(`eje${n}Dato`, language)}
+        {dato2 && <span className="block mt-1">{dato2}</span>}
+      </p>
       <h3 className="font-serif text-3xl md:text-4xl uppercase text-wine leading-[1.05] mb-5">{t(`eje${n}Title`, language)}</h3>
       <p className="text-base md:text-lg text-wine/75 leading-relaxed">{t(`eje${n}Text`, language)}</p>
       {cierre && <p className="mt-5 text-base md:text-lg text-wine/90 italic leading-relaxed">{cierre}</p>}
