@@ -80,6 +80,7 @@ const LOGOS: { file: string; nombre: string; w: number; h: number }[] = [
   { file: "riosma", nombre: "Riosma", w: 294, h: 59 },
   { file: "la-carolina", nombre: "La Carolina Café · Bistró · Bar", w: 239, h: 105 },
   { file: "la-toscana-trattoria", nombre: "La Toscana Trattoria", w: 226, h: 84 },
+  { file: "yvyra-resto-del-arbol", nombre: "Yvyrá resto del árbol", w: 181, h: 95 },
 ];
 
 export function Sponsors() {
