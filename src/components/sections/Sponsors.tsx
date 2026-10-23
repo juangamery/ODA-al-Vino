@@ -55,13 +55,29 @@ const GRUPOS: { titulo: Texto; texto: Texto; marcas: string[] }[] = [
   },
 ];
 
-const EN_LOGOS = [
-  "Hotel de Selva", "La Aldea de la Selva Lodge", "Hotel Saint George Iguazú",
-  "AHGAI — Asociación Hotelera, Gastronómica y Afines de Iguazú", "Duty Free Shop Puerto Iguazú",
-  "Bagu Hoteles 7 Bocas", "Iguazú Grand Puerto Iguazú", "Río Uruguay", "Merendero Mano Abierta",
-  "Alsultan Shawarma", "Arami Hotel & Lodge", "Selva de Laurel Boutique Lodge",
-  "Caracol Internacional Viajes & Turismo", "Perobal Restaurante", "Mercure Hotels", "O2 Hotel Iguazú",
-  "Agua de las Misiones", "El Quincho del Tío Querido", "Riosma",
+// Área visual común: los logos altos y los anchos se ven del mismo "peso".
+const AREA_LOGO = 11000;
+
+const LOGOS: { file: string; nombre: string; w: number; h: number }[] = [
+  { file: "hotel-de-selva", nombre: "Hotel de Selva", w: 243, h: 105 },
+  { file: "la-aldea-de-la-selva-lodge", nombre: "La Aldea de la Selva Lodge", w: 274, h: 201 },
+  { file: "hotel-saint-george", nombre: "Hotel Saint George Iguazú", w: 238, h: 209 },
+  { file: "ahgai", nombre: "AHGAI — Asociación Hotelera, Gastronómica y Afines de Iguazú", w: 315, h: 136 },
+  { file: "duty-free-shop-puerto-iguazu", nombre: "Duty Free Shop Puerto Iguazú", w: 233, h: 220 },
+  { file: "bagu-hoteles-7-bocas", nombre: "Bagu Hoteles 7 Bocas", w: 212, h: 130 },
+  { file: "iguazu-grand", nombre: "Iguazú Grand Puerto Iguazú", w: 254, h: 135 },
+  { file: "rio-uruguay", nombre: "Río Uruguay", w: 226, h: 183 },
+  { file: "merendero-mano-abierta", nombre: "Merendero Mano Abierta", w: 221, h: 203 },
+  { file: "alsultan-shawarma", nombre: "Alsultan Shawarma", w: 279, h: 112 },
+  { file: "arami-hotel-lodge", nombre: "Arami Hotel & Lodge", w: 278, h: 100 },
+  { file: "selva-de-laurel", nombre: "Selva de Laurel Boutique Lodge", w: 230, h: 116 },
+  { file: "caracol-internacional", nombre: "Caracol Internacional Viajes & Turismo", w: 310, h: 84 },
+  { file: "perobal", nombre: "Perobal Restaurante", w: 273, h: 164 },
+  { file: "mercure-hotels", nombre: "Mercure Hotels", w: 286, h: 76 },
+  { file: "o2-hotel-iguazu", nombre: "O2 Hotel Iguazú", w: 268, h: 111 },
+  { file: "agua-de-las-misiones", nombre: "Agua de las Misiones", w: 210, h: 93 },
+  { file: "el-quincho-del-tio-querido", nombre: "El Quincho del Tío Querido", w: 212, h: 168 },
+  { file: "riosma", nombre: "Riosma", w: 294, h: 59 },
 ];
 
 export function Sponsors() {
@@ -86,20 +102,25 @@ export function Sponsors() {
         </Reveal>
       </div>
 
-      <Reveal delay={0.2}>
-        <div className="mx-auto max-w-[1440px] md:px-10 lg:px-16 mt-6 md:mt-4">
-          <Image
-            src="/oda/sponsors/sponsors-oav26.webp"
-            alt={`Logos de las marcas que acompañaron ODA Al Vino 2026: ${EN_LOGOS.join(", ")}.`}
-            width={1920}
-            height={1080}
-            sizes="(max-width: 1440px) 100vw, 1440px"
-            className="w-full h-auto"
-          />
-        </div>
-      </Reveal>
+      <ul className="mx-auto max-w-[1440px] px-8 md:px-16 lg:px-24 mt-14 md:mt-20 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-x-8 gap-y-12 md:gap-y-16 items-center">
+        {LOGOS.map((l, i) => (
+          <li key={l.file} className="flex items-center justify-center">
+            <Reveal delay={(i % 5) * 0.05}>
+              <Image
+                src={`/oda/sponsors/logos/${l.file}.png`}
+                alt={l.nombre}
+                width={l.w}
+                height={l.h}
+                sizes="220px"
+                style={{ width: `${Math.round(Math.sqrt(AREA_LOGO * (l.w / l.h)))}px` }}
+                className="h-auto max-w-full object-contain opacity-90 hover:opacity-100 transition-opacity"
+              />
+            </Reveal>
+          </li>
+        ))}
+      </ul>
 
-      <div className="mx-auto max-w-[1440px] px-8 md:px-16 lg:px-24 mt-8 md:mt-4">
+      <div className="mx-auto max-w-[1440px] px-8 md:px-16 lg:px-24 mt-16 md:mt-20">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-x-16 gap-y-12 md:gap-y-16 border-t border-paper/20 pt-12 md:pt-16">
           {GRUPOS.map((g, i) => (
             <Reveal key={g.titulo.es} delay={(i % 2) * 0.1}>
