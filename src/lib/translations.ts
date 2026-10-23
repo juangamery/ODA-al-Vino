@@ -149,7 +149,7 @@ export const translations = {
     authorityYears: "Años",
     authorityYearsSub: "de encuentros",
     authorityAsistentes: "Personas",
-    authorityAsistentesSub: "en experiencias de conocimiento · 2026",
+    authorityAsistentesSub: "en experiencias y capacitaciones",
     authorityTitle: "La dimensión de nuestra 10ª edición",
     authoritySubtitle: "ODA al Vino 2026 en números",
 
@@ -542,7 +542,7 @@ export const translations = {
     authorityYears: "Anos",
     authorityYearsSub: "de encontros",
     authorityAsistentes: "Pessoas",
-    authorityAsistentesSub: "em experiências de conhecimento · 2026",
+    authorityAsistentesSub: "em experiências e capacitações",
     authorityTitle: "A dimensão da nossa 10ª edição",
     authoritySubtitle: "ODA al Vino 2026 em números",
 
