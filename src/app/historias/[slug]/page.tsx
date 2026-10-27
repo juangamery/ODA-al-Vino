@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
-import Script from "next/script";
 import { notFound } from "next/navigation";
 import { FloatingHeader } from "@/components/layout/FloatingHeader";
 import { FooterV3 } from "@/components/sections/FooterV3";
@@ -23,10 +22,14 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   if (!h) return {};
   const url = `${SITE}/historias/${h.slug}`;
   const title = h.tituloSeo ?? h.titulo;
+  const t = h.traduccion ? getHistoria(h.traduccion) : undefined;
   return {
     title,
     description: h.descripcionSeo,
-    alternates: { canonical: url },
+    alternates: {
+      canonical: url,
+      ...(t ? { languages: { [LANG_TAG[h.idioma]]: url, [LANG_TAG[t.idioma]]: `${SITE}/historias/${t.slug}` } } : {}),
+    },
     openGraph: {
       title,
       description: h.descripcionSeo,
@@ -48,6 +51,7 @@ export default async function HistoriaPage({ params }: { params: Promise<{ slug:
 
   const relacionadas = getRelacionadas(h);
   const e = ETIQUETAS[h.idioma];
+  const traduccion = h.traduccion ? getHistoria(h.traduccion) : undefined;
   const articleSchema = {
     "@context": "https://schema.org",
     "@type": "Article",
@@ -72,9 +76,21 @@ export default async function HistoriaPage({ params }: { params: Promise<{ slug:
         <article lang={LANG_TAG[h.idioma]}>
           <header className="bg-wine pt-48 md:pt-40 pb-14 md:pb-20 px-6 md:px-12">
             <div className="mx-auto max-w-3xl">
-              <Link href="/historias" className="lato-expanded inline-block text-[10px] uppercase tracking-[0.3em] font-bold text-paper/60 hover:text-paper mb-8">
-                {e.volver}
-              </Link>
+              <div className="flex flex-wrap items-center justify-between gap-4 mb-8">
+                <Link href="/historias" className="lato-expanded inline-block text-[10px] uppercase tracking-[0.3em] font-bold text-paper/60 hover:text-paper">
+                  {e.volver}
+                </Link>
+                {traduccion && (
+                  <Link
+                    href={`/historias/${traduccion.slug}`}
+                    hrefLang={LANG_TAG[traduccion.idioma]}
+                    lang={LANG_TAG[traduccion.idioma]}
+                    className="lato-expanded inline-block text-[10px] uppercase tracking-[0.3em] font-bold text-paper/80 hover:text-paper border border-paper/30 rounded-full px-4 py-2"
+                  >
+                    {e.otroIdioma}
+                  </Link>
+                )}
+              </div>
               <h1 className="font-serif text-[clamp(2.25rem,6vw,4.25rem)] leading-[1] uppercase text-paper mb-6">{h.titulo}</h1>
               <p className="text-lg md:text-xl text-paper/80 leading-relaxed mb-8">{h.bajada}</p>
               <p className="text-sm text-paper/60">

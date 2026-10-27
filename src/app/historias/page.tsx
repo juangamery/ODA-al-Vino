@@ -3,7 +3,7 @@ import { notFound } from "next/navigation";
 import { FloatingHeader } from "@/components/layout/FloatingHeader";
 import { FooterV3 } from "@/components/sections/FooterV3";
 import { HistoriaCard } from "@/components/historias/HistoriaCard";
-import { historiasOrdenadas } from "@/lib/historias";
+import { historiasEnIdioma, historiasOrdenadas } from "@/lib/historias";
 
 const DESCRIPTION =
   "Un espacio para seguir descubriendo todo lo que sucede alrededor de ODA Al Vino. Encuentros, protagonistas, experiencias y contenidos que forman parte de nuestra historia.";
@@ -22,6 +22,7 @@ export const metadata: Metadata = {
 
 export default function HistoriasPage() {
   if (historiasOrdenadas.length === 0) notFound();
+  const lista = historiasEnIdioma("es");
 
   return (
     <>
@@ -37,10 +38,10 @@ export default function HistoriasPage() {
         </header>
 
         <section className="mx-auto max-w-[1440px] px-8 md:px-16 lg:px-24 py-20 md:py-28">
-          <HistoriaCard historia={historiasOrdenadas[0]} destacada />
-          {historiasOrdenadas.length > 1 && (
+          <HistoriaCard historia={lista[0]} destacada />
+          {lista.length > 1 && (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-10 gap-y-16 mt-20 pt-16 border-t border-wine/10">
-              {historiasOrdenadas.slice(1).map((h) => (
+              {lista.slice(1).map((h) => (
                 <HistoriaCard key={h.slug} historia={h} />
               ))}
             </div>
