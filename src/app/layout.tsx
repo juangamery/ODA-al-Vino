@@ -80,11 +80,7 @@ export default function RootLayout({
     <html lang="es" className="h-full antialiased">
       <head>
         {/* JSON-LD Schema */}
-        <Script
-          id="schema-website-org"
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema) }}
-        />
+        <script id="schema-website-org" type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema).replace(/</g, "\\u003c") }} />
 
         {/* Google Tag Manager */}
         <Script

@@ -1,5 +1,4 @@
 import type { Metadata } from 'next'
-import Script from 'next/script'
 import { LayoutClient } from "@/components/LayoutClient";
 import FaqPage from "@/components/sections/FaqPage";
 import { translations } from "@/lib/translations";
@@ -56,11 +55,7 @@ export default function FAQ() {
       <LayoutClient>
         <FaqPage />
       </LayoutClient>
-      <Script
-        id="schema-faq"
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
-      />
+      <script id="schema-faq" type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema).replace(/</g, "\\u003c") }} />
     </>
   );
 }

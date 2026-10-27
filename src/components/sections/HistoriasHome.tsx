@@ -28,11 +28,15 @@ export function HistoriasHome() {
           <p className="text-lg text-wine/70 leading-relaxed max-w-2xl mb-14">{t("historiasHomeText", language)}</p>
         </Reveal>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
-          {historiasOrdenadas.slice(0, 3).map((h) => (
-            <HistoriaCard key={h.slug} historia={h} mostrarFecha={false} />
-          ))}
-        </div>
+        {historiasOrdenadas.length === 1 ? (
+          <HistoriaCard historia={historiasOrdenadas[0]} mostrarFecha={false} destacada />
+        ) : (
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
+            {historiasOrdenadas.slice(0, 3).map((h) => (
+              <HistoriaCard key={h.slug} historia={h} mostrarFecha={false} />
+            ))}
+          </div>
+        )}
 
         <div className="mt-14">
           <Link

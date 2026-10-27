@@ -1,5 +1,4 @@
 import type { Metadata } from 'next'
-import Script from 'next/script'
 import dynamic from "next/dynamic";
 import { Authority } from "@/components/sections/Authority";
 import { ExperienceV3 } from "@/components/sections/ExperienceV3";
@@ -151,11 +150,7 @@ export default function Home() {
 
       <FooterV3 />
 
-      <Script
-        id="schema-event"
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(eventSchema) }}
-      />
+      <script id="schema-event" type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(eventSchema).replace(/</g, "\\u003c") }} />
     </main>
   );
 }
