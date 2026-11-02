@@ -75,7 +75,7 @@ export default async function HistoriaPage({ params }: { params: Promise<{ slug:
       <main className="bg-paper text-wine">
         <article lang={LANG_TAG[h.idioma]}>
           <header className="bg-wine pt-48 md:pt-40 pb-14 md:pb-20 px-6 md:px-12">
-            <div className="mx-auto max-w-3xl">
+            <div className="mx-auto max-w-3xl md:px-2">
               <div className="flex flex-wrap items-center justify-between gap-4 mb-8">
                 <Link href="/historias" className="lato-expanded inline-block text-[10px] uppercase tracking-[0.3em] font-bold text-paper/60 hover:text-paper">
                   {e.volver}
@@ -91,7 +91,7 @@ export default async function HistoriaPage({ params }: { params: Promise<{ slug:
                   </Link>
                 )}
               </div>
-              <h1 className="font-serif text-[clamp(2.25rem,6vw,4.25rem)] leading-[1] uppercase text-paper mb-6">{h.titulo}</h1>
+              <h1 className="font-serif text-[clamp(2.25rem,6vw,4.25rem)] leading-[1] uppercase text-paper mb-6 [text-wrap:balance]">{h.titulo}</h1>
               <p className="text-lg md:text-xl text-paper/80 leading-relaxed mb-8">{h.bajada}</p>
               <p className="text-sm text-paper/60">
                 <time dateTime={h.fecha}>{formatFecha(h.fecha, h.idioma)}</time> · {h.autor}
@@ -111,22 +111,33 @@ export default async function HistoriaPage({ params }: { params: Promise<{ slug:
             />
           </div>
 
-          <div className="mx-auto max-w-2xl px-6 md:px-0 py-14 md:py-20 text-lg leading-[1.8] text-wine/85">
+          <div className="mx-auto max-w-3xl px-6 md:px-8 py-14 md:py-20 text-lg md:text-[1.1875rem] leading-[1.75] text-wine/85">
             {h.cuerpo.map((b, i) => {
               switch (b.tipo) {
                 case "h2":
-                  return <h2 key={i} className="font-serif text-3xl md:text-4xl uppercase text-wine leading-tight mt-14 mb-5">{b.texto}</h2>;
+                  return (
+                    <h2 key={i} className="font-serif text-[1.75rem] md:text-[2.125rem] uppercase text-wine leading-[1.1] mt-16 mb-6 [text-wrap:balance]">
+                      <span className="block w-10 h-[3px] bg-harvest mb-5" aria-hidden />
+                      {b.texto}
+                    </h2>
+                  );
                 case "h3":
-                  return <h3 key={i} className="font-serif text-2xl uppercase text-wine leading-tight mt-10 mb-4">{b.texto}</h3>;
+                  return <h3 key={i} className="lato-expanded text-xs md:text-sm uppercase tracking-[0.2em] font-bold text-plum mt-10 mb-3 [text-wrap:balance]">{b.texto}</h3>;
+                case "cita":
+                  return (
+                    <blockquote key={i} className="my-12 border-l-4 border-harvest pl-6 md:pl-8 font-serif text-2xl md:text-[2rem] leading-snug text-wine [text-wrap:balance]">
+                      <RichText texto={b.texto} />
+                    </blockquote>
+                  );
                 case "img":
                   return (
-                    <figure key={i} className={`my-10 ${b.alto > b.ancho ? "max-w-sm mx-auto" : ""}`}>
-                      <Image src={b.src} alt={b.alt} width={b.ancho} height={b.alto} sizes={b.alto > b.ancho ? "384px" : "(max-width: 672px) 100vw, 672px"} className="w-full h-auto rounded-lg" />
+                    <figure key={i} className={`my-12 ${b.alto > b.ancho ? "max-w-sm mx-auto" : ""}`}>
+                      <Image src={b.src} alt={b.alt} width={b.ancho} height={b.alto} sizes={b.alto > b.ancho ? "384px" : "(max-width: 768px) 100vw, 768px"} className="w-full h-auto rounded-lg" />
                       {b.epigrafe && <figcaption className="text-sm text-wine/55 mt-3">{b.epigrafe}</figcaption>}
                     </figure>
                   );
                 default:
-                  return <p key={i} className="mb-6"><RichText texto={b.texto} /></p>;
+                  return <p key={i} className="mb-6 [text-wrap:pretty]"><RichText texto={b.texto} /></p>;
               }
             })}
           </div>

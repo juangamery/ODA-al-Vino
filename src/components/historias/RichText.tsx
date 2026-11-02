@@ -1,25 +1,35 @@
 import Link from "next/link";
 
-const LINK = /\[([^\]]+)\]\(([^)\s]+)\)/g;
+// Admite **negrita** y enlaces [texto](/ruta) o [texto](https://...).
+const TOKEN = /\*\*(.+?)\*\*|\[([^\]]+)\]\(([^)\s]+)\)/g;
+
+const linkClass = "underline decoration-wine/40 underline-offset-4 hover:decoration-wine";
 
 export function RichText({ texto }: { texto: string }) {
   const partes: React.ReactNode[] = [];
   let ultimo = 0;
-  for (const m of texto.matchAll(LINK)) {
-    const [completo, label, href] = m;
+  for (const m of texto.matchAll(TOKEN)) {
+    const [completo, negrita, label, href] = m;
     partes.push(texto.slice(ultimo, m.index));
-    const externo = /^https?:\/\//.test(href);
-    partes.push(
-      externo ? (
-        <a key={m.index} href={href} target="_blank" rel="noopener noreferrer" className="underline decoration-wine/40 underline-offset-4 hover:decoration-wine">
+    if (negrita !== undefined) {
+      partes.push(
+        <strong key={m.index} className="font-bold text-wine">
+          {negrita}
+        </strong>
+      );
+    } else if (/^https?:\/\//.test(href)) {
+      partes.push(
+        <a key={m.index} href={href} target="_blank" rel="noopener noreferrer" className={linkClass}>
           {label}
         </a>
-      ) : (
-        <Link key={m.index} href={href} className="underline decoration-wine/40 underline-offset-4 hover:decoration-wine">
+      );
+    } else {
+      partes.push(
+        <Link key={m.index} href={href} className={linkClass}>
           {label}
         </Link>
-      )
-    );
+      );
+    }
     ultimo = m.index! + completo.length;
   }
   partes.push(texto.slice(ultimo));
