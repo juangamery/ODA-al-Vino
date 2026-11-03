@@ -14,19 +14,19 @@ export function RichText({ texto }: { texto: string }) {
     if (negrita !== undefined) {
       partes.push(
         <strong key={m.index} className="font-bold text-wine">
-          {negrita}
+          <RichText texto={negrita} />
         </strong>
       );
     } else if (/^https?:\/\//.test(href)) {
       partes.push(
         <a key={m.index} href={href} target="_blank" rel="noopener noreferrer" className={linkClass}>
-          {label}
+          <RichText texto={label} />
         </a>
       );
     } else {
       partes.push(
         <Link key={m.index} href={href} className={linkClass}>
-          {label}
+          <RichText texto={label} />
         </Link>
       );
     }
