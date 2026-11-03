@@ -10,6 +10,9 @@ import { ETIQUETAS, LANG_TAG, contarPalabras, formatFecha, getHistoria, getRelac
 
 const SITE = "https://www.odaalvino.com.br";
 
+// Subtítulos en negrita simple: anula la regla global de h1–h6 (serif, mayúsculas, espaciado).
+const TEXTO_H = { fontFamily: "var(--font-sans)", textTransform: "none", letterSpacing: "normal" } as const;
+
 export const dynamicParams = false;
 
 export function generateStaticParams() {
@@ -188,7 +191,7 @@ export default async function HistoriaPage({ params }: { params: Promise<{ slug:
                     </h2>
                   );
                 case "h3":
-                  return <h3 key={i} className="lato-expanded text-xs md:text-sm uppercase tracking-[0.2em] font-bold text-plum mt-10 mb-3 [text-wrap:balance]">{b.texto}</h3>;
+                  return <h3 key={i} style={TEXTO_H} className="font-bold text-xl md:text-[1.375rem] leading-snug text-wine mt-10 mb-3 [text-wrap:balance]">{b.texto}</h3>;
                 case "resumen":
                   return (
                     <aside key={i} className="mb-12 rounded-xl bg-wine text-paper p-6 md:p-8">
@@ -206,7 +209,7 @@ export default async function HistoriaPage({ params }: { params: Promise<{ slug:
                 case "linea":
                   return (
                     <section key={i} className="my-14" aria-label={b.titulo}>
-                      <h3 className="lato-expanded text-xs md:text-sm uppercase tracking-[0.2em] font-bold text-plum mb-6">{b.titulo}</h3>
+                      <h3 style={TEXTO_H} className="font-bold text-xl md:text-[1.375rem] leading-snug text-wine mb-6">{b.titulo}</h3>
                       <ol className="relative border-l-2 border-harvest/60 ml-2 space-y-6">
                         {b.items.map((it, j) => (
                           <li key={j} className="pl-6 relative">
@@ -228,7 +231,7 @@ export default async function HistoriaPage({ params }: { params: Promise<{ slug:
                       <div className="divide-y divide-wine/10">
                         {b.items.map((q, j) => (
                           <div key={j} className="py-6">
-                            <h3 className="font-bold text-wine text-lg md:text-xl mb-2 [text-wrap:balance]">{q.pregunta}</h3>
+                            <h3 style={TEXTO_H} className="font-bold text-wine text-lg md:text-xl mb-2 [text-wrap:balance]">{q.pregunta}</h3>
                             <p className="text-base md:text-lg text-wine/80 leading-relaxed [text-wrap:pretty]"><RichText texto={q.respuesta} /></p>
                           </div>
                         ))}
