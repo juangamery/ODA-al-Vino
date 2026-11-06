@@ -33,7 +33,7 @@ export function FinalV3() {
           {/* Eyebrow */}
           <Reveal delay={0.1}>
             <p className="lato-expanded text-[10px] text-paper/60 uppercase tracking-[0.4em] font-bold">
-              10° Edición · 2026
+              {t("finalEyebrow", language)}
             </p>
           </Reveal>
 
@@ -71,33 +71,17 @@ export function FinalV3() {
             </h2>
           </Reveal>
 
-          {/* Información de evento */}
+          {/* Continuidad */}
           <Reveal delay={0.4}>
-            <div className="flex flex-col md:flex-row items-center justify-center gap-6 md:gap-8 mt-8">
-              <span className="font-serif text-base md:text-lg text-paper/80 tracking-widest">
-                4 y 5 de Septiembre
-              </span>
-              <div className="w-px h-6 bg-paper/40" />
-              <span className="lato-expanded text-[11px] text-paper/70 uppercase tracking-[0.3em]">
-                Iguazú · Argentina
-              </span>
-            </div>
+            <p className="font-serif text-2xl md:text-4xl uppercase text-paper/90 tracking-wide">
+              {t("finalLine", language)}
+            </p>
           </Reveal>
 
-          {/* CTA */}
-          <Reveal delay={0.55}>
-            <div className="pt-8">
-              <a
-                href="https://painel.odaalvino.com.br/login"
-                target="_blank"
-                rel="noopener noreferrer"
-                data-event="purchase_click"
-                data-event-location="final_section"
-                className="inline-block px-10 md:px-14 py-5 md:py-6 bg-paper text-wine font-serif text-lg md:text-xl font-bold uppercase tracking-widest hover:bg-harvest hover:text-paper transition-all duration-300 rounded-full shadow-2xl"
-              >
-                {t("ticketsBtnBuy", language)}
-              </a>
-            </div>
+          <Reveal delay={0.5}>
+            <p className="text-paper/75 text-base md:text-lg leading-relaxed max-w-2xl mx-auto">
+              {t("finalText", language)}
+            </p>
           </Reveal>
 
           {/* Línea ornamental final */}
@@ -107,13 +91,6 @@ export function FinalV3() {
               <span className="text-[11px] font-serif italic text-paper/60">·</span>
               <div className="w-12 h-px bg-paper/40" />
             </div>
-          </Reveal>
-
-          {/* Tagline */}
-          <Reveal delay={0.85}>
-            <p className="text-paper/60 text-sm md:text-base font-serif italic max-w-2xl mx-auto">
-              Una celebración de la cultura, los sentidos y la comunidad en el corazón de la Triple Frontera.
-            </p>
           </Reveal>
         </div>
       </div>

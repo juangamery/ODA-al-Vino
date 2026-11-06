@@ -33,6 +33,8 @@ function getFloors(lang: Language): Floor[] {
   ];
 }
 
+const SHOW_FLOORS = false;
+
 const venueImages = [
   "_HID8883.webp",
   "_HID8893.webp",
@@ -70,10 +72,10 @@ export function VenueV3() {
             </Reveal>
 
             <Reveal variant="clip" delay={0.15}>
-              <h2 className="font-serif text-[clamp(2.5rem,6vw,5.5rem)] leading-[0.9] uppercase text-wine">
-                El Espacio
+              <h2 className="font-serif text-[clamp(2.25rem,5vw,4.5rem)] leading-[0.9] uppercase text-wine">
+                {t("venueHeading", language)}
                 <br />
-                <span className="script normal-case italic text-wine text-[1.2em]"><span className="script-ss01">P</span>erfecto</span>
+                <span className="script normal-case italic text-wine text-[1.2em]">{t("venueHeadingScript", language)}</span>
               </h2>
             </Reveal>
 
@@ -97,6 +99,8 @@ export function VenueV3() {
               </div>
             </Reveal>
 
+            {/* Planos/plantas: ocultos post-evento, describen la operación de la edición 2026 */}
+            {SHOW_FLOORS && (<>
             <Reveal delay={0.5}>
               <div className="flex gap-2">
                 {floors.map((floor, idx) => (
@@ -120,6 +124,7 @@ export function VenueV3() {
                 {floors[selectedFloor].description}
               </p>
             </Reveal>
+            </>)}
           </div>
 
           {/* Right: Gallery */}
@@ -129,7 +134,7 @@ export function VenueV3() {
               <div>
                 <h3 className="font-serif text-[clamp(1.5rem,3vw,2.5rem)] uppercase text-wine leading-tight">
                   Iguazú Urban Mall<br/>
-                  <span className="script normal-case italic text-wine text-[1.15em]"><span className="script-ss01">n</span>uestro espacio</span>
+                  <span className="script normal-case italic text-wine text-[1.15em]">{t("venueMallScript", language)}</span>
                 </h3>
               </div>
 
@@ -138,7 +143,7 @@ export function VenueV3() {
                 {/* Image */}
                 <Image
                   src={`/oda/venue/${venueImages[imageIndex]}`}
-                  alt={`Venue space ${imageIndex + 1}`}
+                  alt={`Iguazú Urban Mall, espacio de ODA al Vino — foto ${imageIndex + 1}`}
                   fill
                   className="object-cover"
                   priority={imageIndex === 0}

@@ -3,30 +3,9 @@
 import { useEffect } from "react";
 import { useLanguage } from "@/context/LanguageContext";
 import { t } from "@/lib/translations";
+import { BODEGAS_2026 } from "@/lib/bodegas2026";
 
-const bodegas = [
-  "Jorge Rubio", "Antigal", "Ojo de Tigre", "Don Bosco", "Bemberg",
-  "Escorihuela", "Rutini", "Ernesto Catena", "Catena Zapata", "Falasco",
-  "Chateau Subsónico", "Goyenechea", "Sottano", "Mil Demonios", "Colosso",
-  "Viña Alicia", "Heracles", "Makila", "Argana", "Gloria Galvagno",
-  "Domingo Molina", "La Anita", "Yacochuya", "El Porvenir", "Funckenhausen",
-  "Puna", "La Macarena", "Maison Pouget", "Mauricio Lorca", "Ojo de Agua",
-  "Penedo Borges", "Primogénito", "Finca Iral", "La Coste de los Andes",
-  "Navarro Correas", "El Esteco", "Las Moras", "Trapiche", "Séptima",
-  "Domaine Bousquet", "Cuarto Surco", "Mosquita Muerta", "Salentein",
-  "Antucura", "Luigi Bosca", "Cicchitti", "Proyecto X", "Achaval",
-  "Monte Viejo", "Huentala", "Mil Suelos", "Lui", "Desquiciado",
-  "Los Imposibles", "La Azul", "Benegas", "Budeguer", "Sposato",
-  "Grazie Mille", "Kalos Cru", "CarinaE", "Lauri Viana", "Sánchez Carrillo",
-  "Andillian", "López", "Finca Los Maza", "Diamandes", "Rosell Boher",
-  "Renacer", "A16", "Flechas de los Andes", "Familia Altieri", "Freixenet",
-  "Doña Paula", "Zuccardi", "Cara Sur", "Los Dragones", "Michelini i Mufatto",
-  "Finca Suarez", "Claroscuro", "Matervini", "Caro", "Susana Balbo",
-  "Ballester", "Durigutti", "Vistalba", "Ribera del Cuarzo", "Due Continenti",
-  "A Corazón Abierto", "Montequieto", "Casa Araujo", "Rocamadre",
-  "Casa Gli Amici", "Colomé", "Bianchi", "Isasmendi", "Aceites Olei Guardia",
-  "Mal Wine", "Gimenez Riili", "El Lado Polo del Mundo", "San Huberto",
-];
+const bodegas = [...BODEGAS_2026].sort((x, y) => x.localeCompare(y, "es"));
 
 interface Props {
   isOpen: boolean;
@@ -94,7 +73,7 @@ export function BodegasModal({ isOpen, onClose }: Props) {
         {/* Footer */}
         <div className="border-t border-wine/10 px-6 md:px-10 py-4 flex-shrink-0 text-center">
           <p className="text-[10px] uppercase tracking-widest text-wine/40 font-bold">
-            {bodegas.length} {language === "pt" ? "adegas participantes" : "bodegas participantes"}
+            {language === "pt" ? "10ª edição · 105 adegas participantes" : "10ª edición · 105 bodegas participantes"}
           </p>
         </div>
       </div>

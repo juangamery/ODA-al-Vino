@@ -24,6 +24,23 @@ function getTestimonials(lang: Language): Testimonial[] {
 }
 
 const photos = [
+  // OAV 2026 — 10ª edición
+  "/oda/gallery/oav26/oav26-comunidad-grupo-brindis.webp",
+  "/oda/gallery/oav26/oav26-photocall-el-vino-nos-reune.webp",
+  "/oda/gallery/oav26/oav26-brindis-el-esteco.webp",
+  "/oda/gallery/oav26/oav26-degustacion-publico-barra.webp",
+  "/oda/gallery/oav26/oav26-stand-don-bosco.webp",
+  "/oda/gallery/oav26/oav26-stand-luigi-bosca.webp",
+  "/oda/gallery/oav26/oav26-degustacion-guiada-rutini-servicio.webp",
+  "/oda/gallery/oav26/oav26-stand-makila.webp",
+  "/oda/gallery/oav26/oav26-degustacion-guiada-mauricio-lorca.webp",
+  "/oda/gallery/oav26/oav26-charla-catena-zapata.webp",
+  "/oda/gallery/oav26/oav26-muro-25-anos-historia.webp",
+  "/oda/gallery/oav26/oav26-degustacion-etiqueta.webp",
+  "/oda/gallery/oav26/oav26-muro-bodegas-oda-al-vino.webp",
+  "/oda/gallery/oav26/oav26-neon-oda-vinoteca-25-anos.webp",
+  "/oda/gallery/oav26/oav26-degustacion-guiada-rutini-charla.webp",
+
   // OAV 2025
   "/oda/gallery/oav25/009A7272.webp",
   "/oda/gallery/oav25/009A7373.webp",
