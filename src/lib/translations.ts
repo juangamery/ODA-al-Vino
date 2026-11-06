@@ -154,7 +154,7 @@ export const translations = {
     authorityYearsSub: "de encuentros",
     authorityAsistentes: "Personas",
     authorityAsistentesSub: "en experiencias y capacitaciones",
-    authorityTitle: "La dimensión de nuestra 10ª edición",
+    authorityTitle: "La dimensión de nuestra 10° edición",
     authoritySubtitle: "ODA al Vino 2026 en números",
 
     // ========== COMMUNITY ==========
